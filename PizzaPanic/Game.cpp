@@ -1,38 +1,41 @@
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 
 #include "Game.h"
 
+
 using std::cout;
 
+
 Game::Game()
-	: mWindow(sf::VideoMode(640, 480), "SFML Application")
+	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
 	, mTexture()
 	, mPlayer()
 	, iTexture()
 	, iBackground()
+	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 {
-	if (!mTexture.loadFromFile("C:\\Dev\\SFMLTest\\SFMLTest\\Images\\robot-idle.gif"))
+	//Player
+	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
 	}
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(500.f, 500.f);
-	mPlayer.setScale(.4, .4);
+	mPlayer.setScale(0.4f, 0.4f);
 
-	if (!iTexture.loadFromFile("C:\\Dev\\SFMLTest\\SFMLTest\\Images\\grass.png"))
+	/*
+	if (!iTexture.loadFromFile("grass.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el fondo.");
 	}
 
-
 	iBackground.setTexture(iTexture);
 	iBackground.setPosition(0.f, 0.f);
 	iBackground.setScale(3, 3);
+	*/
 
 	//Music
 	if (!music.openFromFile("C:\\Dev\\SFMLTest\\SFMLTest\\Audios\\CreepyForest.wav"))
@@ -41,11 +44,6 @@ Game::Game()
 		cout << ("Error al cargar el audio.");
 	}
 	music.play();
-
-	//Custom View
-	sf::View pView(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
-
-
 
 }
 
@@ -87,6 +85,7 @@ void Game::processEvents()
 		}
 	}
 }
+
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
 	if (key == sf::Keyboard::W)
@@ -98,11 +97,13 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 	else if (key == sf::Keyboard::D)
 		mIsMovingRight = isPressed;
 }
+
 void Game::update(sf::Time deltaTime)
-// Actualiza lo que pasa en el juego
+// Update what happens in game
 {
 	sf::Vector2f movement(0.f, 0.f);
-	const float PlayerSpeed = 200.f;
+	const float PlayerSpeed = 250.f;
+
 	if (mIsMovingUp)
 		movement.y -= PlayerSpeed;
 	if (mIsMovingDown)
@@ -112,14 +113,15 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
+	// Camera follows player
 	pView.setCenter(mPlayer.getPosition());
-	//pView.setSize(270.f, 270.f);
+	pView.setSize(1300.f, 1300.f);
 	mWindow.setView(pView);
 
 	mPlayer.move(movement * deltaTime.asSeconds());
 }
+
 void Game::render()
-// Representar gráficamente
 {
 	mWindow.clear();
 	mWindow.draw(iBackground);
