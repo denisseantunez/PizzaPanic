@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "Game.h"
 
@@ -28,9 +29,18 @@ Game::Game()
 		cout << ("Error al cargar el fondo.");
 	}
 
+
 	iBackground.setTexture(iTexture);
 	iBackground.setPosition(0.f, 0.f);
 	iBackground.setScale(3, 3);
+
+	//Music
+	if (!music.openFromFile("C:\\Dev\\SFMLTest\\SFMLTest\\Audios\\CreepyForest.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio.");
+	}
+	music.play();
 
 	//Custom View
 	sf::View pView(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));

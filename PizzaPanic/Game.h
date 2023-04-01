@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
@@ -27,4 +28,5 @@ private:
 	sf::Texture iTexture;
 	sf::Sprite iBackground;
 	sf::View pView;
+	sf::Music music;
 };
