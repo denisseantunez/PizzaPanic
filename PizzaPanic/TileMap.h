@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 // tutorial sobre esto en https://www.sfml-dev.org/tutorials/2.4/graphics-vertex-array.php#example-tile-map :)
 
@@ -11,7 +12,7 @@ public:
 	bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 	{
 		// Load the tileset texture
-		if (!m_tileset.loadFromFile("Village.png"))
+		if (!m_tileset.loadFromFile("Images\\Terrains.png"))
 			return false;
 
 		// Resize the vertex array to fit the level size

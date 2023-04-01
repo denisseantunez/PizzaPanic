@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include "TileMap.h"
+
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
 class Game
@@ -29,4 +31,5 @@ private:
 	sf::Sprite iBackground;
 	sf::View pView;
 	sf::Music music;
+	TileMap map;
 };

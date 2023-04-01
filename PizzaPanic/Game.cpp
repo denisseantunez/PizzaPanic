@@ -2,9 +2,13 @@
 #include <iostream>
 
 #include "Game.h"
+#include "TileMap.h"
 
 
 using std::cout;
+
+
+#define TimePerFrame sf::seconds(1.f / 60.f)
 
 
 Game::Game()
@@ -25,20 +29,35 @@ Game::Game()
 	mPlayer.setPosition(500.f, 500.f);
 	mPlayer.setScale(0.4f, 0.4f);
 
-	/*
-	if (!iTexture.loadFromFile("grass.png"))
+	// Tilemap
+	// Define the level with an array of tile indices
+	const int level[] =
 	{
+		1, 1, 1, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2,
+		1, 1, 4, 4, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2,
+		1, 1, 4, 1, 2, 1, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 2,
+		1, 1, 1, 1, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0, 2, 2, 2, 2,
+		1, 1, 1, 1, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0, 2, 2, 2, 2,
+		2, 1, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+		1, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+		1, 1, 1, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 2, 2, 2, 2,
+		1, 1, 0, 0, 0, 1, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2,
+		1, 1, 1, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 2, 1, 0, 1, 0, 2, 2, 2, 2,
+		1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2,
+		1, 1, 1, 1, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 2,
+
+	};
+
+	if (!map.load("Images\\Terrains.png", sf::Vector2u(48, 48), level, 20, 20))
 		// Handle loading error
-		cout << ("Error al cargar el fondo.");
-	}
+		cout << ("Error al cargar el mapa.");
 
-	iBackground.setTexture(iTexture);
-	iBackground.setPosition(0.f, 0.f);
-	iBackground.setScale(3, 3);
-	*/
-
+	
 	//Music
-	if (!music.openFromFile("C:\\Dev\\SFMLTest\\SFMLTest\\Audios\\CreepyForest.wav"))
+	if (!music.openFromFile("Audios\\CreepyForest.wav"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -124,7 +143,7 @@ void Game::update(sf::Time deltaTime)
 void Game::render()
 {
 	mWindow.clear();
-	mWindow.draw(iBackground);
+	mWindow.draw(map);
 	mWindow.draw(mPlayer);
 	mWindow.display();
 }
