@@ -30,7 +30,7 @@ Game::Game()
 	mPlayer.setScale(0.4f, 0.4f);
 
 	// Tilemap
-	if (!map.load("Images\\Terrains.png", sf::Vector2u(48, 48), level, 20, 20))
+	if (!map.load("Images\\Terrains.png", sf::Vector2u(48, 48), level, 50, 50))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
