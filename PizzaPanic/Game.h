@@ -28,7 +28,6 @@ private:
 	sf::Texture mTexture;
 	sf::Sprite mPlayer;
 	sf::Texture iTexture;
-	sf::Sprite iBackground;
 	sf::View pView;
 	sf::Music music;
 	TileMap map;

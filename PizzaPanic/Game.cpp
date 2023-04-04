@@ -1,3 +1,4 @@
+// basado en el libro SFML Game Development :)
 
 #include <iostream>
 
@@ -16,7 +17,6 @@ Game::Game()
 	, mTexture()
 	, mPlayer()
 	, iTexture()
-	, iBackground()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 {
 	//Player
@@ -26,7 +26,7 @@ Game::Game()
 		cout << ("Error al cargar el archivo.");
 	}
 	mPlayer.setTexture(mTexture);
-	mPlayer.setPosition(500.f, 500.f);
+	mPlayer.setPosition(700.f, 700.f);
 	mPlayer.setScale(0.4f, 0.4f);
 
 	// Tilemap
@@ -37,7 +37,7 @@ Game::Game()
 	}
 	
 	//Music
-	if (!music.openFromFile("Audios\\CreepyForest.wav"))
+	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canción de prueba nomás
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
