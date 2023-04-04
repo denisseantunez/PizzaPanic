@@ -31,7 +31,7 @@ Game::Game()
 
 	// Tilemap
 	// Define the level with an array of tile indices
-	const int level[] =
+	/*const int level[] =
 	{
 		1, 1, 1, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 		1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2,
@@ -49,7 +49,7 @@ Game::Game()
 		1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2,
 		1, 1, 1, 1, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 2,
 
-	};
+	};*/
 
 	if (!map.load("Images\\Terrains.png", sf::Vector2u(48, 48), level, 20, 20))
 		// Handle loading error
@@ -63,6 +63,7 @@ Game::Game()
 		cout << ("Error al cargar el audio.");
 	}
 	music.play();
+	music.setVolume(30.f);
 
 }
 
