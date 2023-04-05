@@ -19,7 +19,7 @@ Game::Game()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 {
 	// Player
-	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
+	if (!mTexture.loadFromFile("C:\\Users\\Manuel\\Pictures\\Images\\robot-idle.gif"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
@@ -27,23 +27,24 @@ Game::Game()
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(700.f, 700.f);
 	mPlayer.setScale(0.3f, 0.3f);
+	this->HitBoxPlayer();
 
 	// Tilemap
-	if (!background.load("Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
+	if (!background.load("C:\\Users\\Manuel\\Pictures\\Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
 	}
 
 	// Houses, trees, ...
-	if (!objects.load("Images\\Objects_.png", sf::Vector2u(48, 48), objectDisplay, 70, 70))
+	if (!objects.load("C:\\Users\\Manuel\\Pictures\\Images\\Objects.png", sf::Vector2u(48, 48), objectDisplay, 70, 70))
 	{
 		// Handle loading error
 		cout << ("Error al cargar los objetos del mapa.");
 	}
-	
+
 	// Music
-	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canción de prueba nomás
+	if (!music.openFromFile("C:\\Users\\Manuel\\Music\\Audios")) // canciï¿½n de prueba nomï¿½s
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -126,6 +127,16 @@ void Game::update(sf::Time deltaTime)
 	mWindow.setView(pView);
 
 	mPlayer.move(movement * deltaTime.asSeconds());
+	hitboxplayer.move(movement * deltaTime.asSeconds());
+}
+
+void Game::HitBoxPlayer()
+{
+	this->hitboxplayer.setPosition(720.f, 725.f);
+	this->hitboxplayer.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxplayer.setFillColor(sf::Color::Transparent);
+	this->hitboxplayer.setOutlineColor(sf::Color::Red);
+	this->hitboxplayer.setOutlineThickness(6.f);
 }
 
 void Game::render()
@@ -134,5 +145,7 @@ void Game::render()
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(mPlayer);
+	mWindow.draw(this->hitboxplayer);
 	mWindow.display();
+	
 }
