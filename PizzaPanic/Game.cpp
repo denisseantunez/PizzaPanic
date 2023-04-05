@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Game.h"
-#include "TileMap.h"
+//#include "TileMap.h"
 
 
 using std::cout;
@@ -16,10 +16,9 @@ Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
 	, mTexture()
 	, mPlayer()
-	, iTexture()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 {
-	//Player
+	// Player
 	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
 	{
 		// Handle loading error
@@ -27,23 +26,30 @@ Game::Game()
 	}
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(700.f, 700.f);
-	mPlayer.setScale(0.4f, 0.4f);
+	mPlayer.setScale(0.3f, 0.3f);
 
 	// Tilemap
-	if (!map.load("Images\\Terrains.png", sf::Vector2u(48, 48), level, 50, 50))
+	if (!background.load("Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
 	}
+
+	// Houses, trees, ...
+	if (!objects.load("Images\\Objects_.png", sf::Vector2u(48, 48), objectDisplay, 70, 70))
+	{
+		// Handle loading error
+		cout << ("Error al cargar los objetos del mapa.");
+	}
 	
-	//Music
+	// Music
 	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canción de prueba nomás
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
 	}
 	music.play();
-	music.setVolume(30.f);
+	music.setVolume(20.f);
 
 }
 
@@ -115,6 +121,7 @@ void Game::update(sf::Time deltaTime)
 
 	// Camera follows player
 	pView.setCenter(mPlayer.getPosition());
+	//pView.setSize(900.f, 900.f);
 	pView.setSize(1300.f, 1300.f);
 	mWindow.setView(pView);
 
@@ -124,7 +131,8 @@ void Game::update(sf::Time deltaTime)
 void Game::render()
 {
 	mWindow.clear();
-	mWindow.draw(map);
+	mWindow.draw(background);
+	mWindow.draw(objects);
 	mWindow.draw(mPlayer);
 	mWindow.display();
 }

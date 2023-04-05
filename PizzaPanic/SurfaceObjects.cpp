@@ -1,19 +1,17 @@
-// tutorial sobre esto en https://www.sfml-dev.org/tutorials/2.4/graphics-vertex-array.php#example-tile-map :)
 
-
-#include "TileMap.h"
+#include "SurfaceObjects.h"
 
 
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool SurfaceObjects::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
 	// Load the tileset texture
-	if (!m_tileset.loadFromFile("Images\\Background.png"))
+	if (!o_tileset.loadFromFile("Images\\Objects_.png"))
 		return false;
 
 	// Resize the vertex array to fit the level size
-	m_vertices.setPrimitiveType(sf::Quads);
-	m_vertices.resize(width * height * 4);
+	o_vertices.setPrimitiveType(sf::Quads);
+	o_vertices.resize(width * height * 4);
 
 	// Populate the vertex array, with one quad per tile
 	for (unsigned int i = 0; i < width; ++i)
@@ -23,11 +21,11 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 			int tileNumber = tiles[i + j * width];
 
 			// Find its position in the tileset texture
-			int tileCol = tileNumber % (m_tileset.getSize().x / tileSize.x);
-			int tileRow = tileNumber / (m_tileset.getSize().x / tileSize.x);
+			int tileCol = tileNumber % (o_tileset.getSize().x / tileSize.x);
+			int tileRow = tileNumber / (o_tileset.getSize().x / tileSize.x);
 
 			// Get a pointer to the current tile's quad
-			sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
+			sf::Vertex* quad = &o_vertices[(i + j * width) * 4];
 
 			// Define its 4 corners
 			quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
@@ -45,15 +43,14 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 	return true;
 }
 
-void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void SurfaceObjects::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	// Apply the transform
 	states.transform *= getTransform();
 
 	// Apply the tileset texture
-	states.texture = &m_tileset;
+	states.texture = &o_tileset;
 
 	// Draw the vertex array
-	target.draw(m_vertices, states);
+	target.draw(o_vertices, states);
 }
-

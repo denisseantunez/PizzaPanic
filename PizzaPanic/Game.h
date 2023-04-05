@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 
 #include "TileMap.h"
+#include "SurfaceObjects.h"
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
@@ -27,8 +28,8 @@ private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
 	sf::Sprite mPlayer;
-	sf::Texture iTexture;
 	sf::View pView;
 	sf::Music music;
-	TileMap map;
+	TileMap background;
+	SurfaceObjects objects;
 };
