@@ -8,6 +8,13 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
+const float PlayerSpeed = 250.f;
+const float SheguisSpeed = 260.f;
+const float SoruyaSpeed = 150.f;
+const float ChiwisSpeed = 200.f;
+const float MindySpeed = 250.f;
+
+
 class Game
 {
 public:
@@ -25,8 +32,11 @@ private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
-	void ChiwisMove();
 	void HitBoxPlayer();
+	void HitBoxChiwis();
+	void HitBoxSheguis();
+	void HitBoxSoruya();
+	void HitBoxMindy();
 
 	
 private:
@@ -40,6 +50,9 @@ private:
 
 	//Game objects
 	sf::RectangleShape hitboxplayer;
-	sf::RectangleShape chiwis;
+	sf::RectangleShape hitboxchiwis;
+	sf::RectangleShape hitboxsheguis;
+	sf::RectangleShape hitboxsoruya;
+	sf::RectangleShape hitboxmindy;
 
 };
