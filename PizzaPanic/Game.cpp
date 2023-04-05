@@ -28,7 +28,10 @@ Game::Game()
 	mPlayer.setPosition(700.f, 700.f);
 	mPlayer.setScale(0.3f, 0.3f);
 	this->HitBoxPlayer();
-	this->ChiwisMove();
+	this->HitBoxChiwis();
+	this->HitBoxSheguis();
+	this->HitBoxSoruya();
+	this->HitBoxMindy();
 
 	// Tilemap
 	if (!background.load("C:\\Users\\Manuel\\Pictures\\Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
@@ -110,8 +113,7 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 	sf::Vector2f movement(0.f, 0.f);
-	const float PlayerSpeed = 250.f;
-	const float ChiwisSpeed = 150.f;
+	
 
 	if (mIsMovingUp)
 		movement.y -= PlayerSpeed;
@@ -129,19 +131,42 @@ void Game::update(sf::Time deltaTime)
 	mWindow.setView(pView);
 
 	// Calculate the distance between the enemy and the player
-	float dx = mPlayer.getPosition().x - chiwis.getPosition().x;
-	float dy = mPlayer.getPosition().y - chiwis.getPosition().y;
-	float distance = sqrt(pow(dx,2) + pow(dy,2));
+	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
+	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
+	float distancechiwis = sqrt(pow(dxchiwis,2) + pow(dychiwis,2));
+
+	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
+	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
+	float distancesheguis = sqrt(pow(dxsheguis, 2) + pow(dysheguis, 2));
+
+	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
+	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
+	float distancesoruya = sqrt(pow(dxsoruya, 2) + pow(dysoruya, 2));
+
+	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
+	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
+	float distancemindy = sqrt(pow(dxmindy, 2) + pow(dymindy, 2));
 
 	// Calculate the unit vector from the enemy to the player
-	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
+	sf::Vector2f unitVectorsheguis(dxsheguis / distancesheguis, dysheguis / distancesheguis);
+	sf::Vector2f unitVectorsoruya(dxsoruya / distancesoruya, dysoruya / distancesoruya);
+	sf::Vector2f unitVectormindy(dxmindy / distancemindy, dymindy / distancemindy);
 
 	// Calculate the velocity vector
-	sf::Vector2f velocity = unitVector * ChiwisSpeed;
+	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+	sf::Vector2f velocitysheguis = unitVectorsheguis * (SheguisSpeed);
+	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
+	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
-	chiwis.move(velocity * deltaTime.asSeconds());
+	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
+	hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
+	hitboxsoruya.move(velocitysoruya * deltaTime.asSeconds());
+	hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
+
+	
 }
 
 void Game::HitBoxPlayer()
@@ -153,15 +178,43 @@ void Game::HitBoxPlayer()
 	this->hitboxplayer.setOutlineThickness(6.f);
 }
 
-
-void Game::ChiwisMove()
+void Game::HitBoxChiwis()
 {
-	this->chiwis.setPosition(500.f, 500.f);
-	this->chiwis.setSize(sf::Vector2f(55.f, 75.f));
-	this->chiwis.setFillColor(sf::Color::Transparent);
-	this->chiwis.setOutlineColor(sf::Color::Cyan);
-	this->chiwis.setOutlineThickness(6.f);
+	this->hitboxchiwis.setPosition(500.f, 500.f);
+	this->hitboxchiwis.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
+	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
+	this->hitboxchiwis.setOutlineThickness(6.f);
 }
+
+void Game::HitBoxSheguis()
+{
+	this->hitboxsheguis.setPosition(500.f, 1000.f);
+	this->hitboxsheguis.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
+	this->hitboxsheguis.setOutlineColor(sf::Color::White);
+	this->hitboxsheguis.setOutlineThickness(6.f);
+}
+
+void Game::HitBoxSoruya()
+{
+	this->hitboxsoruya.setPosition(1000.f, 1000.f);
+	this->hitboxsoruya.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
+	this->hitboxsoruya.setOutlineColor(sf::Color::Black);
+	this->hitboxsoruya.setOutlineThickness(6.f);
+}
+
+void Game::HitBoxMindy()
+{
+	this->hitboxmindy.setPosition(150.f, 200.f);
+	this->hitboxmindy.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxmindy.setFillColor(sf::Color::Transparent);
+	this->hitboxmindy.setOutlineColor(sf::Color::Red);
+	this->hitboxmindy.setOutlineThickness(6.f);
+}
+
+
 
 void Game::render()
 {
@@ -170,8 +223,12 @@ void Game::render()
 	mWindow.draw(objects);
 	mWindow.draw(mPlayer);
 	mWindow.draw(hitboxplayer);
-	mWindow.draw(chiwis);
+	mWindow.draw(hitboxchiwis);
+	mWindow.draw(hitboxsheguis);
+	mWindow.draw(hitboxsoruya);
+	mWindow.draw(hitboxmindy);
 	mWindow.display();
 
 }
+
 
