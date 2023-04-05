@@ -19,11 +19,15 @@ public:
 	bool mIsMovingRight = false;
 	void run();
 
+	
+
 private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
+	void HitBoxPlayer();
 
+	
 private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
@@ -32,4 +36,8 @@ private:
 	sf::Music music;
 	TileMap background;
 	SurfaceObjects objects;
+
+	//Game objects
+	sf::RectangleShape hitboxplayer;
+
 };
