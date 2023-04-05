@@ -25,6 +25,7 @@ private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
+	void ChiwisMove();
 	void HitBoxPlayer();
 
 	
@@ -39,5 +40,6 @@ private:
 
 	//Game objects
 	sf::RectangleShape hitboxplayer;
+	sf::RectangleShape chiwis;
 
 };
