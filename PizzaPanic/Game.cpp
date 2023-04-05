@@ -1,7 +1,7 @@
 // basado en el libro SFML Game Development :)
 
 #include <iostream>
-
+#include <cmath>
 #include "Game.h"
 //#include "TileMap.h"
 
@@ -28,6 +28,7 @@ Game::Game()
 	mPlayer.setPosition(700.f, 700.f);
 	mPlayer.setScale(0.3f, 0.3f);
 	this->HitBoxPlayer();
+	this->ChiwisMove();
 
 	// Tilemap
 	if (!background.load("C:\\Users\\Manuel\\Pictures\\Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
@@ -110,6 +111,7 @@ void Game::update(sf::Time deltaTime)
 {
 	sf::Vector2f movement(0.f, 0.f);
 	const float PlayerSpeed = 250.f;
+	const float ChiwisSpeed = 150.f;
 
 	if (mIsMovingUp)
 		movement.y -= PlayerSpeed;
@@ -126,8 +128,20 @@ void Game::update(sf::Time deltaTime)
 	pView.setSize(1300.f, 1300.f);
 	mWindow.setView(pView);
 
+	// Calculate the distance between the enemy and the player
+	float dx = mPlayer.getPosition().x - chiwis.getPosition().x;
+	float dy = mPlayer.getPosition().y - chiwis.getPosition().y;
+	float distance = sqrt(pow(dx,2) + pow(dy,2));
+
+	// Calculate the unit vector from the enemy to the player
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+
+	// Calculate the velocity vector
+	sf::Vector2f velocity = unitVector * ChiwisSpeed;
+
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
+	chiwis.move(velocity * deltaTime.asSeconds());
 }
 
 void Game::HitBoxPlayer()
@@ -139,13 +153,25 @@ void Game::HitBoxPlayer()
 	this->hitboxplayer.setOutlineThickness(6.f);
 }
 
+
+void Game::ChiwisMove()
+{
+	this->chiwis.setPosition(500.f, 500.f);
+	this->chiwis.setSize(sf::Vector2f(55.f, 75.f));
+	this->chiwis.setFillColor(sf::Color::Transparent);
+	this->chiwis.setOutlineColor(sf::Color::Cyan);
+	this->chiwis.setOutlineThickness(6.f);
+}
+
 void Game::render()
 {
 	mWindow.clear();
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(mPlayer);
-	mWindow.draw(this->hitboxplayer);
+	mWindow.draw(hitboxplayer);
+	mWindow.draw(chiwis);
 	mWindow.display();
-	
+
 }
+
