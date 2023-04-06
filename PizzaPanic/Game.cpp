@@ -19,7 +19,7 @@ Game::Game()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 {
 	// Player
-	if (!mTexture.loadFromFile("C:\\Users\\Manuel\\Pictures\\Images\\robot-idle.gif"))
+	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
@@ -34,21 +34,21 @@ Game::Game()
 	this->HitBoxMindy();
 
 	// Tilemap
-	if (!background.load("C:\\Users\\Manuel\\Pictures\\Images\\Background.png", sf::Vector2u(48, 48), level, 70, 70))
+	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
 	}
 
 	// Houses, trees, ...
-	if (!objects.load("C:\\Users\\Manuel\\Pictures\\Images\\Objects.png", sf::Vector2u(48, 48), objectDisplay, 70, 70))
+	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar los objetos del mapa.");
 	}
 
 	// Music
-	if (!music.openFromFile("C:\\Users\\Manuel\\Music\\Audios")) // canci�n de prueba nom�s
+	if (!music.openFromFile("Music\\Audios")) // canci�n de prueba nom�s
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -133,19 +133,19 @@ void Game::update(sf::Time deltaTime)
 	// Calculate the distance between the enemy and the player
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
 	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
-	float distancechiwis = sqrt(pow(dxchiwis,2) + pow(dychiwis,2));
+	float distancechiwis = sqrt(pow(dxchiwis,2.f) + pow(dychiwis,2.f));
 
 	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
 	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
-	float distancesheguis = sqrt(pow(dxsheguis, 2) + pow(dysheguis, 2));
+	float distancesheguis = sqrt(pow(dxsheguis, 2.f) + pow(dysheguis, 2.f));
 
 	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
 	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
-	float distancesoruya = sqrt(pow(dxsoruya, 2) + pow(dysoruya, 2));
+	float distancesoruya = sqrt(pow(dxsoruya, 2.f) + pow(dysoruya, 2.f));
 
 	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
 	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
-	float distancemindy = sqrt(pow(dxmindy, 2) + pow(dymindy, 2));
+	float distancemindy = sqrt(pow(dxmindy, 2.f) + pow(dymindy, 2.f));
 
 	// Calculate the unit vector from the enemy to the player
 	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
