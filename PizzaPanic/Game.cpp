@@ -25,7 +25,7 @@ Game::Game()
 		cout << ("Error al cargar el archivo.");
 	}
 	mPlayer.setTexture(mTexture);
-	mPlayer.setPosition(700.f, 700.f);
+	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.3f, 0.3f);
 	this->HitBoxPlayer();
 	this->HitBoxChiwis();
@@ -48,7 +48,7 @@ Game::Game()
 	}
 
 	// Music
-	if (!music.openFromFile("Music\\Audios")) // canci�n de prueba nom�s
+	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
