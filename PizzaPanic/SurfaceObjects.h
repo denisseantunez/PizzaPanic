@@ -8,6 +8,8 @@
 #include <iterator>
 #include <algorithm>
 
+#include "Collidable.h"
+
 // Houses, trees, ...
 
 class SurfaceObjects : public sf::Drawable, public sf::Transformable
@@ -15,6 +17,8 @@ class SurfaceObjects : public sf::Drawable, public sf::Transformable
 public:
 
 	bool load(const std::string& tileset, sf::Vector2u tileSize);
+	std::vector<Collidable> collidables;
+
 
 private:
 

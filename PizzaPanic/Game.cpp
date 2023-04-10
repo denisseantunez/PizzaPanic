@@ -3,13 +3,6 @@
 #include <iostream>
 #include <cmath>
 #include "Game.h"
-//#include "TileMap.h"
-
-
-using std::cout;
-
-
-#define TimePerFrame sf::seconds(1.f / 60.f)
 
 
 Game::Game()
@@ -26,7 +19,8 @@ Game::Game()
 	}
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(2500.f, 2500.f);
-	mPlayer.setScale(0.3f, 0.3f);
+	mPlayer.setScale(0.2f, 0.2f);
+	//mPlayer.setOrigin(mPlayer.getLocalBounds().width / 2.f, mPlayer.getLocalBounds().height / 2.f);
 	this->HitBoxPlayer();
 	this->HitBoxChiwis();
 	this->HitBoxSheguis();
@@ -48,18 +42,21 @@ Game::Game()
 	}
 
 	// Music
-	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
-	{
+	//if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
+	//{
 		// Handle loading error
-		cout << ("Error al cargar el audio.");
-	}
-	music.play();
-	music.setVolume(20.f);
+	//	cout << ("Error al cargar el audio.");
+	//}
+	//music.play();
+	//music.setVolume(20.f);
 
 }
 
 void Game::run()
 {
+	// Keep track of the player's initial position
+	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
@@ -126,9 +123,34 @@ void Game::update(sf::Time deltaTime)
 
 	// Camera follows player
 	pView.setCenter(mPlayer.getPosition());
-	//pView.setSize(900.f, 900.f);
-	pView.setSize(1300.f, 1300.f);
+	pView.setSize(1000.f, 1000.f);
+	//pView.setSize(1300.f, 1300.f);
 	mWindow.setView(pView);
+
+	// Keep track of the player's previous position
+	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+	
+	// Let player move
+	mPlayer.move(movement * deltaTime.asSeconds());
+
+
+	// Create Collidable object for the player
+	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
+
+
+
+	// Check if the player collides with any of the Collidable objects in the collidables vector of the SurfaceObjects object
+	for (auto collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
+
+			// Handle collision
+			//sf::Vector2f movement(0.f, 0.f);
+			mPlayer.setPosition(previousPlayerPos);
+			hitboxplayer.setPosition(previousPlayerPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
 
 	// Calculate the distance between the enemy and the player
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
@@ -159,7 +181,7 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
 	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
 
-	mPlayer.move(movement * deltaTime.asSeconds());
+	//mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
 	hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
@@ -172,10 +194,10 @@ void Game::update(sf::Time deltaTime)
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
-	this->hitboxplayer.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxplayer.setSize(sf::Vector2f(55.f,75.f));
 	this->hitboxplayer.setFillColor(sf::Color::Transparent);
-	this->hitboxplayer.setOutlineColor(sf::Color::Red);
-	this->hitboxplayer.setOutlineThickness(6.f);
+	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
+	this->hitboxplayer.setOutlineThickness(4.f);
 }
 
 void Game::HitBoxChiwis()

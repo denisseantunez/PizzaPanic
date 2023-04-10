@@ -5,14 +5,17 @@
 
 #include "TileMap.h"
 #include "SurfaceObjects.h"
+#include "Collidable.h"
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
 const float PlayerSpeed = 250.f;
-const float SheguisSpeed = 260.f;
+const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
 const float ChiwisSpeed = 200.f;
 const float MindySpeed = 250.f;
+
+using std::cout;
 
 
 class Game
@@ -26,7 +29,6 @@ public:
 	bool mIsMovingRight = false;
 	void run();
 
-	
 
 private:
 	void processEvents();
@@ -48,7 +50,11 @@ private:
 	TileMap background;
 	SurfaceObjects objects;
 
-	//Game objects
+	// Collision
+	Collidable playerCollidable;
+	sf::Vector2f previousPlayerPos;
+
+	// Game objects
 	sf::RectangleShape hitboxplayer;
 	sf::RectangleShape hitboxchiwis;
 	sf::RectangleShape hitboxsheguis;

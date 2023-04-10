@@ -6,6 +6,7 @@
 
 
 
+
 bool SurfaceObjects::load(const std::string& tileset, sf::Vector2u tileSize)
 {
 	// Load the tileset texture
@@ -36,6 +37,16 @@ bool SurfaceObjects::load(const std::string& tileset, sf::Vector2u tileSize)
 			// Get the current tile number 
 			int tileNumber = tiles[j][i];
 
+			// COLISIONS
+			if (tileNumber != -1 && tileNumber != 58 && tileNumber != 0){ // tiles in .txt that are different from -1, 0 and 58 are not passable
+				// Calculate the bounds of the title
+				sf::FloatRect tileBounds(i * 48.f, j * 48.f, 48.f, 48.f);
+
+				// Create a Collidable object for the tile and add it to a vector 
+				Collidable collidable(1, tileBounds, true); // set the tile type to 1
+				collidables.push_back(collidable);
+			}
+
 			// Find its position in the tileset texture
 			int tileCol = tileNumber % (o_tileset.getSize().x / tileSize.x);
 			int tileRow = tileNumber / (o_tileset.getSize().x / tileSize.x);
@@ -60,6 +71,7 @@ bool SurfaceObjects::load(const std::string& tileset, sf::Vector2u tileSize)
 		}
 
 	}
+
 
 	return true;
 }
