@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <cmath>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -28,6 +31,7 @@ public:
 	bool mIsMovingDown = false;
 	bool mIsMovingLeft = false;
 	bool mIsMovingRight = false;
+	void showMainMenu();
 	void run();
 
 
@@ -50,7 +54,9 @@ private:
 	sf::Music music;
 
 	// Main menu
-	MainMenu m_mainMenu;
+	MainMenu mainMenu;
+	sf::Font m_font;
+	sf::Texture m_menuBackground;
 
 	// Tilemaps
 	TileMap background;

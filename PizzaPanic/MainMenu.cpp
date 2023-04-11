@@ -4,23 +4,29 @@
 
 MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 		: m_font(font)
-		, m_backgroundTexture(backgroundTexture)
+		, m_menuBackground(backgroundTexture)
 {
 	// Set up menu items
+	
+	// Title
+	sf::Text Title("PIZZA PANIC", m_font);
+	Title.setCharacterSize(55);
+	Title.setPosition(210, 30);
+	m_menuItems.emplace_back(std::move(Title));
 
 	// Play button
 	sf::Text playText("Play", m_font);
-	playText.setPosition(100, 100);
+	playText.setPosition(100, 400);
 	m_menuItems.emplace_back(std::move(playText));
 
 	// Credits button
 	sf::Text creditsText("Credits", m_font);
-	creditsText.setPosition(100, 125);
+	creditsText.setPosition(100, 430);
 	m_menuItems.emplace_back(std::move(creditsText));
 
 	// Quit button
 	sf::Text quitText("Quit", m_font);
-	quitText.setPosition(100, 150);
+	quitText.setPosition(100, 460);
 	m_menuItems.emplace_back(std::move(quitText));
 
 }
@@ -52,7 +58,7 @@ void MainMenu::handleEvent(sf::Event event)
 void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	// Draw background texture
-	sf::Sprite background(m_backgroundTexture);
+	sf::Sprite background(m_menuBackground);
 	target.draw(background);
 
 	// Draw menu options
