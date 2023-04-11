@@ -6,6 +6,7 @@
 #include "TileMap.h"
 #include "SurfaceObjects.h"
 #include "Collidable.h"
+#include "MainMenu.h"
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
@@ -47,11 +48,17 @@ private:
 	sf::Sprite mPlayer;
 	sf::View pView;
 	sf::Music music;
+
+	// Main menu
+	MainMenu m_mainMenu;
+
+	// Tilemaps
 	TileMap background;
 	SurfaceObjects objects;
 
 	// Collision
 	Collidable playerCollidable;
+	Collidable chiwisCollidable;
 	sf::Vector2f previousPlayerPos;
 
 	// Game objects
