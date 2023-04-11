@@ -1,7 +1,5 @@
 // basado en el libro SFML Game Development :)
 
-#include <iostream>
-#include <cmath>
 #include "Game.h"
 
 
@@ -10,7 +8,21 @@ Game::Game()
 	, mTexture()
 	, mPlayer()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
+	, mainMenu(m_font, m_menuBackground)
 {
+	// Initialize MainMenu
+	if (!m_font.loadFromFile("Fonts\\font2.ttf"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el font.");
+	}
+	if (!m_menuBackground.loadFromFile("Images\\FondoMenuPrueba.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el fondo del menu.");
+	}
+	MainMenu mainMenu(m_font, m_menuBackground);
+
 	// Player
 	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
 	{
@@ -20,7 +32,8 @@ Game::Game()
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.2f, 0.2f);
-	//mPlayer.setOrigin(mPlayer.getLocalBounds().width / 2.f, mPlayer.getLocalBounds().height / 2.f);
+	
+	// Hitboxes
 	this->HitBoxPlayer();
 	this->HitBoxChiwis();
 	this->HitBoxSheguis();
@@ -34,7 +47,7 @@ Game::Game()
 		cout << ("Error al cargar el mapa.");
 	}
 
-	// Houses, trees, ...
+	// Collision objects
 	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
@@ -42,35 +55,66 @@ Game::Game()
 	}
 
 	// Music
-	//if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
-	//{
+	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
+	{
 		// Handle loading error
-	//	cout << ("Error al cargar el audio.");
-	//}
-	//music.play();
-	//music.setVolume(20.f);
+		cout << ("Error al cargar el audio.");
+	}
+	music.play();
+	music.setVolume(20.f);
 
+}
+
+void Game::showMainMenu()
+{
+
+	while (mWindow.isOpen())
+	{
+		sf::Event event;
+		while (mWindow.pollEvent(event))
+		{
+			mainMenu.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+			{
+				mWindow.close();
+			}
+		}
+
+		mWindow.clear();
+		mWindow.draw(mainMenu);
+		mWindow.display();
+
+		if (mainMenu.getSelectedOption() == MainMenu::Option::Play)
+			break;
+	}
 }
 
 void Game::run()
 {
-	// Keep track of the player's initial position
-	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+	showMainMenu();
 
-	sf::Clock clock;
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	while (mWindow.isOpen())
-	{
-		processEvents();
-		timeSinceLastUpdate += clock.restart();
-		while (timeSinceLastUpdate > TimePerFrame)
+	// If Play button is clicked, start the game
+	if (mainMenu.getSelectedOption() == MainMenu::Option::Play) {
+
+		// Keep track of the player's initial position
+		sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+
+		sf::Clock clock;
+		sf::Time timeSinceLastUpdate = sf::Time::Zero;
+		while (mWindow.isOpen())
 		{
-			timeSinceLastUpdate -= TimePerFrame;
 			processEvents();
-			update(TimePerFrame);
+			timeSinceLastUpdate += clock.restart();
+			while (timeSinceLastUpdate > TimePerFrame)
+			{
+				timeSinceLastUpdate -= TimePerFrame;
+				processEvents();
+				update(TimePerFrame);
+			}
+			render();
 		}
-		render();
 	}
+	
 }
 
 void Game::processEvents()
@@ -79,6 +123,7 @@ void Game::processEvents()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
+		mainMenu.handleEvent(event);
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -110,7 +155,6 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 	sf::Vector2f movement(0.f, 0.f);
-	
 
 	if (mIsMovingUp)
 		movement.y -= PlayerSpeed;
@@ -121,36 +165,12 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
+
 	// Camera follows player
 	pView.setCenter(mPlayer.getPosition());
 	pView.setSize(1000.f, 1000.f);
-	//pView.setSize(1300.f, 1300.f);
 	mWindow.setView(pView);
 
-	// Keep track of the player's previous position
-	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
-	
-	// Let player move
-	mPlayer.move(movement * deltaTime.asSeconds());
-
-
-	// Create Collidable object for the player
-	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
-
-
-
-	// Check if the player collides with any of the Collidable objects in the collidables vector of the SurfaceObjects object
-	for (auto collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
-
-			// Handle collision
-			//sf::Vector2f movement(0.f, 0.f);
-			mPlayer.setPosition(previousPlayerPos);
-			hitboxplayer.setPosition(previousPlayerPos);
-			//cout << "Collision with object!\n";
-
-		}
-	}
 
 	// Calculate the distance between the enemy and the player
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
@@ -181,20 +201,39 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
 	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
 
-	//mPlayer.move(movement * deltaTime.asSeconds());
+
+	// Keep track of the player's previous position
+	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+
+
+	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
 	hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
 	hitboxsoruya.move(velocitysoruya * deltaTime.asSeconds());
 	hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
 
-	
+
+	// Create Collidable object for the player
+	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
+
+
+	for (auto collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
+
+			// Handle collision
+			mPlayer.setPosition(previousPlayerPos);
+			hitboxplayer.setPosition(previousPlayerPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
 }
 
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
-	this->hitboxplayer.setSize(sf::Vector2f(55.f,75.f));
+	this->hitboxplayer.setSize(sf::Vector2f(48.f,48.f));
 	this->hitboxplayer.setFillColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineThickness(4.f);
@@ -202,8 +241,8 @@ void Game::HitBoxPlayer()
 
 void Game::HitBoxChiwis()
 {
-	this->hitboxchiwis.setPosition(500.f, 500.f);
-	this->hitboxchiwis.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxchiwis.setPosition(500.f, 1200.f);
+	this->hitboxchiwis.setSize(sf::Vector2f(48.f, 48.f));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
 	this->hitboxchiwis.setOutlineThickness(6.f);
@@ -212,7 +251,7 @@ void Game::HitBoxChiwis()
 void Game::HitBoxSheguis()
 {
 	this->hitboxsheguis.setPosition(500.f, 1000.f);
-	this->hitboxsheguis.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxsheguis.setSize(sf::Vector2f(48.f, 48.f));
 	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
 	this->hitboxsheguis.setOutlineColor(sf::Color::White);
 	this->hitboxsheguis.setOutlineThickness(6.f);
@@ -221,7 +260,7 @@ void Game::HitBoxSheguis()
 void Game::HitBoxSoruya()
 {
 	this->hitboxsoruya.setPosition(1000.f, 1000.f);
-	this->hitboxsoruya.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxsoruya.setSize(sf::Vector2f(48.f, 48.f));
 	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
 	this->hitboxsoruya.setOutlineColor(sf::Color::Black);
 	this->hitboxsoruya.setOutlineThickness(6.f);
@@ -230,13 +269,11 @@ void Game::HitBoxSoruya()
 void Game::HitBoxMindy()
 {
 	this->hitboxmindy.setPosition(150.f, 200.f);
-	this->hitboxmindy.setSize(sf::Vector2f(55.f, 75.f));
+	this->hitboxmindy.setSize(sf::Vector2f(48.f, 48.f));
 	this->hitboxmindy.setFillColor(sf::Color::Transparent);
 	this->hitboxmindy.setOutlineColor(sf::Color::Red);
 	this->hitboxmindy.setOutlineThickness(6.f);
 }
-
-
 
 void Game::render()
 {

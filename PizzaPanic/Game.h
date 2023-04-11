@@ -1,11 +1,15 @@
 #pragma once
 
+#include <iostream>
+#include <cmath>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 #include "TileMap.h"
 #include "SurfaceObjects.h"
 #include "Collidable.h"
+#include "MainMenu.h"
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
@@ -27,6 +31,7 @@ public:
 	bool mIsMovingDown = false;
 	bool mIsMovingLeft = false;
 	bool mIsMovingRight = false;
+	void showMainMenu();
 	void run();
 
 
@@ -47,11 +52,19 @@ private:
 	sf::Sprite mPlayer;
 	sf::View pView;
 	sf::Music music;
+
+	// Main menu
+	MainMenu mainMenu;
+	sf::Font m_font;
+	sf::Texture m_menuBackground;
+
+	// Tilemaps
 	TileMap background;
 	SurfaceObjects objects;
 
 	// Collision
 	Collidable playerCollidable;
+	Collidable chiwisCollidable;
 	sf::Vector2f previousPlayerPos;
 
 	// Game objects
