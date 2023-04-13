@@ -12,6 +12,8 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	sf::Text Title("PIZZA PANIC", m_font);
 	Title.setCharacterSize(55);
 	Title.setPosition(210, 30);
+	Title.setStyle(sf::Text::Bold);
+	Title.setFillColor(sf::Color::Red);
 	m_menuItems.emplace_back(std::move(Title));
 
 	// Play button

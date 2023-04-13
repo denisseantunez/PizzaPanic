@@ -26,5 +26,5 @@ private:
 	sf::Font& m_font;
 	sf::Texture& m_menuBackground;
 	std::vector<sf::Text> m_menuItems;
-	Option m_selectedOption = Option::Quit; // Default to quit option
+	Option m_selectedOption = Option::Credits; // Default to quit option
 };

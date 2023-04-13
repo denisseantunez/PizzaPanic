@@ -31,7 +31,7 @@ Game::Game()
 	}
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(2500.f, 2500.f);
-	mPlayer.setScale(0.2f, 0.2f);
+	mPlayer.setScale(0.18f, 0.18f);
 	
 	// Hitboxes
 	this->HitBoxPlayer();
@@ -84,7 +84,7 @@ void Game::showMainMenu()
 		mWindow.draw(mainMenu);
 		mWindow.display();
 
-		if (mainMenu.getSelectedOption() == MainMenu::Option::Play)
+		if (mainMenu.getSelectedOption() == MainMenu::Option::Play || mainMenu.getSelectedOption() == MainMenu::Option::Quit)
 			break;
 	}
 }
@@ -233,7 +233,7 @@ void Game::update(sf::Time deltaTime)
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
-	this->hitboxplayer.setSize(sf::Vector2f(48.f,48.f));
+	this->hitboxplayer.setSize(sf::Vector2f(40.f,40.f));
 	this->hitboxplayer.setFillColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineThickness(4.f);
@@ -242,7 +242,7 @@ void Game::HitBoxPlayer()
 void Game::HitBoxChiwis()
 {
 	this->hitboxchiwis.setPosition(500.f, 1200.f);
-	this->hitboxchiwis.setSize(sf::Vector2f(48.f, 48.f));
+	this->hitboxchiwis.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
 	this->hitboxchiwis.setOutlineThickness(6.f);
@@ -251,7 +251,7 @@ void Game::HitBoxChiwis()
 void Game::HitBoxSheguis()
 {
 	this->hitboxsheguis.setPosition(500.f, 1000.f);
-	this->hitboxsheguis.setSize(sf::Vector2f(48.f, 48.f));
+	this->hitboxsheguis.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
 	this->hitboxsheguis.setOutlineColor(sf::Color::White);
 	this->hitboxsheguis.setOutlineThickness(6.f);
@@ -260,7 +260,7 @@ void Game::HitBoxSheguis()
 void Game::HitBoxSoruya()
 {
 	this->hitboxsoruya.setPosition(1000.f, 1000.f);
-	this->hitboxsoruya.setSize(sf::Vector2f(48.f, 48.f));
+	this->hitboxsoruya.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
 	this->hitboxsoruya.setOutlineColor(sf::Color::Black);
 	this->hitboxsoruya.setOutlineThickness(6.f);
@@ -269,7 +269,7 @@ void Game::HitBoxSoruya()
 void Game::HitBoxMindy()
 {
 	this->hitboxmindy.setPosition(150.f, 200.f);
-	this->hitboxmindy.setSize(sf::Vector2f(48.f, 48.f));
+	this->hitboxmindy.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxmindy.setFillColor(sf::Color::Transparent);
 	this->hitboxmindy.setOutlineColor(sf::Color::Red);
 	this->hitboxmindy.setOutlineThickness(6.f);

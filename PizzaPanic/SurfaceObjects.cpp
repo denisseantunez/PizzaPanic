@@ -38,7 +38,7 @@ bool SurfaceObjects::load(const std::string& tileset, sf::Vector2u tileSize)
 			int tileNumber = tiles[j][i];
 
 			// COLISIONS
-			if (tileNumber != -1 && tileNumber != 58 && tileNumber != 0){ // tiles in .txt that are different from -1, 0 and 58 are not passable
+			if (tileNumber != -1 && tileNumber != 96 && tileNumber != 0 && tileNumber != 249){ // tiles in .txt that are different from -1, 0 and 58 are not passable
 				// Calculate the bounds of the title
 				sf::FloatRect tileBounds(i * 48.f, j * 48.f, 48.f, 48.f);
 
