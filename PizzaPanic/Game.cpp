@@ -1,6 +1,7 @@
 // basado en el libro SFML Game Development :)
 
 #include "Game.h"
+#include <cmath>
 
 
 Game::Game()
@@ -174,16 +175,32 @@ void Game::update(sf::Time deltaTime)
 	
 
 	//**************SHEGUIS**************************************************
-	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
-	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
-	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
-
+	
 	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
 	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
 	float distancesheguis = sqrt(pow(dxsheguis, 2.f) + pow(dysheguis, 2.f));
 
+	float dxsheguisaux = 2000 - hitboxsheguis.getPosition().x;
+	float dysheguisaux = 2100 - hitboxsheguis.getPosition().y;
+	float distancesheguisaux = sqrt(pow(dxsheguisaux, 2.f) + pow(dysheguisaux, 2.f));
+
+	sf::Vector2f unitVectorsheguis(dxsheguis / distancesheguis, dysheguis / distancesheguis);
+	sf::Vector2f unitVectorsheguisaux(dxsheguisaux / (distancesheguisaux + 0.001), dysheguisaux / (distancesheguisaux + 0.001));
+
+	sf::Vector2f velocitysheguis = unitVectorsheguis * (SheguisSpeed);
+	sf::Vector2f velocitysheguisaux = unitVectorsheguisaux * (SheguisSpeed);
+
+	if (distancesheguis <= RadioDetected && distancesheguisaux <= RadioDetected) {
+		hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
+	}
+	else {
+		hitboxsheguis.move(velocitysheguisaux * deltaTime.asSeconds());
+	}
+	//************************************************************************
+
 
 	//**************SORUYA****************************************************
+	
 	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
 	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
 	float distancesoruya = sqrt(pow(dxsoruya, 2.f) + pow(dysoruya, 2.f));
@@ -193,7 +210,7 @@ void Game::update(sf::Time deltaTime)
 	float distancesoruyaaux = sqrt(pow(dxsoruyaaux, 2.f) + pow(dysoruyaaux, 2.f));
 
 	sf::Vector2f unitVectorsoruya(dxsoruya / distancesoruya, dysoruya / distancesoruya);
-	sf::Vector2f unitVectorsoruyaaux(dxsoruyaaux / (distancesoruyaaux + 0.1), dysoruyaaux / (distancesoruyaaux + 0.1));
+	sf::Vector2f unitVectorsoruyaaux(dxsoruyaaux / (distancesoruyaaux + 0.001), dysoruyaaux / (distancesoruyaaux + 0.001));
 
 	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
 	sf::Vector2f velocitysoruyaaux = unitVectorsoruyaaux * (SoruyaSpeed);
@@ -207,24 +224,40 @@ void Game::update(sf::Time deltaTime)
 	//**************************************************************************
 
 
+	//**************MINDY****************************************************
+
 	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
 	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
 	float distancemindy = sqrt(pow(dxmindy, 2.f) + pow(dymindy, 2.f));
 
+	float dxmindyaux = 1816 - hitboxmindy.getPosition().x;
+	float dymindyaux = 1416 - hitboxmindy.getPosition().y;
+	float distancemindyaux = sqrt(pow(dxmindyaux, 2.f) + pow(dymindyaux, 2.f));
 
-
-
-	// Calculate the unit vector from the enemy to the player
-	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
-	sf::Vector2f unitVectorsheguis(dxsheguis / distancesheguis, dysheguis / distancesheguis);
-	
 	sf::Vector2f unitVectormindy(dxmindy / distancemindy, dymindy / distancemindy);
+	sf::Vector2f unitVectormindyaux(dxmindyaux / (distancemindyaux + 0.001), dymindyaux / (distancemindyaux + 0.001));
 
-	// Calculate the velocity vector
-	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	sf::Vector2f velocitysheguis = unitVectorsheguis * (SheguisSpeed);
-	
 	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
+	sf::Vector2f velocitymindyaux = unitVectormindyaux * (MindySpeed);
+
+	if (distancemindy <= RadioDetected && distancemindyaux <= RadioDetected) {
+		hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
+	}
+	else {
+		hitboxmindy.move(velocitymindyaux * deltaTime.asSeconds());
+	}
+	//**************************************************************************
+
+
+	//*************CHIWIS*******************************************************
+	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
+	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
+	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
+	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
+	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
+	//**************************************************************************
+	
 
 
 	// Keep track of the player's previous position
@@ -233,18 +266,18 @@ void Game::update(sf::Time deltaTime)
 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
-	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
-	//hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
 	
 	
-	//hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
+	
+	
+
 
 
 	// Create Collidable object for the player
 	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
 
 
-	for (auto collidable : objects.collidables) {
+	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
 
 			// Handle collision
@@ -254,10 +287,14 @@ void Game::update(sf::Time deltaTime)
 
 		}
 	}
+
+
 	cout << hitboxsoruya.getPosition().x << std::endl;
 	cout << hitboxsoruya.getPosition().y;
 	cout << "\n\n";
 }
+
+
 
 void Game::HitBoxPlayer()
 {
@@ -304,6 +341,7 @@ void Game::HitBoxMindy()
 	this->hitboxmindy.setOutlineThickness(6.f);
 }
 
+
 void Game::render()
 {
 	mWindow.clear();
@@ -318,3 +356,27 @@ void Game::render()
 	mWindow.display();
 
 }
+
+/* void Game::Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime) {
+	float dx = xP - xM;
+	float dy = yP - yM;
+	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
+
+	float dxaux = Pox - xM;
+	float dyaux = Poy - yM;
+	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
+
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
+
+	sf::Vector2f velocity = unitVector * (Speed);
+	sf::Vector2f velocityaux = unitVectoraux * (Speed);
+
+	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
+		hitboxmascota.move(velocity * deltaTime.asSeconds());
+	}
+	else {
+		hitboxmascota.move(velocityaux * deltaTime.asSeconds());
+	}
+}
+*/

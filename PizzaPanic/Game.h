@@ -34,6 +34,8 @@ public:
 	bool mIsMovingRight = false;
 	void showMainMenu();
 	void run();
+	
+	
 
 
 private:
@@ -45,6 +47,9 @@ private:
 	void HitBoxSheguis();
 	void HitBoxSoruya();
 	void HitBoxMindy();
+	void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
+	
+
 
 
 private:
