@@ -8,9 +8,11 @@ public:
 	// Menu Options
 	enum class Option
 	{
-		Play,
-		Credits,
-		Quit
+		Jugar,
+		Instrucciones,
+		Creditos,
+		Salir,
+		Default
 	};
 
 	MainMenu(sf::Font& font, sf::Texture& backgroundTexture);
@@ -26,5 +28,5 @@ private:
 	sf::Font& m_font;
 	sf::Texture& m_menuBackground;
 	std::vector<sf::Text> m_menuItems;
-	Option m_selectedOption = Option::Credits; // Default to quit option
+	Option m_selectedOption = Option::Default; // Default option
 };

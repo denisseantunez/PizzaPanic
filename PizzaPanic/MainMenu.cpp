@@ -6,29 +6,34 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 		: m_font(font)
 		, m_menuBackground(backgroundTexture)
 {
-	// Set up menu items
+	// Items del menu
 	
-	// Title
+	// Título
 	sf::Text Title("PIZZA PANIC", m_font);
 	Title.setCharacterSize(55);
-	Title.setPosition(210, 30);
+	Title.setPosition(170, 30);
 	Title.setStyle(sf::Text::Bold);
 	Title.setFillColor(sf::Color::Red);
 	m_menuItems.emplace_back(std::move(Title));
 
-	// Play button
-	sf::Text playText("Play", m_font);
-	playText.setPosition(100, 400);
+	// Botón de jugar
+	sf::Text playText("Jugar", m_font);
+	playText.setPosition(330, 300);
 	m_menuItems.emplace_back(std::move(playText));
 
-	// Credits button
-	sf::Text creditsText("Credits", m_font);
-	creditsText.setPosition(100, 430);
+	// Botón de instrucciones
+	sf::Text instructionsText("Instrucciones", m_font);
+	instructionsText.setPosition(250, 350);
+	m_menuItems.emplace_back(std::move(instructionsText));
+
+	// Botón de créditos
+	sf::Text creditsText("Creditos", m_font);
+	creditsText.setPosition(300, 400);
 	m_menuItems.emplace_back(std::move(creditsText));
 
-	// Quit button
-	sf::Text quitText("Quit", m_font);
-	quitText.setPosition(100, 460);
+	// Botón de Salir
+	sf::Text quitText("Salir", m_font);
+	quitText.setPosition(335, 450);
 	m_menuItems.emplace_back(std::move(quitText));
 
 }
@@ -41,14 +46,17 @@ void MainMenu::handleEvent(sf::Event event)
 			for (const auto& menuItem : m_menuItems) {
 				if (menuItem.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
 
-					if (menuItem.getString() == "Play") {
-						m_selectedOption = Option::Play;
+					if (menuItem.getString() == "Jugar") {
+						m_selectedOption = Option::Jugar;
 					}
-					else if (menuItem.getString() == "Credits") {
-						m_selectedOption = Option::Credits;
+					else if (menuItem.getString() == "Instrucciones") {
+						m_selectedOption = Option::Instrucciones;
 					}
-					else if (menuItem.getString() == "Quit") {
-						m_selectedOption = Option::Quit;
+					else if (menuItem.getString() == "Creditos") {
+						m_selectedOption = Option::Creditos;
+					}
+					else if (menuItem.getString() == "Salir") {
+						m_selectedOption = Option::Salir;
 					}
 					return;
 				}

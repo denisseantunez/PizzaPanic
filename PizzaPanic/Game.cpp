@@ -11,7 +11,7 @@ Game::Game()
 	, mainMenu(m_font, m_menuBackground)
 {
 	// Initialize MainMenu
-	if (!m_font.loadFromFile("Fonts\\font2.ttf"))
+	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el font.");
@@ -84,7 +84,7 @@ void Game::showMainMenu()
 		mWindow.draw(mainMenu);
 		mWindow.display();
 
-		if (mainMenu.getSelectedOption() == MainMenu::Option::Play || mainMenu.getSelectedOption() == MainMenu::Option::Quit)
+		if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar || mainMenu.getSelectedOption() == MainMenu::Option::Salir)
 			break;
 	}
 }
@@ -94,7 +94,7 @@ void Game::run()
 	showMainMenu();
 
 	// If Play button is clicked, start the game
-	if (mainMenu.getSelectedOption() == MainMenu::Option::Play) {
+	if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
 
 		// Keep track of the player's initial position
 		sf::Vector2f previousPlayerPos = mPlayer.getPosition();
