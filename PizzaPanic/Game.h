@@ -13,11 +13,12 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
-const float PlayerSpeed = 250.f;
+const float PlayerSpeed = 1000.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
 const float ChiwisSpeed = 200.f;
 const float MindySpeed = 250.f;
+const float RadioDetected = 300.f;
 
 using std::cout;
 
@@ -45,7 +46,7 @@ private:
 	void HitBoxSoruya();
 	void HitBoxMindy();
 
-	
+
 private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;

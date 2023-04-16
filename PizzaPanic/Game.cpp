@@ -32,7 +32,7 @@ Game::Game()
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.18f, 0.18f);
-	
+
 	// Hitboxes
 	this->HitBoxPlayer();
 	this->HitBoxChiwis();
@@ -60,7 +60,7 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
 	}
-	music.play();
+	//music.play();
 	music.setVolume(20.f);
 
 }
@@ -114,7 +114,7 @@ void Game::run()
 			render();
 		}
 	}
-	
+
 }
 
 void Game::processEvents()
@@ -171,34 +171,59 @@ void Game::update(sf::Time deltaTime)
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
+	
 
-	// Calculate the distance between the enemy and the player
+	//**************SHEGUIS**************************************************
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
 	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
-	float distancechiwis = sqrt(pow(dxchiwis,2.f) + pow(dychiwis,2.f));
+	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
 
 	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
 	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
 	float distancesheguis = sqrt(pow(dxsheguis, 2.f) + pow(dysheguis, 2.f));
 
+
+	//**************SORUYA****************************************************
 	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
 	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
 	float distancesoruya = sqrt(pow(dxsoruya, 2.f) + pow(dysoruya, 2.f));
+
+	float dxsoruyaaux = 3000 - hitboxsoruya.getPosition().x;
+	float dysoruyaaux = 700 - hitboxsoruya.getPosition().y;
+	float distancesoruyaaux = sqrt(pow(dxsoruyaaux, 2.f) + pow(dysoruyaaux, 2.f));
+
+	sf::Vector2f unitVectorsoruya(dxsoruya / distancesoruya, dysoruya / distancesoruya);
+	sf::Vector2f unitVectorsoruyaaux(dxsoruyaaux / (distancesoruyaaux + 0.1), dysoruyaaux / (distancesoruyaaux + 0.1));
+
+	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
+	sf::Vector2f velocitysoruyaaux = unitVectorsoruyaaux * (SoruyaSpeed);
+
+	if (distancesoruya <= RadioDetected && distancesoruyaaux <= RadioDetected) {
+		hitboxsoruya.move(velocitysoruya * deltaTime.asSeconds());
+	}
+	else {
+		hitboxsoruya.move(velocitysoruyaaux * deltaTime.asSeconds());
+	}
+	//**************************************************************************
+
 
 	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
 	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
 	float distancemindy = sqrt(pow(dxmindy, 2.f) + pow(dymindy, 2.f));
 
+
+
+
 	// Calculate the unit vector from the enemy to the player
 	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
 	sf::Vector2f unitVectorsheguis(dxsheguis / distancesheguis, dysheguis / distancesheguis);
-	sf::Vector2f unitVectorsoruya(dxsoruya / distancesoruya, dysoruya / distancesoruya);
+	
 	sf::Vector2f unitVectormindy(dxmindy / distancemindy, dymindy / distancemindy);
 
 	// Calculate the velocity vector
 	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
 	sf::Vector2f velocitysheguis = unitVectorsheguis * (SheguisSpeed);
-	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
+	
 	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
 
 
@@ -209,9 +234,10 @@ void Game::update(sf::Time deltaTime)
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
-	hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
-	hitboxsoruya.move(velocitysoruya * deltaTime.asSeconds());
-	hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
+	//hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
+	
+	
+	//hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
 
 
 	// Create Collidable object for the player
@@ -228,12 +254,15 @@ void Game::update(sf::Time deltaTime)
 
 		}
 	}
+	cout << hitboxsoruya.getPosition().x << std::endl;
+	cout << hitboxsoruya.getPosition().y;
+	cout << "\n\n";
 }
 
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
-	this->hitboxplayer.setSize(sf::Vector2f(40.f,40.f));
+	this->hitboxplayer.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxplayer.setFillColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineThickness(4.f);
@@ -241,7 +270,7 @@ void Game::HitBoxPlayer()
 
 void Game::HitBoxChiwis()
 {
-	this->hitboxchiwis.setPosition(500.f, 1200.f);
+	this->hitboxchiwis.setPosition(3250.f, 1215.f);
 	this->hitboxchiwis.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
@@ -250,16 +279,16 @@ void Game::HitBoxChiwis()
 
 void Game::HitBoxSheguis()
 {
-	this->hitboxsheguis.setPosition(500.f, 1000.f);
+	this->hitboxsheguis.setPosition(2000.f, 2100.f);
 	this->hitboxsheguis.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
-	this->hitboxsheguis.setOutlineColor(sf::Color::White);
+	this->hitboxsheguis.setOutlineColor(sf::Color::Red);
 	this->hitboxsheguis.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxSoruya()
 {
-	this->hitboxsoruya.setPosition(1000.f, 1000.f);
+	this->hitboxsoruya.setPosition(3000.f, 700.f);
 	this->hitboxsoruya.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
 	this->hitboxsoruya.setOutlineColor(sf::Color::Black);
@@ -268,10 +297,10 @@ void Game::HitBoxSoruya()
 
 void Game::HitBoxMindy()
 {
-	this->hitboxmindy.setPosition(150.f, 200.f);
+	this->hitboxmindy.setPosition(1816.f, 1466.f);
 	this->hitboxmindy.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxmindy.setFillColor(sf::Color::Transparent);
-	this->hitboxmindy.setOutlineColor(sf::Color::Red);
+	this->hitboxmindy.setOutlineColor(sf::Color::Black);
 	this->hitboxmindy.setOutlineThickness(6.f);
 }
 
@@ -289,5 +318,3 @@ void Game::render()
 	mWindow.display();
 
 }
-
-
