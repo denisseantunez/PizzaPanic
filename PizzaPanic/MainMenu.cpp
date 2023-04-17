@@ -3,11 +3,11 @@
 
 
 MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
-		: m_font(font)
-		, m_menuBackground(backgroundTexture)
+	: m_font(font)
+	, m_menuBackground(backgroundTexture)
 {
 	// Items del menu
-	
+
 	// Título
 	sf::Text Title("PIZZA PANIC", m_font);
 	Title.setCharacterSize(55);
@@ -15,6 +15,8 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	Title.setStyle(sf::Text::Bold);
 	Title.setFillColor(sf::Color::Red);
 	m_menuItems.emplace_back(std::move(Title));
+;
+
 
 	// Botón de jugar
 	sf::Text playText("Jugar", m_font);

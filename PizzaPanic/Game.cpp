@@ -16,7 +16,7 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar el font.");
 	}
-	if (!m_menuBackground.loadFromFile("Images\\FondoMenuPrueba.png"))
+	if (!m_menuBackground.loadFromFile("Images\\FondoMenu.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el fondo del menu.");
