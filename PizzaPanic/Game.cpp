@@ -12,12 +12,17 @@ Game::Game()
 	, mainMenu(m_font, m_menuBackground)
 {
 	// Initialize MainMenu
-	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
+	if (!m_font.loadFromFile("Fonts/ka1.ttf"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el font.");
 	}
-	if (!m_menuBackground.loadFromFile("Images\\FondoMenu.png"))
+    if (!m_font2.loadFromFile("Fonts/font2.ttf"))
+    {
+        // Handle loading error
+        cout << ("Error al cargar el font del item.");
+    }
+	if (!m_menuBackground.loadFromFile("Images/FondoMenu.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el fondo del menu.");
@@ -25,7 +30,7 @@ Game::Game()
 	MainMenu mainMenu(m_font, m_menuBackground);
 
 	// Player
-	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
+	if (!mTexture.loadFromFile("Images/robot-idle.gif"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
@@ -33,6 +38,21 @@ Game::Game()
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.18f, 0.18f);
+
+    // Textura del Item
+    if (!mItemTexture.loadFromFile("Images/Eagle.png"))
+    {
+        // Handle loading error
+        cout << ("Error al cargar el archivo del Item.");
+    }
+    mItem.setTexture(mItemTexture);
+    mItem.setPosition(3070.f, 2760.f);
+    mItem.setScale(1.f,1.f);
+
+    // Texto del item
+    prompt.setFont(m_font2);
+    prompt.setString("Presiona espacio para recoger el item!");
+    prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
 
 	// Hitboxes
 	this->HitBoxPlayer();
@@ -42,21 +62,21 @@ Game::Game()
 	this->HitBoxMindy();
 
 	// Tilemap
-	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	if (!background.load("Images/Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
 	}
 
 	// Collision objects
-	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	if (!objects.load("Images/Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar los objetos del mapa.");
 	}
 
 	// Music
-	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
+	if (!music.openFromFile("Audios/CreepyForest.wav")) // canci�n de prueba nom�s
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -166,11 +186,27 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
-
 	// Camera follows player
 	pView.setCenter(mPlayer.getPosition());
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
+
+    // Update Item and Player collision boundaries
+    mItemCollider = mItem.getGlobalBounds();
+    mPlayerCollider = mPlayer.getGlobalBounds();
+
+    // Check item collision
+    displayItemPrompt = false;
+    if(mPlayerCollider.intersects(mItemCollider)){
+
+        displayItemPrompt = true;
+
+        if(sf::Keyboard::isKeyPressed(teclaItem)) {
+            // Perform item pickup logic here
+            cout << "Item picked up!" << std::endl;
+            mItem.setPosition(-1000.f,-1000.f);
+        }
+    }
 
 	
 
@@ -289,9 +325,9 @@ void Game::update(sf::Time deltaTime)
 	}
 
 
-	cout << hitboxsoruya.getPosition().x << std::endl;
-	cout << hitboxsoruya.getPosition().y;
-	cout << "\n\n";
+//	cout << hitboxsoruya.getPosition().x << std::endl;
+//	cout << hitboxsoruya.getPosition().y;
+//	cout << "\n\n";
 }
 
 
@@ -348,11 +384,15 @@ void Game::render()
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(mPlayer);
-	mWindow.draw(hitboxplayer);
+    mWindow.draw(mItem);
+    mWindow.draw(hitboxplayer);
 	mWindow.draw(hitboxchiwis);
 	mWindow.draw(hitboxsheguis);
 	mWindow.draw(hitboxsoruya);
 	mWindow.draw(hitboxmindy);
+    if (displayItemPrompt){
+        mWindow.draw(prompt);
+    }
 	mWindow.display();
 
 }
