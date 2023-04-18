@@ -143,13 +143,22 @@ void Game::processEvents()
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
 	if (key == sf::Keyboard::W)
+	{
 		mIsMovingUp = isPressed;
+	}
 	else if (key == sf::Keyboard::S)
+	{
 		mIsMovingDown = isPressed;
+	}
 	else if (key == sf::Keyboard::A)
+	{
 		mIsMovingLeft = isPressed;
+	}
 	else if (key == sf::Keyboard::D)
+	{
 		mIsMovingRight = isPressed;
+	}
+
 }
 
 void Game::update(sf::Time deltaTime)

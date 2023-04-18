@@ -11,9 +11,9 @@
 #include "Collidable.h"
 #include "MainMenu.h"
 
-#define TimePerFrame sf::seconds(1.f / 60.f)
+#define TimePerFrame sf::seconds(1.f / 24.f)
 
-const float PlayerSpeed = 1000.f;
+const float PlayerSpeed = 400.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
 const float ChiwisSpeed = 200.f;
