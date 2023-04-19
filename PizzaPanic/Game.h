@@ -84,6 +84,10 @@ private:
 	sf::Texture sheguisTexture;
 	sf::Texture soruyaTexture;
 	sf::Texture mindyTexture;
+	sf::Texture bellaTexture;
+	sf::Texture mantecaTexture;
+	sf::Texture pushiTexture;
+	sf::Texture munecaTexture;
 
 	// Sprites
 	sf::Sprite mPlayer;
@@ -91,6 +95,14 @@ private:
 	sf::Sprite Sheguis;
 	sf::Sprite Soruya;
 	sf::Sprite Mindy;
+	sf::Sprite Bella;
+	sf::Sprite Manteca;
+	sf::Sprite Pushi;
+	sf::Sprite Muneca;
+
+	// Pizza logo in restaurant
+	sf::Texture PizzaLogoTex;
+	sf::Sprite PizzaLogo;
 
 	// Camera
 	sf::View pView;
