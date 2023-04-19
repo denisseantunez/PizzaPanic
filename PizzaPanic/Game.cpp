@@ -43,14 +43,14 @@ Game::Game()
 
 
     // Textura del Item *************************************************************************
-    if (!mItemTexture.loadFromFile("Images\\Pizza.png"))
+    if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
     {
         // Handle loading error
         cout << ("Error al cargar el archivo del Item.");
     }
     mItem.setTexture(mItemTexture);
     mItem.setPosition(3070.f, 2760.f);
-    mItem.setScale(0.05f, 0.05f);
+    mItem.setScale(1.7f, 1.7f);
 
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
