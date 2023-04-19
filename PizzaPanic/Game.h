@@ -13,12 +13,17 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
-const float PlayerSpeed = 300.f;
+const float PlayerSpeed = 450.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
 const float ChiwisSpeed = 150.f;
 const float MindySpeed = 250.f;
+const float BellaSpeed = 250.f;
+const float MantecaSpeed = 250.f;
+const float PushiSpeed = 250.f;
+const float MunecaSpeed = 250.f;
 const float RadioDetected = 300.f;
+
 
 using std::cout;
 
@@ -34,6 +39,7 @@ public:
 	bool mIsMovingRight = false;
 	void showMainMenu();
 	void run();
+    bool displayItemPrompt;
 	
 	
 
@@ -47,6 +53,13 @@ private:
 	void HitBoxSheguis();
 	void HitBoxSoruya();
 	void HitBoxMindy();
+
+    sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
+
+	void HitBoxBella();
+	void HitBoxManteca();
+	void HitBoxPushi();
+	void HitBoxMuneca();
 	//void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
 	
 
@@ -75,9 +88,17 @@ private:
 	// Audio
 	sf::Music music;
 
-	// Main menu
+    // Item
+    sf::Texture mItemTexture;
+    sf::Sprite mItem;
+    sf::FloatRect mPlayerCollider;
+    sf::FloatRect mItemCollider;
+    sf::Text prompt;
+
+    // Main menu
 	MainMenu mainMenu;
 	sf::Font m_font;
+    sf::Font m_font2;
 	sf::Texture m_menuBackground;
 
 	// Tilemaps
@@ -104,5 +125,12 @@ private:
 	sf::RectangleShape hitboxsheguis;
 	sf::RectangleShape hitboxsoruya;
 	sf::RectangleShape hitboxmindy;
+<<<<<<< HEAD
+=======
+	sf::RectangleShape hitboxbella;
+	sf::RectangleShape hitboxmanteca;
+	sf::RectangleShape hitboxpushi;
+	sf::RectangleShape hitboxmuneca;
 
+>>>>>>> 9080f614ab62beaeb6abc3d356a0a2add9ef35c2
 };
