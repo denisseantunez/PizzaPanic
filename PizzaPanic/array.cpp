@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// PRUEBA PARA VER SI TE SALE DENISSE :P
 void Game::MakeArray() {
     for (int i = 0; i <= 34; ++i){
         if (i/3 == 0) PosicionesItem[1][i] = AlturaInicial;
