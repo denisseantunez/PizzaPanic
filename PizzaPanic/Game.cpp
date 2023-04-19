@@ -201,6 +201,9 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
+
+	float QuitarVida = 0.f;
+
 	sf::Vector2f movement(0.f, 0.f);
 
 	if (mIsMovingUp)
@@ -574,6 +577,11 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
+	// Vida Player*************************************************************************************
+	float xPlayer = mPlayer.getPosition().x;
+	float yPlayer = mPlayer.getPosition().y;
+	this->BarraVida(QuitarVida, xPlayer, yPlayer);
+
 	//*************************************************************************************************
 
 	// Player coordinates
@@ -606,6 +614,7 @@ void Game::render()
 	mWindow.draw(hitboxmanteca);
 	mWindow.draw(hitboxpushi);
 	mWindow.draw(hitboxmuneca);
+	mWindow.draw(vida);
 
 	mWindow.display();
 
@@ -694,6 +703,17 @@ void Game::HitBoxMuneca()
 	this->hitboxmuneca.setOutlineColor(sf::Color::Black);
 	this->hitboxmuneca.setOutlineThickness(6.f);
 }
+
+void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
+
+	this->vida.setPosition(xPlayer - 2.f, yPlayer - 20.f);
+	this->vida.setSize(sf::Vector2f(CantVida-QuitarVida, 10.f));
+	this->vida.setFillColor(sf::Color::Green);
+	this->vida.setOutlineColor(sf::Color::Black);
+	this->vida.setOutlineThickness(3.f);
+
+}
+
 
 /*******************************************************************************************************************************************************************/
 
