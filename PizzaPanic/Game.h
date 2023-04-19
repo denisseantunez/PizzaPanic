@@ -64,7 +64,6 @@ private:
 	
 
 
-
 private:
 	sf::RenderWindow mWindow;
 
@@ -111,6 +110,10 @@ private:
 	Collidable sheguisCollidable;
 	Collidable soruyaCollidable;
 	Collidable mindyCollidable;
+	Collidable bellaCollidable;
+	Collidable mantecaCollidable;
+	Collidable pushiCollidable;
+	Collidable munecaCollidable;
 
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
@@ -125,7 +128,6 @@ private:
 	sf::RectangleShape hitboxsheguis;
 	sf::RectangleShape hitboxsoruya;
 	sf::RectangleShape hitboxmindy;
-
 	sf::RectangleShape hitboxbella;
 	sf::RectangleShape hitboxmanteca;
 	sf::RectangleShape hitboxpushi;

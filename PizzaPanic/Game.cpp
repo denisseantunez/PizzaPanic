@@ -43,14 +43,14 @@ Game::Game()
 
 
     // Textura del Item *************************************************************************
-    if (!mItemTexture.loadFromFile("Images\\Eagle.png"))
+    if (!mItemTexture.loadFromFile("Images\\Pizza.png"))
     {
         // Handle loading error
         cout << ("Error al cargar el archivo del Item.");
     }
     mItem.setTexture(mItemTexture);
     mItem.setPosition(3070.f, 2760.f);
-    mItem.setScale(1.f,1.f);
+    mItem.setScale(0.05f, 0.05f);
 
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
@@ -217,22 +217,22 @@ void Game::update(sf::Time deltaTime)
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
-    // Update item and player collision boundaries *************************************************
-    mItemCollider = mItem.getGlobalBounds();
-    mPlayerCollider = mPlayer.getGlobalBounds();
+	// Update item and player collision boundaries *************************************************
+	mItemCollider = mItem.getGlobalBounds();
+	mPlayerCollider = mPlayer.getGlobalBounds();
 
-    // Check item collision ************************************************************************
-    displayItemPrompt = false;
-    if(mPlayerCollider.intersects(mItemCollider)){
+	// Check item collision ************************************************************************
+	displayItemPrompt = false;
+	if (mPlayerCollider.intersects(mItemCollider)) {
 
-        displayItemPrompt = true;
+		displayItemPrompt = true;
 
-        if(sf::Keyboard::isKeyPressed(teclaItem)) {
-            // Perform item pickup logic here
-            cout << "Item picked up!" << std::endl;
-            mItem.setPosition(-1000.f,-1000.f);
-        }
-    }
+		if (sf::Keyboard::isKeyPressed(teclaItem)) {
+			// Perform item pickup logic here
+			cout << "Item picked up!" << std::endl;
+			mItem.setPosition(-1000.f, -1000.f);
+		}
+	}
 
 	// Keep track of previous positions ************************************************************************
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
@@ -240,10 +240,14 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f previousSheguisPos = hitboxsheguis.getPosition();
 	sf::Vector2f previousSoruyaPos = hitboxsoruya.getPosition();
 	sf::Vector2f previousMindyPos = hitboxmindy.getPosition();
+	sf::Vector2f previousBellaPos = hitboxbella.getPosition();
+	sf::Vector2f previousMantecaPos = hitboxmanteca.getPosition();
+	sf::Vector2f previousPushiPos = hitboxpushi.getPosition();
+	sf::Vector2f previousMunecaPos = hitboxmuneca.getPosition();
 
 
 	//**************SHEGUIS*************************************************************************************
-	
+
 	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
 	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
 	float distancesheguis = sqrt(pow(dxsheguis, 2.f) + pow(dysheguis, 2.f));
@@ -268,8 +272,8 @@ void Game::update(sf::Time deltaTime)
 
 
 	//**************SORUYA************************************************************************************
-	
-	
+
+
 	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
 	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
 	float distancesoruya = sqrt(pow(dxsoruya, 2.f) + pow(dysoruya, 2.f));
@@ -365,7 +369,7 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxmanteca.move(velocitymantecaaux * deltaTime.asSeconds());
 	}
-	
+
 	//****************************************************************************************************
 
 
@@ -428,22 +432,26 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
 	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
 	//*************************************************************************************************
-	
+
 
 	// Move player 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
-	
-	
-	
+
+
+
 	// *************COLLISIONS*************************************************************************
-	
+
 	// Create Collidable object for the player and enemies
 	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
 	Collidable chiwisCollidable(1, hitboxchiwis.getGlobalBounds(), true);
 	Collidable sheguisCollidable(1, hitboxsheguis.getGlobalBounds(), true);
 	Collidable soruyaCollidable(1, hitboxsoruya.getGlobalBounds(), true);
 	Collidable mindyCollidable(1, hitboxmindy.getGlobalBounds(), true);
+	Collidable bellaCollidable(1, hitboxbella.getGlobalBounds(), true);
+	Collidable mantecaCollidable(1, hitboxmanteca.getGlobalBounds(), true);
+	Collidable pushiCollidable(1, hitboxpushi.getGlobalBounds(), true);
+	Collidable munecaCollidable(1, hitboxmuneca.getGlobalBounds(), true);
 
 	// Check for collisions
 	for (auto& collidable : objects.collidables) {
@@ -456,7 +464,6 @@ void Game::update(sf::Time deltaTime)
 
 		}
 	}
-
 
 	// Chiwis Collision
 	for (auto& collidable : objects.collidables) {
@@ -483,7 +490,7 @@ void Game::update(sf::Time deltaTime)
 				float speed = ChiwisSpeed * (distance / radius);
 				sf::Vector2f velocity = direction * speed;
 				hitboxchiwis.move(velocity * deltaTime.asSeconds());
-				break;		
+				break;
 			}
 		}
 	}
@@ -518,6 +525,50 @@ void Game::update(sf::Time deltaTime)
 			// Handle collision
 			//Chiwis.setPosition(previousChiwisPos);
 			hitboxmindy.setPosition(previousMindyPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Bella Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(bellaCollidable.m_bounds)) {
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxbella.setPosition(previousBellaPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Manteca Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(mantecaCollidable.m_bounds)) {
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxmanteca.setPosition(previousMantecaPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Pushi Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(pushiCollidable.m_bounds)) {
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxpushi.setPosition(previousPushiPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Muneca Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(munecaCollidable.m_bounds)) {
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxmuneca.setPosition(previousMunecaPos);
 			//cout << "Collision with object!\n";
 
 		}
