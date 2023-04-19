@@ -202,7 +202,7 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 
-	float QuitarVida = 0.f;
+	float QuitarVida = 40.f;
 
 	sf::Vector2f movement(0.f, 0.f);
 
@@ -460,7 +460,9 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	// Vida Player*************************************************************************************
+	
 	this->BarraVida(QuitarVida, xPlayer, yPlayer);
+	this->BarraVidaAux(xPlayer, yPlayer);
 
 	//*************************************************************************************************
 
@@ -494,7 +496,9 @@ void Game::render()
 	mWindow.draw(hitboxmanteca);
 	mWindow.draw(hitboxpushi);
 	mWindow.draw(hitboxmuneca);
+	mWindow.draw(vidaaux);
 	mWindow.draw(vida);
+	
 
 	mWindow.display();
 
@@ -592,6 +596,15 @@ void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 	this->vida.setOutlineColor(sf::Color::Black);
 	this->vida.setOutlineThickness(3.f);
 
+}
+
+void Game::BarraVidaAux(float xPlayer, float yPlayer) {
+
+	this->vidaaux.setPosition(xPlayer - 2.f, yPlayer - 20.f);
+	this->vidaaux.setSize(sf::Vector2f(CantVida, 10.f));
+	this->vidaaux.setFillColor(sf::Color::Red);
+	this->vidaaux.setOutlineColor(sf::Color::Black);
+	this->vidaaux.setOutlineThickness(3.f);
 }
 
 

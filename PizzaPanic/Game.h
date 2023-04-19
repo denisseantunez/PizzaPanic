@@ -17,7 +17,7 @@
 const float PlayerSpeed = 450.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
-const float ChiwisSpeed = 150.f;
+const float ChiwisSpeed = 300.f;
 const float MindySpeed = 250.f;
 const float BellaSpeed = 250.f;
 const float MantecaSpeed = 250.f;
@@ -63,6 +63,7 @@ private:
 	void HitBoxPushi();
 	void HitBoxMuneca();
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
+	void BarraVidaAux(float xPlayer, float yPlayer);
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	
 
@@ -136,5 +137,6 @@ private:
 	sf::RectangleShape hitboxpushi;
 	sf::RectangleShape hitboxmuneca;
 	sf::RectangleShape vida;
+	sf::RectangleShape vidaaux;
 
 };
