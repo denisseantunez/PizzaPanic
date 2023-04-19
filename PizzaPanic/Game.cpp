@@ -272,7 +272,7 @@ void Game::update(sf::Time deltaTime)
 
 	float xMindy = hitboxmindy.getPosition().x;
 	float yMindy = hitboxmindy.getPosition().y;
-	Seguir(xPlayer, yPlayer, xMindy, yMindy, 1816, 1416, MindySpeed, hitboxmindy, deltaTime);
+	Seguir(xPlayer, yPlayer, xMindy, yMindy, 1816, 1466, MindySpeed, hitboxmindy, deltaTime);
 	//******************************************************************************************************
 
 
