@@ -82,6 +82,16 @@ Game::Game()
 		cout << ("Error al cargar los objetos del mapa.");
 	}
 
+	// Pizza logo in restaurant ****************************************************************
+	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del Item.");
+	}
+	PizzaLogo.setTexture(PizzaLogoTex);
+	PizzaLogo.setPosition(2795.f, 2355.f);
+	PizzaLogo.setScale(0.1f, 0.1f);
+
 	// Music ***********************************************************************************
 	if (!music.openFromFile("Audios\\CreepyForest.wav")) 
 	{
@@ -480,6 +490,7 @@ void Game::render()
 	mWindow.clear();
 	mWindow.draw(background);
 	mWindow.draw(objects);
+	mWindow.draw(PizzaLogo);
 	mWindow.draw(mPlayer);
 	mWindow.draw(mItem);
 	mWindow.draw(hitboxplayer);
