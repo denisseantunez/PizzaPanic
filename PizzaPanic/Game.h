@@ -125,12 +125,10 @@ private:
 	sf::RectangleShape hitboxsheguis;
 	sf::RectangleShape hitboxsoruya;
 	sf::RectangleShape hitboxmindy;
-<<<<<<< HEAD
-=======
+
 	sf::RectangleShape hitboxbella;
 	sf::RectangleShape hitboxmanteca;
 	sf::RectangleShape hitboxpushi;
 	sf::RectangleShape hitboxmuneca;
 
->>>>>>> 9080f614ab62beaeb6abc3d356a0a2add9ef35c2
 };

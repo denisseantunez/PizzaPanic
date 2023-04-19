@@ -1,9 +1,9 @@
 // basado en el libro SFML Game Development :)
 
 #include "Game.h"
-#include <cmath>
 
 /*******************************************************************************************************************************************************************/
+
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
 	, mTexture()
@@ -11,7 +11,8 @@ Game::Game()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
-	// Initialize MainMenu
+
+	//Initialize MainMenu ************************************************************************
 	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
 	{
 		// Handle loading error
@@ -29,7 +30,8 @@ Game::Game()
 	}
 	MainMenu mainMenu(m_font, m_menuBackground);
 
-	// Player
+
+	// Player ************************************************************************************
 	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
 	{
 		// Handle loading error
@@ -39,7 +41,8 @@ Game::Game()
 	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.18f, 0.18f);
 
-    // Textura del Item
+
+    // Textura del Item *************************************************************************
     if (!mItemTexture.loadFromFile("Images\\Eagle.png"))
     {
         // Handle loading error
@@ -49,12 +52,12 @@ Game::Game()
     mItem.setPosition(3070.f, 2760.f);
     mItem.setScale(1.f,1.f);
 
-    // Texto del item
+    // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
     prompt.setString("Presiona espacio para recoger el item!");
     prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
 
-	// Hitboxes
+	// Hitboxes ********************************************************************************
 	this->HitBoxPlayer();
 	this->HitBoxChiwis();
 	this->HitBoxSheguis();
@@ -65,22 +68,22 @@ Game::Game()
 	this->HitBoxPushi();
 	this->HitBoxMuneca();
 
-	// Tilemap
+	// Tilemap *********************************************************************************
 	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el mapa.");
 	}
 
-	// Collision objects
+	// Collision objects ***********************************************************************
 	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
 	{
 		// Handle loading error
 		cout << ("Error al cargar los objetos del mapa.");
 	}
 
-	// Music
-	if (!music.openFromFile("Audios\\CreepyForest.wav")) // canci�n de prueba nom�s
+	// Music ***********************************************************************************
+	if (!music.openFromFile("Audios\\CreepyForest.wav")) 
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -89,7 +92,9 @@ Game::Game()
 	music.setVolume(20.f);
 
 }
+
 /*******************************************************************************************************************************************************************/
+
 void Game::showMainMenu()
 {
 
@@ -191,6 +196,8 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
@@ -205,16 +212,16 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
-	// Camera follows player
+	// Camera follows player ************************************************************************
 	pView.setCenter(mPlayer.getPosition());
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
-    // Update Item and Player collision boundaries
+    // Update item and player collision boundaries *************************************************
     mItemCollider = mItem.getGlobalBounds();
     mPlayerCollider = mPlayer.getGlobalBounds();
 
-    // Check item collision
+    // Check item collision ************************************************************************
     displayItemPrompt = false;
     if(mPlayerCollider.intersects(mItemCollider)){
 
@@ -227,14 +234,15 @@ void Game::update(sf::Time deltaTime)
         }
     }
 
-	// Keep track of previous positions
+	// Keep track of previous positions ************************************************************************
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
 	sf::Vector2f previousChiwisPos = hitboxchiwis.getPosition();
 	sf::Vector2f previousSheguisPos = hitboxsheguis.getPosition();
 	sf::Vector2f previousSoruyaPos = hitboxsoruya.getPosition();
 	sf::Vector2f previousMindyPos = hitboxmindy.getPosition();
 
-	//**************SHEGUIS**************************************************
+
+	//**************SHEGUIS*************************************************************************************
 	
 	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
 	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
@@ -256,10 +264,11 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxsheguis.move(velocitysheguisaux * deltaTime.asSeconds());
 	}
-	//************************************************************************
+	//********************************************************************************************************
 
 
-	//**************SORUYA****************************************************
+	//**************SORUYA************************************************************************************
+	
 	
 	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
 	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
@@ -281,10 +290,10 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxsoruya.move(velocitysoruyaaux * deltaTime.asSeconds());
 	}
-	//**************************************************************************
+	//*******************************************************************************************************
 
 
-	//**************MINDY****************************************************
+	//**************MINDY************************************************************************************
 
 	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
 	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
@@ -306,10 +315,10 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxmindy.move(velocitymindyaux * deltaTime.asSeconds());
 	}
-	//**************************************************************************
+	//******************************************************************************************************
 
 
-	//**************BELLA****************************************************
+	//**************BELLA***********************************************************************************
 
 	float dxbella = mPlayer.getPosition().x - hitboxbella.getPosition().x;
 	float dybella = mPlayer.getPosition().y - hitboxbella.getPosition().y;
@@ -331,10 +340,10 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxbella.move(velocitybellaaux * deltaTime.asSeconds());
 	}
-	//**************************************************************************
+	//*****************************************************************************************************
 
 
-	//**************MANTECA****************************************************
+	//**************MANTECA********************************************************************************
 
 	float dxmanteca = mPlayer.getPosition().x - hitboxmanteca.getPosition().x;
 	float dymanteca = mPlayer.getPosition().y - hitboxmanteca.getPosition().y;
@@ -357,9 +366,10 @@ void Game::update(sf::Time deltaTime)
 		hitboxmanteca.move(velocitymantecaaux * deltaTime.asSeconds());
 	}
 	
-	//**************************************************************************
+	//****************************************************************************************************
 
-	//**************PUSHI****************************************************
+
+	//**************PUSHI*********************************************************************************
 
 	float dxpushi = mPlayer.getPosition().x - hitboxpushi.getPosition().x;
 	float dypushi = mPlayer.getPosition().y - hitboxpushi.getPosition().y;
@@ -382,9 +392,10 @@ void Game::update(sf::Time deltaTime)
 		hitboxpushi.move(velocitypushiaux * deltaTime.asSeconds());
 	}
 
-	//**************************************************************************
+	//***************************************************************************************************
 
-	//**************MUNECA****************************************************
+
+	//**************MUNECA*******************************************************************************
 
 	float dxmuneca = mPlayer.getPosition().x - hitboxmuneca.getPosition().x;
 	float dymuneca = mPlayer.getPosition().y - hitboxmuneca.getPosition().y;
@@ -406,26 +417,27 @@ void Game::update(sf::Time deltaTime)
 	else {
 		hitboxmuneca.move(velocitymunecaaux * deltaTime.asSeconds());
 	}
-	//**************************************************************************
+	//**************************************************************************************************
 
 
-	//*************CHIWIS*******************************************************
+	//*************CHIWIS******************************************************************************
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
 	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
 	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
 	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
 	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
 	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
-	//**************************************************************************
+	//*************************************************************************************************
 	
 
-
+	// Move player 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 	
 	
 	
-
+	// *************COLLISIONS*************************************************************************
+	
 	// Create Collidable object for the player and enemies
 	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
 	Collidable chiwisCollidable(1, hitboxchiwis.getGlobalBounds(), true);
@@ -511,17 +523,44 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
+	//*************************************************************************************************
 
+	// Player coordinates
 	cout << mPlayer.getPosition().x << std::endl;
 	cout << mPlayer.getPosition().y;
 	cout << "\n\n";
 
 }
 
+/*******************************************************************************************************************************************************************/
 
+void Game::render()
+{
+	mWindow.clear();
+	mWindow.draw(background);
+	mWindow.draw(objects);
+	mWindow.draw(mPlayer);
+	mWindow.draw(mItem);
+	mWindow.draw(hitboxplayer);
+	mWindow.draw(hitboxchiwis);
+	mWindow.draw(hitboxsheguis);
+	mWindow.draw(hitboxsoruya);
+	mWindow.draw(hitboxmindy);
 
+	if (displayItemPrompt) {
+		mWindow.draw(prompt);
+	}
 
+	mWindow.draw(hitboxbella);
+	mWindow.draw(hitboxmanteca);
+	mWindow.draw(hitboxpushi);
+	mWindow.draw(hitboxmuneca);
 
+	mWindow.display();
+
+}
+
+/*******************************************************************************************************************************************************************/
 
 void Game::HitBoxPlayer()
 {
@@ -605,32 +644,7 @@ void Game::HitBoxMuneca()
 	this->hitboxmuneca.setOutlineThickness(6.f);
 }
 
-
-void Game::render()
-{
-	mWindow.clear();
-	mWindow.draw(background);
-	mWindow.draw(objects);
-	mWindow.draw(mPlayer);
-    mWindow.draw(mItem);
-    mWindow.draw(hitboxplayer);
-	mWindow.draw(hitboxchiwis);
-	mWindow.draw(hitboxsheguis);
-	mWindow.draw(hitboxsoruya);
-	mWindow.draw(hitboxmindy);
-
-    if (displayItemPrompt){
-        mWindow.draw(prompt);
-    }
-
-	mWindow.draw(hitboxbella);
-	mWindow.draw(hitboxmanteca);
-	mWindow.draw(hitboxpushi);
-	mWindow.draw(hitboxmuneca);
-
-	mWindow.display();
-
-}
+/*******************************************************************************************************************************************************************/
 
 /* void Game::Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime) {
 	float dx = xP - xM;
