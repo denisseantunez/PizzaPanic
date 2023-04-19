@@ -10,6 +10,7 @@
 #include "SurfaceObjects.h"
 #include "Collidable.h"
 #include "MainMenu.h"
+
 #include <cstdlib>
 #include <ctime>
 
@@ -44,6 +45,7 @@ public:
 	bool mIsMovingRight = false;
 	void showMainMenu();
 	void run();
+	void MakeArray();
     bool displayItemPrompt;
 	bool cargandoItem;
     int PosicionesItem[Filas][Columnas];
@@ -53,7 +55,8 @@ public:
 	
 
 
-private:
+	private:
+	// Funciones
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
@@ -73,9 +76,7 @@ private:
 	void BarraVidaAux(float xPlayer, float yPlayer);
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	
-
-
-private:
+	// Variables
 	sf::RenderWindow mWindow;
 
 	// Textures
