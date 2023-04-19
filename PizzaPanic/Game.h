@@ -11,13 +11,17 @@
 #include "Collidable.h"
 #include "MainMenu.h"
 
-#define TimePerFrame sf::seconds(1.f / 24.f)
+#define TimePerFrame sf::seconds(1.f / 60.f)
 
-const float PlayerSpeed = 400.f;
+const float PlayerSpeed = 1000.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
 const float ChiwisSpeed = 200.f;
 const float MindySpeed = 250.f;
+const float BellaSpeed = 250.f;
+const float MantecaSpeed = 250.f;
+const float PushiSpeed = 250.f;
+const float MunecaSpeed = 250.f;
 const float RadioDetected = 300.f;
 
 using std::cout;
@@ -47,7 +51,11 @@ private:
 	void HitBoxSheguis();
 	void HitBoxSoruya();
 	void HitBoxMindy();
-	void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
+	void HitBoxBella();
+	void HitBoxManteca();
+	void HitBoxPushi();
+	void HitBoxMuneca();
+	//void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
 	
 
 
@@ -79,5 +87,9 @@ private:
 	sf::RectangleShape hitboxsheguis;
 	sf::RectangleShape hitboxsoruya;
 	sf::RectangleShape hitboxmindy;
+	sf::RectangleShape hitboxbella;
+	sf::RectangleShape hitboxmanteca;
+	sf::RectangleShape hitboxpushi;
+	sf::RectangleShape hitboxmuneca;
 
 };
