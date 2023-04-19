@@ -3,7 +3,7 @@
 #include "Game.h"
 #include <cmath>
 
-
+/*******************************************************************************************************************************************************************/
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
 	, mTexture()
@@ -17,7 +17,7 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar el font.");
 	}
-	if (!m_menuBackground.loadFromFile("Images\\FondoMenu.png"))
+	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el fondo del menu.");
@@ -65,7 +65,7 @@ Game::Game()
 	music.setVolume(20.f);
 
 }
-
+/*******************************************************************************************************************************************************************/
 void Game::showMainMenu()
 {
 
@@ -89,6 +89,8 @@ void Game::showMainMenu()
 			break;
 	}
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Game::run()
 {
@@ -118,6 +120,8 @@ void Game::run()
 
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Game::processEvents()
 // User input
 {
@@ -140,6 +144,8 @@ void Game::processEvents()
 	}
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
 	if (key == sf::Keyboard::W)
@@ -151,6 +157,8 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 	else if (key == sf::Keyboard::D)
 		mIsMovingRight = isPressed;
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
@@ -172,7 +180,12 @@ void Game::update(sf::Time deltaTime)
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
-	
+	// Keep track of previous positions
+	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+	sf::Vector2f previousChiwisPos = hitboxchiwis.getPosition();
+	sf::Vector2f previousSheguisPos = hitboxsheguis.getPosition();
+	sf::Vector2f previousSoruyaPos = hitboxsoruya.getPosition();
+	sf::Vector2f previousMindyPos = hitboxmindy.getPosition();
 
 	//**************SHEGUIS**************************************************
 	
@@ -260,23 +273,20 @@ void Game::update(sf::Time deltaTime)
 	
 
 
-	// Keep track of the player's previous position
-	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
-
-
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 	
 	
 	
-	
 
-
-
-	// Create Collidable object for the player
+	// Create Collidable object for the player and enemies
 	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
+	Collidable chiwisCollidable(1, hitboxchiwis.getGlobalBounds(), true);
+	Collidable sheguisCollidable(1, hitboxsheguis.getGlobalBounds(), true);
+	Collidable soruyaCollidable(1, hitboxsoruya.getGlobalBounds(), true);
+	Collidable mindyCollidable(1, hitboxmindy.getGlobalBounds(), true);
 
-
+	// Check for collisions
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
 
@@ -289,12 +299,97 @@ void Game::update(sf::Time deltaTime)
 	}
 
 
+	// Chiwis Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(chiwisCollidable.m_bounds)) {
+			// Handle collision
+			sf::FloatRect intersection;
+			if (hitboxchiwis.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxchiwis.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxchiwis.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxchiwis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = ChiwisSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxchiwis.move(velocity * deltaTime.asSeconds());
+				break;		
+			}
+		}
+	}
+
+	// Sheguis Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(sheguisCollidable.m_bounds)) {
+
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxsheguis.setPosition(previousSheguisPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Soruya Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(soruyaCollidable.m_bounds)) {
+
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxsoruya.setPosition(previousSoruyaPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+	// Mindy Collision
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(mindyCollidable.m_bounds)) {
+
+			// Handle collision
+			//Chiwis.setPosition(previousChiwisPos);
+			hitboxmindy.setPosition(previousMindyPos);
+			//cout << "Collision with object!\n";
+
+		}
+	}
+
+
 	cout << hitboxsoruya.getPosition().x << std::endl;
 	cout << hitboxsoruya.getPosition().y;
 	cout << "\n\n";
 }
 
+/*******************************************************************************************************************************************************************/
 
+void Game::render()
+{
+	mWindow.clear();
+	mWindow.draw(background);
+	mWindow.draw(objects);
+	mWindow.draw(mPlayer);
+	mWindow.draw(hitboxplayer);
+	mWindow.draw(hitboxchiwis);
+	mWindow.draw(hitboxsheguis);
+	mWindow.draw(hitboxsoruya);
+	mWindow.draw(hitboxmindy);
+	mWindow.display();
+
+}
+
+
+/*******************************************************************************************************************************************************************/
 
 void Game::HitBoxPlayer()
 {
@@ -307,7 +402,7 @@ void Game::HitBoxPlayer()
 
 void Game::HitBoxChiwis()
 {
-	this->hitboxchiwis.setPosition(3250.f, 1215.f);
+	this->hitboxchiwis.setPosition(3000.f, 700.f);
 	this->hitboxchiwis.setSize(sf::Vector2f(40.f, 40.f));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
@@ -341,21 +436,7 @@ void Game::HitBoxMindy()
 	this->hitboxmindy.setOutlineThickness(6.f);
 }
 
-
-void Game::render()
-{
-	mWindow.clear();
-	mWindow.draw(background);
-	mWindow.draw(objects);
-	mWindow.draw(mPlayer);
-	mWindow.draw(hitboxplayer);
-	mWindow.draw(hitboxchiwis);
-	mWindow.draw(hitboxsheguis);
-	mWindow.draw(hitboxsoruya);
-	mWindow.draw(hitboxmindy);
-	mWindow.display();
-
-}
+/*******************************************************************************************************************************************************************/
 
 /* void Game::Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime) {
 	float dx = xP - xM;

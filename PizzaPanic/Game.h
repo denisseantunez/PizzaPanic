@@ -13,10 +13,10 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 
-const float PlayerSpeed = 1000.f;
+const float PlayerSpeed = 300.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 150.f;
-const float ChiwisSpeed = 200.f;
+const float ChiwisSpeed = 150.f;
 const float MindySpeed = 250.f;
 const float RadioDetected = 300.f;
 
@@ -47,16 +47,32 @@ private:
 	void HitBoxSheguis();
 	void HitBoxSoruya();
 	void HitBoxMindy();
-	void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
+	//void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
 	
 
 
 
 private:
 	sf::RenderWindow mWindow;
+
+	// Textures
 	sf::Texture mTexture;
+	sf::Texture chiwisTexture;
+	sf::Texture sheguisTexture;
+	sf::Texture soruyaTexture;
+	sf::Texture mindyTexture;
+
+	// Sprites
 	sf::Sprite mPlayer;
+	sf::Sprite Chiwis;
+	sf::Sprite Sheguis;
+	sf::Sprite Soruya;
+	sf::Sprite Mindy;
+
+	// Camera
 	sf::View pView;
+
+	// Audio
 	sf::Music music;
 
 	// Main menu
@@ -71,7 +87,16 @@ private:
 	// Collision
 	Collidable playerCollidable;
 	Collidable chiwisCollidable;
+	Collidable sheguisCollidable;
+	Collidable soruyaCollidable;
+	Collidable mindyCollidable;
+
+	// Previous Positions
 	sf::Vector2f previousPlayerPos;
+	sf::Vector2f previousChiwisPos;
+	sf::Vector2f previousSheguisPos;
+	sf::Vector2f previousSoruyaPos;
+	sf::Vector2f previousMindyPos;
 
 	// Game objects
 	sf::RectangleShape hitboxplayer;
