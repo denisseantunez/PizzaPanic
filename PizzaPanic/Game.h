@@ -10,6 +10,8 @@
 #include "SurfaceObjects.h"
 #include "Collidable.h"
 #include "MainMenu.h"
+#include <cstdlib>
+#include <ctime>
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
@@ -24,7 +26,8 @@ const float MantecaSpeed = 250.f;
 const float PushiSpeed = 250.f;
 const float MunecaSpeed = 250.f;
 const float RadioDetected = 300.f;
- 
+const int Filas = 2;
+const int Columnas = 35;
 
 
 using std::cout;
@@ -42,7 +45,11 @@ public:
 	void showMainMenu();
 	void run();
     bool displayItemPrompt;
-	
+	bool cargandoItem;
+    int PosicionesItem[Filas][Columnas];
+    int NuevaPosicion;
+    int AlturaInicial = 2645;
+    int PizzasEntregadas = 0;
 	
 
 

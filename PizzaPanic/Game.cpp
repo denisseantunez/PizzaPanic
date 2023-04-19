@@ -55,7 +55,6 @@ Game::Game()
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
     prompt.setString("Presiona espacio para recoger el item!");
-    prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
 
 	// Hitboxes ********************************************************************************
 	this->HitBoxPlayer();
@@ -90,6 +89,52 @@ Game::Game()
 	}
 	//music.play();
 	music.setVolume(20.f);
+
+	for (int i = 0; i <= 34; ++i){
+        if (i/3 == 0) PosicionesItem[1][i] = AlturaInicial;
+        else if (i/3 == 1) PosicionesItem[1][i] = AlturaInicial - 385;
+        else if (i/3 == 2) PosicionesItem[1][i] = AlturaInicial - (385*2);
+        else if (i/3 == 3) PosicionesItem[1][i] = AlturaInicial - (385*3);
+        else if (i/13 < 1) PosicionesItem[1][i] = AlturaInicial - (385*3);
+        else if (i/18 < 1) PosicionesItem[1][i] = AlturaInicial - (385*4);
+        else if (i/25 < 1) PosicionesItem[1][i] = AlturaInicial - (385*5);
+        else if (i/35 < 1) PosicionesItem[1][i] = AlturaInicial - (385*6);
+    }
+
+    for(int i = 0; i <= 6; i+=3){
+        PosicionesItem[0][i] = 1045;
+        PosicionesItem[0][i+1] = 660;
+        PosicionesItem[0][i+2] = 325;
+    }
+
+    PosicionesItem[0][9] = 1380;
+    PosicionesItem[0][10] = 1045;
+    PosicionesItem[0][11] = 660;
+    PosicionesItem[0][12] = 325;
+    PosicionesItem[0][13] = 1770;
+    PosicionesItem[0][14] = 1380;
+    PosicionesItem[0][15] = 1045;
+    PosicionesItem[0][16] = 660;
+    PosicionesItem[0][17] = 325;
+    PosicionesItem[0][18] = 2480;
+    PosicionesItem[0][19] = 2150;
+    PosicionesItem[0][20] = 1770;
+    PosicionesItem[0][21] = 1380;
+    PosicionesItem[0][22] = 1045;
+    PosicionesItem[0][23] = 660;
+    PosicionesItem[0][24] = 325;
+    PosicionesItem[0][25] = 3160;
+    PosicionesItem[0][26] = 2870;
+    PosicionesItem[0][27] = 2480;
+    PosicionesItem[0][28] = 2150;
+    PosicionesItem[0][29] = 1770;
+    PosicionesItem[0][30] = 1380;
+    PosicionesItem[0][31] = 1045;
+    PosicionesItem[0][32] = 660;
+    PosicionesItem[0][33] = 325;
+    PosicionesItem[0][34] = 80;
+
+    srand(time(NULL));
 
 }
 
@@ -229,11 +274,18 @@ void Game::update(sf::Time deltaTime)
 	if (mPlayerCollider.intersects(mItemCollider)) {
 
 		displayItemPrompt = true;
+		prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
 
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
-			// Perform item pickup logic here
-			cout << "Item picked up!" << std::endl;
-			mItem.setPosition(-1000.f, -1000.f);
+			if(cargandoItem){
+                mItem.setPosition(3070.f, 2760.f);
+                cargandoItem = false;
+                ++PizzasEntregadas;
+            } else {
+                cargandoItem = true;
+                NuevaPosicion = rand() % 13;
+                mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+            }
 		}
 	}
 
