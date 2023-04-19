@@ -248,182 +248,64 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f previousPushiPos = hitboxpushi.getPosition();
 	sf::Vector2f previousMunecaPos = hitboxmuneca.getPosition();
 
+	// Guardar Coordenadas del jugador en variables*************************************************************
+	float xPlayer = mPlayer.getPosition().x;
+	float yPlayer = mPlayer.getPosition().y;
 
 	//**************SHEGUIS*************************************************************************************
 
-	float dxsheguis = mPlayer.getPosition().x - hitboxsheguis.getPosition().x;
-	float dysheguis = mPlayer.getPosition().y - hitboxsheguis.getPosition().y;
-	float distancesheguis = sqrt(pow(dxsheguis, 2.f) + pow(dysheguis, 2.f));
-
-	float dxsheguisaux = 2000.f - hitboxsheguis.getPosition().x;
-	float dysheguisaux = 2100.f - hitboxsheguis.getPosition().y;
-	float distancesheguisaux = sqrt(pow(dxsheguisaux, 2.f) + pow(dysheguisaux, 2.f));
-
-	sf::Vector2f unitVectorsheguis(dxsheguis / distancesheguis, dysheguis / distancesheguis);
-	sf::Vector2f unitVectorsheguisaux(dxsheguisaux / (distancesheguisaux + 0.001), dysheguisaux / (distancesheguisaux + 0.001));
-
-	sf::Vector2f velocitysheguis = unitVectorsheguis * (SheguisSpeed);
-	sf::Vector2f velocitysheguisaux = unitVectorsheguisaux * (SheguisSpeed);
-
-	if (distancesheguis <= RadioDetected && distancesheguisaux <= RadioDetected) {
-		hitboxsheguis.move(velocitysheguis * deltaTime.asSeconds());
-	}
-	else {
-		hitboxsheguis.move(velocitysheguisaux * deltaTime.asSeconds());
-	}
+	float xSheguis = hitboxsheguis.getPosition().x;
+	float ySheguis = hitboxsheguis.getPosition().y;
+	Seguir(xPlayer, yPlayer, xSheguis, ySheguis, 2000, 2100, SheguisSpeed, hitboxsheguis, deltaTime);
 	//********************************************************************************************************
 
 
 	//**************SORUYA************************************************************************************
 
-
-	float dxsoruya = mPlayer.getPosition().x - hitboxsoruya.getPosition().x;
-	float dysoruya = mPlayer.getPosition().y - hitboxsoruya.getPosition().y;
-	float distancesoruya = sqrt(pow(dxsoruya, 2.f) + pow(dysoruya, 2.f));
-
-	float dxsoruyaaux = 3000.f - hitboxsoruya.getPosition().x;
-	float dysoruyaaux = 700.f - hitboxsoruya.getPosition().y;
-	float distancesoruyaaux = sqrt(pow(dxsoruyaaux, 2.f) + pow(dysoruyaaux, 2.f));
-
-	sf::Vector2f unitVectorsoruya(dxsoruya / distancesoruya, dysoruya / distancesoruya);
-	sf::Vector2f unitVectorsoruyaaux(dxsoruyaaux / (distancesoruyaaux + 0.001), dysoruyaaux / (distancesoruyaaux + 0.001));
-
-	sf::Vector2f velocitysoruya = unitVectorsoruya * (SoruyaSpeed);
-	sf::Vector2f velocitysoruyaaux = unitVectorsoruyaaux * (SoruyaSpeed);
-
-	if (distancesoruya <= RadioDetected && distancesoruyaaux <= RadioDetected) {
-		hitboxsoruya.move(velocitysoruya * deltaTime.asSeconds());
-	}
-	else {
-		hitboxsoruya.move(velocitysoruyaaux * deltaTime.asSeconds());
-	}
+	float xSoruya = hitboxsoruya.getPosition().x;
+	float ySoruya = hitboxsoruya.getPosition().y;
+	Seguir(xPlayer, yPlayer, xSoruya, ySoruya, 3000, 700, SoruyaSpeed, hitboxsoruya, deltaTime);
 	//*******************************************************************************************************
 
 
 	//**************MINDY************************************************************************************
 
-	float dxmindy = mPlayer.getPosition().x - hitboxmindy.getPosition().x;
-	float dymindy = mPlayer.getPosition().y - hitboxmindy.getPosition().y;
-	float distancemindy = sqrt(pow(dxmindy, 2.f) + pow(dymindy, 2.f));
-
-	float dxmindyaux = 1816.f - hitboxmindy.getPosition().x;
-	float dymindyaux = 1416.f - hitboxmindy.getPosition().y;
-	float distancemindyaux = sqrt(pow(dxmindyaux, 2.f) + pow(dymindyaux, 2.f));
-
-	sf::Vector2f unitVectormindy(dxmindy / distancemindy, dymindy / distancemindy);
-	sf::Vector2f unitVectormindyaux(dxmindyaux / (distancemindyaux + 0.001), dymindyaux / (distancemindyaux + 0.001));
-
-	sf::Vector2f velocitymindy = unitVectormindy * (MindySpeed);
-	sf::Vector2f velocitymindyaux = unitVectormindyaux * (MindySpeed);
-
-	if (distancemindy <= RadioDetected && distancemindyaux <= RadioDetected) {
-		hitboxmindy.move(velocitymindy * deltaTime.asSeconds());
-	}
-	else {
-		hitboxmindy.move(velocitymindyaux * deltaTime.asSeconds());
-	}
+	float xMindy = hitboxmindy.getPosition().x;
+	float yMindy = hitboxmindy.getPosition().y;
+	Seguir(xPlayer, yPlayer, xMindy, yMindy, 1816, 1416, MindySpeed, hitboxmindy, deltaTime);
 	//******************************************************************************************************
 
 
 	//**************BELLA***********************************************************************************
 
-	float dxbella = mPlayer.getPosition().x - hitboxbella.getPosition().x;
-	float dybella = mPlayer.getPosition().y - hitboxbella.getPosition().y;
-	float distancebella = sqrt(pow(dxbella, 2.f) + pow(dybella, 2.f));
-
-	float dxbellaaux = 85.f - hitboxbella.getPosition().x;
-	float dybellaaux = 790.f - hitboxbella.getPosition().y;
-	float distancebellaaux = sqrt(pow(dxbellaaux, 2.f) + pow(dybellaaux, 2.f));
-
-	sf::Vector2f unitVectorbella(dxbella / distancebella, dybella / distancebella);
-	sf::Vector2f unitVectorbellaaux(dxbellaaux / (distancebellaaux + 0.001), dybellaaux / (distancebellaaux + 0.001));
-
-	sf::Vector2f velocitybella = unitVectorbella * (BellaSpeed);
-	sf::Vector2f velocitybellaaux = unitVectorbellaaux * (BellaSpeed);
-
-	if (distancebella <= RadioDetected && distancebellaaux <= RadioDetected) {
-		hitboxbella.move(velocitybella * deltaTime.asSeconds());
-	}
-	else {
-		hitboxbella.move(velocitybellaaux * deltaTime.asSeconds());
-	}
+	float xBella = hitboxbella.getPosition().x;
+	float yBella = hitboxbella.getPosition().y;
+	Seguir(xPlayer, yPlayer, xBella, yBella, 85, 790, BellaSpeed, hitboxbella, deltaTime);
 	//*****************************************************************************************************
 
 
 	//**************MANTECA********************************************************************************
 
-	float dxmanteca = mPlayer.getPosition().x - hitboxmanteca.getPosition().x;
-	float dymanteca = mPlayer.getPosition().y - hitboxmanteca.getPosition().y;
-	float distancemanteca = sqrt(pow(dxmanteca, 2.f) + pow(dymanteca, 2.f));
-
-	float dxmantecaaux = 2366.f - hitboxmanteca.getPosition().x;
-	float dymantecaaux = 2800.f - hitboxmanteca.getPosition().y;
-	float distancemantecaaux = sqrt(pow(dxmantecaaux, 2.f) + pow(dymantecaaux, 2.f));
-
-	sf::Vector2f unitVectormanteca(dxmanteca / distancemanteca, dymanteca / distancemanteca);
-	sf::Vector2f unitVectormantecaaux(dxmantecaaux / (distancemantecaaux + 0.001), dymantecaaux / (distancemantecaaux + 0.001));
-
-	sf::Vector2f velocitymanteca = unitVectormanteca * (MantecaSpeed);
-	sf::Vector2f velocitymantecaaux = unitVectormantecaaux * (MantecaSpeed);
-
-	if (distancemanteca <= RadioDetected && distancemantecaaux <= RadioDetected) {
-		hitboxmanteca.move(velocitymanteca * deltaTime.asSeconds());
-	}
-	else {
-		hitboxmanteca.move(velocitymantecaaux * deltaTime.asSeconds());
-	}
-
+	float xManteca = hitboxmanteca.getPosition().x;
+	float yManteca = hitboxmanteca.getPosition().y;
+	Seguir(xPlayer, yPlayer, xManteca, yManteca, 2366, 2800, MantecaSpeed, hitboxmanteca, deltaTime);
 	//****************************************************************************************************
 
 
 	//**************PUSHI*********************************************************************************
 
-	float dxpushi = mPlayer.getPosition().x - hitboxpushi.getPosition().x;
-	float dypushi = mPlayer.getPosition().y - hitboxpushi.getPosition().y;
-	float distancepushi = sqrt(pow(dxpushi, 2.f) + pow(dypushi, 2.f));
-
-	float dxpushiaux = 85.f - hitboxpushi.getPosition().x;
-	float dypushiaux = 1950.f - hitboxpushi.getPosition().y;
-	float distancepushiaux = sqrt(pow(dxpushiaux, 2.f) + pow(dypushiaux, 2.f));
-
-	sf::Vector2f unitVectorpushi(dxpushi / distancepushi, dypushi / distancepushi);
-	sf::Vector2f unitVectorpushiaux(dxpushiaux / (distancepushiaux + 0.001), dypushiaux / (distancepushiaux + 0.001));
-
-	sf::Vector2f velocitypushi = unitVectorpushi * (PushiSpeed);
-	sf::Vector2f velocitypushiaux = unitVectorpushiaux * (PushiSpeed);
-
-	if (distancepushi <= RadioDetected && distancepushiaux <= RadioDetected) {
-		hitboxpushi.move(velocitypushi * deltaTime.asSeconds());
-	}
-	else {
-		hitboxpushi.move(velocitypushiaux * deltaTime.asSeconds());
-	}
+	float xPushi = hitboxpushi.getPosition().x;
+	float yPushi = hitboxpushi.getPosition().y;
+	Seguir(xPlayer, yPlayer, xPushi, yPushi, 85, 1950, PushiSpeed, hitboxpushi, deltaTime);
 
 	//***************************************************************************************************
 
 
 	//**************MUNECA*******************************************************************************
 
-	float dxmuneca = mPlayer.getPosition().x - hitboxmuneca.getPosition().x;
-	float dymuneca = mPlayer.getPosition().y - hitboxmuneca.getPosition().y;
-	float distancemuneca = sqrt(pow(dxmuneca, 2.f) + pow(dymuneca, 2.f));
-
-	float dxmunecaaux = 1500.f - hitboxmuneca.getPosition().x;
-	float dymunecaaux = 2415.f - hitboxmuneca.getPosition().y;
-	float distancemunecaaux = sqrt(pow(dxmunecaaux, 2.f) + pow(dymunecaaux, 2.f));
-
-	sf::Vector2f unitVectormuneca(dxmuneca / distancemuneca, dymuneca / distancemuneca);
-	sf::Vector2f unitVectormunecaaux(dxmunecaaux / (distancemunecaaux + 0.001), dymunecaaux / (distancemunecaaux + 0.001));
-
-	sf::Vector2f velocitymuneca = unitVectormuneca * (MunecaSpeed);
-	sf::Vector2f velocitymunecaaux = unitVectormunecaaux * (MunecaSpeed);
-
-	if (distancemuneca <= RadioDetected && distancemunecaaux <= RadioDetected) {
-		hitboxmuneca.move(velocitymuneca * deltaTime.asSeconds());
-	}
-	else {
-		hitboxmuneca.move(velocitymunecaaux * deltaTime.asSeconds());
-	}
+	float xMuneca = hitboxmuneca.getPosition().x;
+	float yMuneca = hitboxmuneca.getPosition().y;
+	Seguir(xPlayer, yPlayer, xMuneca, yMuneca, 1500, 2415, MunecaSpeed, hitboxmuneca, deltaTime);
 	//**************************************************************************************************
 
 
@@ -578,8 +460,6 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	// Vida Player*************************************************************************************
-	float xPlayer = mPlayer.getPosition().x;
-	float yPlayer = mPlayer.getPosition().y;
 	this->BarraVida(QuitarVida, xPlayer, yPlayer);
 
 	//*************************************************************************************************
@@ -717,13 +597,13 @@ void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 
 /*******************************************************************************************************************************************************************/
 
-/* void Game::Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime) {
-	float dx = xP - xM;
-	float dy = yP - yM;
+void Game::Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime) {
+	float dx = xPlayer - xMascota;
+	float dy = yPlayer - yMascota;
 	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
 
-	float dxaux = Pox - xM;
-	float dyaux = Poy - yM;
+	float dxaux = Pox - xMascota;
+	float dyaux = Poy - yMascota;
 	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
 
 	sf::Vector2f unitVector(dx / distance, dy / distance);
@@ -739,4 +619,28 @@ void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 		hitboxmascota.move(velocityaux * deltaTime.asSeconds());
 	}
 }
-*/
+
+
+//NOOOO BORRRARRR ES POR SI UNA EMERGENCIA
+/*
+	float dxmanteca = mPlayer.getPosition().x - hitboxmanteca.getPosition().x;
+	float dymanteca = mPlayer.getPosition().y - hitboxmanteca.getPosition().y;
+	float distancemanteca = sqrt(pow(dxmanteca, 2.f) + pow(dymanteca, 2.f));
+
+	float dxmantecaaux = 2366.f - hitboxmanteca.getPosition().x;
+	float dymantecaaux = 2800.f - hitboxmanteca.getPosition().y;
+	float distancemantecaaux = sqrt(pow(dxmantecaaux, 2.f) + pow(dymantecaaux, 2.f));
+
+	sf::Vector2f unitVectormanteca(dxmanteca / distancemanteca, dymanteca / distancemanteca);
+	sf::Vector2f unitVectormantecaaux(dxmantecaaux / (distancemantecaaux + 0.001), dymantecaaux / (distancemantecaaux + 0.001));
+
+	sf::Vector2f velocitymanteca = unitVectormanteca * (MantecaSpeed);
+	sf::Vector2f velocitymantecaaux = unitVectormantecaaux * (MantecaSpeed);
+
+	if (distancemanteca <= RadioDetected && distancemantecaaux <= RadioDetected) {
+		hitboxmanteca.move(velocitymanteca * deltaTime.asSeconds());
+	}
+	else {
+		hitboxmanteca.move(velocitymantecaaux * deltaTime.asSeconds());
+	}
+	*/

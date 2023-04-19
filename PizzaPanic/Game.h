@@ -63,7 +63,7 @@ private:
 	void HitBoxPushi();
 	void HitBoxMuneca();
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
-	//void Seguir(float xP, float yP, float xM, float yM, float Pox, float Poy, float Speed, sf::RectangleShape hitboxmascota, sf::Time deltaTime);
+	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	
 
 
