@@ -52,6 +52,18 @@ Game::Game()
     mItem.setPosition(3070.f, 2760.f);
     mItem.setScale(1.7f, 1.7f);
 
+	// Textura de Chiwis *************************************************************************
+    if (!chiwisTexture.loadFromFile("Images/chiwis.png")){
+        // Handle loading error
+        cout << ("Error al cargar la textura de chiwis.");
+    }
+    Chiwis.setTexture(chiwisTexture);
+    Chiwis.setPosition(3000.f, 700.f);
+    Chiwis.setScale(0.3f,0.3f);
+    sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
+    ChiwisWidth = ChiwisRect.width;
+    ChiwisHeight = ChiwisRect.height;
+
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
     prompt.setString("Presiona espacio para recoger el item!");
@@ -235,6 +247,8 @@ void Game::update(sf::Time deltaTime)
 	// Update item and player collision boundaries *************************************************
 	mItemCollider = mItem.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
+	ChiwisCollider = Chiwis.getGlobalBounds();
+    Chiwis.setPosition(hitboxchiwis.getPosition().x,hitboxchiwis.getPosition().y);
 
 	// Check item collision ************************************************************************
 	displayItemPrompt = false;
@@ -255,6 +269,11 @@ void Game::update(sf::Time deltaTime)
             }
 		}
 	}
+
+	if (ChiwisCollider.intersects(mPlayerCollider)){
+        displayItemPrompt = true;
+        prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
+    }
 
 	// Keep track of previous positions ************************************************************************
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
@@ -486,9 +505,9 @@ void Game::update(sf::Time deltaTime)
 	//*************************************************************************************************
 
 	// Player coordinates
-	cout << mPlayer.getPosition().x << std::endl;
-	cout << mPlayer.getPosition().y;
-	cout << "\n\n";
+	// cout << mPlayer.getPosition().x << std::endl;
+	// cout << mPlayer.getPosition().y;
+	// cout << "\n\n";
 
 }
 
@@ -518,6 +537,7 @@ void Game::render()
 	mWindow.draw(hitboxmuneca);
 	mWindow.draw(vidaaux);
 	mWindow.draw(vida);
+	mWindow.draw(Chiwis);
 	
 
 	mWindow.display();
@@ -538,7 +558,7 @@ void Game::HitBoxPlayer()
 void Game::HitBoxChiwis()
 {
 	this->hitboxchiwis.setPosition(3000.f, 700.f);
-	this->hitboxchiwis.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxchiwis.setSize(ChiwisWidth, ChiwisHeight);
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
 	this->hitboxchiwis.setOutlineThickness(6.f);
