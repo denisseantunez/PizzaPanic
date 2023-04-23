@@ -109,7 +109,7 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
 	}
-	music.play();
+	//music.play();
 	music.setVolume(20.f);
 
 	// Crear arreglo y empezar semilla
@@ -558,7 +558,7 @@ void Game::HitBoxPlayer()
 void Game::HitBoxChiwis()
 {
 	this->hitboxchiwis.setPosition(3000.f, 700.f);
-	this->hitboxchiwis.setSize(ChiwisWidth, ChiwisHeight);
+	this->hitboxchiwis.setSize(sf::Vector2f(ChiwisWidth, ChiwisHeight));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
 	this->hitboxchiwis.setOutlineThickness(6.f);
