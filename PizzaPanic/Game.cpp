@@ -274,12 +274,13 @@ void Game::update(sf::Time deltaTime)
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if(cargandoItem){
 				QuitarVida = 0.f;
+				Mordidas = 0;
                 mItem.setPosition(3070.f, 2760.f);
                 cargandoItem = false;
                 ++PizzasEntregadas;
             } else {
                 cargandoItem = true;
-                NuevaPosicion = rand() % 13;
+                NuevaPosicion = rand() % 35;
                 mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
             }
 		}
