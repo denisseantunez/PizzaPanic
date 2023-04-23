@@ -53,7 +53,7 @@ Game::Game()
     mItem.setScale(1.7f, 1.7f);
 
 	// Textura de Chiwis *************************************************************************
-    if (!chiwisTexture.loadFromFile("Images/chiwis.png")){
+    if (!chiwisTexture.loadFromFile("Images\\chiwis.png")){
         // Handle loading error
         cout << ("Error al cargar la textura de chiwis.");
     }
