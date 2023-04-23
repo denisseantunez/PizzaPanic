@@ -74,6 +74,10 @@ Game::Game()
 	Sheguis.setTextureRect(sf::IntRect(480, 288, 48, 48));
 	Sheguis.setPosition(2000.f, 2100.f);
 
+	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
+	SheguisWidth = SheguisRect.width;
+	SheguisHeight = SheguisRect.height;
+
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
     prompt.setString("Presiona espacio para recoger el item!");
@@ -602,7 +606,7 @@ void Game::HitBoxChiwis()
 void Game::HitBoxSheguis()
 {
 	this->hitboxsheguis.setPosition(2000.f, 2100.f);
-	this->hitboxsheguis.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxsheguis.setSize(sf::Vector2f(SheguisWidth, SheguisHeight));
 	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
 	this->hitboxsheguis.setOutlineColor(sf::Color::Red);
 	this->hitboxsheguis.setOutlineThickness(6.f);

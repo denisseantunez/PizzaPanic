@@ -58,6 +58,8 @@ public:
 	// chiwis temporal
     float ChiwisWidth;
     float ChiwisHeight;
+	float SheguisWidth;
+	float SheguisHeight;
 
 	private:
 	// Funciones
