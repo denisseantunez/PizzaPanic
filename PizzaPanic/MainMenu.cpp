@@ -80,11 +80,30 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	quitText.setPosition(345, 450);
 	m_menuItems.emplace_back(std::move(quitText));
 
+	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
+		// Botón de Regresar
+		sf::RectangleShape backButton;
+		backButton.setSize(sf::Vector2f(230, 40));
+		backButton.setOutlineColor(sf::Color::Red);
+		backButton.setOutlineThickness(2);
+		backButton.setPosition(500, 520);
+		backButton.setFillColor(sf::Color::White);
+		m_menuButtons.emplace_back(std::move(backButton));
+
+		sf::Text backText("Regresar", m_font);
+		backText.setFillColor(sf::Color::Black);
+		backText.setPosition(500, 520);
+		m_menuItems.emplace_back(std::move(backText));
+	}
+
+
 }
 
 void MainMenu::handleEvent(sf::Event event)
 {
+	
 	if (event.type == sf::Event::MouseButtonPressed) {
+		m_selectedOption = Option::Default;
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			// Check if any menu option was clicked
 			for (const auto& menuItem : m_menuItems) {
@@ -94,46 +113,19 @@ void MainMenu::handleEvent(sf::Event event)
 						m_selectedOption = Option::Jugar;
 					}
 					else if (menuItem.getString() == "Instrucciones") {
-						m_selectedOption = Option::Instrucciones;
-
-						// Botón de Regresar
-						sf::RectangleShape backButton;
-						backButton.setSize(sf::Vector2f(328, 40));
-						backButton.setOutlineColor(sf::Color::Red);
-						backButton.setOutlineThickness(2);
-						backButton.setPosition(500, 520);
-						backButton.setFillColor(sf::Color::White);
-						m_menuButtons.emplace_back(std::move(backButton));
-
-						sf::Text backText("Regresar", m_font);
-						backText.setFillColor(sf::Color::Black);
-						backText.setPosition(500, 520);
-						m_menuItems.emplace_back(std::move(backText));
+						m_selectedOption = Option::Instrucciones; 
 
 					}
 					else if (menuItem.getString() == "Creditos") {
 						m_selectedOption = Option::Creditos;
-
-						// Botón de Regresar
-						sf::RectangleShape backButton;
-						backButton.setSize(sf::Vector2f(328, 40));
-						backButton.setOutlineColor(sf::Color::Red);
-						backButton.setOutlineThickness(2);
-						backButton.setPosition(240, 450);
-						backButton.setFillColor(sf::Color::White);
-						m_menuButtons.emplace_back(std::move(backButton));
-
-						sf::Text backText("Regresar", m_font);
-						backText.setFillColor(sf::Color::Black);
-						backText.setPosition(345, 450);
-						m_menuItems.emplace_back(std::move(backText));
-
 					}
 					else if (menuItem.getString() == "Salir") {
 						m_selectedOption = Option::Salir;
 					}
 					else if (menuItem.getString() == "Regresar") {
-						m_selectedOption = Option::Default;
+						m_selectedOption = Option::Regresar;
+						m_menuItems.pop_back();
+						m_menuButtons.pop_back();
 					}
 					return;
 				}
@@ -148,6 +140,23 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	sf::Sprite background(m_menuBackground);
 	target.draw(background);
 
+
+	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
+		// Botón de Regresar
+		sf::RectangleShape backButton;
+		backButton.setSize(sf::Vector2f(230, 40));
+		backButton.setOutlineColor(sf::Color::Red);
+		backButton.setOutlineThickness(2);
+		backButton.setPosition(458, 530);
+		backButton.setFillColor(sf::Color::White);
+		target.draw(backButton);
+
+		sf::Text backText("Regresar", m_font);
+		backText.setFillColor(sf::Color::Black);
+		backText.setPosition(468, 530);
+		target.draw(backText);
+	}
+
 	// Draw menu buttons
 	for (const auto& menuButton : m_menuButtons)
 	{
@@ -159,6 +168,19 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		target.draw(menuItem);
 	}
+
+	if (m_selectedOption == Option::Instrucciones) {
+		// 
+		sf::Texture instructionsTexture;
+		instructionsTexture.loadFromFile("Images\\Instrucciones.png");
+		sf::Sprite Instructions(instructionsTexture);
+		Instructions.setPosition(30, 8);
+		Instructions.setScale(0.85f, 0.85f);
+
+		target.draw(Instructions);
+
+	}
+
 }
 
 MainMenu::Option MainMenu::getSelectedOption() const

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class MainMenu : public sf::Drawable, public sf::Transformable
 {
@@ -12,7 +13,8 @@ public:
 		Instrucciones,
 		Creditos,
 		Salir,
-		Default
+		Default,
+		Regresar
 	};
 
 	MainMenu(sf::Font& font, sf::Texture& backgroundTexture);
