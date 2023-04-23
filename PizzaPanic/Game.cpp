@@ -274,13 +274,13 @@ void Game::update(sf::Time deltaTime)
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if(cargandoItem){
 				QuitarVida = 0.f;
-				Mordidas = 0;
+				Mordidas = 0.f;
                 mItem.setPosition(3070.f, 2760.f);
                 cargandoItem = false;
                 ++PizzasEntregadas;
             } else {
                 cargandoItem = true;
-                NuevaPosicion = rand() % 35;
+                NuevaPosicion = rand() % 2;
                 mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
             }
 		}
@@ -291,6 +291,7 @@ void Game::update(sf::Time deltaTime)
 
 		if (Mordidas > 0 && Mordidas < 120) {
 			QuitarVida += 0.5f;
+			
 		}
 
         displayItemPrompt = true;
@@ -372,6 +373,7 @@ void Game::update(sf::Time deltaTime)
 
 
 	//*************CHIWIS******************************************************************************
+
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
 	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
 	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
@@ -654,11 +656,18 @@ void Game::HitBoxMuneca()
 
 void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 
-	this->vida.setPosition(xPlayer - 2.f, yPlayer - 20.f);
-	this->vida.setSize(sf::Vector2f(CantVida-QuitarVida, 10.f));
-	this->vida.setFillColor(sf::Color::Green);
-	this->vida.setOutlineColor(sf::Color::Black);
-	this->vida.setOutlineThickness(3.f);
+		this->vida.setPosition(xPlayer - 2.f, yPlayer - 20.f);
+		this->vida.setSize(sf::Vector2f(CantVida - QuitarVida, 10.f));
+
+		if (QuitarVida >= CantVida - 1.f) {
+			this->vida.setFillColor(sf::Color::Red);
+		}
+		else {
+			this->vida.setFillColor(sf::Color::Green);
+		}
+		this->vida.setOutlineColor(sf::Color::Transparent);
+		this->vida.setOutlineThickness(3.f);
+	
 
 }
 
