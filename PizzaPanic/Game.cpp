@@ -104,15 +104,22 @@ Game::Game()
 	PizzaLogo.setScale(0.1f, 0.1f);
 
 	// Music ***********************************************************************************
-	if (!music.openFromFile("Audios\\CreepyForest.wav")) 
+	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
 	}
-	//music.play();
 	music.setVolume(20.f);
 
-	// Crear arreglo y empezar semilla
+	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio del menu.");
+	}
+	menuMusic.setVolume(20.f);
+
+
+	// Crear arreglo y empezar semilla **********************************************************
 	MakeArray();
     srand(time(NULL));
 }
@@ -147,10 +154,18 @@ void Game::showMainMenu()
 
 void Game::run()
 {
+	menuMusic.play();
+	menuMusic.setLoop(true);
+
 	showMainMenu();
 
 	// If Play button is clicked, start the game
 	if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
+
+		// Play game music
+		menuMusic.stop();
+		music.play();
+		music.setLoop(true);
 
 		// Keep track of the player's initial position
 		sf::Vector2f previousPlayerPos = mPlayer.getPosition();

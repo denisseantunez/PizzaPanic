@@ -112,6 +112,7 @@ public:
 
 	// Audio
 	sf::Music music;
+	sf::Music menuMusic;
 
     // Item
     sf::Texture mItemTexture;
