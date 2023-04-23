@@ -74,10 +74,6 @@ Game::Game()
 	Sheguis.setTextureRect(sf::IntRect(480, 288, 48, 48));
 	Sheguis.setPosition(2000.f, 2100.f);
 
-	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
-	ChiwisWidth = ChiwisRect.width;
-	ChiwisHeight = ChiwisRect.height;
-
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
     prompt.setString("Presiona espacio para recoger el item!");
