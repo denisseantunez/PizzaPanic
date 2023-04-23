@@ -97,7 +97,7 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
 	}
-	//music.play();
+	music.play();
 	music.setVolume(20.f);
 
 	// Crear arreglo y empezar semilla

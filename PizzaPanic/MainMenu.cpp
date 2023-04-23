@@ -95,12 +95,45 @@ void MainMenu::handleEvent(sf::Event event)
 					}
 					else if (menuItem.getString() == "Instrucciones") {
 						m_selectedOption = Option::Instrucciones;
+
+						// Botón de Regresar
+						sf::RectangleShape backButton;
+						backButton.setSize(sf::Vector2f(328, 40));
+						backButton.setOutlineColor(sf::Color::Red);
+						backButton.setOutlineThickness(2);
+						backButton.setPosition(500, 520);
+						backButton.setFillColor(sf::Color::White);
+						m_menuButtons.emplace_back(std::move(backButton));
+
+						sf::Text backText("Regresar", m_font);
+						backText.setFillColor(sf::Color::Black);
+						backText.setPosition(500, 520);
+						m_menuItems.emplace_back(std::move(backText));
+
 					}
 					else if (menuItem.getString() == "Creditos") {
 						m_selectedOption = Option::Creditos;
+
+						// Botón de Regresar
+						sf::RectangleShape backButton;
+						backButton.setSize(sf::Vector2f(328, 40));
+						backButton.setOutlineColor(sf::Color::Red);
+						backButton.setOutlineThickness(2);
+						backButton.setPosition(240, 450);
+						backButton.setFillColor(sf::Color::White);
+						m_menuButtons.emplace_back(std::move(backButton));
+
+						sf::Text backText("Regresar", m_font);
+						backText.setFillColor(sf::Color::Black);
+						backText.setPosition(345, 450);
+						m_menuItems.emplace_back(std::move(backText));
+
 					}
 					else if (menuItem.getString() == "Salir") {
 						m_selectedOption = Option::Salir;
+					}
+					else if (menuItem.getString() == "Regresar") {
+						m_selectedOption = Option::Default;
 					}
 					return;
 				}
