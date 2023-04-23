@@ -52,6 +52,8 @@ public:
     int NuevaPosicion;
     int AlturaInicial = 2645;
     int PizzasEntregadas = 0;
+	float QuitarVida = .0f;
+	float Mordidas = 0.f;
 	
 	// chiwis temporal
     float ChiwisWidth;

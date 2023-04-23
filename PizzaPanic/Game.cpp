@@ -154,7 +154,7 @@ void Game::showMainMenu()
 
 void Game::run()
 {
-	menuMusic.play();
+	//menuMusic.play();
 	menuMusic.setLoop(true);
 
 	showMainMenu();
@@ -164,7 +164,7 @@ void Game::run()
 
 		// Play game music
 		menuMusic.stop();
-		music.play();
+		//music.play();
 		music.setLoop(true);
 
 		// Keep track of the player's initial position
@@ -241,7 +241,6 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 
-	float QuitarVida = 40.f;
 
 	sf::Vector2f movement(0.f, 0.f);
 
@@ -274,6 +273,7 @@ void Game::update(sf::Time deltaTime)
 
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if(cargandoItem){
+				QuitarVida = 0.f;
                 mItem.setPosition(3070.f, 2760.f);
                 cargandoItem = false;
                 ++PizzasEntregadas;
@@ -286,9 +286,17 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	if (ChiwisCollider.intersects(mPlayerCollider)){
+		Mordidas++;
+
+		if (Mordidas > 0 && Mordidas < 120) {
+			QuitarVida += 0.5f;
+		}
+
         displayItemPrompt = true;
         prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
     }
+
+
 
 	// Keep track of previous positions ************************************************************************
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
