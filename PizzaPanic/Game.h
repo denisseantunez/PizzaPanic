@@ -53,7 +53,9 @@ public:
     int AlturaInicial = 2645;
     int PizzasEntregadas = 0;
 	
-
+	// chiwis temporal
+    float ChiwisWidth;
+    float ChiwisHeight;
 
 	private:
 	// Funciones
@@ -138,6 +140,9 @@ public:
 	Collidable mantecaCollidable;
 	Collidable pushiCollidable;
 	Collidable munecaCollidable;
+
+	// Collision with player
+	sf::FloatRect ChiwisCollider;
 
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
