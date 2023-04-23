@@ -52,17 +52,31 @@ Game::Game()
     mItem.setPosition(3070.f, 2760.f);
     mItem.setScale(1.7f, 1.7f);
 
-	// Textura de Chiwis *************************************************************************
-    if (!chiwisTexture.loadFromFile("Images\\chiwis.png")){
+	// Textura Chiwis **************************************************************************
+    if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")){
         // Handle loading error
         cout << ("Error al cargar la textura de chiwis.");
     }
     Chiwis.setTexture(chiwisTexture);
+	Chiwis.setTextureRect(sf::IntRect(0, 288, 48, 48));
     Chiwis.setPosition(3000.f, 700.f);
-    Chiwis.setScale(0.3f,0.3f);
+
     sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
     ChiwisWidth = ChiwisRect.width;
     ChiwisHeight = ChiwisRect.height;
+
+	// Textura Sheguis **************************************************************************
+	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de sheguis.");
+	}
+	Sheguis.setTexture(sheguisTexture);
+	Sheguis.setTextureRect(sf::IntRect(480, 288, 48, 48));
+	Sheguis.setPosition(2000.f, 2100.f);
+
+	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
+	ChiwisWidth = ChiwisRect.width;
+	ChiwisHeight = ChiwisRect.height;
 
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
@@ -553,6 +567,7 @@ void Game::render()
 	mWindow.draw(vidaaux);
 	mWindow.draw(vida);
 	mWindow.draw(Chiwis);
+	mWindow.draw(Sheguis);
 	
 
 	mWindow.display();
