@@ -99,6 +99,12 @@ public:
 	sf::Texture pushiTexture;
 	sf::Texture munecaTexture;
 
+	// Player
+	sf::IntRect m_playerRect;
+
+	// Time
+	sf::Clock clock;
+
 	// Sprites
 	sf::Sprite mPlayer;
 	sf::Sprite Chiwis;
