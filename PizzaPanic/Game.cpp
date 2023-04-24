@@ -726,6 +726,9 @@ void Game::update(sf::Time deltaTime)
 	
 	//*****FLECHA**************************************************************************************
 	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
+
+	float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
+	cout << AnguloImp << std::endl;
 }
 
 /*******************************************************************************************************************************************************************/
@@ -939,6 +942,31 @@ void Game::Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, 
 	}
 	else {
 		hitboxmascota.move(velocityaux * deltaTime.asSeconds());
+	}
+}
+
+float Game::Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed) {
+	float dx = xPlayer - xMascota;
+	float dy = yPlayer - yMascota;
+	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
+
+	float dxaux = Pox - xMascota;
+	float dyaux = Poy - yMascota;
+	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
+
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
+
+	sf::Vector2f velocity = unitVector * (Speed);
+	sf::Vector2f velocityaux = unitVectoraux * (Speed);
+
+	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
+		float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
+		return angle ;
+	}
+	else {
+		float angle = atan2(velocityaux.y, velocityaux.x) * 180/3.141592 + 180.f;
+		return angle;
 	}
 }
 
