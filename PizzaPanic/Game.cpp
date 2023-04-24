@@ -377,7 +377,7 @@ void Game::update(sf::Time deltaTime)
 		MunecaCollider.intersects(mPlayerCollider) ||
 		MindyCollider.intersects(mPlayerCollider)  ||
 		MantecaCollider.intersects(mPlayerCollider))
-	{
+	{-
 		Mordidas++;
 		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
@@ -757,6 +757,9 @@ void Game::update(sf::Time deltaTime)
 	
 	//*****FLECHA**************************************************************************************
 	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
+
+	float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
+	cout << AnguloImp << std::endl;
 }
 
 /*******************************************************************************************************************************************************************/
@@ -820,8 +823,19 @@ void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setOutlineThickness(2.f);
 	this->arrow.setOutlineColor(sf::Color::Black);
 
-	// actualizar la posición de la flecha en función de la posición del jugador
-	this->arrow.setPosition(xPlayer + 25.f, yPlayer + arrowOffset);
+	// calcular la posición del centro del círculo
+	float circleRadius = 80.f; // ajusta el radio del círculo según lo necesites
+	sf::Vector2f circleCenter(xPlayer + 15.f, yPlayer + 20.f);
+
+	// calcular la posición de la flecha en el borde del círculo
+	float angleRadians = (angle + 90) * 3.141592 / 180; // convertir el ángulo a radianes y ajustar para la orientación de la flecha
+	sf::Vector2f arrowPosition(cos(angleRadians) * circleRadius, sin(angleRadians) * circleRadius);
+
+	// ajustar la posición de la flecha en función del centro del círculo
+	arrowPosition += circleCenter;
+
+	// establecer la posición de la flecha
+	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
 
@@ -959,6 +973,31 @@ void Game::Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, 
 	}
 	else {
 		hitboxmascota.move(velocityaux * deltaTime.asSeconds());
+	}
+}
+
+float Game::Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed) {
+	float dx = xPlayer - xMascota;
+	float dy = yPlayer - yMascota;
+	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
+
+	float dxaux = Pox - xMascota;
+	float dyaux = Poy - yMascota;
+	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
+
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
+
+	sf::Vector2f velocity = unitVector * (Speed);
+	sf::Vector2f velocityaux = unitVectoraux * (Speed);
+
+	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
+		float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
+		return angle ;
+	}
+	else {
+		float angle = atan2(velocityaux.y, velocityaux.x) * 180/3.141592 + 180.f;
+		return angle;
 	}
 }
 
