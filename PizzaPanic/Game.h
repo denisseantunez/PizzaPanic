@@ -57,6 +57,8 @@ public:
 	float QuitarVida = .0f;
 	float Mordidas = 0.f;
     float ChiwisSpeed = 300.f;
+	float xPlayer;
+    float yPlayer;
 	sf::Vector2f EntregarPizza;
 	
 	// chiwis temporal
@@ -108,8 +110,11 @@ public:
 	sf::Texture pushiTexture;
 	sf::Texture munecaTexture;
 
-	// Player
+	// Texture Rects
 	sf::IntRect m_playerRect;
+    sf::IntRect chiwisTexRect;
+    sf::IntRect soruyaTexRect;
+	sf::IntRect sheguisTexRect;
 
 	// Time
 	sf::Clock clock;

@@ -77,8 +77,11 @@ Game::Game()
 		// Handle loading error
 		cout << ("Error al cargar la textura de sheguis.");
 	}
+	sheguisTexRect.left = 0;
+	sheguisTexRect.width = 36;
+	sheguisTexRect.height = 47;
 	Sheguis.setTexture(sheguisTexture);
-	Sheguis.setTextureRect(sf::IntRect(480, 288, 48, 48));
+	Sheguis.setTextureRect(sheguisTexRect);
 	Sheguis.setPosition(2000.f, 2100.f);
 
 	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
@@ -320,13 +323,62 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
-	// Player Animation *****************************************************************************
+	// Sprite Animations *****************************************************************************
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
-		if (m_playerRect.left == 1920)
-			m_playerRect.left = 0;
-		else { m_playerRect.left += 320; }
-		mPlayer.setTextureRect(m_playerRect);
-		clock.restart();
+		// Player Animations
+        if (m_playerRect.left == 1920)
+            m_playerRect.left = 0;
+        else { m_playerRect.left += 320; }
+
+		// Chiwis Animations
+        chiwisTexRect.top = 287;
+        if (chiwisTexRect.left == 104)
+            chiwisTexRect.left = 0;
+        else
+            chiwisTexRect.left += 52;
+
+		// Sheguis Animations
+		float AnguloSheguis = this->Angulo(xPlayer, yPlayer, hitboxsheguis.getPosition().x, hitboxsheguis.getPosition().y, 2000, 2100, SheguisSpeed);
+
+		if ((AnguloSheguis >= 70 && AnguloSheguis <= 110) || (AnguloSheguis >= -290 && AnguloSheguis <= -250)) { // ARRIBA
+			sheguisTexRect.top = 213;
+			if (sheguisTexRect.left == 104) 
+				sheguisTexRect.left = 0;
+			else 
+				sheguisTexRect.left += 52;
+		} else if (AnguloSheguis > 110 && AnguloSheguis < 250) { // DERECHA
+			sheguisTexRect.top = 142;
+			if (sheguisTexRect.left == 104) 
+				sheguisTexRect.left = 0;
+			else 
+				sheguisTexRect.left += 52;
+		} else if ((AnguloSheguis >= 250 && AnguloSheguis <= 290) || (AnguloSheguis >= -110 && AnguloSheguis <= -70)) { // ABAJO
+			sheguisTexRect.top = 0;
+			if (sheguisTexRect.left == 104) 
+				sheguisTexRect.left = 0;
+			else 
+				sheguisTexRect.left += 52;
+		} else {
+			if (AnguloSheguis > 0 || (AnguloSheguis > -250 && AnguloSheguis < -110)) {
+				sheguisTexRect.top = 71;
+				if (sheguisTexRect.left == 104) 
+					sheguisTexRect.left = 0;
+				else 
+					sheguisTexRect.left += 52;
+			} else {
+				sheguisTexRect.top = 142;
+				if (sheguisTexRect.left == 104) 
+					sheguisTexRect.left = 0;
+				else 
+					sheguisTexRect.left += 52;
+			}
+		}	
+
+		// Set Sprite Textures Rectangles
+        mPlayer.setTextureRect(m_playerRect);
+        Chiwis.setTextureRect(chiwisTexRect);
+        Sheguis.setTextureRect(sheguisTexRect);
+        clock.restart();
 	}
 
 	// Camera follows player ************************************************************************
@@ -347,7 +399,8 @@ void Game::update(sf::Time deltaTime)
 	BellaCollider = hitboxbella.getGlobalBounds();
 
 	//Sprites junto con la hitbox.
-    Chiwis.setPosition(hitboxchiwis.getPosition().x,hitboxchiwis.getPosition().y);
+    Chiwis.setPosition(hitboxchiwis.getPosition().x, hitboxchiwis.getPosition().y);
+	Sheguis.setPosition(hitboxsheguis.getPosition().x, hitboxsheguis.getPosition().y);
 
 
 	// Check item collision ************************************************************************
@@ -404,8 +457,8 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f previousMunecaPos = hitboxmuneca.getPosition();
 
 	// Guardar Coordenadas del jugador en variables*************************************************************
-	float xPlayer = mPlayer.getPosition().x;
-	float yPlayer = mPlayer.getPosition().y;
+	xPlayer = mPlayer.getPosition().x;
+	yPlayer = mPlayer.getPosition().y;
 
 	//**************SHEGUIS*************************************************************************************
 
@@ -774,7 +827,8 @@ void Game::update(sf::Time deltaTime)
 	//*****FLECHA**************************************************************************************
 	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 
-	float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
+	// float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
+	// cout << AnguloImp << std::endl;
 }
 
 /*******************************************************************************************************************************************************************/
@@ -823,7 +877,7 @@ void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf:
 	this->fondotexto.setOutlineColor(sf::Color::Black);
 	this->fondotexto.setOutlineThickness(4.f);
 	this->texto.setFont(fuente); // "fuente" es el objeto de la fuente que quieres utilizar
-	this->texto.setCharacterSize(20); // ajusta el tamaño del texto según tus necesidades
+	this->texto.setCharacterSize(20); // ajusta el tamaÃ±o del texto segÃºn tus necesidades
 	this->texto.setPosition(xPlayer - 450.f, yPlayer - 450.f);
 	this->texto.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
@@ -832,39 +886,39 @@ void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 
 	float dx = xItem - xPlayer;
 	float dy = yItem - yPlayer;
-	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; // calcular el ángulo en grados
+	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; // calcular el ï¿½ngulo en grados
 	this->arrow.setRotation(angle); // rotar la flecha
-	float arrowOffset = -50.f; // ajusta esto para que la flecha esté en la posición correcta
+	float arrowOffset = -50.f; // ajusta esto para que la flecha estï¿½ en la posiciï¿½n correcta
 
-	// establecer los puntos de la flecha en relación con la posición del jugador
+	// establecer los puntos de la flecha en relaciï¿½n con la posiciï¿½n del jugador
 	this->arrow.setPointCount(3);
 	this->arrow.setPoint(0, sf::Vector2f(xPlayer, yPlayer));
 	this->arrow.setPoint(1, sf::Vector2f(xPlayer - 10.f, yPlayer - 10.f));
 	this->arrow.setPoint(2, sf::Vector2f(xPlayer + 10.f, yPlayer - 10.f));
 	this->arrow.setFillColor(sf::Color::Yellow);
 
-	// ajustar el origen de la flecha para que esté en la punta superior
+	// ajustar el origen de la flecha para que estï¿½ en la punta superior
 	this->arrow.setOrigin(xPlayer, yPlayer - 20.f);
 
 	// ajustar la escala de la flecha
-	this->arrow.setScale(1.f,1.f); // ajusta la escala según lo necesites
+	this->arrow.setScale(1.f,1.f); // ajusta la escala segï¿½n lo necesites
 
 	// enmarcar el contorno de la flecha de negro
 	this->arrow.setOutlineThickness(2.f);
 	this->arrow.setOutlineColor(sf::Color::Black);
 
-	// calcular la posición del centro del círculo
-	float circleRadius = 80.f; // ajusta el radio del círculo según lo necesites
+	// calcular la posiciï¿½n del centro del cï¿½rculo
+	float circleRadius = 80.f; // ajusta el radio del cï¿½rculo segï¿½n lo necesites
 	sf::Vector2f circleCenter(xPlayer + 15.f, yPlayer + 20.f);
 
-	// calcular la posición de la flecha en el borde del círculo
-	float angleRadians = (angle + 90) * 3.141592 / 180; // convertir el ángulo a radianes y ajustar para la orientación de la flecha
+	// calcular la posiciï¿½n de la flecha en el borde del cï¿½rculo
+	float angleRadians = (angle + 90) * 3.141592 / 180; // convertir el ï¿½ngulo a radianes y ajustar para la orientaciï¿½n de la flecha
 	sf::Vector2f arrowPosition(cos(angleRadians) * circleRadius, sin(angleRadians) * circleRadius);
 
-	// ajustar la posición de la flecha en función del centro del círculo
+	// ajustar la posiciï¿½n de la flecha en funciï¿½n del centro del cï¿½rculo
 	arrowPosition += circleCenter;
 
-	// establecer la posición de la flecha
+	// establecer la posiciï¿½n de la flecha
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
