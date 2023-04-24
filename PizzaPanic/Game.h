@@ -117,6 +117,10 @@ public:
 	sf::Texture PizzaLogoTex;
 	sf::Sprite PizzaLogo;
 
+	// Ocean Background
+	sf::Texture OceanTex;
+	sf::Sprite Ocean;
+
 	// Camera
 	sf::View pView;
 

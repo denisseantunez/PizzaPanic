@@ -116,11 +116,20 @@ Game::Game()
 	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
 	{
 		// Handle loading error
-		cout << ("Error al cargar el archivo del Item.");
+		cout << ("Error al cargar el archivo de la pizza");
 	}
 	PizzaLogo.setTexture(PizzaLogoTex);
 	PizzaLogo.setPosition(2795.f, 2355.f);
 	PizzaLogo.setScale(0.1f, 0.1f);
+
+	// Ocean ***********************************************************************************
+	if (!OceanTex.loadFromFile("Images\\Mar.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del mar.");
+	}
+	Ocean.setTexture(OceanTex);
+	Ocean.setPosition(-600.f, -300.f);
 
 	// Music ***********************************************************************************
 	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
@@ -173,7 +182,7 @@ void Game::showMainMenu()
 
 void Game::run()
 {
-	//menuMusic.play();
+	menuMusic.play();
 	menuMusic.setLoop(true);
 
 	showMainMenu();
@@ -183,7 +192,7 @@ void Game::run()
 
 		// Play game music
 		menuMusic.stop();
-		//music.play();
+		music.play();
 		music.setLoop(true);
 
 		// Keep track of the player's initial position
@@ -201,6 +210,9 @@ void Game::run()
 				timeSinceLastUpdate -= TimePerFrame;
 				processEvents();
 				update(TimePerFrame);
+				if (QuitarVida == 120) {
+					break;
+				}
 			}
 			render();
 		}
@@ -727,6 +739,7 @@ void Game::update(sf::Time deltaTime)
 void Game::render()
 {
 	mWindow.clear();
+	mWindow.draw(Ocean);
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
