@@ -234,5 +234,6 @@ public:
 	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;
 
+	void IniciarVariables();
 	
 };
