@@ -55,9 +55,16 @@ Game::Game()
         // Handle loading error
         cout << ("Error al cargar el archivo del Item.");
     }
+
+	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del Item.");
+	}
     mItem.setTexture(mItemTexture);
     mItem.setPosition(3070.f, 2760.f);
     mItem.setScale(1.7f, 1.7f);
+
 
 	// Textura Chiwis ***********************************************************
 	if (!chiwisTexture.loadFromFile("Images/Mascotas.png")) {
@@ -189,7 +196,7 @@ Game::Game()
 
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
-    prompt.setString("Presiona espacio para recoger el item!");
+    
 
 	// Hitboxes ********************************************************************************
 	this->HitBoxPlayer();
@@ -802,6 +809,12 @@ void Game::update(sf::Time deltaTime)
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider)) {
 
+		if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
+			prompt.setString("Presiona espacio para recoger la pizza!");
+		}
+		else {
+			prompt.setString("Presiona espacio para dejar la pizza!");
+		}
 		displayItemPrompt = true;
 		prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
 
@@ -819,6 +832,9 @@ void Game::update(sf::Time deltaTime)
             }
 		}
 	}
+
+	//Flecha**************************************
+	Flecha(xPlayer, yPlayer,mItem.getPosition().x , mItem.getPosition().y);
 
 	//Imprimir texto******************************
 	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font);

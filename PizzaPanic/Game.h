@@ -173,9 +173,11 @@ public:
 
     // Item
     sf::Texture mItemTexture;
+	sf::Texture mItemArrowTexture;
     sf::Sprite mItem;
     sf::FloatRect mPlayerCollider;
     sf::FloatRect mItemCollider;
+    sf::FloatRect mItemArrowCollider;
     sf::Text prompt;
 
     // Main menu
