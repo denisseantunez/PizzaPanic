@@ -290,7 +290,16 @@ void Game::update(sf::Time deltaTime)
 	// Update item and player collision boundaries *************************************************
 	mItemCollider = mItem.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
-	ChiwisCollider = Chiwis.getGlobalBounds();
+	ChiwisCollider = hitboxchiwis.getGlobalBounds();
+	SheguisCollider = hitboxsheguis.getGlobalBounds();
+	SoruyaCollider = hitboxsoruya.getGlobalBounds();
+	MindyCollider = hitboxmindy.getGlobalBounds();
+	MantecaCollider = hitboxmanteca.getGlobalBounds();
+	MunecaCollider = hitboxmuneca.getGlobalBounds();
+	PushiCollider = hitboxpushi.getGlobalBounds();
+	BellaCollider = hitboxbella.getGlobalBounds();
+
+	//Sprites junto con la hitbox.
     Chiwis.setPosition(hitboxchiwis.getPosition().x,hitboxchiwis.getPosition().y);
 
 	// Check item collision ************************************************************************
@@ -309,20 +318,24 @@ void Game::update(sf::Time deltaTime)
                 ++PizzasEntregadas;
             } else {
                 cargandoItem = true;
-                NuevaPosicion = rand() % 2;
+                NuevaPosicion = rand() % 35;
                 mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
             }
 		}
 	}
 
-	if (ChiwisCollider.intersects(mPlayerCollider)){
+	if (ChiwisCollider.intersects(mPlayerCollider) ||
+		SheguisCollider.intersects(mPlayerCollider)||
+		SoruyaCollider.intersects(mPlayerCollider) ||
+		BellaCollider.intersects(mPlayerCollider)  ||
+		PushiCollider.intersects(mPlayerCollider)  ||
+		MunecaCollider.intersects(mPlayerCollider) ||
+		MindyCollider.intersects(mPlayerCollider)  ||
+		MantecaCollider.intersects(mPlayerCollider))
+	{
 		Mordidas++;
-
-		if (Mordidas > 0 && Mordidas < 120) {
+		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
-			
-		}
-
         displayItemPrompt = true;
         prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
     }
@@ -711,8 +724,8 @@ void Game::render()
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
-	mWindow.draw(mPlayer);
 	mWindow.draw(mItem);
+	mWindow.draw(mPlayer);
 	mWindow.draw(hitboxplayer);
 	mWindow.draw(hitboxchiwis);
 	mWindow.draw(hitboxsheguis);

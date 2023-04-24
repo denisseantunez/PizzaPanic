@@ -54,6 +54,8 @@ public:
     int PizzasEntregadas = 0;
 	float QuitarVida = .0f;
 	float Mordidas = 0.f;
+
+	sf::Vector2f EntregarPizza;
 	
 	// chiwis temporal
     float ChiwisWidth;
@@ -157,6 +159,13 @@ public:
 
 	// Collision with player
 	sf::FloatRect ChiwisCollider;
+	sf::FloatRect SheguisCollider;
+	sf::FloatRect SoruyaCollider;
+	sf::FloatRect MindyCollider;
+	sf::FloatRect MantecaCollider;
+	sf::FloatRect MunecaCollider;
+	sf::FloatRect PushiCollider;
+	sf::FloatRect BellaCollider;
 
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
