@@ -81,7 +81,10 @@ public:
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
 	void BarraVidaAux(float xPlayer, float yPlayer);
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
+	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
+
 	
+
 	// Variables
 	sf::RenderWindow mWindow;
 
@@ -168,6 +171,6 @@ public:
 	sf::RectangleShape hitboxmuneca;
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
-	sf::VertexArray triangle;
-
+	sf::ConvexShape arrow;
+	
 };
