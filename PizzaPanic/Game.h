@@ -21,7 +21,7 @@
 
 const float PlayerSpeed = 450.f;
 const float SheguisSpeed = 250.f;
-const float SoruyaSpeed = 10.f;
+const float SoruyaSpeed = 250.f;
 
 const float MindySpeed = 250.f;
 const float BellaSpeed = 250.f;
@@ -87,6 +87,12 @@ public:
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
 	float Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed);
+	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
+
+	// texto
+	sf::Text texto;
+	sf::Font fuente;
+	sf::RectangleShape fondotexto;
 
 	// Variables
 	sf::RenderWindow mWindow;

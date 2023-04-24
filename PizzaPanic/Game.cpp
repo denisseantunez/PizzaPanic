@@ -13,7 +13,7 @@ Game::Game()
 {
 
 	//Initialize MainMenu ************************************************************************
-	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
+	if (!m_font.loadFromFile("Fonts\\font2.ttf"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el font.");
@@ -29,6 +29,8 @@ Game::Game()
 		cout << ("Error al cargar el fondo del menu.");
 	}
 	MainMenu mainMenu(m_font, m_menuBackground);
+
+	//Texto***************************************************************************************
 
 
 	// Player ************************************************************************************
@@ -206,7 +208,7 @@ void Game::run()
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);
 
-		menuMusic.play();
+		//menuMusic.play();
 		menuMusic.setLoop(true);
 
 		showMainMenu();
@@ -216,7 +218,7 @@ void Game::run()
 
 			// Play game music
 			menuMusic.stop();
-			music.play();
+			//music.play();
 			music.setLoop(true);
 
 			// Keep track of the player's initial position
@@ -347,6 +349,7 @@ void Game::update(sf::Time deltaTime)
 	//Sprites junto con la hitbox.
     Chiwis.setPosition(hitboxchiwis.getPosition().x,hitboxchiwis.getPosition().y);
 
+
 	// Check item collision ************************************************************************
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider)) {
@@ -368,6 +371,10 @@ void Game::update(sf::Time deltaTime)
             }
 		}
 	}
+
+	//Imprimir texto******************************
+	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font);
+
 
 	if (ChiwisCollider.intersects(mPlayerCollider) ||
 		SheguisCollider.intersects(mPlayerCollider)||
@@ -760,15 +767,14 @@ void Game::update(sf::Time deltaTime)
 	//*************************************************************************************************
 
 	// Player coordinates
-	// cout << mPlayer.getPosition().x << std::endl;
-	// cout << mPlayer.getPosition().y;
-	// cout << "\n\n";
+	cout << mPlayer.getPosition().x << std::endl;
+	cout << mPlayer.getPosition().y;
+	cout << "\n\n";
 	
 	//*****FLECHA**************************************************************************************
 	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 
 	float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
-	cout << AnguloImp << std::endl;
 }
 
 /*******************************************************************************************************************************************************************/
@@ -801,11 +807,26 @@ void Game::render()
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
 	mWindow.draw(arrow);
+	mWindow.draw(fondotexto);
+	mWindow.draw(texto);
 	mWindow.display();
 
 }
 
 //*******************************************************************************************************************************************************************
+
+void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
+
+	this->fondotexto.setPosition(xPlayer - 450.f, yPlayer - 450.f);
+	this->fondotexto.setSize(sf::Vector2f(260.f, 30.f));
+	this->fondotexto.setFillColor(sf::Color::Blue);
+	this->fondotexto.setOutlineColor(sf::Color::Black);
+	this->fondotexto.setOutlineThickness(4.f);
+	this->texto.setFont(fuente); // "fuente" es el objeto de la fuente que quieres utilizar
+	this->texto.setCharacterSize(20); // ajusta el tamaño del texto según tus necesidades
+	this->texto.setPosition(xPlayer - 450.f, yPlayer - 450.f);
+	this->texto.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
+}
 
 void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 
