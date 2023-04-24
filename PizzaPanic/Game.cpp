@@ -59,21 +59,24 @@ Game::Game()
     mItem.setPosition(3070.f, 2760.f);
     mItem.setScale(1.7f, 1.7f);
 
-	// Textura Chiwis **************************************************************************
-    if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")){
-        // Handle loading error
-        cout << ("Error al cargar la textura de chiwis.");
-    }
-    Chiwis.setTexture(chiwisTexture);
-	Chiwis.setTextureRect(sf::IntRect(0, 288, 48, 48));
-    Chiwis.setPosition(3000.f, 700.f);
+	// Textura Chiwis ***********************************************************
+	if (!chiwisTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de chiwis.");
+	}
+	chiwisTexRect.left = 0;
+	chiwisTexRect.width = 36;
+	chiwisTexRect.height = 47;
+	Chiwis.setTexture(chiwisTexture);
+	Chiwis.setTextureRect(chiwisTexRect);
+	Chiwis.setPosition(3000.f, 700.f);
 
-    sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
-    ChiwisWidth = ChiwisRect.width;
-    ChiwisHeight = ChiwisRect.height;
+	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
+	ChiwisWidth = ChiwisRect.width;
+	ChiwisHeight = ChiwisRect.height;
 
-	// Textura Sheguis **************************************************************************
-	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
+	// Textura Sheguis **************************
+	if (!sheguisTexture.loadFromFile("Images/Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de sheguis.");
 	}
@@ -87,6 +90,102 @@ Game::Game()
 	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
 	SheguisWidth = SheguisRect.width;
 	SheguisHeight = SheguisRect.height;
+
+	// Textura Soruya **************************
+	if (!soruyaTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de soruya.");
+	}
+	soruyaTexRect.left = 156;
+	soruyaTexRect.width = 36;
+	soruyaTexRect.height = 47;
+	Soruya.setTexture(soruyaTexture);
+	Soruya.setTextureRect(soruyaTexRect);
+	Soruya.setPosition(3000.f, 700.f);
+
+	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
+	SoruyaWidth = SoruyaRect.width;
+	SoruyaHeight = SoruyaRect.height;
+
+	// Textura Mindy **************************
+	if (!mindyTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de mindy.");
+	}
+	mindyTexRect.left = 156;
+	mindyTexRect.width = 36;
+	mindyTexRect.height = 47;
+	Mindy.setTexture(mindyTexture);
+	Mindy.setTextureRect(mindyTexRect);
+	Mindy.setPosition(1816.f, 1466.f);
+
+	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
+	MindyWidth = MindyRect.width;
+	MindyHeight = MindyRect.height;
+
+	// Textura Bella **************************
+	if (!bellaTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de bella.");
+	}
+	bellaTexRect.left = 468;
+	bellaTexRect.width = 36;
+	bellaTexRect.height = 47;
+	Bella.setTexture(bellaTexture);
+	Bella.setTextureRect(bellaTexRect);
+	Bella.setPosition(85.f, 790.f);
+
+	sf::FloatRect BellaRect = Bella.getGlobalBounds();
+	BellaWidth = BellaRect.width;
+	BellaHeight = BellaRect.height;
+
+	// Textura Manteca **************************
+	if (!mantecaTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de manteca.");
+	}
+	mantecaTexRect.left = 312;
+	mantecaTexRect.width = 36;
+	mantecaTexRect.height = 47;
+	Manteca.setTexture(mantecaTexture);
+	Manteca.setTextureRect(mantecaTexRect);
+	Manteca.setPosition(2366.f, 2800.f);
+
+	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
+	MantecaWidth = MantecaRect.width;
+	MantecaHeight = MantecaRect.height;
+
+	// Textura Pushi **************************
+	if (!pushiTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de pushi.");
+	}
+	pushiTexRect.left = 312;
+	pushiTexRect.width = 36;
+	pushiTexRect.height = 47;
+	Pushi.setTexture(pushiTexture);
+	Pushi.setTextureRect(pushiTexRect);
+	Pushi.setPosition(85.f, 1950.f);
+
+	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
+	PushiWidth = PushiRect.width;
+	PushiHeight = PushiRect.height;
+
+	// Textura Muneca **************************
+	if (!munecaTexture.loadFromFile("Images/Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de muneca.");
+	}
+	munecaTexRect.left = 468;
+	munecaTexRect.width = 36;
+	munecaTexRect.height = 47;
+	Muneca.setTexture(munecaTexture);
+	Muneca.setTextureRect(munecaTexRect);
+	Muneca.setPosition(1500.f, 2415.f);
+
+	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
+	MunecaWidth = MunecaRect.width;
+	MunecaHeight = MunecaRect.height;
 
     // Texto del item ***************************************************************************
     prompt.setFont(m_font2);
@@ -211,7 +310,7 @@ void Game::run()
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);
 
-		//menuMusic.play();
+		menuMusic.play();
 		menuMusic.setLoop(true);
 
 		showMainMenu();
@@ -221,7 +320,7 @@ void Game::run()
 
 			// Play game music
 			menuMusic.stop();
-			//music.play();
+			music.play();
 			music.setLoop(true);
 
 			// Keep track of the player's initial position
@@ -323,62 +422,353 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
-	// Sprite Animations *****************************************************************************
+	// Sprite Animations ***************************
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
 		// Player Animations
-        if (m_playerRect.left == 1920)
-            m_playerRect.left = 0;
-        else { m_playerRect.left += 320; }
+		if (m_playerRect.left == 1920)
+			m_playerRect.left = 0;
+		else { m_playerRect.left += 320; }
 
 		// Chiwis Animations
-        chiwisTexRect.top = 287;
-        if (chiwisTexRect.left == 104)
-            chiwisTexRect.left = 0;
-        else
-            chiwisTexRect.left += 52;
+		float AnguloChiwis = this->AnguloChiwis(xPlayer, yPlayer, hitboxchiwis.getPosition().x, hitboxchiwis.getPosition().y, ChiwisSpeed);
+
+		if ((AnguloChiwis >= 70 && AnguloChiwis <= 110) || (AnguloChiwis >= -290 && AnguloChiwis <= -250)) { // ARRIBA
+			chiwisTexRect.top = 498;
+			if (chiwisTexRect.left == 104)
+				chiwisTexRect.left = 0;
+			else
+				chiwisTexRect.left += 52;
+		}
+		else if (AnguloChiwis > 110 && AnguloChiwis < 250) { // DERECHA
+			chiwisTexRect.top = 429;
+			if (chiwisTexRect.left == 104)
+				chiwisTexRect.left = 0;
+			else
+				chiwisTexRect.left += 52;
+		}
+		else if ((AnguloChiwis >= 250 && AnguloChiwis <= 290) || (AnguloChiwis >= -110 && AnguloChiwis <= -70)) { // ABAJO
+			chiwisTexRect.top = 287;
+			if (chiwisTexRect.left == 104)
+				chiwisTexRect.left = 0;
+			else
+				chiwisTexRect.left += 52;
+		}
+		else {
+			if (AnguloChiwis > 0 || (AnguloChiwis > -250 && AnguloChiwis < -110)) { // IZQUIERDA
+				chiwisTexRect.top = 358; // IZQUIERDA
+				if (chiwisTexRect.left == 104)
+					chiwisTexRect.left = 0;
+				else
+					chiwisTexRect.left += 52;
+			}
+			else {
+				chiwisTexRect.top = 429; // DERECHA
+				if (chiwisTexRect.left == 104)
+					chiwisTexRect.left = 0;
+				else
+					chiwisTexRect.left += 52;
+			}
+		}
 
 		// Sheguis Animations
 		float AnguloSheguis = this->Angulo(xPlayer, yPlayer, hitboxsheguis.getPosition().x, hitboxsheguis.getPosition().y, 2000, 2100, SheguisSpeed);
 
 		if ((AnguloSheguis >= 70 && AnguloSheguis <= 110) || (AnguloSheguis >= -290 && AnguloSheguis <= -250)) { // ARRIBA
 			sheguisTexRect.top = 213;
-			if (sheguisTexRect.left == 104) 
+			if (sheguisTexRect.left == 104)
 				sheguisTexRect.left = 0;
-			else 
+			else
 				sheguisTexRect.left += 52;
-		} else if (AnguloSheguis > 110 && AnguloSheguis < 250) { // DERECHA
+		}
+		else if (AnguloSheguis > 110 && AnguloSheguis < 250) { // DERECHA
 			sheguisTexRect.top = 142;
-			if (sheguisTexRect.left == 104) 
+			if (sheguisTexRect.left == 104)
 				sheguisTexRect.left = 0;
-			else 
+			else
 				sheguisTexRect.left += 52;
-		} else if ((AnguloSheguis >= 250 && AnguloSheguis <= 290) || (AnguloSheguis >= -110 && AnguloSheguis <= -70)) { // ABAJO
+		}
+		else if ((AnguloSheguis >= 250 && AnguloSheguis <= 290) || (AnguloSheguis >= -110 && AnguloSheguis <= -70)) { // ABAJO
 			sheguisTexRect.top = 0;
-			if (sheguisTexRect.left == 104) 
+			if (sheguisTexRect.left == 104)
 				sheguisTexRect.left = 0;
-			else 
+			else
 				sheguisTexRect.left += 52;
-		} else {
-			if (AnguloSheguis > 0 || (AnguloSheguis > -250 && AnguloSheguis < -110)) {
-				sheguisTexRect.top = 71;
-				if (sheguisTexRect.left == 104) 
+		}
+		else {
+			if (AnguloSheguis > 0 || (AnguloSheguis > -250 && AnguloSheguis < -110)) { // IZQUIERDA
+				sheguisTexRect.top = 71; // IZQUIERDA
+				if (sheguisTexRect.left == 104)
 					sheguisTexRect.left = 0;
-				else 
-					sheguisTexRect.left += 52;
-			} else {
-				sheguisTexRect.top = 142;
-				if (sheguisTexRect.left == 104) 
-					sheguisTexRect.left = 0;
-				else 
+				else
 					sheguisTexRect.left += 52;
 			}
-		}	
+			else {
+				sheguisTexRect.top = 142; // DERECHA
+				if (sheguisTexRect.left == 104)
+					sheguisTexRect.left = 0;
+				else
+					sheguisTexRect.left += 52;
+			}
+		}
+
+		// Soruya Animations
+		float AnguloSoruya = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
+
+		if ((AnguloSoruya >= 70 && AnguloSoruya <= 110) || (AnguloSoruya >= -290 && AnguloSoruya <= -250)) { // ARRIBA
+			soruyaTexRect.top = 213;
+			if (soruyaTexRect.left == 260)
+				soruyaTexRect.left = 156;
+			else
+				soruyaTexRect.left += 52;
+		}
+		else if (AnguloSoruya > 110 && AnguloSoruya < 250) { // DERECHA
+			soruyaTexRect.top = 142;
+			if (soruyaTexRect.left == 260)
+				soruyaTexRect.left = 156;
+			else
+				soruyaTexRect.left += 52;
+		}
+		else if ((AnguloSoruya >= 250 && AnguloSoruya <= 290) || (AnguloSoruya >= -110 && AnguloSoruya <= -70)) { // ABAJO
+			soruyaTexRect.top = 0;
+			if (soruyaTexRect.left == 260)
+				soruyaTexRect.left = 156;
+			else
+				soruyaTexRect.left += 52;
+		}
+		else {
+			if (AnguloSoruya > 0 || (AnguloSoruya > -250 && AnguloSoruya < -110)) { // IZQUIERDA
+				soruyaTexRect.top = 71; // IZQUIERDA
+				if (soruyaTexRect.left == 260)
+					soruyaTexRect.left = 156;
+				else
+					soruyaTexRect.left += 52;
+			}
+			else {
+				soruyaTexRect.top = 142; // DERECHA
+				if (soruyaTexRect.left == 260)
+					soruyaTexRect.left = 156;
+				else
+					soruyaTexRect.left += 52;
+			}
+		}
+
+		// Mindy Animations
+		float AnguloMindy = this->Angulo(xPlayer, yPlayer, hitboxmindy.getPosition().x, hitboxmindy.getPosition().y, 1816, 1466, MindySpeed);
+
+		if ((AnguloMindy >= 70 && AnguloMindy <= 110) || (AnguloMindy >= -290 && AnguloMindy <= -250)) { // ARRIBA
+			mindyTexRect.top = 498;
+			if (mindyTexRect.left == 260)
+				mindyTexRect.left = 156;
+			else
+				mindyTexRect.left += 52;
+		}
+		else if (AnguloMindy > 110 && AnguloMindy < 250) { // DERECHA
+			mindyTexRect.top = 429;
+			if (mindyTexRect.left == 260)
+				mindyTexRect.left = 156;
+			else
+				mindyTexRect.left += 52;
+		}
+		else if ((AnguloMindy >= 250 && AnguloMindy <= 290) || (AnguloMindy >= -110 && AnguloMindy <= -70)) { // ABAJO
+			mindyTexRect.top = 287;
+			if (mindyTexRect.left == 260)
+				mindyTexRect.left = 156;
+			else
+				mindyTexRect.left += 52;
+		}
+		else {
+			if (AnguloMindy > 0 || (AnguloMindy > -250 && AnguloMindy < -110)) { // IZQUIERDA
+				mindyTexRect.top = 358; // IZQUIERDA
+				if (mindyTexRect.left == 260)
+					mindyTexRect.left = 156;
+				else
+					mindyTexRect.left += 52;
+			}
+			else {
+				mindyTexRect.top = 429; // DERECHA
+				if (mindyTexRect.left == 260)
+					mindyTexRect.left = 156;
+				else
+					mindyTexRect.left += 52;
+			}
+		}
+
+		// Bella Animations
+		float AnguloBella = this->Angulo(xPlayer, yPlayer, hitboxbella.getPosition().x, hitboxbella.getPosition().y, 85, 790, BellaSpeed);
+
+		if ((AnguloBella >= 70 && AnguloBella <= 110) || (AnguloBella >= -290 && AnguloBella <= -250)) { // ARRIBA
+			bellaTexRect.top = 498;
+			if (bellaTexRect.left == 572)
+				bellaTexRect.left = 468;
+			else
+				bellaTexRect.left += 52;
+		}
+		else if (AnguloBella > 110 && AnguloBella < 250) { // DERECHA
+			bellaTexRect.top = 429;
+			if (bellaTexRect.left == 572)
+				bellaTexRect.left = 468;
+			else
+				bellaTexRect.left += 52;
+		}
+		else if ((AnguloBella >= 250 && AnguloBella <= 290) || (AnguloBella >= -110 && AnguloBella <= -70)) { // ABAJO
+			bellaTexRect.top = 287;
+			if (bellaTexRect.left == 572)
+				bellaTexRect.left = 468;
+			else
+				bellaTexRect.left += 52;
+		}
+		else {
+			if (AnguloBella > 0 || (AnguloBella > -250 && AnguloBella < -110)) { // IZQUIERDA
+				bellaTexRect.top = 358; // IZQUIERDA
+				if (bellaTexRect.left == 572)
+					bellaTexRect.left = 468;
+				else
+					bellaTexRect.left += 52;
+			}
+			else {
+				bellaTexRect.top = 429; // DERECHA
+				if (bellaTexRect.left == 572)
+					bellaTexRect.left = 468;
+				else
+					bellaTexRect.left += 52;
+			}
+		}
+
+		// Manteca Animations
+		float AnguloManteca = this->Angulo(xPlayer, yPlayer, hitboxmanteca.getPosition().x, hitboxmanteca.getPosition().y, 2366, 2800, MantecaSpeed);
+
+		if ((AnguloManteca >= 70 && AnguloManteca <= 110) || (AnguloManteca >= -290 && AnguloManteca <= -250)) { // ARRIBA
+			mantecaTexRect.top = 498;
+			if (mantecaTexRect.left == 416)
+				mantecaTexRect.left = 312;
+			else
+				mantecaTexRect.left += 52;
+		}
+		else if (AnguloManteca > 110 && AnguloManteca < 250) { // DERECHA
+			mantecaTexRect.top = 429;
+			if (mantecaTexRect.left == 416)
+				mantecaTexRect.left = 312;
+			else
+				mantecaTexRect.left += 52;
+		}
+		else if ((AnguloManteca >= 250 && AnguloManteca <= 290) || (AnguloManteca >= -110 && AnguloManteca <= -70)) { // ABAJO
+			mantecaTexRect.top = 287;
+			if (mantecaTexRect.left == 416)
+				mantecaTexRect.left = 312;
+			else
+				mantecaTexRect.left += 52;
+		}
+		else {
+			if (AnguloManteca > 0 || (AnguloManteca > -250 && AnguloManteca < -110)) { // IZQUIERDA
+				mantecaTexRect.top = 358; // IZQUIERDA
+				if (mantecaTexRect.left == 416)
+					mantecaTexRect.left = 312;
+				else
+					mantecaTexRect.left += 52;
+			}
+			else {
+				mantecaTexRect.top = 429; // DERECHA
+				if (mantecaTexRect.left == 416)
+					mantecaTexRect.left = 312;
+				else
+					mantecaTexRect.left += 52;
+			}
+		}
+
+		// Pushi Animations
+		float AnguloPushi = this->Angulo(xPlayer, yPlayer, hitboxpushi.getPosition().x, hitboxpushi.getPosition().y, 85, 1950, PushiSpeed);
+
+		if ((AnguloPushi >= 70 && AnguloPushi <= 110) || (AnguloPushi >= -290 && AnguloPushi <= -250)) { // ARRIBA
+			pushiTexRect.top = 213;
+			if (pushiTexRect.left == 416)
+				pushiTexRect.left = 312;
+			else
+				pushiTexRect.left += 52;
+		}
+		else if (AnguloPushi > 110 && AnguloPushi < 250) { // DERECHA
+			pushiTexRect.top = 142;
+			if (pushiTexRect.left == 416)
+				pushiTexRect.left = 312;
+			else
+				pushiTexRect.left += 52;
+		}
+		else if ((AnguloPushi >= 250 && AnguloPushi <= 290) || (AnguloPushi >= -110 && AnguloPushi <= -70)) { // ABAJO
+			pushiTexRect.top = 0;
+			if (pushiTexRect.left == 416)
+				pushiTexRect.left = 312;
+			else
+				pushiTexRect.left += 52;
+		}
+		else {
+			if (AnguloPushi > 0 || (AnguloPushi > -250 && AnguloPushi < -110)) { // IZQUIERDA
+				pushiTexRect.top = 71; // IZQUIERDA
+				if (pushiTexRect.left == 416)
+					pushiTexRect.left = 312;
+				else
+					pushiTexRect.left += 52;
+			}
+			else {
+				pushiTexRect.top = 142; // DERECHA
+				if (pushiTexRect.left == 416)
+					pushiTexRect.left = 312;
+				else
+					pushiTexRect.left += 52;
+			}
+		}
+
+		// Muneca Animations
+		float AnguloMuneca = this->Angulo(xPlayer, yPlayer, hitboxmuneca.getPosition().x, hitboxmuneca.getPosition().y, 1500, 2415, MunecaSpeed);
+
+		if ((AnguloMuneca >= 70 && AnguloMuneca <= 110) || (AnguloMuneca >= -290 && AnguloMuneca <= -250)) { // ARRIBA
+			munecaTexRect.top = 213;
+			if (munecaTexRect.left == 572)
+				munecaTexRect.left = 468;
+			else
+				munecaTexRect.left += 52;
+		}
+		else if (AnguloMuneca > 110 && AnguloMuneca < 250) { // DERECHA
+			munecaTexRect.top = 142;
+			if (munecaTexRect.left == 572)
+				munecaTexRect.left = 468;
+			else
+				munecaTexRect.left += 52;
+		}
+		else if ((AnguloMuneca >= 250 && AnguloMuneca <= 290) || (AnguloMuneca >= -110 && AnguloMuneca <= -70)) { // ABAJO
+			munecaTexRect.top = 0;
+			if (munecaTexRect.left == 572)
+				munecaTexRect.left = 468;
+			else
+				munecaTexRect.left += 52;
+		}
+		else {
+			if (AnguloMuneca > 0 || (AnguloMuneca > -250 && AnguloMuneca < -110)) { // IZQUIERDA
+				munecaTexRect.top = 71; // IZQUIERDA
+				if (munecaTexRect.left == 572)
+					munecaTexRect.left = 468;
+				else
+					munecaTexRect.left += 52;
+			}
+			else {
+				munecaTexRect.top = 142; // DERECHA
+				if (munecaTexRect.left == 572)
+					munecaTexRect.left = 468;
+				else
+					munecaTexRect.left += 52;
+			}
+			
+		}
 
 		// Set Sprite Textures Rectangles
-        mPlayer.setTextureRect(m_playerRect);
-        Chiwis.setTextureRect(chiwisTexRect);
-        Sheguis.setTextureRect(sheguisTexRect);
-        clock.restart();
+		mPlayer.setTextureRect(m_playerRect);
+		Chiwis.setTextureRect(chiwisTexRect);
+		Sheguis.setTextureRect(sheguisTexRect);
+		Soruya.setTextureRect(soruyaTexRect);
+		Mindy.setTextureRect(mindyTexRect);
+		Bella.setTextureRect(bellaTexRect);
+		Manteca.setTextureRect(mantecaTexRect);
+		Pushi.setTextureRect(pushiTexRect);
+		Muneca.setTextureRect(munecaTexRect);
+		clock.restart();
 	}
 
 	// Camera follows player ************************************************************************
@@ -386,7 +776,7 @@ void Game::update(sf::Time deltaTime)
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
-	// Update item and player collision boundaries *************************************************
+	// Update item and player collision boundaries *****************
 	mItemCollider = mItem.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
 	ChiwisCollider = hitboxchiwis.getGlobalBounds();
@@ -399,9 +789,14 @@ void Game::update(sf::Time deltaTime)
 	BellaCollider = hitboxbella.getGlobalBounds();
 
 	//Sprites junto con la hitbox.
-    Chiwis.setPosition(hitboxchiwis.getPosition().x, hitboxchiwis.getPosition().y);
+	Chiwis.setPosition(hitboxchiwis.getPosition().x, hitboxchiwis.getPosition().y);
 	Sheguis.setPosition(hitboxsheguis.getPosition().x, hitboxsheguis.getPosition().y);
-
+	Soruya.setPosition(hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y);
+	Mindy.setPosition(hitboxmindy.getPosition().x, hitboxmindy.getPosition().y);
+	Bella.setPosition(hitboxbella.getPosition().x, hitboxbella.getPosition().y);
+	Manteca.setPosition(hitboxmanteca.getPosition().x, hitboxmanteca.getPosition().y);
+	Pushi.setPosition(hitboxpushi.getPosition().x, hitboxpushi.getPosition().y);
+	Muneca.setPosition(hitboxmuneca.getPosition().x, hitboxmuneca.getPosition().y);
 
 	// Check item collision ************************************************************************
 	displayItemPrompt = false;
@@ -441,8 +836,6 @@ void Game::update(sf::Time deltaTime)
 		Mordidas++;
 		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
-        displayItemPrompt = true;
-        prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
     }
 
 	// Keep track of previous positions ************************************************************************
@@ -525,7 +918,7 @@ void Game::update(sf::Time deltaTime)
 
 	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
 	if (distancechiwis <= RadioChiwis) {
-		ChiwisSpeed = 300.f;
+		ChiwisSpeed = 250.f;
 		sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
 		hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
 	}
@@ -849,9 +1242,16 @@ void Game::render()
 	mWindow.draw(vida);
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
+	mWindow.draw(Soruya);
+	mWindow.draw(Mindy);
+	mWindow.draw(Bella);
+	mWindow.draw(Manteca);
+	mWindow.draw(Pushi);
+	mWindow.draw(Muneca);
 	mWindow.draw(arrow);
 	mWindow.draw(fondotexto);
 	mWindow.draw(texto);
+
 	mWindow.display();
 
 }
@@ -928,7 +1328,7 @@ void Game::HitBoxChiwis()
 	this->hitboxchiwis.setPosition(3000.f, 700.f);
 	this->hitboxchiwis.setSize(sf::Vector2f(ChiwisWidth, ChiwisHeight));
 	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
-	this->hitboxchiwis.setOutlineColor(sf::Color::Cyan);
+	this->hitboxchiwis.setOutlineColor(sf::Color::Transparent);
 	this->hitboxchiwis.setOutlineThickness(6.f);
 }
 
@@ -937,25 +1337,25 @@ void Game::HitBoxSheguis()
 	this->hitboxsheguis.setPosition(2000.f, 2100.f);
 	this->hitboxsheguis.setSize(sf::Vector2f(SheguisWidth, SheguisHeight));
 	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
-	this->hitboxsheguis.setOutlineColor(sf::Color::Red);
+	this->hitboxsheguis.setOutlineColor(sf::Color::Transparent);
 	this->hitboxsheguis.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxSoruya()
 {
 	this->hitboxsoruya.setPosition(3000.f, 700.f);
-	this->hitboxsoruya.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxsoruya.setSize(sf::Vector2f(SoruyaWidth, SoruyaHeight));
 	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
-	this->hitboxsoruya.setOutlineColor(sf::Color::Black);
+	this->hitboxsoruya.setOutlineColor(sf::Color::Transparent);
 	this->hitboxsoruya.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxMindy()
 {
 	this->hitboxmindy.setPosition(1816.f, 1466.f);
-	this->hitboxmindy.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxmindy.setSize(sf::Vector2f(MindyWidth, MindyHeight));
 	this->hitboxmindy.setFillColor(sf::Color::Transparent);
-	this->hitboxmindy.setOutlineColor(sf::Color::Black);
+	this->hitboxmindy.setOutlineColor(sf::Color::Transparent);
 	this->hitboxmindy.setOutlineThickness(6.f);
 }
 
@@ -963,36 +1363,36 @@ void Game::HitBoxMindy()
 void Game::HitBoxBella()
 {
 	this->hitboxbella.setPosition(85.f, 790.f);
-	this->hitboxbella.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxbella.setSize(sf::Vector2f(BellaWidth, BellaHeight));
 	this->hitboxbella.setFillColor(sf::Color::Transparent);
-	this->hitboxbella.setOutlineColor(sf::Color::Black);
+	this->hitboxbella.setOutlineColor(sf::Color::Transparent);
 	this->hitboxbella.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxManteca()
 {
 	this->hitboxmanteca.setPosition(2366.f, 2800.f);
-	this->hitboxmanteca.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxmanteca.setSize(sf::Vector2f(MantecaWidth, MantecaHeight));
 	this->hitboxmanteca.setFillColor(sf::Color::Transparent);
-	this->hitboxmanteca.setOutlineColor(sf::Color::Black);
+	this->hitboxmanteca.setOutlineColor(sf::Color::Transparent);
 	this->hitboxmanteca.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxPushi()
 {
 	this->hitboxpushi.setPosition(85.f, 1950.f);
-	this->hitboxpushi.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxpushi.setSize(sf::Vector2f(PushiWidth, PushiHeight));
 	this->hitboxpushi.setFillColor(sf::Color::Transparent);
-	this->hitboxpushi.setOutlineColor(sf::Color::Black);
+	this->hitboxpushi.setOutlineColor(sf::Color::Transparent);
 	this->hitboxpushi.setOutlineThickness(6.f);
 }
 
 void Game::HitBoxMuneca()
 {
 	this->hitboxmuneca.setPosition(1500.f, 2415.f);
-	this->hitboxmuneca.setSize(sf::Vector2f(40.f, 40.f));
+	this->hitboxmuneca.setSize(sf::Vector2f(MunecaWidth, MunecaHeight));
 	this->hitboxmuneca.setFillColor(sf::Color::Transparent);
-	this->hitboxmuneca.setOutlineColor(sf::Color::Black);
+	this->hitboxmuneca.setOutlineColor(sf::Color::Transparent);
 	this->hitboxmuneca.setOutlineThickness(6.f);
 }
 
@@ -1074,6 +1474,16 @@ float Game::Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota,
 	}
 }
 
+float Game::AnguloChiwis(float xPlayer, float yPlayer, float xMascota, float yMascota, const float Speed) {
+	float dx = xPlayer - xMascota;
+	float dy = yPlayer - yMascota;
+	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f velocity = unitVector * (Speed);
+	float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
+	return angle;
+	
+}
 
 //NOOOO BORRRARRR ES POR SI UNA EMERGENCIA
 /*

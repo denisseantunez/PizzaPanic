@@ -61,11 +61,23 @@ public:
     float yPlayer;
 	sf::Vector2f EntregarPizza;
 	
-	// chiwis temporal
-    float ChiwisWidth;
-    float ChiwisHeight;
+	// Sprites Width and Heights
+	float ChiwisWidth;
+	float ChiwisHeight;
 	float SheguisWidth;
 	float SheguisHeight;
+	float SoruyaWidth;
+	float SoruyaHeight;
+	float MindyWidth;
+	float MindyHeight;
+	float BellaWidth;
+	float BellaHeight;
+	float MantecaWidth;
+	float MantecaHeight;
+	float PushiWidth;
+	float PushiHeight;
+	float MunecaWidth;
+	float MunecaHeight;
 
 	private:
 	// Funciones
@@ -89,6 +101,7 @@ public:
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
 	float Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed);
+	float AnguloChiwis(float xPlayer, float yPlayer, float xMascota, float yMascota, const float Speed);
 	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
 	// texto
@@ -112,9 +125,17 @@ public:
 
 	// Texture Rects
 	sf::IntRect m_playerRect;
-    sf::IntRect chiwisTexRect;
-    sf::IntRect soruyaTexRect;
+	sf::IntRect chiwisTexRect;
 	sf::IntRect sheguisTexRect;
+	sf::IntRect soruyaTexRect;
+	sf::IntRect mindyTexRect;
+	sf::IntRect bellaTexRect;
+	sf::IntRect mantecaTexRect;
+	sf::IntRect pushiTexRect;
+	sf::IntRect munecaTexRect;
+
+
+
 
 	// Time
 	sf::Clock clock;
