@@ -23,7 +23,10 @@ public:
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+	void resetSelectedOption();
+
 	Option getSelectedOption() const;
+	Option m_selectedOption = Option::Default; // Default option
 
 
 private:
@@ -31,5 +34,4 @@ private:
 	sf::Texture& m_menuBackground;
 	std::vector<sf::Text> m_menuItems;
 	std::vector<sf::RectangleShape> m_menuButtons;
-	Option m_selectedOption = Option::Default; // Default option
 };

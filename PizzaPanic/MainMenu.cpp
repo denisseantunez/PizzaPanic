@@ -203,4 +203,9 @@ MainMenu::Option MainMenu::getSelectedOption() const
 	return m_selectedOption;
 }
 
+void MainMenu::resetSelectedOption()
+{
+	m_selectedOption = Option::Default;
+}
+
 

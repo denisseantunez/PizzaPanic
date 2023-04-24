@@ -182,41 +182,49 @@ void Game::showMainMenu()
 
 void Game::run()
 {
-	menuMusic.play();
-	menuMusic.setLoop(true);
+	do {
+		mainMenu.resetSelectedOption();
+		Mordidas = 0.f;
+		QuitarVida = 0.f;
 
-	showMainMenu();
+		menuMusic.play();
+		menuMusic.setLoop(true);
 
-	// If Play button is clicked, start the game
-	if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
+		showMainMenu();
 
-		// Play game music
-		menuMusic.stop();
-		music.play();
-		music.setLoop(true);
+		// If Play button is clicked, start the game
+		if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
 
-		// Keep track of the player's initial position
-		sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+			// Play game music
+			menuMusic.stop();
+			music.play();
+			music.setLoop(true);
 
-		sf::Clock clock;
+			// Keep track of the player's initial position
+			sf::Vector2f previousPlayerPos = mPlayer.getPosition();
 
-		sf::Time timeSinceLastUpdate = sf::Time::Zero;
-		while (mWindow.isOpen())
-		{
-			processEvents();
-			timeSinceLastUpdate += clock.restart();
-			while (timeSinceLastUpdate > TimePerFrame)
+			sf::Clock clock;
+
+			sf::Time timeSinceLastUpdate = sf::Time::Zero;
+			while (mWindow.isOpen())
 			{
-				timeSinceLastUpdate -= TimePerFrame;
 				processEvents();
-				update(TimePerFrame);
-				if (QuitarVida == 120) {
+				timeSinceLastUpdate += clock.restart();
+				while (timeSinceLastUpdate > TimePerFrame)
+				{
+					timeSinceLastUpdate -= TimePerFrame;
+					processEvents();
+					update(TimePerFrame);
+				}
+				render();
+				if (Mordidas == 120) {
+					cout << "moriste:p";
+					music.stop();
 					break;
 				}
 			}
-			render();
 		}
-	}
+	} while (mainMenu.getSelectedOption() == MainMenu::Option::Jugar);
 
 }
 
@@ -273,7 +281,6 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
-
 	sf::Vector2f movement(0.f, 0.f);
 
 	if (mIsMovingUp)
@@ -351,8 +358,6 @@ void Game::update(sf::Time deltaTime)
         displayItemPrompt = true;
         prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
     }
-
-
 
 	// Keep track of previous positions ************************************************************************
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
@@ -758,6 +763,7 @@ void Game::render()
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
 	mWindow.draw(arrow);
+	mWindow.draw(mainMenu);
 	mWindow.display();
 
 }

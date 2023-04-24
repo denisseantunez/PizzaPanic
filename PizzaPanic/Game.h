@@ -85,8 +85,6 @@ public:
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
 
-	
-
 	// Variables
 	sf::RenderWindow mWindow;
 
@@ -191,5 +189,6 @@ public:
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;
+
 	
 };
