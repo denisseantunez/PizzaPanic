@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <windows.h>
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
@@ -124,12 +125,17 @@ public:
 	sf::Texture OceanTex;
 	sf::Sprite Ocean;
 
+	// Game Over
+	sf::Texture GameOverTex;
+	sf::Sprite GameOver;
+
 	// Camera
 	sf::View pView;
 
 	// Audio
 	sf::Music music;
 	sf::Music menuMusic;
+	sf::Music deathSound;
 
     // Item
     sf::Texture mItemTexture;

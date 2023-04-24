@@ -131,6 +131,15 @@ Game::Game()
 	Ocean.setTexture(OceanTex);
 	Ocean.setPosition(-600.f, -300.f);
 
+	// Game Over *******************************************************************************
+	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo de game over.");
+	}
+	GameOver.setTexture(GameOverTex);
+	GameOver.setScale(1.5f, 1.5f);
+
 	// Music ***********************************************************************************
 	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
 	{
@@ -145,6 +154,13 @@ Game::Game()
 		cout << ("Error al cargar el audio del menu.");
 	}
 	menuMusic.setVolume(20.f);
+
+	if (!deathSound.openFromFile("Audios\\death.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio de game over.");
+	}
+	deathSound.setVolume(40.f);
 
 
 	// Crear arreglo y empezar semilla **********************************************************
@@ -186,6 +202,9 @@ void Game::run()
 		mainMenu.resetSelectedOption();
 		Mordidas = 0.f;
 		QuitarVida = 0.f;
+		mPlayer.setPosition(2500.f, 2500.f);
+		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
+		mWindow.setView(pView);
 
 		menuMusic.play();
 		menuMusic.setLoop(true);
@@ -218,8 +237,15 @@ void Game::run()
 				}
 				render();
 				if (Mordidas == 120) {
-					cout << "moriste:p";
 					music.stop();
+					deathSound.play();
+					deathSound.setLoop(true);
+					GameOver.setPosition(mPlayer.getPosition().x - 460.f, mPlayer.getPosition().y - 500.f);
+					mWindow.clear();
+					mWindow.draw(GameOver);
+					mWindow.display();
+					Sleep(1900);
+					deathSound.stop();
 					break;
 				}
 			}
@@ -763,7 +789,6 @@ void Game::render()
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
 	mWindow.draw(arrow);
-	mWindow.draw(mainMenu);
 	mWindow.display();
 
 }
