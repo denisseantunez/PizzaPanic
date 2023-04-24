@@ -182,7 +182,7 @@ void Game::showMainMenu()
 
 void Game::run()
 {
-	menuMusic.play();
+	//menuMusic.play();
 	menuMusic.setLoop(true);
 
 	showMainMenu();
@@ -192,7 +192,7 @@ void Game::run()
 
 		// Play game music
 		menuMusic.stop();
-		music.play();
+		//music.play();
 		music.setLoop(true);
 
 		// Keep track of the player's initial position
@@ -344,7 +344,7 @@ void Game::update(sf::Time deltaTime)
 		MunecaCollider.intersects(mPlayerCollider) ||
 		MindyCollider.intersects(mPlayerCollider)  ||
 		MantecaCollider.intersects(mPlayerCollider))
-	{
+	{-
 		Mordidas++;
 		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
@@ -789,8 +789,19 @@ void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setOutlineThickness(2.f);
 	this->arrow.setOutlineColor(sf::Color::Black);
 
-	// actualizar la posición de la flecha en función de la posición del jugador
-	this->arrow.setPosition(xPlayer + 25.f, yPlayer + arrowOffset);
+	// calcular la posición del centro del círculo
+	float circleRadius = 80.f; // ajusta el radio del círculo según lo necesites
+	sf::Vector2f circleCenter(xPlayer + 15.f, yPlayer + 20.f);
+
+	// calcular la posición de la flecha en el borde del círculo
+	float angleRadians = (angle + 90) * 3.141592 / 180; // convertir el ángulo a radianes y ajustar para la orientación de la flecha
+	sf::Vector2f arrowPosition(cos(angleRadians) * circleRadius, sin(angleRadians) * circleRadius);
+
+	// ajustar la posición de la flecha en función del centro del círculo
+	arrowPosition += circleCenter;
+
+	// establecer la posición de la flecha
+	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
 
