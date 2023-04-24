@@ -632,6 +632,8 @@ void Game::run()
 					mWindow.display();
 					Sleep(1900);
 					deathSound.stop();
+
+
 					IniciarVariables();
 					break;
 				}
