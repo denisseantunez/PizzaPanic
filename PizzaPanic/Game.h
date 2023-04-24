@@ -174,5 +174,6 @@ public:
 	sf::RectangleShape hitboxmuneca;
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
+	sf::VertexArray triangle;
 
 };

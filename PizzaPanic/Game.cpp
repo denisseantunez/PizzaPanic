@@ -478,9 +478,28 @@ void Game::update(sf::Time deltaTime)
 		if (collidable.m_bounds.intersects(sheguisCollidable.m_bounds)) {
 
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxsheguis.setPosition(previousSheguisPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxsheguis.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxsheguis.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxsheguis.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxsheguis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = SheguisSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxsheguis.move(velocity * deltaTime.asSeconds());
+			}
 
 		}
 	}
@@ -490,9 +509,28 @@ void Game::update(sf::Time deltaTime)
 		if (collidable.m_bounds.intersects(soruyaCollidable.m_bounds)) {
 
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxsoruya.setPosition(previousSoruyaPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxsoruya.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxsoruya.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxsoruya.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxsoruya.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = SoruyaSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxsoruya.move(velocity * deltaTime.asSeconds());
+			}
 
 		}
 	}
@@ -501,9 +539,29 @@ void Game::update(sf::Time deltaTime)
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(mindyCollidable.m_bounds)) {
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxmindy.setPosition(previousMindyPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxmindy.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxmindy.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxmindy.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxchiwis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = MindySpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxmindy.move(velocity * deltaTime.asSeconds());
+				break;
+			}
 
 		}
 	}
@@ -512,9 +570,29 @@ void Game::update(sf::Time deltaTime)
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(bellaCollidable.m_bounds)) {
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxbella.setPosition(previousBellaPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxbella.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxbella.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxbella.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxbella.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = BellaSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxbella.move(velocity * deltaTime.asSeconds());
+				break;
+			}
 
 		}
 	}
@@ -523,9 +601,29 @@ void Game::update(sf::Time deltaTime)
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(mantecaCollidable.m_bounds)) {
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxmanteca.setPosition(previousMantecaPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxbella.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxbella.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxbella.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxbella.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = BellaSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxbella.move(velocity * deltaTime.asSeconds());
+				break;
+			}
 
 		}
 	}
@@ -534,10 +632,28 @@ void Game::update(sf::Time deltaTime)
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(pushiCollidable.m_bounds)) {
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxpushi.setPosition(previousPushiPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxpushi.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxpushi.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxpushi.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
 
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxpushi.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = PushiSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxpushi.move(velocity * deltaTime.asSeconds());
+			}
 		}
 	}
 
@@ -545,9 +661,28 @@ void Game::update(sf::Time deltaTime)
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(munecaCollidable.m_bounds)) {
 			// Handle collision
-			//Chiwis.setPosition(previousChiwisPos);
-			hitboxmuneca.setPosition(previousMunecaPos);
-			//cout << "Collision with object!\n";
+			sf::FloatRect intersection;
+			if (hitboxmuneca.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitboxmuneca.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitboxmuneca.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitboxmuneca.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = MunecaSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				hitboxmuneca.move(velocity * deltaTime.asSeconds());
+			}
 
 		}
 	}
@@ -564,6 +699,27 @@ void Game::update(sf::Time deltaTime)
 	// cout << mPlayer.getPosition().y;
 	// cout << "\n\n";
 
+	//*****FLECHA**************************************************************************************
+
+	
+		sf::Vector2f direction = mItem.getPosition() - mPlayer.getPosition();
+		float targetDirection = std::atan2(direction.y, direction.x);
+
+		// Calcula la posición del triángulo
+		sf::Vector2f directionVector(std::cos(targetDirection), std::sin(targetDirection));
+		sf::Vector2f leftVector(-directionVector.y, directionVector.x);
+		sf::Vector2f rightVector(directionVector.y, -directionVector.x);
+		sf::Vector2f triangleCenter = mPlayer.getPosition() + directionVector * 50.f;
+		sf::VertexArray triangle(sf::Triangles, 3);
+		triangle[0].position = triangleCenter + leftVector * 20.f;
+		triangle[1].position = triangleCenter + rightVector * 20.f;
+		triangle[2].position = triangleCenter + directionVector * -30.f;
+
+		// Establece el color del triángulo
+		triangle[0].color = sf::Color::Red;
+		triangle[1].color = sf::Color::Red;
+		triangle[2].color = sf::Color::Red;
+	
 }
 
 /*******************************************************************************************************************************************************************/
@@ -584,6 +740,7 @@ void Game::render()
 
 	if (displayItemPrompt) {
 		mWindow.draw(prompt);
+		mWindow.draw(triangle);
 	}
 
 	mWindow.draw(hitboxbella);
@@ -594,8 +751,6 @@ void Game::render()
 	mWindow.draw(vida);
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
-	
-
 	mWindow.display();
 
 }
@@ -683,6 +838,7 @@ void Game::HitBoxMuneca()
 	this->hitboxmuneca.setOutlineColor(sf::Color::Black);
 	this->hitboxmuneca.setOutlineThickness(6.f);
 }
+
 
 void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 
