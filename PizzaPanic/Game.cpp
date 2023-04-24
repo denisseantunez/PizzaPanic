@@ -818,17 +818,6 @@ void Game::update(sf::Time deltaTime)
 	this->BarraVidaAux(xPlayer, yPlayer);
 
 	//*************************************************************************************************
-
-	// Player coordinates
-	cout << mPlayer.getPosition().x << std::endl;
-	cout << mPlayer.getPosition().y;
-	cout << "\n\n";
-	
-	//*****FLECHA**************************************************************************************
-	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
-
-	// float AnguloImp = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
-	// cout << AnguloImp << std::endl;
 }
 
 /*******************************************************************************************************************************************************************/
