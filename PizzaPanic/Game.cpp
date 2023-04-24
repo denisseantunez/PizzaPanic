@@ -13,7 +13,7 @@ Game::Game()
 {
 
 	//Initialize MainMenu ************************************************************************
-	if (!m_font.loadFromFile("Fonts\\font2.ttf"))
+	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el font.");
@@ -311,9 +311,10 @@ void Game::run()
 {
 	do {
 		mainMenu.resetSelectedOption();
+		//sf::Vector2f movement(0.f, 0.f);
+		processEvents();
 		Mordidas = 0.f;
 		QuitarVida = 0.f;
-		mPlayer.setPosition(2500.f, 2500.f);
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);
 
@@ -324,6 +325,9 @@ void Game::run()
 
 		// If Play button is clicked, start the game
 		if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
+
+			mWindow.draw(Ocean);
+			mWindow.display();
 
 			// Play game music
 			menuMusic.stop();
@@ -348,6 +352,9 @@ void Game::run()
 				}
 				render();
 				if (Mordidas == 120) {
+					PizzasEntregadas = 0;
+					mItem.setPosition(3070.f, 2760.f);
+					cargandoItem = false;
 					music.stop();
 					deathSound.play();
 					deathSound.setLoop(true);
@@ -837,11 +844,14 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
+	cout << "x: " << mItem.getPosition().x << std::endl;
+	cout << "y: " << mItem.getPosition().y << std::endl;
+
 	//Flecha**************************************
 	Flecha(xPlayer, yPlayer,mItem.getPosition().x , mItem.getPosition().y);
 
 	//Imprimir texto******************************
-	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font);
+	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font2);
 
 
 	if (ChiwisCollider.intersects(mPlayerCollider) ||

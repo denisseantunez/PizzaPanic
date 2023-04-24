@@ -92,6 +92,8 @@ public:
 
     sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 
+	sf::Vector2f movement;
+
 	void HitBoxBella();
 	void HitBoxManteca();
 	void HitBoxPushi();
