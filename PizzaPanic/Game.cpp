@@ -302,7 +302,16 @@ void Game::update(sf::Time deltaTime)
 	// Update item and player collision boundaries *************************************************
 	mItemCollider = mItem.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
-	ChiwisCollider = Chiwis.getGlobalBounds();
+	ChiwisCollider = hitboxchiwis.getGlobalBounds();
+	SheguisCollider = hitboxsheguis.getGlobalBounds();
+	SoruyaCollider = hitboxsoruya.getGlobalBounds();
+	MindyCollider = hitboxmindy.getGlobalBounds();
+	MantecaCollider = hitboxmanteca.getGlobalBounds();
+	MunecaCollider = hitboxmuneca.getGlobalBounds();
+	PushiCollider = hitboxpushi.getGlobalBounds();
+	BellaCollider = hitboxbella.getGlobalBounds();
+
+	//Sprites junto con la hitbox.
     Chiwis.setPosition(hitboxchiwis.getPosition().x,hitboxchiwis.getPosition().y);
 
 	// Check item collision ************************************************************************
@@ -321,20 +330,24 @@ void Game::update(sf::Time deltaTime)
                 ++PizzasEntregadas;
             } else {
                 cargandoItem = true;
-                NuevaPosicion = rand() % 2;
+                NuevaPosicion = rand() % 35;
                 mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
             }
 		}
 	}
 
-	if (ChiwisCollider.intersects(mPlayerCollider)){
+	if (ChiwisCollider.intersects(mPlayerCollider) ||
+		SheguisCollider.intersects(mPlayerCollider)||
+		SoruyaCollider.intersects(mPlayerCollider) ||
+		BellaCollider.intersects(mPlayerCollider)  ||
+		PushiCollider.intersects(mPlayerCollider)  ||
+		MunecaCollider.intersects(mPlayerCollider) ||
+		MindyCollider.intersects(mPlayerCollider)  ||
+		MantecaCollider.intersects(mPlayerCollider))
+	{
 		Mordidas++;
-
-		if (Mordidas > 0 && Mordidas < 120) {
+		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
-			
-		}
-
         displayItemPrompt = true;
         prompt.setPosition(Chiwis.getPosition().x - 300,Chiwis.getPosition().y + 100);
     }
@@ -710,28 +723,9 @@ void Game::update(sf::Time deltaTime)
 	// cout << mPlayer.getPosition().x << std::endl;
 	// cout << mPlayer.getPosition().y;
 	// cout << "\n\n";
-
+	
 	//*****FLECHA**************************************************************************************
-
-	
-		sf::Vector2f direction = mItem.getPosition() - mPlayer.getPosition();
-		float targetDirection = std::atan2(direction.y, direction.x);
-
-		// Calcula la posición del triángulo
-		sf::Vector2f directionVector(std::cos(targetDirection), std::sin(targetDirection));
-		sf::Vector2f leftVector(-directionVector.y, directionVector.x);
-		sf::Vector2f rightVector(directionVector.y, -directionVector.x);
-		sf::Vector2f triangleCenter = mPlayer.getPosition() + directionVector * 50.f;
-		sf::VertexArray triangle(sf::Triangles, 3);
-		triangle[0].position = triangleCenter + leftVector * 20.f;
-		triangle[1].position = triangleCenter + rightVector * 20.f;
-		triangle[2].position = triangleCenter + directionVector * -30.f;
-
-		// Establece el color del triángulo
-		triangle[0].color = sf::Color::Red;
-		triangle[1].color = sf::Color::Red;
-		triangle[2].color = sf::Color::Red;
-	
+	this->Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 }
 
 /*******************************************************************************************************************************************************************/
@@ -743,8 +737,8 @@ void Game::render()
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
-	mWindow.draw(mPlayer);
 	mWindow.draw(mItem);
+	mWindow.draw(mPlayer);
 	mWindow.draw(hitboxplayer);
 	mWindow.draw(hitboxchiwis);
 	mWindow.draw(hitboxsheguis);
@@ -753,7 +747,6 @@ void Game::render()
 
 	if (displayItemPrompt) {
 		mWindow.draw(prompt);
-		mWindow.draw(triangle);
 	}
 
 	mWindow.draw(hitboxbella);
@@ -764,12 +757,44 @@ void Game::render()
 	mWindow.draw(vida);
 	mWindow.draw(Chiwis);
 	mWindow.draw(Sheguis);
+	mWindow.draw(arrow);
 	mWindow.display();
 
 }
 
-/*******************************************************************************************************************************************************************/
+//*******************************************************************************************************************************************************************
 
+void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
+
+	float dx = xItem - xPlayer;
+	float dy = yItem - yPlayer;
+	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; // calcular el ángulo en grados
+	this->arrow.setRotation(angle); // rotar la flecha
+	float arrowOffset = -50.f; // ajusta esto para que la flecha esté en la posición correcta
+
+	// establecer los puntos de la flecha en relación con la posición del jugador
+	this->arrow.setPointCount(3);
+	this->arrow.setPoint(0, sf::Vector2f(xPlayer, yPlayer));
+	this->arrow.setPoint(1, sf::Vector2f(xPlayer - 10.f, yPlayer - 10.f));
+	this->arrow.setPoint(2, sf::Vector2f(xPlayer + 10.f, yPlayer - 10.f));
+	this->arrow.setFillColor(sf::Color::Yellow);
+
+	// ajustar el origen de la flecha para que esté en la punta superior
+	this->arrow.setOrigin(xPlayer, yPlayer - 20.f);
+
+	// ajustar la escala de la flecha
+	this->arrow.setScale(1.f,1.f); // ajusta la escala según lo necesites
+
+	// enmarcar el contorno de la flecha de negro
+	this->arrow.setOutlineThickness(2.f);
+	this->arrow.setOutlineColor(sf::Color::Black);
+
+	// actualizar la posición de la flecha en función de la posición del jugador
+	this->arrow.setPosition(xPlayer + 25.f, yPlayer + arrowOffset);
+}
+
+
+//********HITBOXES*****************************************************************
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
@@ -777,6 +802,7 @@ void Game::HitBoxPlayer()
 	this->hitboxplayer.setFillColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
 	this->hitboxplayer.setOutlineThickness(4.f);
+
 }
 
 void Game::HitBoxChiwis()

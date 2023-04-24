@@ -54,6 +54,8 @@ public:
     int PizzasEntregadas = 0;
 	float QuitarVida = .0f;
 	float Mordidas = 0.f;
+
+	sf::Vector2f EntregarPizza;
 	
 	// chiwis temporal
     float ChiwisWidth;
@@ -81,7 +83,10 @@ public:
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
 	void BarraVidaAux(float xPlayer, float yPlayer);
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
+	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
+
 	
+
 	// Variables
 	sf::RenderWindow mWindow;
 
@@ -158,6 +163,13 @@ public:
 
 	// Collision with player
 	sf::FloatRect ChiwisCollider;
+	sf::FloatRect SheguisCollider;
+	sf::FloatRect SoruyaCollider;
+	sf::FloatRect MindyCollider;
+	sf::FloatRect MantecaCollider;
+	sf::FloatRect MunecaCollider;
+	sf::FloatRect PushiCollider;
+	sf::FloatRect BellaCollider;
 
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
@@ -178,6 +190,6 @@ public:
 	sf::RectangleShape hitboxmuneca;
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
-	sf::VertexArray triangle;
-
+	sf::ConvexShape arrow;
+	
 };
