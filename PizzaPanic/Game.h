@@ -17,11 +17,12 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
+#define RadioChiwis 100.f
 
 const float PlayerSpeed = 450.f;
 const float SheguisSpeed = 250.f;
 const float SoruyaSpeed = 10.f;
-const float ChiwisSpeed = 300.f;
+
 const float MindySpeed = 250.f;
 const float BellaSpeed = 250.f;
 const float MantecaSpeed = 250.f;
@@ -55,7 +56,7 @@ public:
     int PizzasEntregadas = 0;
 	float QuitarVida = .0f;
 	float Mordidas = 0.f;
-
+    float ChiwisSpeed = 300.f;
 	sf::Vector2f EntregarPizza;
 	
 	// chiwis temporal

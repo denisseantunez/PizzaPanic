@@ -462,9 +462,18 @@ void Game::update(sf::Time deltaTime)
 	float dxchiwis = mPlayer.getPosition().x - hitboxchiwis.getPosition().x;
 	float dychiwis = mPlayer.getPosition().y - hitboxchiwis.getPosition().y;
 	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
+
 	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
-	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
+	if (distancechiwis <= RadioChiwis) {
+		ChiwisSpeed = 300.f;
+		sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+		hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
+	}
+	else {
+		ChiwisSpeed = 400.f;
+		sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+		hitboxchiwis.move(velocitychiwis * deltaTime.asSeconds());
+	}
 	//*************************************************************************************************
 
 
