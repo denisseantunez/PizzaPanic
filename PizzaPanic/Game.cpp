@@ -32,12 +32,17 @@ Game::Game()
 
 
 	// Player ************************************************************************************
-	if (!mTexture.loadFromFile("Images\\robot-idle.gif"))
+	if (!mTexture.loadFromFile("Images\\Robot.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
 	}
+	m_playerRect.left = 0;
+	m_playerRect.top = 0;
+	m_playerRect.width = 320;
+	m_playerRect.height = 320;
 	mPlayer.setTexture(mTexture);
+	mPlayer.setTextureRect(m_playerRect);
 	mPlayer.setPosition(2500.f, 2500.f);
 	mPlayer.setScale(0.18f, 0.18f);
 
@@ -185,6 +190,7 @@ void Game::run()
 		sf::Vector2f previousPlayerPos = mPlayer.getPosition();
 
 		sf::Clock clock;
+
 		sf::Time timeSinceLastUpdate = sf::Time::Zero;
 		while (mWindow.isOpen())
 		{
@@ -223,6 +229,7 @@ void Game::processEvents()
 			mWindow.close();
 			break;
 		}
+
 	}
 }
 
@@ -255,7 +262,6 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 
-
 	sf::Vector2f movement(0.f, 0.f);
 
 	if (mIsMovingUp)
@@ -266,6 +272,15 @@ void Game::update(sf::Time deltaTime)
 		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
+
+	// Player Animation *****************************************************************************
+	if (clock.getElapsedTime().asSeconds() > 0.1f) {
+		if (m_playerRect.left == 1920)
+			m_playerRect.left = 0;
+		else { m_playerRect.left += 320; }
+		mPlayer.setTextureRect(m_playerRect);
+		clock.restart();
+	}
 
 	// Camera follows player ************************************************************************
 	pView.setCenter(mPlayer.getPosition());
