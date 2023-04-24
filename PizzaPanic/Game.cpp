@@ -822,12 +822,16 @@ void Game::update(sf::Time deltaTime)
 			if(cargandoItem){
 				QuitarVida = 0.f;
 				Mordidas = 0.f;
+				mItem.setTexture(mItemTexture);
+				mItem.setScale(1.7f, 1.7f);
                 mItem.setPosition(3070.f, 2760.f);
                 cargandoItem = false;
                 ++PizzasEntregadas;
             } else {
                 cargandoItem = true;
                 NuevaPosicion = rand() % 35;
+				mItem.setTexture(mItemArrowTexture);
+				mItem.setScale(1.7f, 1.7f);
                 mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
             }
 		}
