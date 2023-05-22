@@ -11,278 +11,6 @@ Game::Game()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
-	IniciarVariables();
-	////Initialize MainMenu ************************************************************************
-	//if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el font.");
-	//}
- //   if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
- //   {
- //       // Handle loading error
- //       cout << ("Error al cargar el font del item.");
- //   }
-	//if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el fondo del menu.");
-	//}
-	//MainMenu mainMenu(m_font, m_menuBackground);
-
-	////Texto***************************************************************************************
-
-
-	//// Player ************************************************************************************
-	//if (!mTexture.loadFromFile("Images\\Robot.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el archivo.");
-	//}
-	//m_playerRect.left = 0;
-	//m_playerRect.top = 0;
-	//m_playerRect.width = 320;
-	//m_playerRect.height = 320;
-	//mPlayer.setTexture(mTexture);
-	//mPlayer.setTextureRect(m_playerRect);
-	//mPlayer.setPosition(2500.f, 2500.f);
-	//mPlayer.setScale(0.18f, 0.18f);
-
-
- //   // Textura del Item *************************************************************************
- //   if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
- //   {
- //       // Handle loading error
- //       cout << ("Error al cargar el archivo del Item.");
- //   }
-
-	//if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el archivo del Item.");
-	//}
- //   mItem.setTexture(mItemTexture);
- //   mItem.setPosition(3070.f, 2760.f);
- //   mItem.setScale(1.7f, 1.7f);
-
-
-	//// Textura Chiwis ***********************************************************
-	//if (!chiwisTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de chiwis.");
-	//}
-	//chiwisTexRect.left = 0;
-	//chiwisTexRect.width = 36;
-	//chiwisTexRect.height = 47;
-	//Chiwis.setTexture(chiwisTexture);
-	//Chiwis.setTextureRect(chiwisTexRect);
-	//Chiwis.setPosition(3000.f, 700.f);
-
-	//sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
-	//ChiwisWidth = ChiwisRect.width;
-	//ChiwisHeight = ChiwisRect.height;
-
-	//// Textura Sheguis **************************
-	//if (!sheguisTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de sheguis.");
-	//}
-	//sheguisTexRect.left = 0;
-	//sheguisTexRect.width = 36;
-	//sheguisTexRect.height = 47;
-	//Sheguis.setTexture(sheguisTexture);
-	//Sheguis.setTextureRect(sheguisTexRect);
-	//Sheguis.setPosition(2000.f, 2100.f);
-
-	//sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
-	//SheguisWidth = SheguisRect.width;
-	//SheguisHeight = SheguisRect.height;
-
-	//// Textura Soruya **************************
-	//if (!soruyaTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de soruya.");
-	//}
-	//soruyaTexRect.left = 156;
-	//soruyaTexRect.width = 36;
-	//soruyaTexRect.height = 47;
-	//Soruya.setTexture(soruyaTexture);
-	//Soruya.setTextureRect(soruyaTexRect);
-	//Soruya.setPosition(3000.f, 700.f);
-
-	//sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
-	//SoruyaWidth = SoruyaRect.width;
-	//SoruyaHeight = SoruyaRect.height;
-
-	//// Textura Mindy **************************
-	//if (!mindyTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de mindy.");
-	//}
-	//mindyTexRect.left = 156;
-	//mindyTexRect.width = 36;
-	//mindyTexRect.height = 47;
-	//Mindy.setTexture(mindyTexture);
-	//Mindy.setTextureRect(mindyTexRect);
-	//Mindy.setPosition(1816.f, 1466.f);
-
-	//sf::FloatRect MindyRect = Mindy.getGlobalBounds();
-	//MindyWidth = MindyRect.width;
-	//MindyHeight = MindyRect.height;
-
-	//// Textura Bella **************************
-	//if (!bellaTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de bella.");
-	//}
-	//bellaTexRect.left = 468;
-	//bellaTexRect.width = 36;
-	//bellaTexRect.height = 47;
-	//Bella.setTexture(bellaTexture);
-	//Bella.setTextureRect(bellaTexRect);
-	//Bella.setPosition(85.f, 790.f);
-
-	//sf::FloatRect BellaRect = Bella.getGlobalBounds();
-	//BellaWidth = BellaRect.width;
-	//BellaHeight = BellaRect.height;
-
-	//// Textura Manteca **************************
-	//if (!mantecaTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de manteca.");
-	//}
-	//mantecaTexRect.left = 312;
-	//mantecaTexRect.width = 36;
-	//mantecaTexRect.height = 47;
-	//Manteca.setTexture(mantecaTexture);
-	//Manteca.setTextureRect(mantecaTexRect);
-	//Manteca.setPosition(2366.f, 2800.f);
-
-	//sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
-	//MantecaWidth = MantecaRect.width;
-	//MantecaHeight = MantecaRect.height;
-
-	//// Textura Pushi **************************
-	//if (!pushiTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de pushi.");
-	//}
-	//pushiTexRect.left = 312;
-	//pushiTexRect.width = 36;
-	//pushiTexRect.height = 47;
-	//Pushi.setTexture(pushiTexture);
-	//Pushi.setTextureRect(pushiTexRect);
-	//Pushi.setPosition(85.f, 1950.f);
-
-	//sf::FloatRect PushiRect = Pushi.getGlobalBounds();
-	//PushiWidth = PushiRect.width;
-	//PushiHeight = PushiRect.height;
-
-	//// Textura Muneca **************************
-	//if (!munecaTexture.loadFromFile("Images/Mascotas.png")) {
-	//	// Handle loading error
-	//	cout << ("Error al cargar la textura de muneca.");
-	//}
-	//munecaTexRect.left = 468;
-	//munecaTexRect.width = 36;
-	//munecaTexRect.height = 47;
-	//Muneca.setTexture(munecaTexture);
-	//Muneca.setTextureRect(munecaTexRect);
-	//Muneca.setPosition(1500.f, 2415.f);
-
-	//sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
-	//MunecaWidth = MunecaRect.width;
-	//MunecaHeight = MunecaRect.height;
-
- //   // Texto del item ***************************************************************************
- //   prompt.setFont(m_font2);
- //   
-
-	//// Hitboxes ********************************************************************************
-	//this->HitBoxPlayer();
-	//this->HitBoxChiwis();
-	//this->HitBoxSheguis();
-	//this->HitBoxSoruya();
-	//this->HitBoxMindy();
-	//this->HitBoxBella();
-	//this->HitBoxManteca();
-	//this->HitBoxPushi();
-	//this->HitBoxMuneca();
-
-	//// Tilemap *********************************************************************************
-	//if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el mapa.");
-	//}
-
-	//// Collision objects ***********************************************************************
-	//if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar los objetos del mapa.");
-	//}
-
-	//// Pizza logo in restaurant ****************************************************************
-	//if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el archivo de la pizza");
-	//}
-	//PizzaLogo.setTexture(PizzaLogoTex);
-	//PizzaLogo.setPosition(2795.f, 2355.f);
-	//PizzaLogo.setScale(0.1f, 0.1f);
-
-	//// Ocean ***********************************************************************************
-	//if (!OceanTex.loadFromFile("Images\\Mar.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el archivo del mar.");
-	//}
-	//Ocean.setTexture(OceanTex);
-	//Ocean.setPosition(-600.f, -300.f);
-
-	//// Game Over *******************************************************************************
-	//if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el archivo de game over.");
-	//}
-	//GameOver.setTexture(GameOverTex);
-	//GameOver.setScale(1.5f, 1.5f);
-
-	//// Music ***********************************************************************************
-	//if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el audio.");
-	//}
-	//music.setVolume(20.f);
-
-	//if (!menuMusic.openFromFile("Audios\\omairi.wav"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el audio del menu.");
-	//}
-	//menuMusic.setVolume(20.f);
-
-	//if (!deathSound.openFromFile("Audios\\death.wav"))
-	//{
-	//	// Handle loading error
-	//	cout << ("Error al cargar el audio de game over.");
-	//}
-	//deathSound.setVolume(40.f);
-
-
-	//// Crear arreglo y empezar semilla **********************************************************
-	//MakeArray();
- //   srand(time(NULL));
-}
-
-/*******************************************************************************************************************************************************************/
-
-void Game::IniciarVariables()
-{
 	//Initialize MainMenu ************************************************************************
 	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
 	{
@@ -310,6 +38,137 @@ void Game::IniciarVariables()
 		// Handle loading error
 		cout << ("Error al cargar el archivo.");
 	}
+
+	// Textura del Item *************************************************************************
+	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del Item.");
+	}
+	mItem.setTexture(mItemTexture);
+	mItem.setPosition(3070.f, 2760.f);
+	mItem.setScale(1.7f, 1.7f);
+
+	// Textura de la flecha del Item ************************************************************
+	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del Item.");
+	}
+	mItemArrow.setTexture(mItemArrowTexture);
+	mItemArrow.setScale(0.3f, 0.3f);
+
+	// Textura Chiwis ***********************************************************
+	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de chiwis.");
+	}
+
+	// Ocean ***********************************************************************************
+	if (!OceanTex.loadFromFile("Images\\Mar.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo del mar.");
+	}
+	Ocean.setTexture(OceanTex);
+	Ocean.setPosition(-600.f, -300.f);
+
+	// Game Over *******************************************************************************
+	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo de game over.");
+	}
+	GameOver.setTexture(GameOverTex);
+	GameOver.setScale(1.5f, 1.5f);
+
+	// Music ***********************************************************************************
+	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio.");
+	}
+	music.setVolume(10.f);
+
+	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio del menu.");
+	}
+	menuMusic.setVolume(20.f);
+
+	if (!deathSound.openFromFile("Audios\\death.wav"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el audio de game over.");
+	}
+
+	// Textura Sheguis **************************
+	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de sheguis.");
+	}
+	// Textura Soruya **************************
+	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de soruya.");
+	}
+
+	// Textura Mindy **************************
+	if (!mindyTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de mindy.");
+	}
+
+	// Tilemap *********************************************************************************
+	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el mapa.");
+	}
+
+	// Collision objects ***********************************************************************
+	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	{
+		// Handle loading error
+		cout << ("Error al cargar los objetos del mapa.");
+	}
+
+	// Pizza logo in restaurant ****************************************************************
+	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo de la pizza");
+	}
+	// Textura Bella **************************
+	if (!bellaTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de bella.");
+	}
+	// Textura Manteca **************************
+	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de manteca.");
+	}
+	// Textura Pushi **************************
+	if (!pushiTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de pushi.");
+	}
+	// Textura Muneca **************************
+	if (!munecaTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de muneca.");
+	}
+	//IniciarVariables();
+	////Initialize MainMenu ************************************************************************
+
+	// Player ************************************************************************************
+	if (!mTexture.loadFromFile("Images\\Robot.png"))
+	{
+		// Handle loading error
+		cout << ("Error al cargar el archivo.");
+	}
 	m_playerRect.left = 0;
 	m_playerRect.top = 0;
 	m_playerRect.width = 320;
@@ -320,25 +179,27 @@ void Game::IniciarVariables()
 	mPlayer.setScale(0.18f, 0.18f);
 
 
-	// Textura del Item *************************************************************************
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del Item.");
-	}
+    // Textura del Item *************************************************************************
+    if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+    {
+        // Handle loading error
+        cout << ("Error al cargar el archivo del Item.");
+    }
+	mItem.setTexture(mItemTexture);
+	mItem.setPosition(3070.f, 2760.f);
+	mItem.setScale(1.7f, 1.7f);
 
 	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 	{
 		// Handle loading error
 		cout << ("Error al cargar el archivo del Item.");
 	}
-	mItem.setTexture(mItemTexture);
-	mItem.setPosition(3070.f, 2760.f);
-	mItem.setScale(1.7f, 1.7f);
+	mItemArrow.setTexture(mItemArrowTexture);
+	mItem.setPosition(-1000, -1000);
 
 
 	// Textura Chiwis ***********************************************************
-	if (!chiwisTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de chiwis.");
 	}
@@ -348,13 +209,15 @@ void Game::IniciarVariables()
 	Chiwis.setTexture(chiwisTexture);
 	Chiwis.setTextureRect(chiwisTexRect);
 	Chiwis.setPosition(3000.f, 700.f);
+	Chiwis.setScale(1.5f,1.5f);
+
 
 	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
 	ChiwisWidth = ChiwisRect.width;
 	ChiwisHeight = ChiwisRect.height;
 
 	// Textura Sheguis **************************
-	if (!sheguisTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de sheguis.");
 	}
@@ -364,13 +227,15 @@ void Game::IniciarVariables()
 	Sheguis.setTexture(sheguisTexture);
 	Sheguis.setTextureRect(sheguisTexRect);
 	Sheguis.setPosition(2000.f, 2100.f);
+	Sheguis.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
 	SheguisWidth = SheguisRect.width;
 	SheguisHeight = SheguisRect.height;
 
 	// Textura Soruya **************************
-	if (!soruyaTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de soruya.");
 	}
@@ -380,13 +245,15 @@ void Game::IniciarVariables()
 	Soruya.setTexture(soruyaTexture);
 	Soruya.setTextureRect(soruyaTexRect);
 	Soruya.setPosition(3000.f, 700.f);
+	Soruya.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
 	SoruyaWidth = SoruyaRect.width;
 	SoruyaHeight = SoruyaRect.height;
 
 	// Textura Mindy **************************
-	if (!mindyTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!mindyTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de mindy.");
 	}
@@ -396,13 +263,15 @@ void Game::IniciarVariables()
 	Mindy.setTexture(mindyTexture);
 	Mindy.setTextureRect(mindyTexRect);
 	Mindy.setPosition(1816.f, 1466.f);
+	Mindy.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
 	MindyWidth = MindyRect.width;
 	MindyHeight = MindyRect.height;
 
 	// Textura Bella **************************
-	if (!bellaTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!bellaTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de bella.");
 	}
@@ -412,13 +281,15 @@ void Game::IniciarVariables()
 	Bella.setTexture(bellaTexture);
 	Bella.setTextureRect(bellaTexRect);
 	Bella.setPosition(85.f, 790.f);
+	Bella.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect BellaRect = Bella.getGlobalBounds();
 	BellaWidth = BellaRect.width;
 	BellaHeight = BellaRect.height;
 
 	// Textura Manteca **************************
-	if (!mantecaTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de manteca.");
 	}
@@ -428,13 +299,15 @@ void Game::IniciarVariables()
 	Manteca.setTexture(mantecaTexture);
 	Manteca.setTextureRect(mantecaTexRect);
 	Manteca.setPosition(2366.f, 2800.f);
+	Manteca.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
 	MantecaWidth = MantecaRect.width;
 	MantecaHeight = MantecaRect.height;
 
 	// Textura Pushi **************************
-	if (!pushiTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!pushiTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de pushi.");
 	}
@@ -444,13 +317,15 @@ void Game::IniciarVariables()
 	Pushi.setTexture(pushiTexture);
 	Pushi.setTextureRect(pushiTexRect);
 	Pushi.setPosition(85.f, 1950.f);
+	Pushi.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
 	PushiWidth = PushiRect.width;
 	PushiHeight = PushiRect.height;
 
 	// Textura Muneca **************************
-	if (!munecaTexture.loadFromFile("Images/Mascotas.png")) {
+	if (!munecaTexture.loadFromFile("Images\\Mascotas.png")) {
 		// Handle loading error
 		cout << ("Error al cargar la textura de muneca.");
 	}
@@ -460,14 +335,16 @@ void Game::IniciarVariables()
 	Muneca.setTexture(munecaTexture);
 	Muneca.setTextureRect(munecaTexRect);
 	Muneca.setPosition(1500.f, 2415.f);
+	Muneca.setScale(1.5f, 1.5f);
+
 
 	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
 	MunecaWidth = MunecaRect.width;
 	MunecaHeight = MunecaRect.height;
 
-	// Texto del item ***************************************************************************
-	prompt.setFont(m_font2);
-
+    // Texto del item ***************************************************************************
+    prompt.setFont(m_font2);
+    
 
 	// Hitboxes ********************************************************************************
 	this->HitBoxPlayer();
@@ -523,7 +400,7 @@ void Game::IniciarVariables()
 	GameOver.setScale(1.5f, 1.5f);
 
 	// Music ***********************************************************************************
-	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
+	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
 	{
 		// Handle loading error
 		cout << ("Error al cargar el audio.");
@@ -542,6 +419,133 @@ void Game::IniciarVariables()
 		// Handle loading error
 		cout << ("Error al cargar el audio de game over.");
 	}
+	deathSound.setVolume(40.f);
+
+
+	// Crear arreglo y empezar semilla **********************************************************
+	MakeArray();
+    srand(time(NULL));
+}
+
+/*******************************************************************************************************************************************************************/
+
+void Game::IniciarVariables()
+{
+	m_playerRect.left = 0;
+	m_playerRect.top = 0;
+	m_playerRect.width = 320;
+	m_playerRect.height = 320;
+	mPlayer.setTexture(mTexture);
+	mPlayer.setTextureRect(m_playerRect);
+	mPlayer.setPosition(2500.f, 2500.f);
+	mPlayer.setScale(0.18f, 0.18f);
+
+	chiwisTexRect.left = 0;
+	chiwisTexRect.width = 36;
+	chiwisTexRect.height = 47;
+	Chiwis.setTexture(chiwisTexture);
+	Chiwis.setTextureRect(chiwisTexRect);
+	Chiwis.setPosition(3000.f, 700.f);
+
+	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
+	ChiwisWidth = ChiwisRect.width;
+	ChiwisHeight = ChiwisRect.height;
+
+	sheguisTexRect.left = 0;
+	sheguisTexRect.width = 36;
+	sheguisTexRect.height = 47;
+	Sheguis.setTexture(sheguisTexture);
+	Sheguis.setTextureRect(sheguisTexRect);
+	Sheguis.setPosition(2000.f, 2100.f);
+
+	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
+	SheguisWidth = SheguisRect.width;
+	SheguisHeight = SheguisRect.height;
+	soruyaTexRect.left = 156;
+	soruyaTexRect.width = 36;
+	soruyaTexRect.height = 47;
+	Soruya.setTexture(soruyaTexture);
+	Soruya.setTextureRect(soruyaTexRect);
+	Soruya.setPosition(3000.f, 700.f);
+
+	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
+	SoruyaWidth = SoruyaRect.width;
+	SoruyaHeight = SoruyaRect.height;
+
+	mindyTexRect.left = 156;
+	mindyTexRect.width = 36;
+	mindyTexRect.height = 47;
+	Mindy.setTexture(mindyTexture);
+	Mindy.setTextureRect(mindyTexRect);
+	Mindy.setPosition(1816.f, 1466.f);
+
+	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
+	MindyWidth = MindyRect.width;
+	MindyHeight = MindyRect.height;
+
+	bellaTexRect.left = 468;
+	bellaTexRect.width = 36;
+	bellaTexRect.height = 47;
+	Bella.setTexture(bellaTexture);
+	Bella.setTextureRect(bellaTexRect);
+	Bella.setPosition(85.f, 790.f);
+
+	sf::FloatRect BellaRect = Bella.getGlobalBounds();
+	BellaWidth = BellaRect.width;
+	BellaHeight = BellaRect.height;
+
+	mantecaTexRect.left = 312;
+	mantecaTexRect.width = 36;
+	mantecaTexRect.height = 47;
+	Manteca.setTexture(mantecaTexture);
+	Manteca.setTextureRect(mantecaTexRect);
+	Manteca.setPosition(2366.f, 2800.f);
+
+	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
+	MantecaWidth = MantecaRect.width;
+	MantecaHeight = MantecaRect.height;
+
+	pushiTexRect.left = 312;
+	pushiTexRect.width = 36;
+	pushiTexRect.height = 47;
+	Pushi.setTexture(pushiTexture);
+	Pushi.setTextureRect(pushiTexRect);
+	Pushi.setPosition(85.f, 1950.f);
+
+	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
+	PushiWidth = PushiRect.width;
+	PushiHeight = PushiRect.height;
+
+	munecaTexRect.left = 468;
+	munecaTexRect.width = 36;
+	munecaTexRect.height = 47;
+	Muneca.setTexture(munecaTexture);
+	Muneca.setTextureRect(munecaTexRect);
+	Muneca.setPosition(1500.f, 2415.f);
+
+	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
+	MunecaWidth = MunecaRect.width;
+	MunecaHeight = MunecaRect.height;
+
+	// Texto del item ***************************************************************************
+	prompt.setFont(m_font2);
+
+
+	// Hitboxes ********************************************************************************
+	this->HitBoxPlayer();
+	this->HitBoxChiwis();
+	this->HitBoxSheguis();
+	this->HitBoxSoruya();
+	this->HitBoxMindy();
+	this->HitBoxBella();
+	this->HitBoxManteca();
+	this->HitBoxPushi();
+	this->HitBoxMuneca();
+
+	PizzaLogo.setTexture(PizzaLogoTex);
+	PizzaLogo.setPosition(2795.f, 2355.f);
+	PizzaLogo.setScale(0.1f, 0.1f);
+
 	deathSound.setVolume(40.f);
 
 
@@ -583,8 +587,25 @@ void Game::run()
 		processEvents();
 		Mordidas = 0.f;
 		QuitarVida = 0.f;
+		mItem.setTexture(mItemTexture);
+		mItem.setPosition(3070.f, 2760.f);
+		mPlayer.setPosition(2500.f, 2500.f);
+		mItem.setScale(1.7f, 1.7f);
+		hitboxchiwis.setPosition(3000.f, 700.f);
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);
+		// Textura del Item *************************************************************************
+		if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+		{
+			// Handle loading error
+			cout << ("Error al cargar el archivo del Item.");
+		}
+
+		if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+		{
+			// Handle loading error
+			cout << ("Error al cargar el archivo del Item.");
+		}
 
 		menuMusic.play();
 		menuMusic.setLoop(true);
@@ -630,17 +651,15 @@ void Game::run()
 					//mWindow.draw(mItem);
 					mWindow.draw(GameOver);
 					mWindow.display();
-					Sleep(1900);
+                    usleep(1900000);
 					deathSound.stop();
 
-
-					IniciarVariables();
+					//IniciarVariables();
 					break;
 				}
 			}
 		}
 	} while (mainMenu.getSelectedOption() == MainMenu::Option::Jugar);
-
 }
 
 /*******************************************************************************************************************************************************************/
@@ -1063,6 +1082,7 @@ void Game::update(sf::Time deltaTime)
 
 	// Update item and player collision boundaries *****************
 	mItemCollider = mItem.getGlobalBounds();
+	mItemArrowCollider = mItemArrow.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
 	ChiwisCollider = hitboxchiwis.getGlobalBounds();
 	SheguisCollider = hitboxsheguis.getGlobalBounds();
@@ -1085,7 +1105,7 @@ void Game::update(sf::Time deltaTime)
 
 	// Check item collision ************************************************************************
 	displayItemPrompt = false;
-	if (mPlayerCollider.intersects(mItemCollider)) {
+	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
 
 		if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
 			prompt.setString("Presiona espacio para recoger la pizza!");
@@ -1094,32 +1114,44 @@ void Game::update(sf::Time deltaTime)
 			prompt.setString("Presiona espacio para dejar la pizza!");
 		}
 		displayItemPrompt = true;
-		prompt.setPosition(mItem.getPosition().x - 300,mItem.getPosition().y + 100);
+		if (cargandoItem) {
+			prompt.setPosition(mItemArrow.getPosition().x - 300, mItemArrow.getPosition().y + 100);
+		}
+		else {
+			prompt.setPosition(mItem.getPosition().x - 300, mItem.getPosition().y + 100);
+		}
 
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if(cargandoItem){
 				QuitarVida = 0.f;
 				Mordidas = 0.f;
-				mItem.setTexture(mItemTexture);
-				mItem.setScale(1.7f, 1.7f);
+				mItemArrow.setPosition(-1000, -1000);
                 mItem.setPosition(3070.f, 2760.f);
+				mItem.setScale(1.7f, 1.7f);
                 cargandoItem = false;
-                ++PizzasEntregadas;
+                PizzasEntregadas++;
             } else {
                 cargandoItem = true;
                 NuevaPosicion = rand() % 35;
-				mItem.setTexture(mItemArrowTexture);
-				mItem.setScale(1.7f, 1.7f);
-                mItem.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+				mItemArrow.setScale(0.3f, 0.3f);
+				mItem.setPosition(-1000, -1000);
             }
 		}
 	}
 
-	cout << "x: " << mItem.getPosition().x << std::endl;
-	cout << "y: " << mItem.getPosition().y << std::endl;
+
+	cout << "x: " << mItemArrow.getPosition().x << std::endl;
+	cout << "y: " << mItemArrow.getPosition().y << std::endl;
+	cout << "\n";
 
 	//Flecha**************************************
-	Flecha(xPlayer, yPlayer,mItem.getPosition().x , mItem.getPosition().y);
+	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
+		Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
+	}
+	else {
+		Flecha(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
+	}
 
 	//Imprimir texto******************************
 	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font2);
@@ -1133,7 +1165,7 @@ void Game::update(sf::Time deltaTime)
 		MunecaCollider.intersects(mPlayerCollider) ||
 		MindyCollider.intersects(mPlayerCollider)  ||
 		MantecaCollider.intersects(mPlayerCollider))
-	{-
+	{
 		Mordidas++;
 		if (Mordidas > 0 && Mordidas < 120) 
 			QuitarVida += 0.5f;
@@ -1523,8 +1555,9 @@ void Game::render()
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
+    mWindow.draw(mItem);
 	mWindow.draw(mPlayer);
-	mWindow.draw(mItem);
+	mWindow.draw(mItemArrow);
 	mWindow.draw(hitboxplayer);
 	mWindow.draw(hitboxchiwis);
 	mWindow.draw(hitboxsheguis);
