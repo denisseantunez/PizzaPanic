@@ -235,5 +235,6 @@ public:
 	sf::ConvexShape arrow;
 
 	void IniciarVariables();
+	void iniciar();
 	
 };
