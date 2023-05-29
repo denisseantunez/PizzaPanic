@@ -8,7 +8,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 {
 	// Items del menu
 
-	// Título
+	// Tï¿½tulo
 	sf::Text TitleShadow("PIZZA PANIC", m_font);
 	TitleShadow.setCharacterSize(55);
 	TitleShadow.setPosition(170, 30);
@@ -23,7 +23,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	Title.setFillColor(sf::Color::Red);
 	m_menuItems.emplace_back(std::move(Title));
 ;
-	// Botón de jugar
+	// Botï¿½n de jugar
 	sf::RectangleShape playButton;
 	playButton.setSize(sf::Vector2f(328, 40));
 	playButton.setOutlineColor(sf::Color::Red);
@@ -38,7 +38,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	m_menuItems.emplace_back(std::move(playText));
 
 
-	// Botón de instrucciones
+	// Botï¿½n de instrucciones
 	sf::RectangleShape instructionsButton;
 	instructionsButton.setSize(sf::Vector2f(328, 40));
 	instructionsButton.setOutlineColor(sf::Color::Red);
@@ -52,7 +52,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	instructionsText.setPosition(250, 350);
 	m_menuItems.emplace_back(std::move(instructionsText));
 
-	// Botón de créditos
+	// Botï¿½n de crï¿½ditos
 	sf::RectangleShape creditsButton;
 	creditsButton.setSize(sf::Vector2f(328, 40));
 	creditsButton.setOutlineColor(sf::Color::Red);
@@ -66,7 +66,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	creditsText.setPosition(310, 400);
 	m_menuItems.emplace_back(std::move(creditsText));
 
-	// Botón de Salir
+	// Botï¿½n de Salir
 	sf::RectangleShape quitButton;
 	quitButton.setSize(sf::Vector2f(328, 40));
 	quitButton.setOutlineColor(sf::Color::Red);
@@ -81,7 +81,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	m_menuItems.emplace_back(std::move(quitText));
 
 	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
-		// Botón de Regresar
+		// Botï¿½n de Regresar
 		sf::RectangleShape backButton;
 		backButton.setSize(sf::Vector2f(230, 40));
 		backButton.setOutlineColor(sf::Color::Red);
@@ -124,7 +124,7 @@ void MainMenu::handleEvent(sf::Event event)
 					}
 					else if (menuItem.getString() == "Regresar") {
 						m_selectedOption = Option::Regresar;
-						// Borrar botón de regresar de los vectores
+						// Borrar botï¿½n de regresar de los vectores
 						m_menuItems.pop_back();
 						m_menuButtons.pop_back();
 					}
@@ -143,7 +143,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
 	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
-		// Botón de Regresar
+		// Botï¿½n de Regresar
 		sf::RectangleShape backButton;
 		backButton.setSize(sf::Vector2f(230, 40));
 		backButton.setOutlineColor(sf::Color::Red);

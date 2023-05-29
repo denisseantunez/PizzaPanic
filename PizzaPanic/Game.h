@@ -13,7 +13,7 @@
 
 #include <cstdlib>
 #include <ctime>
-#include <windows.h>
+#include <unistd.h>
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
@@ -176,6 +176,7 @@ public:
     // Item
     sf::Texture mItemTexture;
 	sf::Texture mItemArrowTexture;
+	sf::Sprite mItemArrow;
     sf::Sprite mItem;
     sf::FloatRect mPlayerCollider;
     sf::FloatRect mItemCollider;
