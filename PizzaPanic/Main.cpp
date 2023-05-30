@@ -6,8 +6,6 @@ int main()
 {
 	Game game;
 	
-	//do {
-		game.run();
-	//}while()
+	game.run();
 	
 }
