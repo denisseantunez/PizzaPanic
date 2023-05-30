@@ -144,12 +144,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Pets.cpp" />
     <ClCompile Include="SurfaceObjects.cpp" />
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Pets.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="SurfaceObjects.h" />
     <ClInclude Include="TileMap.h" />

@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
+
 class Collidable
 {
 public:
@@ -17,6 +19,7 @@ public:
 		, m_bounds(sf::FloatRect(0.f, 0.f, 0.f, 0.f))
 		, m_solid(false)
 	{}
+
 
 	int getTileType() const;
 	const sf::FloatRect& getBounds() const;

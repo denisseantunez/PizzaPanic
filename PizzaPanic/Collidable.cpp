@@ -15,3 +15,4 @@ bool Collidable::isSolid() const
 {
 	return m_solid;
 }
+

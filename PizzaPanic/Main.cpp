@@ -5,5 +5,9 @@
 int main()
 {
 	Game game;
-	game.run();
+	
+	//do {
+		game.run();
+	//}while()
+	
 }

@@ -1,5 +1,3 @@
-// tutorial sobre esto en https://www.sfml-dev.org/tutorials/2.4/graphics-vertex-array.php#example-tile-map :)
-// modificación para que obtenga los índices mediante un .txt https://en.sfml-dev.org/forums/index.php?topic=14216.0
 
 
 #include "TileMap.h"

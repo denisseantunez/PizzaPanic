@@ -13,7 +13,8 @@
 
 #include <cstdlib>
 #include <ctime>
-#include <unistd.h>
+#include <thread>
+#include <chrono>
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
@@ -79,11 +80,14 @@ public:
 	float MunecaWidth;
 	float MunecaHeight;
 
-	private:
+private:
 	// Funciones
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
+
+	void checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime);
+
 	void HitBoxPlayer();
 	void HitBoxChiwis();
 	void HitBoxSheguis();
@@ -156,10 +160,6 @@ public:
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;
 	sf::Sprite PizzaLogo;
-
-	// Ocean Background
-	sf::Texture OceanTex;
-	sf::Sprite Ocean;
 
 	// Game Over
 	sf::Texture GameOverTex;
@@ -235,7 +235,7 @@ public:
 	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;
 
-	void IniciarVariables();
-	void iniciar();
+	void Initialize();
+
 	
 };

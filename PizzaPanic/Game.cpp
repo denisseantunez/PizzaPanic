@@ -11,563 +11,20 @@ Game::Game()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
-	//Initialize MainMenu ************************************************************************
-	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el font.");
-	}
-	if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el font del item.");
-	}
-	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el fondo del menu.");
-	}
-	MainMenu mainMenu(m_font, m_menuBackground);
-
-	//Texto***************************************************************************************
-
-
-	// Player ************************************************************************************
-	if (!mTexture.loadFromFile("Images\\Robot.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo.");
-	}
-
-	// Textura del Item *************************************************************************
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del Item.");
-	}
-	mItem.setTexture(mItemTexture);
-	mItem.setPosition(3070.f, 2760.f);
-	mItem.setScale(1.7f, 1.7f);
-
-	// Textura de la flecha del Item ************************************************************
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del Item.");
-	}
-	mItemArrow.setTexture(mItemArrowTexture);
-	mItemArrow.setScale(0.3f, 0.3f);
-
-	// Textura Chiwis ***********************************************************
-	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de chiwis.");
-	}
-
-	// Ocean ***********************************************************************************
-	if (!OceanTex.loadFromFile("Images\\Mar.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del mar.");
-	}
-	Ocean.setTexture(OceanTex);
-	Ocean.setPosition(-600.f, -300.f);
-
-	// Game Over *******************************************************************************
-	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo de game over.");
-	}
-	GameOver.setTexture(GameOverTex);
-	GameOver.setScale(1.5f, 1.5f);
-
-	// Music ***********************************************************************************
-	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio.");
-	}
-	music.setVolume(10.f);
-
-	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio del menu.");
-	}
-	menuMusic.setVolume(20.f);
-
-	if (!deathSound.openFromFile("Audios\\death.wav"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio de game over.");
-	}
-
-	// Textura Sheguis **************************
-	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de sheguis.");
-	}
-	// Textura Soruya **************************
-	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de soruya.");
-	}
-
-	// Textura Mindy **************************
-	if (!mindyTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de mindy.");
-	}
-
-	// Tilemap *********************************************************************************
-	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el mapa.");
-	}
-
-	// Collision objects ***********************************************************************
-	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	{
-		// Handle loading error
-		cout << ("Error al cargar los objetos del mapa.");
-	}
-
-	// Pizza logo in restaurant ****************************************************************
-	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo de la pizza");
-	}
-	// Textura Bella **************************
-	if (!bellaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de bella.");
-	}
-	// Textura Manteca **************************
-	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de manteca.");
-	}
-	// Textura Pushi **************************
-	if (!pushiTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de pushi.");
-	}
-	// Textura Muneca **************************
-	if (!munecaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de muneca.");
-	}
-	//IniciarVariables();
-	////Initialize MainMenu ************************************************************************
-
-	// Player ************************************************************************************
-	if (!mTexture.loadFromFile("Images\\Robot.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo.");
-	}
-	m_playerRect.left = 0;
-	m_playerRect.top = 0;
-	m_playerRect.width = 320;
-	m_playerRect.height = 320;
-	mPlayer.setTexture(mTexture);
-	mPlayer.setTextureRect(m_playerRect);
-	mPlayer.setPosition(2500.f, 2500.f);
-	mPlayer.setScale(0.18f, 0.18f);
-
-
-    // Textura del Item *************************************************************************
-    if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
-    {
-        // Handle loading error
-        cout << ("Error al cargar el archivo del Item.");
-    }
-	mItem.setTexture(mItemTexture);
-	mItem.setPosition(3070.f, 2760.f);
-	mItem.setScale(1.7f, 1.7f);
-
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del Item.");
-	}
-	mItemArrow.setTexture(mItemArrowTexture);
-	mItem.setPosition(-1000, -1000);
-
-
-	// Textura Chiwis ***********************************************************
-	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de chiwis.");
-	}
-	chiwisTexRect.left = 0;
-	chiwisTexRect.width = 36;
-	chiwisTexRect.height = 47;
-	Chiwis.setTexture(chiwisTexture);
-	Chiwis.setTextureRect(chiwisTexRect);
-	Chiwis.setPosition(3000.f, 700.f);
-	Chiwis.setScale(1.5f,1.5f);
-
-
-	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
-	ChiwisWidth = ChiwisRect.width;
-	ChiwisHeight = ChiwisRect.height;
-
-	// Textura Sheguis **************************
-	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de sheguis.");
-	}
-	sheguisTexRect.left = 0;
-	sheguisTexRect.width = 36;
-	sheguisTexRect.height = 47;
-	Sheguis.setTexture(sheguisTexture);
-	Sheguis.setTextureRect(sheguisTexRect);
-	Sheguis.setPosition(2000.f, 2100.f);
-	Sheguis.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
-	SheguisWidth = SheguisRect.width;
-	SheguisHeight = SheguisRect.height;
-
-	// Textura Soruya **************************
-	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de soruya.");
-	}
-	soruyaTexRect.left = 156;
-	soruyaTexRect.width = 36;
-	soruyaTexRect.height = 47;
-	Soruya.setTexture(soruyaTexture);
-	Soruya.setTextureRect(soruyaTexRect);
-	Soruya.setPosition(3000.f, 700.f);
-	Soruya.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
-	SoruyaWidth = SoruyaRect.width;
-	SoruyaHeight = SoruyaRect.height;
-
-	// Textura Mindy **************************
-	if (!mindyTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de mindy.");
-	}
-	mindyTexRect.left = 156;
-	mindyTexRect.width = 36;
-	mindyTexRect.height = 47;
-	Mindy.setTexture(mindyTexture);
-	Mindy.setTextureRect(mindyTexRect);
-	Mindy.setPosition(1816.f, 1466.f);
-	Mindy.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
-	MindyWidth = MindyRect.width;
-	MindyHeight = MindyRect.height;
-
-	// Textura Bella **************************
-	if (!bellaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de bella.");
-	}
-	bellaTexRect.left = 468;
-	bellaTexRect.width = 36;
-	bellaTexRect.height = 47;
-	Bella.setTexture(bellaTexture);
-	Bella.setTextureRect(bellaTexRect);
-	Bella.setPosition(85.f, 790.f);
-	Bella.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect BellaRect = Bella.getGlobalBounds();
-	BellaWidth = BellaRect.width;
-	BellaHeight = BellaRect.height;
-
-	// Textura Manteca **************************
-	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de manteca.");
-	}
-	mantecaTexRect.left = 312;
-	mantecaTexRect.width = 36;
-	mantecaTexRect.height = 47;
-	Manteca.setTexture(mantecaTexture);
-	Manteca.setTextureRect(mantecaTexRect);
-	Manteca.setPosition(2366.f, 2800.f);
-	Manteca.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
-	MantecaWidth = MantecaRect.width;
-	MantecaHeight = MantecaRect.height;
-
-	// Textura Pushi **************************
-	if (!pushiTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de pushi.");
-	}
-	pushiTexRect.left = 312;
-	pushiTexRect.width = 36;
-	pushiTexRect.height = 47;
-	Pushi.setTexture(pushiTexture);
-	Pushi.setTextureRect(pushiTexRect);
-	Pushi.setPosition(85.f, 1950.f);
-	Pushi.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
-	PushiWidth = PushiRect.width;
-	PushiHeight = PushiRect.height;
-
-	// Textura Muneca **************************
-	if (!munecaTexture.loadFromFile("Images\\Mascotas.png")) {
-		// Handle loading error
-		cout << ("Error al cargar la textura de muneca.");
-	}
-	munecaTexRect.left = 468;
-	munecaTexRect.width = 36;
-	munecaTexRect.height = 47;
-	Muneca.setTexture(munecaTexture);
-	Muneca.setTextureRect(munecaTexRect);
-	Muneca.setPosition(1500.f, 2415.f);
-	Muneca.setScale(1.5f, 1.5f);
-
-
-	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
-	MunecaWidth = MunecaRect.width;
-	MunecaHeight = MunecaRect.height;
-
-    // Texto del item ***************************************************************************
-    prompt.setFont(m_font2);
-    
-
-	// Hitboxes ********************************************************************************
-	this->HitBoxPlayer();
-	this->HitBoxChiwis();
-	this->HitBoxSheguis();
-	this->HitBoxSoruya();
-	this->HitBoxMindy();
-	this->HitBoxBella();
-	this->HitBoxManteca();
-	this->HitBoxPushi();
-	this->HitBoxMuneca();
-
-	// Tilemap *********************************************************************************
-	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el mapa.");
-	}
-
-	// Collision objects ***********************************************************************
-	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
-	{
-		// Handle loading error
-		cout << ("Error al cargar los objetos del mapa.");
-	}
-
-	// Pizza logo in restaurant ****************************************************************
-	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo de la pizza");
-	}
-	PizzaLogo.setTexture(PizzaLogoTex);
-	PizzaLogo.setPosition(2795.f, 2355.f);
-	PizzaLogo.setScale(0.1f, 0.1f);
-
-	// Ocean ***********************************************************************************
-	if (!OceanTex.loadFromFile("Images\\Mar.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo del mar.");
-	}
-	Ocean.setTexture(OceanTex);
-	Ocean.setPosition(-600.f, -300.f);
-
-	// Game Over *******************************************************************************
-	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el archivo de game over.");
-	}
-	GameOver.setTexture(GameOverTex);
-	GameOver.setScale(1.5f, 1.5f);
-
-	// Music ***********************************************************************************
-	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav")) 
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio.");
-	}
-	music.setVolume(20.f);
-
-	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio del menu.");
-	}
-	menuMusic.setVolume(20.f);
-
-	if (!deathSound.openFromFile("Audios\\death.wav"))
-	{
-		// Handle loading error
-		cout << ("Error al cargar el audio de game over.");
-	}
-	deathSound.setVolume(40.f);
-
-
-	// Crear arreglo y empezar semilla **********************************************************
-	MakeArray();
-    srand(time(NULL));
+	Initialize();
 }
 
 /*******************************************************************************************************************************************************************/
 
-void Game::IniciarVariables()
-{
-	m_playerRect.left = 0;
-	m_playerRect.top = 0;
-	m_playerRect.width = 320;
-	m_playerRect.height = 320;
-	mPlayer.setTexture(mTexture);
-	mPlayer.setTextureRect(m_playerRect);
-	mPlayer.setPosition(2500.f, 2500.f);
-	mPlayer.setScale(0.18f, 0.18f);
-
-	chiwisTexRect.left = 0;
-	chiwisTexRect.width = 36;
-	chiwisTexRect.height = 47;
-	Chiwis.setTexture(chiwisTexture);
-	Chiwis.setTextureRect(chiwisTexRect);
-	Chiwis.setPosition(3000.f, 700.f);
-
-	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
-	ChiwisWidth = ChiwisRect.width;
-	ChiwisHeight = ChiwisRect.height;
-
-	sheguisTexRect.left = 0;
-	sheguisTexRect.width = 36;
-	sheguisTexRect.height = 47;
-	Sheguis.setTexture(sheguisTexture);
-	Sheguis.setTextureRect(sheguisTexRect);
-	Sheguis.setPosition(2000.f, 2100.f);
-
-	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
-	SheguisWidth = SheguisRect.width;
-	SheguisHeight = SheguisRect.height;
-	soruyaTexRect.left = 156;
-	soruyaTexRect.width = 36;
-	soruyaTexRect.height = 47;
-	Soruya.setTexture(soruyaTexture);
-	Soruya.setTextureRect(soruyaTexRect);
-	Soruya.setPosition(3000.f, 700.f);
-
-	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
-	SoruyaWidth = SoruyaRect.width;
-	SoruyaHeight = SoruyaRect.height;
-
-	mindyTexRect.left = 156;
-	mindyTexRect.width = 36;
-	mindyTexRect.height = 47;
-	Mindy.setTexture(mindyTexture);
-	Mindy.setTextureRect(mindyTexRect);
-	Mindy.setPosition(1816.f, 1466.f);
-
-	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
-	MindyWidth = MindyRect.width;
-	MindyHeight = MindyRect.height;
-
-	bellaTexRect.left = 468;
-	bellaTexRect.width = 36;
-	bellaTexRect.height = 47;
-	Bella.setTexture(bellaTexture);
-	Bella.setTextureRect(bellaTexRect);
-	Bella.setPosition(85.f, 790.f);
-
-	sf::FloatRect BellaRect = Bella.getGlobalBounds();
-	BellaWidth = BellaRect.width;
-	BellaHeight = BellaRect.height;
-
-	mantecaTexRect.left = 312;
-	mantecaTexRect.width = 36;
-	mantecaTexRect.height = 47;
-	Manteca.setTexture(mantecaTexture);
-	Manteca.setTextureRect(mantecaTexRect);
-	Manteca.setPosition(2366.f, 2800.f);
-
-	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
-	MantecaWidth = MantecaRect.width;
-	MantecaHeight = MantecaRect.height;
-
-	pushiTexRect.left = 312;
-	pushiTexRect.width = 36;
-	pushiTexRect.height = 47;
-	Pushi.setTexture(pushiTexture);
-	Pushi.setTextureRect(pushiTexRect);
-	Pushi.setPosition(85.f, 1950.f);
-
-	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
-	PushiWidth = PushiRect.width;
-	PushiHeight = PushiRect.height;
-
-	munecaTexRect.left = 468;
-	munecaTexRect.width = 36;
-	munecaTexRect.height = 47;
-	Muneca.setTexture(munecaTexture);
-	Muneca.setTextureRect(munecaTexRect);
-	Muneca.setPosition(1500.f, 2415.f);
-
-	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
-	MunecaWidth = MunecaRect.width;
-	MunecaHeight = MunecaRect.height;
-
-	// Texto del item ***************************************************************************
-	prompt.setFont(m_font2);
-
-
-	// Hitboxes ********************************************************************************
-	this->HitBoxPlayer();
-	this->HitBoxChiwis();
-	this->HitBoxSheguis();
-	this->HitBoxSoruya();
-	this->HitBoxMindy();
-	this->HitBoxBella();
-	this->HitBoxManteca();
-	this->HitBoxPushi();
-	this->HitBoxMuneca();
-
-	PizzaLogo.setTexture(PizzaLogoTex);
-	PizzaLogo.setPosition(2795.f, 2355.f);
-	PizzaLogo.setScale(0.1f, 0.1f);
-
-	deathSound.setVolume(40.f);
-
-
-	// Crear arreglo y empezar semilla **********************************************************
-	MakeArray();
-	srand(time(NULL));
-}
 void Game::showMainMenu()
 {
-
-	while (mWindow.isOpen())
-	{
+	while (mWindow.isOpen()){
 		sf::Event event;
-		while (mWindow.pollEvent(event))
-		{
+		while (mWindow.pollEvent(event)){
 			mainMenu.handleEvent(event);
 			if (event.type == sf::Event::Closed)
-			{
 				mWindow.close();
-			}
 		}
-
 		mWindow.clear();
 		mWindow.draw(mainMenu);
 		mWindow.display();
@@ -582,10 +39,9 @@ void Game::showMainMenu()
 void Game::run()
 {
 	do {
+		// Initialize variables
 		mainMenu.resetSelectedOption();
-		//sf::Vector2f movement(0.f, 0.f);
 		processEvents();
-
 		Mordidas = 0.f;
 		QuitarVida = 0.f;
 		mItem.setTexture(mItemTexture);
@@ -594,29 +50,15 @@ void Game::run()
 		mItem.setScale(1.7f, 1.7f);
 		hitboxchiwis.setPosition(3000.f, 700.f);
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
-		mWindow.setView(pView);
-		// Textura del Item *************************************************************************
-		if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
-		{
-			// Handle loading error
-			cout << ("Error al cargar el archivo del Item.");
-		}
-
-		if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
-		{
-			// Handle loading error
-			cout << ("Error al cargar el archivo del Item.");
-		}
+		mWindow.setView(pView);	
 
 		menuMusic.play();
 		menuMusic.setLoop(true);
-
 		showMainMenu();
-
+		
 		// If Play button is clicked, start the game
 		if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
 
-			
 			// Play game music
 			menuMusic.stop();
 			music.play();
@@ -628,17 +70,16 @@ void Game::run()
 			sf::Clock clock;
 
 			sf::Time timeSinceLastUpdate = sf::Time::Zero;
-			while (mWindow.isOpen())
-			{
+			while (mWindow.isOpen()){
 				processEvents();
 				timeSinceLastUpdate += clock.restart();
-				while (timeSinceLastUpdate > TimePerFrame)
-				{
+				while (timeSinceLastUpdate > TimePerFrame){
 					timeSinceLastUpdate -= TimePerFrame;
 					processEvents();
 					update(TimePerFrame);
 				}
 				render();
+				// If player dies
 				if (Mordidas == 120) {
 					PizzasEntregadas = 0;
 					mItem.setPosition(3070.f, 2760.f);
@@ -649,13 +90,10 @@ void Game::run()
 			
 					GameOver.setPosition(mPlayer.getPosition().x - 460.f, mPlayer.getPosition().y - 500.f);
 					mWindow.clear();
-					//mWindow.draw(mItem);
 					mWindow.draw(GameOver);
 					mWindow.display();
-                    usleep(1900000);
+                    std::this_thread::sleep_for(std::chrono::seconds(2));
 					deathSound.stop();
-
-					//IniciarVariables();
 					break;
 				}
 			}
@@ -671,7 +109,6 @@ void Game::processEvents()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
-		mainMenu.handleEvent(event);
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -1286,258 +723,19 @@ void Game::update(sf::Time deltaTime)
 	// Check for collisions
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
-
-			// Handle collision
 			mPlayer.setPosition(previousPlayerPos);
 			hitboxplayer.setPosition(previousPlayerPos);
-			//cout << "Collision with object!\n";
 
 		}
 	}
-
-	// Chiwis Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(chiwisCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxchiwis.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxchiwis.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxchiwis.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxchiwis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = ChiwisSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxchiwis.move(velocity * deltaTime.asSeconds());
-				break;
-			}
-		}
-	}
-
-	// Sheguis Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(sheguisCollidable.m_bounds)) {
-
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxsheguis.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxsheguis.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxsheguis.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxsheguis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = SheguisSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxsheguis.move(velocity * deltaTime.asSeconds());
-			}
-
-		}
-	}
-
-	// Soruya Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(soruyaCollidable.m_bounds)) {
-
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxsoruya.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxsoruya.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxsoruya.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxsoruya.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = SoruyaSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxsoruya.move(velocity * deltaTime.asSeconds());
-			}
-
-		}
-	}
-
-	// Mindy Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(mindyCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxmindy.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxmindy.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxmindy.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxchiwis.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = MindySpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxmindy.move(velocity * deltaTime.asSeconds());
-				break;
-			}
-
-		}
-	}
-
-	// Bella Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(bellaCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxbella.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxbella.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxbella.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxbella.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = BellaSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxbella.move(velocity * deltaTime.asSeconds());
-				break;
-			}
-
-		}
-	}
-
-	// Manteca Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(mantecaCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxbella.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxbella.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxbella.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxbella.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = BellaSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxbella.move(velocity * deltaTime.asSeconds());
-				break;
-			}
-
-		}
-	}
-
-	// Pushi Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(pushiCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxpushi.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxpushi.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxpushi.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxpushi.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = PushiSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxpushi.move(velocity * deltaTime.asSeconds());
-			}
-		}
-	}
-
-	// Muneca Collision
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(munecaCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (hitboxmuneca.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = hitboxmuneca.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = hitboxmuneca.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = hitboxmuneca.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = MunecaSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				hitboxmuneca.move(velocity * deltaTime.asSeconds());
-			}
-
-		}
-	}
+	checkCollision(objects, chiwisCollidable, hitboxchiwis, ChiwisSpeed, deltaTime);
+	checkCollision(objects, sheguisCollidable, hitboxsheguis, SheguisSpeed, deltaTime);
+	checkCollision(objects, soruyaCollidable, hitboxsoruya, SoruyaSpeed, deltaTime);
+	checkCollision(objects, mindyCollidable, hitboxmindy, MindySpeed, deltaTime);
+	checkCollision(objects, bellaCollidable, hitboxbella, BellaSpeed, deltaTime);
+	checkCollision(objects, mantecaCollidable, hitboxmanteca, MantecaSpeed, deltaTime);
+	checkCollision(objects, pushiCollidable, hitboxpushi, PushiSpeed, deltaTime);
+	checkCollision(objects, munecaCollidable, hitboxmuneca, MunecaSpeed, deltaTime);
 
 	// Vida Player*************************************************************************************
 	
@@ -1551,8 +749,7 @@ void Game::update(sf::Time deltaTime)
 
 void Game::render()
 {
-	mWindow.clear();
-	mWindow.draw(Ocean);
+	mWindow.clear();;
 	mWindow.draw(background);
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
@@ -1589,6 +786,303 @@ void Game::render()
 
 	mWindow.display();
 
+}
+/*******************************************************************************************************************************************************************/
+
+void Game::Initialize()
+{
+	// Initialize MainMenu 
+	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
+		cout << ("Error al cargar el font.");
+	
+	if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
+		cout << ("Error al cargar el font del item.");
+	
+	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
+		cout << ("Error al cargar el fondo del menu.");
+	MainMenu mainMenu(m_font, m_menuBackground);
+
+	// Player 
+	if (!mTexture.loadFromFile("Images\\Robot.png"))
+		cout << ("Error al cargar el archivo.");
+
+	// Item
+	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+		cout << ("Error al cargar el archivo del Item.");
+	mItem.setTexture(mItemTexture);
+	mItem.setPosition(3070.f, 2760.f);
+	mItem.setScale(1.7f, 1.7f);
+
+	// Flecha del Item 
+	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+		cout << ("Error al cargar el archivo del Item.");
+	mItemArrow.setTexture(mItemArrowTexture);
+	mItemArrow.setScale(0.3f, 0.3f);
+
+	// Chiwis 
+	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de chiwis.");
+
+	// Game Over
+	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
+		cout << ("Error al cargar el archivo de game over.");
+	GameOver.setTexture(GameOverTex);
+	GameOver.setScale(1.5f, 1.5f);
+
+	// Music 
+	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
+		cout << ("Error al cargar el audio.");
+	music.setVolume(10.f);
+
+	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
+		cout << ("Error al cargar el audio del menu.");
+	menuMusic.setVolume(20.f);
+
+	if (!deathSound.openFromFile("Audios\\death.wav"))
+		cout << ("Error al cargar el audio de game over.");
+
+
+	// Textura Sheguis 
+	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de sheguis.");
+	
+	// Textura Soruya
+	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de soruya.");
+
+	// Textura Mindy 
+	if (!mindyTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de mindy.");
+
+	// Tilemap 
+	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+		cout << ("Error al cargar el mapa.");
+
+	// Collision objects
+	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+		cout << ("Error al cargar los objetos del mapa.");
+
+
+	// Pizza logo in restaurant
+	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
+		cout << ("Error al cargar el archivo de la pizza");
+
+	// Textura Bella 
+	if (!bellaTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de bella.");
+
+	// Textura Manteca 
+	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de manteca.");
+
+	// Textura Pushi 
+	if (!pushiTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de pushi.");
+
+	// Textura Muneca 
+	if (!munecaTexture.loadFromFile("Images\\Mascotas.png")) {
+		// Handle loading error
+		cout << ("Error al cargar la textura de muneca.");
+	}
+
+	// Player 
+	if (!mTexture.loadFromFile("Images\\Robot.png"))
+		cout << ("Error al cargar el archivo.");
+	m_playerRect.left = 0;
+	m_playerRect.top = 0;
+	m_playerRect.width = 320;
+	m_playerRect.height = 320;
+	mPlayer.setTexture(mTexture);
+	mPlayer.setTextureRect(m_playerRect);
+	mPlayer.setPosition(2500.f, 2500.f);
+	mPlayer.setScale(0.18f, 0.18f);
+
+
+	// Textura del Item 
+	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+		cout << ("Error al cargar el archivo del Item.");
+	mItem.setTexture(mItemTexture);
+	mItem.setPosition(3070.f, 2760.f);
+	mItem.setScale(1.7f, 1.7f);
+
+	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+		cout << ("Error al cargar el archivo del Item.");
+	mItemArrow.setTexture(mItemArrowTexture);
+	mItem.setPosition(-1000, -1000);
+
+
+	// Textura Chiwis
+	if (!chiwisTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de chiwis.");
+	chiwisTexRect.left = 0;
+	chiwisTexRect.width = 36;
+	chiwisTexRect.height = 47;
+	Chiwis.setTexture(chiwisTexture);
+	Chiwis.setTextureRect(chiwisTexRect);
+	Chiwis.setPosition(3000.f, 700.f);
+	Chiwis.setScale(1.5f, 1.5f);
+
+
+	sf::FloatRect ChiwisRect = Chiwis.getGlobalBounds();
+	ChiwisWidth = ChiwisRect.width;
+	ChiwisHeight = ChiwisRect.height;
+
+	// Textura Sheguis 
+	if (!sheguisTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de sheguis.");
+	sheguisTexRect.left = 0;
+	sheguisTexRect.width = 36;
+	sheguisTexRect.height = 47;
+	Sheguis.setTexture(sheguisTexture);
+	Sheguis.setTextureRect(sheguisTexRect);
+	Sheguis.setPosition(2000.f, 2100.f);
+	Sheguis.setScale(1.5f, 1.5f);
+
+	sf::FloatRect SheguisRect = Sheguis.getGlobalBounds();
+	SheguisWidth = SheguisRect.width;
+	SheguisHeight = SheguisRect.height;
+
+	// Textura Soruya 
+	if (!soruyaTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de soruya.");
+	soruyaTexRect.left = 156;
+	soruyaTexRect.width = 36;
+	soruyaTexRect.height = 47;
+	Soruya.setTexture(soruyaTexture);
+	Soruya.setTextureRect(soruyaTexRect);
+	Soruya.setPosition(3000.f, 700.f);
+	Soruya.setScale(1.5f, 1.5f);
+
+	sf::FloatRect SoruyaRect = Soruya.getGlobalBounds();
+	SoruyaWidth = SoruyaRect.width;
+	SoruyaHeight = SoruyaRect.height;
+
+	// Textura Mindy
+	if (!mindyTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de mindy.");
+	mindyTexRect.left = 156;
+	mindyTexRect.width = 36;
+	mindyTexRect.height = 47;
+	Mindy.setTexture(mindyTexture);
+	Mindy.setTextureRect(mindyTexRect);
+	Mindy.setPosition(1816.f, 1466.f);
+	Mindy.setScale(1.5f, 1.5f);
+
+	sf::FloatRect MindyRect = Mindy.getGlobalBounds();
+	MindyWidth = MindyRect.width;
+	MindyHeight = MindyRect.height;
+
+	// Textura Bella
+	if (!bellaTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de bella.");
+	bellaTexRect.left = 468;
+	bellaTexRect.width = 36;
+	bellaTexRect.height = 47;
+	Bella.setTexture(bellaTexture);
+	Bella.setTextureRect(bellaTexRect);
+	Bella.setPosition(85.f, 790.f);
+	Bella.setScale(1.5f, 1.5f);
+
+	sf::FloatRect BellaRect = Bella.getGlobalBounds();
+	BellaWidth = BellaRect.width;
+	BellaHeight = BellaRect.height;
+
+	// Textura Manteca 
+	if (!mantecaTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de manteca.");
+	mantecaTexRect.left = 312;
+	mantecaTexRect.width = 36;
+	mantecaTexRect.height = 47;
+	Manteca.setTexture(mantecaTexture);
+	Manteca.setTextureRect(mantecaTexRect);
+	Manteca.setPosition(2366.f, 2800.f);
+	Manteca.setScale(1.5f, 1.5f);
+
+	sf::FloatRect MantecaRect = Manteca.getGlobalBounds();
+	MantecaWidth = MantecaRect.width;
+	MantecaHeight = MantecaRect.height;
+
+	// Textura Pushi 
+	if (!pushiTexture.loadFromFile("Images\\Mascotas.png")) 
+		cout << ("Error al cargar la textura de pushi.");
+	pushiTexRect.left = 312;
+	pushiTexRect.width = 36;
+	pushiTexRect.height = 47;
+	Pushi.setTexture(pushiTexture);
+	Pushi.setTextureRect(pushiTexRect);
+	Pushi.setPosition(85.f, 1950.f);
+	Pushi.setScale(1.5f, 1.5f);
+
+	sf::FloatRect PushiRect = Pushi.getGlobalBounds();
+	PushiWidth = PushiRect.width;
+	PushiHeight = PushiRect.height;
+
+	// Textura Muneca 
+	if (!munecaTexture.loadFromFile("Images\\Mascotas.png"))
+		cout << ("Error al cargar la textura de muneca.");
+	munecaTexRect.left = 468;
+	munecaTexRect.width = 36;
+	munecaTexRect.height = 47;
+	Muneca.setTexture(munecaTexture);
+	Muneca.setTextureRect(munecaTexRect);
+	Muneca.setPosition(1500.f, 2415.f);
+	Muneca.setScale(1.5f, 1.5f);
+
+	sf::FloatRect MunecaRect = Muneca.getGlobalBounds();
+	MunecaWidth = MunecaRect.width;
+	MunecaHeight = MunecaRect.height;
+
+	// Texto del item 
+	prompt.setFont(m_font2);
+
+	// Hitboxes 
+	this->HitBoxPlayer();
+	this->HitBoxChiwis();
+	this->HitBoxSheguis();
+	this->HitBoxSoruya();
+	this->HitBoxMindy();
+	this->HitBoxBella();
+	this->HitBoxManteca();
+	this->HitBoxPushi();
+	this->HitBoxMuneca();
+
+	// Crear arreglo y empezar semilla 
+	MakeArray();
+	srand(time(NULL));
+}
+
+//*******************************************************************************************************************************************************************
+
+void Game::checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime)
+{
+	for (auto& collidable : objects.collidables) {
+		if (collidable.m_bounds.intersects(petCollidable.m_bounds)) {
+			// Handle collision
+			sf::FloatRect intersection;
+			if (petHitbox.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = petHitbox.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = petHitbox.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = petHitbox.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+
+				// Adjust speed based on distance to collision point
+				float speed = petSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speed;
+				petHitbox.move(velocity * deltaTime.asSeconds());
+				break;
+			}
+		}
+	}
 }
 
 //*******************************************************************************************************************************************************************
