@@ -19,7 +19,7 @@
 
 #define TimePerFrame sf::seconds(1.f / 60.f)
 #define CantVida 60.f
-#define RadioChiwis 100.f
+#define chiwisRadio 100.f
 
 const float PlayerSpeed = 450.f;
 const int Filas = 2;
@@ -53,7 +53,7 @@ public:
     float yPlayer;
 	sf::Vector2f EntregarPizza;
 
-	float ChiwisSpeed = 250.f;
+	float chiwisSpeed = 250.f;
 	
 
 private:
@@ -85,7 +85,6 @@ private:
 	
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
 
-	float AnguloChiwis(float xPlayer, float yPlayer, float xMascota, float yMascota, const float Speed);
 	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
 	// texto
@@ -155,16 +154,6 @@ private:
 	Collidable pushiCollidable;
 	Collidable munecaCollidable;
 
-	// Collision with player
-	/*sf::FloatRect ChiwisCollider;
-	sf::FloatRect SheguisCollider;
-	sf::FloatRect SoruyaCollider;
-	sf::FloatRect MindyCollider;
-	sf::FloatRect MantecaCollider;
-	sf::FloatRect MunecaCollider;
-	sf::FloatRect PushiCollider;
-	sf::FloatRect BellaCollider;*/
-
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
 	sf::Vector2f previousChiwisPos;
@@ -174,14 +163,6 @@ private:
 
 	// Game objects
 	sf::RectangleShape hitboxplayer;
-	/*sf::RectangleShape hitboxchiwis;
-	sf::RectangleShape hitboxsheguis;
-	sf::RectangleShape hitboxsoruya;
-	sf::RectangleShape hitboxmindy;
-	sf::RectangleShape hitboxbella;
-	sf::RectangleShape hitboxmanteca;
-	sf::RectangleShape hitboxpushi;
-	sf::RectangleShape hitboxmuneca;*/
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;

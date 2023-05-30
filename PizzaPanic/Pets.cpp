@@ -55,6 +55,50 @@ void Pet::animate(float xPlayer, float yPlayer, float initialX, float initialY)
 	sprite.setTextureRect(texRect);
 }
 
+void Pet::animate(float xPlayer, float yPlayer, float chiwisSpeed) 
+{
+	float chiwisAngle = this->chiwisAngle(xPlayer, yPlayer, hitbox.getPosition().x, hitbox.getPosition().y, chiwisSpeed);
+
+	if ((chiwisAngle >= 70 && chiwisAngle <= 110) || (chiwisAngle >= -290 && chiwisAngle <= -250)) { // ARRIBA
+		texRect.top = 498;
+		if (texRect.left == 104)
+			texRect.left = 0;
+		else
+			texRect.left += 52;
+	}
+	else if (chiwisAngle > 110 && chiwisAngle < 250) { // DERECHA
+		texRect.top = 429;
+		if (texRect.left == 104)
+			texRect.left = 0;
+		else
+			texRect.left += 52;
+	}
+	else if ((chiwisAngle >= 250 && chiwisAngle <= 290) || (chiwisAngle >= -110 && chiwisAngle <= -70)) { // ABAJO
+		texRect.top = 287;
+		if (texRect.left == 104)
+			texRect.left = 0;
+		else
+			texRect.left += 52;
+	}
+	else {
+		if (chiwisAngle > 0 || (chiwisAngle > -250 && chiwisAngle < -110)) { // IZQUIERDA
+			texRect.top = 358; // IZQUIERDA
+			if (texRect.left == 104)
+				texRect.left = 0;
+			else
+				texRect.left += 52;
+		}
+		else {
+			texRect.top = 429; // DERECHA
+			if (texRect.left == 104)
+				texRect.left = 0;
+			else
+				texRect.left += 52;
+		}
+	}
+	sprite.setTextureRect(texRect);
+}
+
 void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime)
 {
 	float xPet = hitbox.getPosition().x;
@@ -79,6 +123,25 @@ void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initi
 	else 
 		hitbox.move(velocityaux * deltaTime.asSeconds());
 	
+}
+
+void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime)
+{
+	float dxchiwis = mPlayer.getPosition().x - hitbox.getPosition().x;
+	float dychiwis = mPlayer.getPosition().y - hitbox.getPosition().y;
+	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
+
+	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
+	if (distancechiwis <= chiwisRadio) {
+		chiwisSpeed = 250.f;
+		sf::Vector2f velocitychiwis = unitVectorchiwis * (chiwisSpeed);
+		hitbox.move(velocitychiwis * deltaTime.asSeconds());
+	}
+	else {
+		chiwisSpeed = 400.f;
+		sf::Vector2f velocitychiwis = unitVectorchiwis * (chiwisSpeed);
+		hitbox.move(velocitychiwis * deltaTime.asSeconds());
+	}
 }
 
 void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
@@ -115,4 +178,15 @@ float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float 
 		float angle = atan2(velocityaux.y, velocityaux.x) * 180 / 3.141592 + 180.f;
 		return angle;
 	}
+}
+
+float Pet::chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, const float chiwisSpeed) {
+	float dx = xPlayer - xPet;
+	float dy = yPlayer - yPet;
+	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
+	sf::Vector2f unitVector(dx / distance, dy / distance);
+	sf::Vector2f velocity = unitVector * (chiwisSpeed);
+	float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
+	return angle;
+
 }

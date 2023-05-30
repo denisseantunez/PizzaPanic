@@ -12,14 +12,20 @@ public:
 	const float speed = 250.f;
 
 	void setHitbox(const float x, const float y, const float width, const float height);
+
 	void animate(float xPlayer, float yPlayer, float initialX, float initialY);
+	void animate(float xPlayer, float yPlayer, float chiwisSpeed);
+
 	void followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime);
+	void followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime);
+
 	void checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerBounds);
 
 private:
 	const float RadioDetected = 300.f;
 
 	float petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY);
+	float chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, const float chiwisSpeed);
 
 	
 };

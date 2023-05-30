@@ -164,54 +164,14 @@ void Game::update(sf::Time deltaTime)
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
 
-	// Sprite Animations ***************************
+	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
 		// Player Animations
 		if (m_playerRect.left == 1920)
 			m_playerRect.left = 0;
 		else { m_playerRect.left += 320; }
 
-		// Chiwis Animations
-		float AnguloChiwis = this->AnguloChiwis(xPlayer, yPlayer, chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y, ChiwisSpeed);
-
-		if ((AnguloChiwis >= 70 && AnguloChiwis <= 110) || (AnguloChiwis >= -290 && AnguloChiwis <= -250)) { // ARRIBA
-			chiwis.texRect.top = 498;
-			if (chiwis.texRect.left == 104)
-				chiwis.texRect.left = 0;
-			else
-				chiwis.texRect.left += 52;
-		}
-		else if (AnguloChiwis > 110 && AnguloChiwis < 250) { // DERECHA
-			chiwis.texRect.top = 429;
-			if (chiwis.texRect.left == 104)
-				chiwis.texRect.left = 0;
-			else
-				chiwis.texRect.left += 52;
-		}
-		else if ((AnguloChiwis >= 250 && AnguloChiwis <= 290) || (AnguloChiwis >= -110 && AnguloChiwis <= -70)) { // ABAJO
-			chiwis.texRect.top = 287;
-			if (chiwis.texRect.left == 104)
-				chiwis.texRect.left = 0;
-			else
-				chiwis.texRect.left += 52;
-		}
-		else {
-			if (AnguloChiwis > 0 || (AnguloChiwis > -250 && AnguloChiwis < -110)) { // IZQUIERDA
-				chiwis.texRect.top = 358; // IZQUIERDA
-				if (chiwis.texRect.left == 104)
-					chiwis.texRect.left = 0;
-				else
-					chiwis.texRect.left += 52;
-			}
-			else {
-				chiwis.texRect.top = 429; // DERECHA
-				if (chiwis.texRect.left == 104)
-					chiwis.texRect.left = 0;
-				else
-					chiwis.texRect.left += 52;
-			}
-		}
-
+		chiwis.animate(xPlayer, yPlayer, chiwisSpeed);
 		sheguis.animate(xPlayer, yPlayer, 2000.f, 2100.f);
 		soruya.animate(xPlayer, yPlayer, 3000.f, 700.f);
 		mindy.animate(xPlayer, yPlayer, 1816.f, 1466.f);
@@ -220,242 +180,20 @@ void Game::update(sf::Time deltaTime)
 		pushi.animate(yPlayer, yPlayer, 85.f, 1950.f);
 		muneca.animate(xPlayer, yPlayer, 1500.f, 2415.f);
 
-		// Mindy Animations
-		//float AnguloMindy = this->Angulo(xPlayer, yPlayer, hitboxmindy.getPosition().x, hitboxmindy.getPosition().y, 1816, 1466, MindySpeed);
-
-		//if ((AnguloMindy >= 70 && AnguloMindy <= 110) || (AnguloMindy >= -290 && AnguloMindy <= -250)) { // ARRIBA
-		//	mindyTexRect.top = 498;
-		//	if (mindyTexRect.left == 260)
-		//		mindyTexRect.left = 156;
-		//	else
-		//		mindyTexRect.left += 52;
-		//}
-		//else if (AnguloMindy > 110 && AnguloMindy < 250) { // DERECHA
-		//	mindyTexRect.top = 429;
-		//	if (mindyTexRect.left == 260)
-		//		mindyTexRect.left = 156;
-		//	else
-		//		mindyTexRect.left += 52;
-		//}
-		//else if ((AnguloMindy >= 250 && AnguloMindy <= 290) || (AnguloMindy >= -110 && AnguloMindy <= -70)) { // ABAJO
-		//	mindyTexRect.top = 287;
-		//	if (mindyTexRect.left == 260)
-		//		mindyTexRect.left = 156;
-		//	else
-		//		mindyTexRect.left += 52;
-		//}
-		//else {
-		//	if (AnguloMindy > 0 || (AnguloMindy > -250 && AnguloMindy < -110)) { // IZQUIERDA
-		//		mindyTexRect.top = 358; // IZQUIERDA
-		//		if (mindyTexRect.left == 260)
-		//			mindyTexRect.left = 156;
-		//		else
-		//			mindyTexRect.left += 52;
-		//	}
-		//	else {
-		//		mindyTexRect.top = 429; // DERECHA
-		//		if (mindyTexRect.left == 260)
-		//			mindyTexRect.left = 156;
-		//		else
-		//			mindyTexRect.left += 52;
-		//	}
-		//}
-
-		// Bella Animations
-		//float AnguloBella = this->Angulo(xPlayer, yPlayer, hitboxbella.getPosition().x, hitboxbella.getPosition().y, 85, 790, BellaSpeed);
-
-		//if ((AnguloBella >= 70 && AnguloBella <= 110) || (AnguloBella >= -290 && AnguloBella <= -250)) { // ARRIBA
-		//	bellaTexRect.top = 498;
-		//	if (bellaTexRect.left == 572)
-		//		bellaTexRect.left = 468;
-		//	else
-		//		bellaTexRect.left += 52;
-		//}
-		//else if (AnguloBella > 110 && AnguloBella < 250) { // DERECHA
-		//	bellaTexRect.top = 429;
-		//	if (bellaTexRect.left == 572)
-		//		bellaTexRect.left = 468;
-		//	else
-		//		bellaTexRect.left += 52;
-		//}
-		//else if ((AnguloBella >= 250 && AnguloBella <= 290) || (AnguloBella >= -110 && AnguloBella <= -70)) { // ABAJO
-		//	bellaTexRect.top = 287;
-		//	if (bellaTexRect.left == 572)
-		//		bellaTexRect.left = 468;
-		//	else
-		//		bellaTexRect.left += 52;
-		//}
-		//else {
-		//	if (AnguloBella > 0 || (AnguloBella > -250 && AnguloBella < -110)) { // IZQUIERDA
-		//		bellaTexRect.top = 358; // IZQUIERDA
-		//		if (bellaTexRect.left == 572)
-		//			bellaTexRect.left = 468;
-		//		else
-		//			bellaTexRect.left += 52;
-		//	}
-		//	else {
-		//		bellaTexRect.top = 429; // DERECHA
-		//		if (bellaTexRect.left == 572)
-		//			bellaTexRect.left = 468;
-		//		else
-		//			bellaTexRect.left += 52;
-		//	}
-		//}
-
-		// Manteca Animations
-		//float AnguloManteca = this->Angulo(xPlayer, yPlayer, hitboxmanteca.getPosition().x, hitboxmanteca.getPosition().y, 2366, 2800, MantecaSpeed);
-
-		//if ((AnguloManteca >= 70 && AnguloManteca <= 110) || (AnguloManteca >= -290 && AnguloManteca <= -250)) { // ARRIBA
-		//	mantecaTexRect.top = 498;
-		//	if (mantecaTexRect.left == 416)
-		//		mantecaTexRect.left = 312;
-		//	else
-		//		mantecaTexRect.left += 52;
-		//}
-		//else if (AnguloManteca > 110 && AnguloManteca < 250) { // DERECHA
-		//	mantecaTexRect.top = 429;
-		//	if (mantecaTexRect.left == 416)
-		//		mantecaTexRect.left = 312;
-		//	else
-		//		mantecaTexRect.left += 52;
-		//}
-		//else if ((AnguloManteca >= 250 && AnguloManteca <= 290) || (AnguloManteca >= -110 && AnguloManteca <= -70)) { // ABAJO
-		//	mantecaTexRect.top = 287;
-		//	if (mantecaTexRect.left == 416)
-		//		mantecaTexRect.left = 312;
-		//	else
-		//		mantecaTexRect.left += 52;
-		//}
-		//else {
-		//	if (AnguloManteca > 0 || (AnguloManteca > -250 && AnguloManteca < -110)) { // IZQUIERDA
-		//		mantecaTexRect.top = 358; // IZQUIERDA
-		//		if (mantecaTexRect.left == 416)
-		//			mantecaTexRect.left = 312;
-		//		else
-		//			mantecaTexRect.left += 52;
-		//	}
-		//	else {
-		//		mantecaTexRect.top = 429; // DERECHA
-		//		if (mantecaTexRect.left == 416)
-		//			mantecaTexRect.left = 312;
-		//		else
-		//			mantecaTexRect.left += 52;
-		//	}
-		//}
-
-		// Pushi Animations
-		//float AnguloPushi = this->Angulo(xPlayer, yPlayer, hitboxpushi.getPosition().x, hitboxpushi.getPosition().y, 85, 1950, PushiSpeed);
-
-		//if ((AnguloPushi >= 70 && AnguloPushi <= 110) || (AnguloPushi >= -290 && AnguloPushi <= -250)) { // ARRIBA
-		//	pushiTexRect.top = 213;
-		//	if (pushiTexRect.left == 416)
-		//		pushiTexRect.left = 312;
-		//	else
-		//		pushiTexRect.left += 52;
-		//}
-		//else if (AnguloPushi > 110 && AnguloPushi < 250) { // DERECHA
-		//	pushiTexRect.top = 142;
-		//	if (pushiTexRect.left == 416)
-		//		pushiTexRect.left = 312;
-		//	else
-		//		pushiTexRect.left += 52;
-		//}
-		//else if ((AnguloPushi >= 250 && AnguloPushi <= 290) || (AnguloPushi >= -110 && AnguloPushi <= -70)) { // ABAJO
-		//	pushiTexRect.top = 0;
-		//	if (pushiTexRect.left == 416)
-		//		pushiTexRect.left = 312;
-		//	else
-		//		pushiTexRect.left += 52;
-		//}
-		//else {
-		//	if (AnguloPushi > 0 || (AnguloPushi > -250 && AnguloPushi < -110)) { // IZQUIERDA
-		//		pushiTexRect.top = 71; // IZQUIERDA
-		//		if (pushiTexRect.left == 416)
-		//			pushiTexRect.left = 312;
-		//		else
-		//			pushiTexRect.left += 52;
-		//	}
-		//	else {
-		//		pushiTexRect.top = 142; // DERECHA
-		//		if (pushiTexRect.left == 416)
-		//			pushiTexRect.left = 312;
-		//		else
-		//			pushiTexRect.left += 52;
-		//	}
-		//}
-
-		// Muneca Animations
-		//float AnguloMuneca = this->Angulo(xPlayer, yPlayer, hitboxmuneca.getPosition().x, hitboxmuneca.getPosition().y, 1500, 2415, MunecaSpeed);
-
-		//if ((AnguloMuneca >= 70 && AnguloMuneca <= 110) || (AnguloMuneca >= -290 && AnguloMuneca <= -250)) { // ARRIBA
-		//	munecaTexRect.top = 213;
-		//	if (munecaTexRect.left == 572)
-		//		munecaTexRect.left = 468;
-		//	else
-		//		munecaTexRect.left += 52;
-		//}
-		//else if (AnguloMuneca > 110 && AnguloMuneca < 250) { // DERECHA
-		//	munecaTexRect.top = 142;
-		//	if (munecaTexRect.left == 572)
-		//		munecaTexRect.left = 468;
-		//	else
-		//		munecaTexRect.left += 52;
-		//}
-		//else if ((AnguloMuneca >= 250 && AnguloMuneca <= 290) || (AnguloMuneca >= -110 && AnguloMuneca <= -70)) { // ABAJO
-		//	munecaTexRect.top = 0;
-		//	if (munecaTexRect.left == 572)
-		//		munecaTexRect.left = 468;
-		//	else
-		//		munecaTexRect.left += 52;
-		//}
-		//else {
-		//	if (AnguloMuneca > 0 || (AnguloMuneca > -250 && AnguloMuneca < -110)) { // IZQUIERDA
-		//		munecaTexRect.top = 71; // IZQUIERDA
-		//		if (munecaTexRect.left == 572)
-		//			munecaTexRect.left = 468;
-		//		else
-		//			munecaTexRect.left += 52;
-		//	}
-		//	else {
-		//		munecaTexRect.top = 142; // DERECHA
-		//		if (munecaTexRect.left == 572)
-		//			munecaTexRect.left = 468;
-		//		else
-		//			munecaTexRect.left += 52;
-		//	}
-		//	
-		//}
-
 		// Set Sprite Textures Rectangles
 		mPlayer.setTextureRect(m_playerRect);
-		chiwis.sprite.setTextureRect(chiwis.texRect);
-		//sheguis.sprite.setTextureRect(sheguis.texRect);
-		//soruya.sprite.setTextureRect(soruya.texRect);
-		//mindy.sprite.setTextureRect(mindy.texRect);
-		//bella.sprite.setTextureRect(bella.texRect);
-		//manteca.sprite.setTextureRect(manteca.texRect);
-		//pushi.sprite.setTextureRect(pushi.texRect);
-		//muneca.sprite.setTextureRect(muneca.texRect);
 		clock.restart();
 	}
 
-	// Camera follows player ************************************************************************
+	// Camera follows player 
 	pView.setCenter(mPlayer.getPosition());
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
-	// Update item and player collision boundaries *****************
+	// Update item and player collision boundaries 
 	mItemCollider = mItem.getGlobalBounds();
 	mItemArrowCollider = mItemArrow.getGlobalBounds();
 	mPlayerCollider = mPlayer.getGlobalBounds();
-	/*ChiwisCollider = hitboxchiwis.getGlobalBounds();
-	SheguisCollider = hitboxsheguis.getGlobalBounds();
-	SoruyaCollider = hitboxsoruya.getGlobalBounds();
-	MindyCollider = hitboxmindy.getGlobalBounds();
-	MantecaCollider = hitboxmanteca.getGlobalBounds();
-	MunecaCollider = hitboxmuneca.getGlobalBounds();
-	PushiCollider = hitboxpushi.getGlobalBounds();
-	BellaCollider = hitboxbella.getGlobalBounds();*/
 
 	//Sprites junto con la hitbox.
 	chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
@@ -467,7 +205,7 @@ void Game::update(sf::Time deltaTime)
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
 
-	// Check item collision ************************************************************************
+	// Check item collision 
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
 
@@ -504,12 +242,11 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
+	//cout << "x: " << mItemArrow.getPosition().x << std::endl;
+	//cout << "y: " << mItemArrow.getPosition().y << std::endl;
+	//cout << "\n";
 
-	cout << "x: " << mItemArrow.getPosition().x << std::endl;
-	cout << "y: " << mItemArrow.getPosition().y << std::endl;
-	cout << "\n";
-
-	//Flecha**************************************
+	//Flecha
 	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
 		Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 	}
@@ -517,9 +254,10 @@ void Game::update(sf::Time deltaTime)
 		Flecha(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
 	}
 
-	//Imprimir texto******************************
+	//Imprimir texto
 	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font2);
 
+	// Check if pet attacks player
 	chiwis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 	sheguis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 	soruya.checkMordidas(mordidas, quitarVida, mPlayerCollider);
@@ -530,21 +268,7 @@ void Game::update(sf::Time deltaTime)
 	manteca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 
 
-	/*if (ChiwisCollider.intersects(mPlayerCollider) ||
-		SheguisCollider.intersects(mPlayerCollider)||
-		SoruyaCollider.intersects(mPlayerCollider) ||
-		BellaCollider.intersects(mPlayerCollider)  ||
-		PushiCollider.intersects(mPlayerCollider)  ||
-		MunecaCollider.intersects(mPlayerCollider) ||
-		MindyCollider.intersects(mPlayerCollider)  ||
-		MantecaCollider.intersects(mPlayerCollider))
-	{
-		Mordidas++;
-		if (Mordidas > 0 && Mordidas < 120) 
-			QuitarVida += 0.5f;
-    }*/
-
-	// Keep track of previous positions ************************************************************************
+	// Keep track of previous positions
 	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
 	sf::Vector2f previousChiwisPos = chiwis.hitbox.getPosition();
 	sf::Vector2f previousSheguisPos = sheguis.hitbox.getPosition();
@@ -555,10 +279,12 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f previousPushiPos = pushi.hitbox.getPosition();
 	sf::Vector2f previousMunecaPos = muneca.hitbox.getPosition();
 
-	// Guardar Coordenadas del jugador en variables*************************************************************
+	// Guardar Coordenadas del jugador en variables
 	xPlayer = mPlayer.getPosition().x;
 	yPlayer = mPlayer.getPosition().y;
 
+	// Pets follow player
+	chiwis.followPlayer(mPlayer, chiwisRadio, chiwisSpeed, deltaTime);
 	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
 	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
 	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
@@ -567,63 +293,29 @@ void Game::update(sf::Time deltaTime)
 	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
 	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
 
-	//float xSheguis = hitboxsheguis.getPosition().x;
-	//float ySheguis = hitboxsheguis.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xSheguis, ySheguis, 2000, 2100, SheguisSpeed, hitboxsheguis, deltaTime);
-	//
-	//float xSoruya = hitboxsoruya.getPosition().x;
-	//float ySoruya = hitboxsoruya.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xSoruya, ySoruya, 3000, 700, SoruyaSpeed, hitboxsoruya, deltaTime);
-
-	//float xMindy = hitboxmindy.getPosition().x;
-	//float yMindy = hitboxmindy.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xMindy, yMindy, 1816, 1466, MindySpeed, hitboxmindy, deltaTime);
-
-	//float xBella = hitboxbella.getPosition().x;
-	//float yBella = hitboxbella.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xBella, yBella, 85, 790, BellaSpeed, hitboxbella, deltaTime);
-
-	//float xManteca = hitboxmanteca.getPosition().x;
-	//float yManteca = hitboxmanteca.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xManteca, yManteca, 2366, 2800, MantecaSpeed, hitboxmanteca, deltaTime);
-
-	//float xPushi = hitboxpushi.getPosition().x;
-	//float yPushi = hitboxpushi.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xPushi, yPushi, 85, 1950, PushiSpeed, hitboxpushi, deltaTime);
-
-	//float xMuneca = hitboxmuneca.getPosition().x;
-	//float yMuneca = hitboxmuneca.getPosition().y;
-	//Seguir(xPlayer, yPlayer, xMuneca, yMuneca, 1500, 2415, MunecaSpeed, hitboxmuneca, deltaTime);
-	//**************************************************************************************************
-
-
 	//*************CHIWIS******************************************************************************
 
-	float dxchiwis = mPlayer.getPosition().x - chiwis.hitbox.getPosition().x;
-	float dychiwis = mPlayer.getPosition().y - chiwis.hitbox.getPosition().y;
-	float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
+	//float dxchiwis = mPlayer.getPosition().x - chiwis.hitbox.getPosition().x;
+	//float dychiwis = mPlayer.getPosition().y - chiwis.hitbox.getPosition().y;
+	//float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
 
-	sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
-	if (distancechiwis <= RadioChiwis) {
-		ChiwisSpeed = 250.f;
-		sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-		chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	}
-	else {
-		ChiwisSpeed = 400.f;
-		sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-		chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	}
+	//sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
+	//if (distancechiwis <= chiwisRadio) {
+	//	ChiwisSpeed = 250.f;
+	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
+	//}
+	//else {
+	//	ChiwisSpeed = 400.f;
+	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
+	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
+	//}
 	//*************************************************************************************************
-
 
 	// Move player 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
 
-
-
-	// *************COLLISIONS*************************************************************************
 
 	// Create Collidable object for the player and enemies
 	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
@@ -653,12 +345,9 @@ void Game::update(sf::Time deltaTime)
 	checkCollision(objects, pushiCollidable, pushi.hitbox, 250.f, deltaTime);
 	checkCollision(objects, munecaCollidable, muneca.hitbox, 250.f, deltaTime);
 
-	// Vida Player*************************************************************************************
-	
+	// Vida Player
 	this->BarraVida(quitarVida, xPlayer, yPlayer);
 	this->BarraVidaAux(xPlayer, yPlayer);
-
-	//*************************************************************************************************
 }
 
 /*******************************************************************************************************************************************************************/
@@ -672,20 +361,11 @@ void Game::render()
     mWindow.draw(mItem);
 	mWindow.draw(mPlayer);
 	mWindow.draw(mItemArrow);
-	//mWindow.draw(hitboxplayer);
-	//mWindow.draw(hitboxchiwis);
-	//mWindow.draw(hitboxsheguis);
-	//mWindow.draw(hitboxsoruya);
-	//mWindow.draw(hitboxmindy);
 
 	if (displayItemPrompt) {
 		mWindow.draw(prompt);
 	}
 
-	//mWindow.draw(hitboxbella);
-	//mWindow.draw(hitboxmanteca);
-	//mWindow.draw(hitboxpushi);
-	//mWindow.draw(hitboxmuneca);
 	mWindow.draw(vidaaux);
 	mWindow.draw(vida);
 	mWindow.draw(chiwis.sprite);
@@ -1017,8 +697,6 @@ void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
-
-//********HITBOXES*****************************************************************
 void Game::HitBoxPlayer()
 {
 	this->hitboxplayer.setPosition(720.f, 725.f);
@@ -1028,80 +706,6 @@ void Game::HitBoxPlayer()
 	this->hitboxplayer.setOutlineThickness(4.f);
 
 }
-//
-//void Game::HitBoxChiwis()
-//{
-//	this->hitboxchiwis.setPosition(3000.f, 700.f);
-//	this->hitboxchiwis.setSize(sf::Vector2f(ChiwisWidth, ChiwisHeight));
-//	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
-//	this->hitboxchiwis.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxchiwis.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxSheguis()
-//{
-//	this->hitboxsheguis.setPosition(2000.f, 2100.f);
-//	this->hitboxsheguis.setSize(sf::Vector2f(SheguisWidth, SheguisHeight));
-//	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
-//	this->hitboxsheguis.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxsheguis.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxSoruya()
-//{
-//	this->hitboxsoruya.setPosition(3000.f, 700.f);
-//	this->hitboxsoruya.setSize(sf::Vector2f(SoruyaWidth, SoruyaHeight));
-//	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
-//	this->hitboxsoruya.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxsoruya.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxMindy()
-//{
-//	this->hitboxmindy.setPosition(1816.f, 1466.f);
-//	this->hitboxmindy.setSize(sf::Vector2f(MindyWidth, MindyHeight));
-//	this->hitboxmindy.setFillColor(sf::Color::Transparent);
-//	this->hitboxmindy.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxmindy.setOutlineThickness(6.f);
-//}
-//
-//
-//void Game::HitBoxBella()
-//{
-//	this->hitboxbella.setPosition(85.f, 790.f);
-//	this->hitboxbella.setSize(sf::Vector2f(BellaWidth, BellaHeight));
-//	this->hitboxbella.setFillColor(sf::Color::Transparent);
-//	this->hitboxbella.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxbella.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxManteca()
-//{
-//	this->hitboxmanteca.setPosition(2366.f, 2800.f);
-//	this->hitboxmanteca.setSize(sf::Vector2f(MantecaWidth, MantecaHeight));
-//	this->hitboxmanteca.setFillColor(sf::Color::Transparent);
-//	this->hitboxmanteca.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxmanteca.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxPushi()
-//{
-//	this->hitboxpushi.setPosition(85.f, 1950.f);
-//	this->hitboxpushi.setSize(sf::Vector2f(PushiWidth, PushiHeight));
-//	this->hitboxpushi.setFillColor(sf::Color::Transparent);
-//	this->hitboxpushi.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxpushi.setOutlineThickness(6.f);
-//}
-//
-//void Game::HitBoxMuneca()
-//{
-//	this->hitboxmuneca.setPosition(1500.f, 2415.f);
-//	this->hitboxmuneca.setSize(sf::Vector2f(MunecaWidth, MunecaHeight));
-//	this->hitboxmuneca.setFillColor(sf::Color::Transparent);
-//	this->hitboxmuneca.setOutlineColor(sf::Color::Transparent);
-//	this->hitboxmuneca.setOutlineThickness(6.f);
-//}
-
 
 void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 
@@ -1130,87 +734,3 @@ void Game::BarraVidaAux(float xPlayer, float yPlayer) {
 }
 
 
-/*******************************************************************************************************************************************************************/
-
-//void Game::Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime) {
-//	float dx = xPlayer - xMascota;
-//	float dy = yPlayer - yMascota;
-//	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
-//
-//	float dxaux = Pox - xMascota;
-//	float dyaux = Poy - yMascota;
-//	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
-//
-//	sf::Vector2f unitVector(dx / distance, dy / distance);
-//	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
-//
-//	sf::Vector2f velocity = unitVector * (Speed);
-//	sf::Vector2f velocityaux = unitVectoraux * (Speed);
-//
-//	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
-//		hitboxmascota.move(velocity * deltaTime.asSeconds());
-//	}
-//	else {
-//		hitboxmascota.move(velocityaux * deltaTime.asSeconds());
-//	}
-//}
-//
-//float Game::Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed) {
-//	float dx = xPlayer - xMascota;
-//	float dy = yPlayer - yMascota;
-//	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
-//
-//	float dxaux = Pox - xMascota;
-//	float dyaux = Poy - yMascota;
-//	float distanceaux = sqrt(pow(dxaux, 2.f) + pow(dyaux, 2.f));
-//
-//	sf::Vector2f unitVector(dx / distance, dy / distance);
-//	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
-//
-//	sf::Vector2f velocity = unitVector * (Speed);
-//	sf::Vector2f velocityaux = unitVectoraux * (Speed);
-//
-//	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
-//		float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
-//		return angle ;
-//	}
-//	else {
-//		float angle = atan2(velocityaux.y, velocityaux.x) * 180/3.141592 + 180.f;
-//		return angle;
-//	}
-//}
-
-float Game::AnguloChiwis(float xPlayer, float yPlayer, float xMascota, float yMascota, const float Speed) {
-	float dx = xPlayer - xMascota;
-	float dy = yPlayer - yMascota;
-	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
-	sf::Vector2f unitVector(dx / distance, dy / distance);
-	sf::Vector2f velocity = unitVector * (Speed);
-	float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;
-	return angle;
-	
-}
-
-//NOOOO BORRRARRR ES POR SI UNA EMERGENCIA
-/*
-	float dxmanteca = mPlayer.getPosition().x - hitboxmanteca.getPosition().x;
-	float dymanteca = mPlayer.getPosition().y - hitboxmanteca.getPosition().y;
-	float distancemanteca = sqrt(pow(dxmanteca, 2.f) + pow(dymanteca, 2.f));
-
-	float dxmantecaaux = 2366.f - hitboxmanteca.getPosition().x;
-	float dymantecaaux = 2800.f - hitboxmanteca.getPosition().y;
-	float distancemantecaaux = sqrt(pow(dxmantecaaux, 2.f) + pow(dymantecaaux, 2.f));
-
-	sf::Vector2f unitVectormanteca(dxmanteca / distancemanteca, dymanteca / distancemanteca);
-	sf::Vector2f unitVectormantecaaux(dxmantecaaux / (distancemantecaaux + 0.001), dymantecaaux / (distancemantecaaux + 0.001));
-
-	sf::Vector2f velocitymanteca = unitVectormanteca * (MantecaSpeed);
-	sf::Vector2f velocitymantecaaux = unitVectormantecaaux * (MantecaSpeed);
-
-	if (distancemanteca <= RadioDetected && distancemantecaaux <= RadioDetected) {
-		hitboxmanteca.move(velocitymanteca * deltaTime.asSeconds());
-	}
-	else {
-		hitboxmanteca.move(velocitymantecaaux * deltaTime.asSeconds());
-	}
-	*/
