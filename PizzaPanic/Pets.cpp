@@ -2,63 +2,63 @@
 #include "Pets.h"
 
 
-void Pet::hitbox(const float x, const float y, const float width, const float height)
+void Pet::setHitbox(const float x, const float y, const float width, const float height)
 {
-	this->petHitbox.setPosition(x, y);
-	this->petHitbox.setSize(sf::Vector2f(width, height));
-	this->petHitbox.setFillColor(sf::Color::Transparent);
-	this->petHitbox.setOutlineColor(sf::Color::Transparent);
-	this->petHitbox.setOutlineThickness(6.f);
+	hitbox.setPosition(x, y);
+	hitbox.setSize(sf::Vector2f(width, height));
+	hitbox.setFillColor(sf::Color::Transparent);
+	hitbox.setOutlineColor(sf::Color::Transparent);
+	hitbox.setOutlineThickness(6.f);
 }
 
-void Pet::animate(sf::Sprite pet, sf::IntRect petTexRect, float xPlayer, float yPlayer, const float petSpeed, float initialX, float initialY)
+void Pet::animate(float xPlayer, float yPlayer, float initialX, float initialY)
 {
-	float petAngle = this->petAngle(xPlayer, yPlayer, petHitbox.getPosition().x, petHitbox.getPosition().y, initialX, initialY, petSpeed);
+	float petAngle = this->petAngle(xPlayer, yPlayer, hitbox.getPosition().x, hitbox.getPosition().y, initialX, initialY);
 
 	if ((petAngle >= 70 && petAngle <= 110) || (petAngle >= -290 && petAngle <= -250)) { // ARRIBA
-		petTexRect.top = 498;
-		if (petTexRect.left == 572)
-			petTexRect.left = 468;
+		texRect.top = 498;
+		if (texRect.left == 572)
+			texRect.left = 468;
 		else
-			petTexRect.left += 52;
+			texRect.left += 52;
 	}
 	else if (petAngle > 110 && petAngle < 250) { // DERECHA
-		petTexRect.top = 429;
-		if (petTexRect.left == 572)
-			petTexRect.left = 468;
+		texRect.top = 429;
+		if (texRect.left == 572)
+			texRect.left = 468;
 		else
-			petTexRect.left += 52;
+			texRect.left += 52;
 	}
 	else if ((petAngle >= 250 && petAngle <= 290) || (petAngle >= -110 && petAngle <= -70)) { // ABAJO
-		petTexRect.top = 287;
-		if (petTexRect.left == 572)
-			petTexRect.left = 468;
+		texRect.top = 287;
+		if (texRect.left == 572)
+			texRect.left = 468;
 		else
-			petTexRect.left += 52;
+			texRect.left += 52;
 	}
 	else {
 		if (petAngle > 0 || (petAngle > -250 && petAngle < -110)) { // IZQUIERDA
-			petTexRect.top = 358; // IZQUIERDA
-			if (petTexRect.left == 572)
-				petTexRect.left = 468;
+			texRect.top = 358; // IZQUIERDA
+			if (texRect.left == 572)
+				texRect.left = 468;
 			else
-				petTexRect.left += 52;
+				texRect.left += 52;
 		}
 		else {
-			petTexRect.top = 429; // DERECHA
-			if (petTexRect.left == 572)
-				petTexRect.left = 468;
+			texRect.top = 429; // DERECHA
+			if (texRect.left == 572)
+				texRect.left = 468;
 			else
-				petTexRect.left += 52;
+				texRect.left += 52;
 		}
 	}
-	pet.setTextureRect(petTexRect);
+	sprite.setTextureRect(texRect);
 }
 
-void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, const float petSpeed, sf::Time deltaTime)
+void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime)
 {
-	float xPet = petHitbox.getPosition().x;
-	float yPet = petHitbox.getPosition().y;
+	float xPet = hitbox.getPosition().x;
+	float yPet = hitbox.getPosition().y;
 
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
@@ -71,29 +71,28 @@ void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initi
 	sf::Vector2f unitVector(dx / distance, dy / distance);
 	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
 	
-	sf::Vector2f velocity = unitVector * (petSpeed);
-	sf::Vector2f velocityaux = unitVectoraux * (petSpeed);
+	sf::Vector2f velocity = unitVector * (speed);
+	sf::Vector2f velocityaux = unitVectoraux * (speed);
 
 	if (distance <= RadioDetected && distanceaux <= RadioDetected)
-		petHitbox.move(velocity * deltaTime.asSeconds());
+		hitbox.move(velocity * deltaTime.asSeconds());
 	else 
-		petHitbox.move(velocityaux * deltaTime.asSeconds());
+		hitbox.move(velocityaux * deltaTime.asSeconds());
 	
 }
 
 void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
 {
-	sf::FloatRect petCollider = petHitbox.getGlobalBounds();
+	sf::FloatRect petCollider = hitbox.getGlobalBounds();
 
-	if (petCollider.intersects(playerCollider))
-	{
+	if (petCollider.intersects(playerCollider)){
 		mordidas++;
 		if (mordidas > 0 && mordidas < 120)
 			quitarVida += 0.5f;
 	}
 }
 
-float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY, const float petSpeed) {
+float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY) {
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
 	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));
@@ -105,8 +104,8 @@ float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float 
 	sf::Vector2f unitVector(dx / distance, dy / distance);
 	sf::Vector2f unitVectoraux(dxaux / (distanceaux + 0.1), dyaux / (distanceaux + 0.1));
 
-	sf::Vector2f velocity = unitVector * (petSpeed);
-	sf::Vector2f velocityaux = unitVectoraux * (petSpeed);
+	sf::Vector2f velocity = unitVector * (speed);
+	sf::Vector2f velocityaux = unitVectoraux * (speed);
 
 	if (distance <= RadioDetected && distanceaux <= RadioDetected) {
 		float angle = atan2(velocity.y, velocity.x) * 180 / 3.141592 + 180.f;

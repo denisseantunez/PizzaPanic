@@ -22,15 +22,6 @@
 #define RadioChiwis 100.f
 
 const float PlayerSpeed = 450.f;
-const float SheguisSpeed = 250.f;
-const float SoruyaSpeed = 250.f;
-
-const float MindySpeed = 250.f;
-const float BellaSpeed = 250.f;
-const float MantecaSpeed = 250.f;
-const float PushiSpeed = 250.f;
-const float MunecaSpeed = 250.f;
-const float RadioDetected = 300.f;
 const int Filas = 2;
 const int Columnas = 35;
 
@@ -56,30 +47,14 @@ public:
     int NuevaPosicion;
     int AlturaInicial = 2645;
     int PizzasEntregadas = 0;
-	float QuitarVida = .0f;
-	float Mordidas = 0.f;
-    float ChiwisSpeed = 300.f;
+	float quitarVida = .0f;
+	float mordidas = 0.f;
 	float xPlayer;
     float yPlayer;
 	sf::Vector2f EntregarPizza;
+
+	float ChiwisSpeed = 250.f;
 	
-	// Sprites Width and Heights
-	float ChiwisWidth;
-	float ChiwisHeight;
-	float SheguisWidth;
-	float SheguisHeight;
-	float SoruyaWidth;
-	float SoruyaHeight;
-	float MindyWidth;
-	float MindyHeight;
-	float BellaWidth;
-	float BellaHeight;
-	float MantecaWidth;
-	float MantecaHeight;
-	float PushiWidth;
-	float PushiHeight;
-	float MunecaWidth;
-	float MunecaHeight;
 
 private:
 	// Funciones
@@ -90,10 +65,6 @@ private:
 	void checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime);
 
 	void HitBoxPlayer();
-	//void HitBoxChiwis();
-	//void HitBoxSheguis();
-	//void HitBoxSoruya();
-	//void HitBoxMindy();
 
     sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 
@@ -109,15 +80,11 @@ private:
 	Pet muneca;
 
 
-	/*void HitBoxBella();
-	void HitBoxManteca();
-	void HitBoxPushi();
-	void HitBoxMuneca()*/;
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
 	void BarraVidaAux(float xPlayer, float yPlayer);
-	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
+	
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
-	float Angulo(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, const float Speed);
+
 	float AnguloChiwis(float xPlayer, float yPlayer, float xMascota, float yMascota, const float Speed);
 	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
@@ -131,42 +98,15 @@ private:
 
 	// Textures
 	sf::Texture mTexture;
-	sf::Texture chiwisTexture;
-	sf::Texture sheguisTexture;
-	sf::Texture soruyaTexture;
-	sf::Texture mindyTexture;
-	sf::Texture bellaTexture;
-	sf::Texture mantecaTexture;
-	sf::Texture pushiTexture;
-	sf::Texture munecaTexture;
 
 	// Texture Rects
 	sf::IntRect m_playerRect;
-	sf::IntRect chiwisTexRect;
-	sf::IntRect sheguisTexRect;
-	sf::IntRect soruyaTexRect;
-	sf::IntRect mindyTexRect;
-	sf::IntRect bellaTexRect;
-	sf::IntRect mantecaTexRect;
-	sf::IntRect pushiTexRect;
-	sf::IntRect munecaTexRect;
-
-
-
 
 	// Time
 	sf::Clock clock;
 
 	// Sprites
 	sf::Sprite mPlayer;
-	sf::Sprite Chiwis;
-	sf::Sprite Sheguis;
-	sf::Sprite Soruya;
-	sf::Sprite Mindy;
-	sf::Sprite Bella;
-	sf::Sprite Manteca;
-	sf::Sprite Pushi;
-	sf::Sprite Muneca;
 
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;
@@ -216,14 +156,14 @@ private:
 	Collidable munecaCollidable;
 
 	// Collision with player
-	sf::FloatRect ChiwisCollider;
+	/*sf::FloatRect ChiwisCollider;
 	sf::FloatRect SheguisCollider;
 	sf::FloatRect SoruyaCollider;
 	sf::FloatRect MindyCollider;
 	sf::FloatRect MantecaCollider;
 	sf::FloatRect MunecaCollider;
 	sf::FloatRect PushiCollider;
-	sf::FloatRect BellaCollider;
+	sf::FloatRect BellaCollider;*/
 
 	// Previous Positions
 	sf::Vector2f previousPlayerPos;
@@ -234,14 +174,14 @@ private:
 
 	// Game objects
 	sf::RectangleShape hitboxplayer;
-	sf::RectangleShape hitboxchiwis;
+	/*sf::RectangleShape hitboxchiwis;
 	sf::RectangleShape hitboxsheguis;
 	sf::RectangleShape hitboxsoruya;
 	sf::RectangleShape hitboxmindy;
 	sf::RectangleShape hitboxbella;
 	sf::RectangleShape hitboxmanteca;
 	sf::RectangleShape hitboxpushi;
-	sf::RectangleShape hitboxmuneca;
+	sf::RectangleShape hitboxmuneca;*/
 	sf::RectangleShape vida;
 	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;
