@@ -1,7 +1,8 @@
 
 #include "Pets.h"
 
-void Pets::hitbox(const float x, const float y, const float width, const float height)
+
+void Pet::hitbox(const float x, const float y, const float width, const float height)
 {
 	this->petHitbox.setPosition(x, y);
 	this->petHitbox.setSize(sf::Vector2f(width, height));
@@ -10,7 +11,7 @@ void Pets::hitbox(const float x, const float y, const float width, const float h
 	this->petHitbox.setOutlineThickness(6.f);
 }
 
-void Pets::animate(sf::Sprite pet, float xPlayer, float yPlayer, const float petSpeed, float initialX, float initialY)
+void Pet::animate(sf::Sprite pet, sf::IntRect petTexRect, float xPlayer, float yPlayer, const float petSpeed, float initialX, float initialY)
 {
 	float petAngle = this->petAngle(xPlayer, yPlayer, petHitbox.getPosition().x, petHitbox.getPosition().y, initialX, initialY, petSpeed);
 
@@ -54,7 +55,7 @@ void Pets::animate(sf::Sprite pet, float xPlayer, float yPlayer, const float pet
 	pet.setTextureRect(petTexRect);
 }
 
-void Pets::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, const float petSpeed, sf::Time deltaTime)
+void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, const float petSpeed, sf::Time deltaTime)
 {
 	float xPet = petHitbox.getPosition().x;
 	float yPet = petHitbox.getPosition().y;
@@ -80,7 +81,7 @@ void Pets::followPlayer(float xPlayer, float yPlayer, float initialX, float init
 	
 }
 
-void Pets::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
+void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
 {
 	sf::FloatRect petCollider = petHitbox.getGlobalBounds();
 
@@ -92,7 +93,7 @@ void Pets::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playe
 	}
 }
 
-float Pets::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY, const float petSpeed) {
+float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY, const float petSpeed) {
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
 	float distance = sqrt(pow(dx, 2.f) + pow(dy, 2.f));

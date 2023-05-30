@@ -212,87 +212,8 @@ void Game::update(sf::Time deltaTime)
 			}
 		}
 
-		// Sheguis Animations
-		float AnguloSheguis = this->Angulo(xPlayer, yPlayer, hitboxsheguis.getPosition().x, hitboxsheguis.getPosition().y, 2000, 2100, SheguisSpeed);
-
-		if ((AnguloSheguis >= 70 && AnguloSheguis <= 110) || (AnguloSheguis >= -290 && AnguloSheguis <= -250)) { // ARRIBA
-			sheguisTexRect.top = 213;
-			if (sheguisTexRect.left == 104)
-				sheguisTexRect.left = 0;
-			else
-				sheguisTexRect.left += 52;
-		}
-		else if (AnguloSheguis > 110 && AnguloSheguis < 250) { // DERECHA
-			sheguisTexRect.top = 142;
-			if (sheguisTexRect.left == 104)
-				sheguisTexRect.left = 0;
-			else
-				sheguisTexRect.left += 52;
-		}
-		else if ((AnguloSheguis >= 250 && AnguloSheguis <= 290) || (AnguloSheguis >= -110 && AnguloSheguis <= -70)) { // ABAJO
-			sheguisTexRect.top = 0;
-			if (sheguisTexRect.left == 104)
-				sheguisTexRect.left = 0;
-			else
-				sheguisTexRect.left += 52;
-		}
-		else {
-			if (AnguloSheguis > 0 || (AnguloSheguis > -250 && AnguloSheguis < -110)) { // IZQUIERDA
-				sheguisTexRect.top = 71; // IZQUIERDA
-				if (sheguisTexRect.left == 104)
-					sheguisTexRect.left = 0;
-				else
-					sheguisTexRect.left += 52;
-			}
-			else {
-				sheguisTexRect.top = 142; // DERECHA
-				if (sheguisTexRect.left == 104)
-					sheguisTexRect.left = 0;
-				else
-					sheguisTexRect.left += 52;
-			}
-		}
-
-		// Soruya Animations
-		float AnguloSoruya = this->Angulo(xPlayer, yPlayer, hitboxsoruya.getPosition().x, hitboxsoruya.getPosition().y, 3000, 700, SoruyaSpeed);
-
-		if ((AnguloSoruya >= 70 && AnguloSoruya <= 110) || (AnguloSoruya >= -290 && AnguloSoruya <= -250)) { // ARRIBA
-			soruyaTexRect.top = 213;
-			if (soruyaTexRect.left == 260)
-				soruyaTexRect.left = 156;
-			else
-				soruyaTexRect.left += 52;
-		}
-		else if (AnguloSoruya > 110 && AnguloSoruya < 250) { // DERECHA
-			soruyaTexRect.top = 142;
-			if (soruyaTexRect.left == 260)
-				soruyaTexRect.left = 156;
-			else
-				soruyaTexRect.left += 52;
-		}
-		else if ((AnguloSoruya >= 250 && AnguloSoruya <= 290) || (AnguloSoruya >= -110 && AnguloSoruya <= -70)) { // ABAJO
-			soruyaTexRect.top = 0;
-			if (soruyaTexRect.left == 260)
-				soruyaTexRect.left = 156;
-			else
-				soruyaTexRect.left += 52;
-		}
-		else {
-			if (AnguloSoruya > 0 || (AnguloSoruya > -250 && AnguloSoruya < -110)) { // IZQUIERDA
-				soruyaTexRect.top = 71; // IZQUIERDA
-				if (soruyaTexRect.left == 260)
-					soruyaTexRect.left = 156;
-				else
-					soruyaTexRect.left += 52;
-			}
-			else {
-				soruyaTexRect.top = 142; // DERECHA
-				if (soruyaTexRect.left == 260)
-					soruyaTexRect.left = 156;
-				else
-					soruyaTexRect.left += 52;
-			}
-		}
+		sheguis.animate(Sheguis, sheguisTexRect, xPlayer, yPlayer, SheguisSpeed, 2000.f, 2100.f);
+		soruya.animate(Soruya, soruyaTexRect, xPlayer, yPlayer, SoruyaSpeed, 3000.f, 700.f);
 
 		// Mindy Animations
 		float AnguloMindy = this->Angulo(xPlayer, yPlayer, hitboxmindy.getPosition().x, hitboxmindy.getPosition().y, 1816, 1466, MindySpeed);
@@ -503,9 +424,9 @@ void Game::update(sf::Time deltaTime)
 		// Set Sprite Textures Rectangles
 		mPlayer.setTextureRect(m_playerRect);
 		Chiwis.setTextureRect(chiwisTexRect);
-		Sheguis.setTextureRect(sheguisTexRect);
-		Soruya.setTextureRect(soruyaTexRect);
-		Mindy.setTextureRect(mindyTexRect);
+		//Sheguis.setTextureRect(sheguisTexRect);
+		//Soruya.setTextureRect(soruyaTexRect);
+		//Mindy.setTextureRect(mindyTexRect);
 		Bella.setTextureRect(bellaTexRect);
 		Manteca.setTextureRect(mantecaTexRect);
 		Pushi.setTextureRect(pushiTexRect);
@@ -1037,14 +958,15 @@ void Game::Initialize()
 
 	// Hitboxes 
 	this->HitBoxPlayer();
-	this->HitBoxChiwis();
-	this->HitBoxSheguis();
-	this->HitBoxSoruya();
-	this->HitBoxMindy();
-	this->HitBoxBella();
-	this->HitBoxManteca();
-	this->HitBoxPushi();
-	this->HitBoxMuneca();
+	chiwis.hitbox(3000.f, 700.f, ChiwisWidth, ChiwisHeight);
+	sheguis.hitbox(2000.f, 2100.f, SheguisWidth, SheguisHeight);
+	soruya.hitbox(3000.f, 700.f, SoruyaWidth, SoruyaHeight);
+	mindy.hitbox(1816.f, 1466.f, MindyWidth, MindyHeight);
+	bella.hitbox(85.f, 790.f, BellaWidth, BellaHeight);
+	manteca.hitbox(2366.f, 2800.f, MantecaWidth, MantecaHeight);
+	pushi.hitbox(85.f, 1950.f, PushiWidth, PushiHeight);
+	muneca.hitbox(1500.f, 2415.f, MunecaWidth, MunecaHeight);
+
 
 	// Crear arreglo y empezar semilla 
 	MakeArray();
@@ -1151,79 +1073,79 @@ void Game::HitBoxPlayer()
 	this->hitboxplayer.setOutlineThickness(4.f);
 
 }
-
-void Game::HitBoxChiwis()
-{
-	this->hitboxchiwis.setPosition(3000.f, 700.f);
-	this->hitboxchiwis.setSize(sf::Vector2f(ChiwisWidth, ChiwisHeight));
-	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
-	this->hitboxchiwis.setOutlineColor(sf::Color::Transparent);
-	this->hitboxchiwis.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxSheguis()
-{
-	this->hitboxsheguis.setPosition(2000.f, 2100.f);
-	this->hitboxsheguis.setSize(sf::Vector2f(SheguisWidth, SheguisHeight));
-	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
-	this->hitboxsheguis.setOutlineColor(sf::Color::Transparent);
-	this->hitboxsheguis.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxSoruya()
-{
-	this->hitboxsoruya.setPosition(3000.f, 700.f);
-	this->hitboxsoruya.setSize(sf::Vector2f(SoruyaWidth, SoruyaHeight));
-	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
-	this->hitboxsoruya.setOutlineColor(sf::Color::Transparent);
-	this->hitboxsoruya.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxMindy()
-{
-	this->hitboxmindy.setPosition(1816.f, 1466.f);
-	this->hitboxmindy.setSize(sf::Vector2f(MindyWidth, MindyHeight));
-	this->hitboxmindy.setFillColor(sf::Color::Transparent);
-	this->hitboxmindy.setOutlineColor(sf::Color::Transparent);
-	this->hitboxmindy.setOutlineThickness(6.f);
-}
-
-
-void Game::HitBoxBella()
-{
-	this->hitboxbella.setPosition(85.f, 790.f);
-	this->hitboxbella.setSize(sf::Vector2f(BellaWidth, BellaHeight));
-	this->hitboxbella.setFillColor(sf::Color::Transparent);
-	this->hitboxbella.setOutlineColor(sf::Color::Transparent);
-	this->hitboxbella.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxManteca()
-{
-	this->hitboxmanteca.setPosition(2366.f, 2800.f);
-	this->hitboxmanteca.setSize(sf::Vector2f(MantecaWidth, MantecaHeight));
-	this->hitboxmanteca.setFillColor(sf::Color::Transparent);
-	this->hitboxmanteca.setOutlineColor(sf::Color::Transparent);
-	this->hitboxmanteca.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxPushi()
-{
-	this->hitboxpushi.setPosition(85.f, 1950.f);
-	this->hitboxpushi.setSize(sf::Vector2f(PushiWidth, PushiHeight));
-	this->hitboxpushi.setFillColor(sf::Color::Transparent);
-	this->hitboxpushi.setOutlineColor(sf::Color::Transparent);
-	this->hitboxpushi.setOutlineThickness(6.f);
-}
-
-void Game::HitBoxMuneca()
-{
-	this->hitboxmuneca.setPosition(1500.f, 2415.f);
-	this->hitboxmuneca.setSize(sf::Vector2f(MunecaWidth, MunecaHeight));
-	this->hitboxmuneca.setFillColor(sf::Color::Transparent);
-	this->hitboxmuneca.setOutlineColor(sf::Color::Transparent);
-	this->hitboxmuneca.setOutlineThickness(6.f);
-}
+//
+//void Game::HitBoxChiwis()
+//{
+//	this->hitboxchiwis.setPosition(3000.f, 700.f);
+//	this->hitboxchiwis.setSize(sf::Vector2f(ChiwisWidth, ChiwisHeight));
+//	this->hitboxchiwis.setFillColor(sf::Color::Transparent);
+//	this->hitboxchiwis.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxchiwis.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxSheguis()
+//{
+//	this->hitboxsheguis.setPosition(2000.f, 2100.f);
+//	this->hitboxsheguis.setSize(sf::Vector2f(SheguisWidth, SheguisHeight));
+//	this->hitboxsheguis.setFillColor(sf::Color::Transparent);
+//	this->hitboxsheguis.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxsheguis.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxSoruya()
+//{
+//	this->hitboxsoruya.setPosition(3000.f, 700.f);
+//	this->hitboxsoruya.setSize(sf::Vector2f(SoruyaWidth, SoruyaHeight));
+//	this->hitboxsoruya.setFillColor(sf::Color::Transparent);
+//	this->hitboxsoruya.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxsoruya.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxMindy()
+//{
+//	this->hitboxmindy.setPosition(1816.f, 1466.f);
+//	this->hitboxmindy.setSize(sf::Vector2f(MindyWidth, MindyHeight));
+//	this->hitboxmindy.setFillColor(sf::Color::Transparent);
+//	this->hitboxmindy.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxmindy.setOutlineThickness(6.f);
+//}
+//
+//
+//void Game::HitBoxBella()
+//{
+//	this->hitboxbella.setPosition(85.f, 790.f);
+//	this->hitboxbella.setSize(sf::Vector2f(BellaWidth, BellaHeight));
+//	this->hitboxbella.setFillColor(sf::Color::Transparent);
+//	this->hitboxbella.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxbella.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxManteca()
+//{
+//	this->hitboxmanteca.setPosition(2366.f, 2800.f);
+//	this->hitboxmanteca.setSize(sf::Vector2f(MantecaWidth, MantecaHeight));
+//	this->hitboxmanteca.setFillColor(sf::Color::Transparent);
+//	this->hitboxmanteca.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxmanteca.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxPushi()
+//{
+//	this->hitboxpushi.setPosition(85.f, 1950.f);
+//	this->hitboxpushi.setSize(sf::Vector2f(PushiWidth, PushiHeight));
+//	this->hitboxpushi.setFillColor(sf::Color::Transparent);
+//	this->hitboxpushi.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxpushi.setOutlineThickness(6.f);
+//}
+//
+//void Game::HitBoxMuneca()
+//{
+//	this->hitboxmuneca.setPosition(1500.f, 2415.f);
+//	this->hitboxmuneca.setSize(sf::Vector2f(MunecaWidth, MunecaHeight));
+//	this->hitboxmuneca.setFillColor(sf::Color::Transparent);
+//	this->hitboxmuneca.setOutlineColor(sf::Color::Transparent);
+//	this->hitboxmuneca.setOutlineThickness(6.f);
+//}
 
 
 void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {

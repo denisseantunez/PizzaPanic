@@ -10,6 +10,7 @@
 #include "SurfaceObjects.h"
 #include "Collidable.h"
 #include "MainMenu.h"
+#include "Pets.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -89,19 +90,29 @@ private:
 	void checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime);
 
 	void HitBoxPlayer();
-	void HitBoxChiwis();
-	void HitBoxSheguis();
-	void HitBoxSoruya();
-	void HitBoxMindy();
+	//void HitBoxChiwis();
+	//void HitBoxSheguis();
+	//void HitBoxSoruya();
+	//void HitBoxMindy();
 
     sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 
 	sf::Vector2f movement;
 
-	void HitBoxBella();
+	Pet chiwis;
+	Pet sheguis;
+	Pet soruya;
+	Pet mindy;
+	Pet bella;
+	Pet manteca;
+	Pet pushi;
+	Pet muneca;
+
+
+	/*void HitBoxBella();
 	void HitBoxManteca();
 	void HitBoxPushi();
-	void HitBoxMuneca();
+	void HitBoxMuneca()*/;
 	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
 	void BarraVidaAux(float xPlayer, float yPlayer);
 	void Seguir(float xPlayer, float yPlayer, float xMascota, float yMascota, float Pox, float Poy, float Speed, sf::RectangleShape& hitboxmascota, sf::Time deltaTime);
