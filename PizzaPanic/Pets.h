@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "TileMap.h"
+
 class Pet 
 {
 public:
@@ -9,7 +11,7 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::IntRect texRect;
-	const float speed = 250.f;
+	float speed = 250.f;
 
 	void setHitbox(const float x, const float y, const float width, const float height);
 
@@ -20,6 +22,8 @@ public:
 	void followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime);
 
 	void checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerBounds);
+
+	void checkCollisions(const TileMap& objects, sf::Time deltaTime, const float petSpeed);
 
 private:
 	const float RadioDetected = 300.f;

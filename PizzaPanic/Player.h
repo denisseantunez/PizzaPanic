@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "TileMap.h"
+
 class Player
 {
 
@@ -13,9 +15,10 @@ public:
 	bool mIsMovingLeft = false;
 	bool mIsMovingRight = false;
 
-	void setHitbox(const float x, const float y, const float width, const float height);
+	//void setHitbox();
 	void move(sf::Time deltaTime);
 	void animate();
+	void checkCollisions(const TileMap& objects);
 	void PlayerLife(float QuitarVida, float xPlayer, float yPlayer);
 	void PlayerLifeAux(float xPlayer, float yPlayer);
 
@@ -26,13 +29,16 @@ public:
 	const float escaleX = 0.18;
 	const float escaleY = 0.18;
 
+	sf::Vector2f previousPos;
 
-	sf::RectangleShape hitbox;
+
 	sf::RectangleShape playerLife;
 	sf::RectangleShape playerLifeAux;
 	sf::IntRect texRect;
 	sf::Sprite sprite;
 	sf::Texture texture;
+	//sf::FloatRect hitbox;
+
 
 	const float speed = 350.f;
 	const float playerFullLife = 100.f;

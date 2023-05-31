@@ -155,6 +155,37 @@ void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect player
 	}
 }
 
+void Pet::checkCollisions(const TileMap& objects, sf::Time deltaTime, const float petSpeed)
+{
+	for (const sf::FloatRect& collidable : objects.collidables) {
+	
+			// Handle collision
+			sf::FloatRect intersection;
+			if (hitbox.getGlobalBounds().intersects(collidable, intersection)) {
+				// Calculate shortest distance to move hitbox away from intersection
+				sf::Vector2f direction = hitbox.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction /= distance;
+				sf::Vector2f size = hitbox.getSize();
+				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+		
+				// Calculate distance to move enemy away from intersection point
+				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
+				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
+		
+				// Add randomness to new position calculation
+				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
+				sf::Vector2f newPosition = hitbox.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
+		
+				// Adjust speed based on distance to collision point
+				float speedAux = petSpeed * (distance / radius);
+				sf::Vector2f velocity = direction * speedAux;
+				hitbox.move(velocity * deltaTime.asSeconds());
+				break;
+			}
+		}
+}
+
 float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY) {
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
