@@ -516,40 +516,6 @@ void Game::Initialize()
 }
 
 //*******************************************************************************************************************************************************************
-//
-//void Game::checkCollision(const TileMap& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime)
-//{
-//	for (auto& collidable : objects.collidables) {
-//		if (collidable.m_bounds.intersects(petCollidable.m_bounds)) {
-//			// Handle collision
-//			sf::FloatRect intersection;
-//			if (petHitbox.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-//				// Calculate shortest distance to move hitbox away from intersection
-//				sf::Vector2f direction = petHitbox.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-//				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-//				direction /= distance;
-//				sf::Vector2f size = petHitbox.getSize();
-//				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-//
-//				// Calculate distance to move enemy away from intersection point
-//				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-//				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-//
-//				// Add randomness to new position calculation
-//				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-//				sf::Vector2f newPosition = petHitbox.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-//
-//				// Adjust speed based on distance to collision point
-//				float speed = petSpeed * (distance / radius);
-//				sf::Vector2f velocity = direction * speed;
-//				petHitbox.move(velocity * deltaTime.asSeconds());
-//				break;
-//			}
-//		}
-//	}
-//}
-
-//*******************************************************************************************************************************************************************
 
 void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
