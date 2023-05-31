@@ -13,7 +13,6 @@ public:
 	bool mIsMovingLeft = false;
 	bool mIsMovingRight = false;
 
-	void setHitbox(const float x, const float y, const float width, const float height);
 	void move(sf::Time deltaTime);
 	void animate();
 	void PlayerLife(float QuitarVida, float xPlayer, float yPlayer);
@@ -26,8 +25,6 @@ public:
 	const float escaleX = 0.18;
 	const float escaleY = 0.18;
 
-
-	sf::RectangleShape hitbox;
 	sf::RectangleShape playerLife;
 	sf::RectangleShape playerLifeAux;
 	sf::IntRect texRect;

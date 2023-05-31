@@ -1,15 +1,6 @@
 #include "Player.h"
 
 
-void Player::setHitbox(const float x, const float y, const float width, const float height)
-{
-	hitbox.setPosition(x, y);
-	hitbox.setSize(sf::Vector2f(width, height));
-	hitbox.setFillColor(sf::Color::Transparent);
-	hitbox.setOutlineColor(sf::Color::Transparent);
-	hitbox.setOutlineThickness(6.f);
-}
-
 void Player::move(sf::Time deltaTime)
 {
 	sf::Vector2f movement(0.f, 0.f);
@@ -22,9 +13,10 @@ void Player::move(sf::Time deltaTime)
 		movement.x -= speed;
 	if (mIsMovingRight)
 		movement.x += speed;
+	if (movement.x != 0.f && movement.y != 0.f)
+		movement = movement / std::sqrt(2.f);
 
 	sprite.move(movement * deltaTime.asSeconds());
-	hitbox.move(movement * deltaTime.asSeconds());
 }
 
 void Player::animate()

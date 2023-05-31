@@ -27,7 +27,6 @@ public:
 
 	sf::FloatRect m_bounds; // The bounding rectangle of the collidable object
 
-public:
 	int m_tileType;
 	bool m_solid;
 
