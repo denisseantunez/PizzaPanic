@@ -134,24 +134,15 @@ void Game::processEvents()
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
-	sf::Vector2f movement(0.f, 0.f);
-
-	if (Player.mIsMovingUp)
-		movement.y -= PlayerSpeed;
-	if (Player.mIsMovingDown)
-		movement.y += PlayerSpeed;
-	if (Player.mIsMovingLeft)
-		movement.x -= PlayerSpeed;
-	if (Player.mIsMovingRight)
-		movement.x += PlayerSpeed;
+	Player.move(deltaTime);
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
 		// Player Animations
-		if (Player.texRect.left == 1920)
+		/*if (Player.texRect.left == 1920)
 			Player.texRect.left = 0;
-		else { Player.texRect.left += 320; }
-
+		else { Player.texRect.left += 320; }*/
+		Player.animate();
 		chiwis.animate(xPlayer, yPlayer, chiwisSpeed);
 		sheguis.animate(xPlayer, yPlayer, 2000.f, 2100.f);
 		soruya.animate(xPlayer, yPlayer, 3000.f, 700.f);
@@ -162,7 +153,7 @@ void Game::update(sf::Time deltaTime)
 		muneca.animate(xPlayer, yPlayer, 1500.f, 2415.f);
 
 		// Set Sprite Textures Rectangles
-		Player.sprite.setTextureRect(Player.texRect);
+		//Player.sprite.setTextureRect(Player.texRect);
 		clock.restart();
 	}
 
@@ -270,33 +261,6 @@ void Game::update(sf::Time deltaTime)
 	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime);
 	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
 	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
-
-	//*************CHIWIS******************************************************************************
-
-	//float dxchiwis = mPlayer.getPosition().x - chiwis.hitbox.getPosition().x;
-	//float dychiwis = mPlayer.getPosition().y - chiwis.hitbox.getPosition().y;
-	//float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
-
-	//sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
-	//if (distancechiwis <= chiwisRadio) {
-	//	ChiwisSpeed = 250.f;
-	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	//}
-	//else {
-	//	ChiwisSpeed = 400.f;
-	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	//}
-	//*************************************************************************************************
-
-	// Move player
-	Player.sprite.move(movement * deltaTime.asSeconds());
-	Player.hitbox.move(movement * deltaTime.asSeconds());
-	//cout << movement.x << std::endl;
-	//cout << movement.y << std::endl;
-	cout << Player.hitbox.getPosition().x;
-	cout << Player.hitbox.getPosition().x << std::endl;
 
 
 	// Create Collidable object for the player and enemies

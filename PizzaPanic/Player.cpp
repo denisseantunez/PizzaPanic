@@ -1,8 +1,5 @@
 #include "Player.h"
 
-Player::Player() {
-
-}
 
 void Player::setHitbox(const float x, const float y, const float width, const float height)
 {
@@ -13,26 +10,45 @@ void Player::setHitbox(const float x, const float y, const float width, const fl
 	hitbox.setOutlineThickness(6.f);
 }
 
-/*******************************************************************************************************************************************************************/
+void Player::move(sf::Time deltaTime)
+{
+	sf::Vector2f movement(0.f, 0.f);
+
+	if (mIsMovingUp)
+		movement.y -= speed;
+	if (mIsMovingDown)
+		movement.y += speed;
+	if (mIsMovingLeft)
+		movement.x -= speed;
+	if (mIsMovingRight)
+		movement.x += speed;
+
+	sprite.move(movement * deltaTime.asSeconds());
+	hitbox.move(movement * deltaTime.asSeconds());
+}
+
+void Player::animate()
+{
+	if (texRect.left == 1920)
+		texRect.left = 0;
+	else { texRect.left += 320; }
+
+	sprite.setTextureRect(texRect);
+}
 
 void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-	switch (key)
-	{
-	case sf::Keyboard::W:
+	if (key == sf::Keyboard::W){
 		mIsMovingUp = isPressed;
-		break;
-	case sf::Keyboard::S:
+	}
+	else if (key == sf::Keyboard::S){
 		mIsMovingDown = isPressed;
-		break;
-	case sf::Keyboard::A:
+	}
+	else if (key == sf::Keyboard::A){
 		mIsMovingLeft = isPressed;
-		break;
-	case sf::Keyboard::D:
+	}
+	else if (key == sf::Keyboard::D){
 		mIsMovingRight = isPressed;
-		break;
-	default:
-		break;
 	}
 }
 

@@ -5,9 +5,7 @@ class Player
 {
 
 public:
-
-	Player();
-
+	
 	//Player's Movement
 	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 	bool mIsMovingUp = false;
@@ -16,6 +14,8 @@ public:
 	bool mIsMovingRight = false;
 
 	void setHitbox(const float x, const float y, const float width, const float height);
+	void move(sf::Time deltaTime);
+	void animate();
 	void PlayerLife(float QuitarVida, float xPlayer, float yPlayer);
 	void PlayerLifeAux(float xPlayer, float yPlayer);
 
@@ -34,7 +34,7 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	const float speed = 250.f;
+	const float speed = 350.f;
 	const float playerFullLife = 100.f;
 	
 };
