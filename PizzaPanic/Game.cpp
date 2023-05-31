@@ -7,7 +7,7 @@
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
 	, mTexture()
-	, mPlayer()
+	, Player()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
@@ -46,7 +46,7 @@ void Game::run()
 		quitarVida = 0.f;
 		mItem.setTexture(mItemTexture);
 		mItem.setPosition(3070.f, 2760.f);
-		mPlayer.setPosition(2500.f, 2500.f);
+		Player.hitbox.setPosition(Player.initialX, Player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
@@ -65,7 +65,7 @@ void Game::run()
 			music.setLoop(true);
 
 			// Keep track of the player's initial position
-			sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+			sf::Vector2f previousPlayerPos = Player.hitbox.getPosition();
 
 			sf::Clock clock;
 
@@ -88,7 +88,7 @@ void Game::run()
 					deathSound.play();
 					deathSound.setLoop(true);
 			
-					GameOver.setPosition(mPlayer.getPosition().x - 460.f, mPlayer.getPosition().y - 500.f);
+					GameOver.setPosition(Player.hitbox.getPosition().x - 460.f, Player.hitbox.getPosition().y - 500.f);
 					mWindow.clear();
 					mWindow.draw(GameOver);
 					mWindow.display();
@@ -103,6 +103,8 @@ void Game::run()
 
 /*******************************************************************************************************************************************************************/
 
+
+
 void Game::processEvents()
 // User input
 {
@@ -112,10 +114,10 @@ void Game::processEvents()
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
+			Player.handlePlayerInput(event.key.code, true);
 			break;
 		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
+			Player.handlePlayerInput(event.key.code, false);
 			break;
 		case sf::Event::Closed:
 			mWindow.close();
@@ -125,28 +127,7 @@ void Game::processEvents()
 	}
 }
 
-/*******************************************************************************************************************************************************************/
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-	if (key == sf::Keyboard::W)
-	{
-		mIsMovingUp = isPressed;
-	}
-	else if (key == sf::Keyboard::S)
-	{
-		mIsMovingDown = isPressed;
-	}
-	else if (key == sf::Keyboard::A)
-	{
-		mIsMovingLeft = isPressed;
-	}
-	else if (key == sf::Keyboard::D)
-	{
-		mIsMovingRight = isPressed;
-	}
-
-}
 
 /*******************************************************************************************************************************************************************/
 
@@ -155,21 +136,21 @@ void Game::update(sf::Time deltaTime)
 {
 	sf::Vector2f movement(0.f, 0.f);
 
-	if (mIsMovingUp)
+	if (Player.mIsMovingUp)
 		movement.y -= PlayerSpeed;
-	if (mIsMovingDown)
+	if (Player.mIsMovingDown)
 		movement.y += PlayerSpeed;
-	if (mIsMovingLeft)
+	if (Player.mIsMovingLeft)
 		movement.x -= PlayerSpeed;
-	if (mIsMovingRight)
+	if (Player.mIsMovingRight)
 		movement.x += PlayerSpeed;
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
 		// Player Animations
-		if (m_playerRect.left == 1920)
-			m_playerRect.left = 0;
-		else { m_playerRect.left += 320; }
+		if (Player.texRect.left == 1920)
+			Player.texRect.left = 0;
+		else { Player.texRect.left += 320; }
 
 		chiwis.animate(xPlayer, yPlayer, chiwisSpeed);
 		sheguis.animate(xPlayer, yPlayer, 2000.f, 2100.f);
@@ -181,21 +162,21 @@ void Game::update(sf::Time deltaTime)
 		muneca.animate(xPlayer, yPlayer, 1500.f, 2415.f);
 
 		// Set Sprite Textures Rectangles
-		mPlayer.setTextureRect(m_playerRect);
+		Player.sprite.setTextureRect(Player.texRect);
 		clock.restart();
 	}
 
 	// Camera follows player 
-	pView.setCenter(mPlayer.getPosition());
+	pView.setCenter(Player.hitbox.getPosition());
 	pView.setSize(1000.f, 1000.f);
 	mWindow.setView(pView);
 
 	// Update item and player collision boundaries 
 	mItemCollider = mItem.getGlobalBounds();
 	mItemArrowCollider = mItemArrow.getGlobalBounds();
-	mPlayerCollider = mPlayer.getGlobalBounds();
+	mPlayerCollider = Player.hitbox.getGlobalBounds();
 
-	//Sprites junto con la hitbox.
+	//Sprites wuth hitboxes.
 	chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
 	sheguis.sprite.setPosition(sheguis.hitbox.getPosition().x, sheguis.hitbox.getPosition().y);
 	soruya.sprite.setPosition(soruya.hitbox.getPosition().x, soruya.hitbox.getPosition().y);
@@ -204,6 +185,7 @@ void Game::update(sf::Time deltaTime)
 	manteca.sprite.setPosition(manteca.hitbox.getPosition().x, manteca.hitbox.getPosition().y);
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
+	Player.sprite.setPosition(Player.hitbox.getPosition().x, Player.hitbox.getPosition().y);
 
 	// Check item collision 
 	displayItemPrompt = false;
@@ -242,10 +224,6 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
-	//cout << "x: " << mItemArrow.getPosition().x << std::endl;
-	//cout << "y: " << mItemArrow.getPosition().y << std::endl;
-	//cout << "\n";
-
 	//Flecha
 	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
 		Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
@@ -255,7 +233,7 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	//Imprimir texto
-	this->ContadorPizzas(mPlayer.getPosition().x, mPlayer.getPosition().y, PizzasEntregadas, texto, m_font2);
+	this->ContadorPizzas(Player.hitbox.getPosition().x, Player.hitbox.getPosition().y, PizzasEntregadas, texto, m_font2);
 
 	// Check if pet attacks player
 	chiwis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
@@ -269,7 +247,7 @@ void Game::update(sf::Time deltaTime)
 
 
 	// Keep track of previous positions
-	sf::Vector2f previousPlayerPos = mPlayer.getPosition();
+	sf::Vector2f previousPlayerPos = Player.hitbox.getPosition();
 	sf::Vector2f previousChiwisPos = chiwis.hitbox.getPosition();
 	sf::Vector2f previousSheguisPos = sheguis.hitbox.getPosition();
 	sf::Vector2f previousSoruyaPos = soruya.hitbox.getPosition();
@@ -280,11 +258,11 @@ void Game::update(sf::Time deltaTime)
 	sf::Vector2f previousMunecaPos = muneca.hitbox.getPosition();
 
 	// Guardar Coordenadas del jugador en variables
-	xPlayer = mPlayer.getPosition().x;
-	yPlayer = mPlayer.getPosition().y;
+	xPlayer = Player.hitbox.getPosition().x;
+	yPlayer = Player.hitbox.getPosition().y;
 
 	// Pets follow player
-	chiwis.followPlayer(mPlayer, chiwisRadio, chiwisSpeed, deltaTime);
+	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
 	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
 	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
 	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
@@ -312,13 +290,17 @@ void Game::update(sf::Time deltaTime)
 	//}
 	//*************************************************************************************************
 
-	// Move player 
-	mPlayer.move(movement * deltaTime.asSeconds());
-	hitboxplayer.move(movement * deltaTime.asSeconds());
+	// Move player
+	Player.sprite.move(movement * deltaTime.asSeconds());
+	Player.hitbox.move(movement * deltaTime.asSeconds());
+	//cout << movement.x << std::endl;
+	//cout << movement.y << std::endl;
+	cout << Player.hitbox.getPosition().x;
+	cout << Player.hitbox.getPosition().x << std::endl;
 
 
 	// Create Collidable object for the player and enemies
-	Collidable playerCollidable(1, mPlayer.getGlobalBounds(), true);
+	Collidable playerCollidable(1, Player.hitbox.getGlobalBounds(), true);
 	Collidable chiwisCollidable(1, chiwis.hitbox.getGlobalBounds(), true);
 	Collidable sheguisCollidable(1, sheguis.hitbox.getGlobalBounds(), true);
 	Collidable soruyaCollidable(1, soruya.hitbox.getGlobalBounds(), true);
@@ -331,8 +313,8 @@ void Game::update(sf::Time deltaTime)
 	// Check for collisions
 	for (auto& collidable : objects.collidables) {
 		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
-			mPlayer.setPosition(previousPlayerPos);
-			hitboxplayer.setPosition(previousPlayerPos);
+			Player.sprite.setPosition(previousPlayerPos);
+			Player.hitbox.setPosition(previousPlayerPos);
 
 		}
 	}
@@ -346,8 +328,8 @@ void Game::update(sf::Time deltaTime)
 	checkCollision(objects, munecaCollidable, muneca.hitbox, 250.f, deltaTime);
 
 	// Vida Player
-	this->BarraVida(quitarVida, xPlayer, yPlayer);
-	this->BarraVidaAux(xPlayer, yPlayer);
+	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
+	this->Player.PlayerLifeAux(xPlayer, yPlayer);
 }
 
 /*******************************************************************************************************************************************************************/
@@ -359,15 +341,16 @@ void Game::render()
 	mWindow.draw(objects);
 	mWindow.draw(PizzaLogo);
     mWindow.draw(mItem);
-	mWindow.draw(mPlayer);
+	mWindow.draw(Player.hitbox);
+	mWindow.draw(Player.sprite);
 	mWindow.draw(mItemArrow);
 
 	if (displayItemPrompt) {
 		mWindow.draw(prompt);
 	}
 
-	mWindow.draw(vidaaux);
-	mWindow.draw(vida);
+	mWindow.draw(Player.playerLifeAux);
+	mWindow.draw(Player.playerLife);
 	mWindow.draw(chiwis.sprite);
 	mWindow.draw(sheguis.sprite);
 	mWindow.draw(soruya.sprite);
@@ -443,16 +426,16 @@ void Game::Initialize()
 		cout << ("Error al cargar el archivo de la pizza");
 
 	// Player 
-	if (!mTexture.loadFromFile("Images\\Robot.png"))
+	if (!Player.texture.loadFromFile("Images\\Robot.png"))
 		cout << ("Error al cargar el archivo.");
-	m_playerRect.left = 0;
-	m_playerRect.top = 0;
-	m_playerRect.width = 320;
-	m_playerRect.height = 320;
-	mPlayer.setTexture(mTexture);
-	mPlayer.setTextureRect(m_playerRect);
-	mPlayer.setPosition(2500.f, 2500.f);
-	mPlayer.setScale(0.18f, 0.18f);
+	Player.texRect.left = 0;
+	Player.texRect.top = 0;
+	Player.texRect.width = 320;
+	Player.texRect.height = 320;
+	Player.sprite.setTexture(Player.texture);
+	Player.sprite.setTextureRect(Player.texRect);
+	Player.sprite.setPosition(Player.initialX, Player.initialY);
+	Player.sprite.setScale(Player.escaleX, Player.escaleY);
 
 
 	// Textura del Item 
@@ -592,7 +575,7 @@ void Game::Initialize()
 	prompt.setFont(m_font2);
 
 	// Hitboxes 
-	this->HitBoxPlayer();
+	Player.setHitbox(Player.escaleX, Player.escaleY, 320.f, 320.f);
 	chiwis.setHitbox(3000.f, 700.f, chiwisWidth, chiwisHeight);
 	sheguis.setHitbox(2000.f, 2100.f, sheguisWidth, sheguisHeight);
 	soruya.setHitbox(3000.f, 700.f, soruyaWidth, soruyaHeight);
@@ -601,7 +584,6 @@ void Game::Initialize()
 	manteca.setHitbox(2366.f, 2800.f, mantecaWidth, mantecaHeight);
 	pushi.setHitbox(85.f, 1950.f, pushiWidth, pushiHeight);
 	muneca.setHitbox(1500.f, 2415.f, munecaWidth, munecaHeight);
-
 
 	// Crear arreglo y empezar semilla 
 	MakeArray();
@@ -697,40 +679,8 @@ void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
-void Game::HitBoxPlayer()
-{
-	this->hitboxplayer.setPosition(720.f, 725.f);
-	this->hitboxplayer.setSize(sf::Vector2f(40.f, 40.f));
-	this->hitboxplayer.setFillColor(sf::Color::Transparent);
-	this->hitboxplayer.setOutlineColor(sf::Color::Transparent);
-	this->hitboxplayer.setOutlineThickness(4.f);
 
-}
 
-void Game::BarraVida(float QuitarVida, float xPlayer, float yPlayer) {
 
-		this->vida.setPosition(xPlayer - 2.f, yPlayer - 20.f);
-		this->vida.setSize(sf::Vector2f(CantVida - QuitarVida, 10.f));
-
-		if (QuitarVida >= CantVida - 1.f) {
-			this->vida.setFillColor(sf::Color::Red);
-		}
-		else {
-			this->vida.setFillColor(sf::Color::Green);
-		}
-		this->vida.setOutlineColor(sf::Color::Transparent);
-		this->vida.setOutlineThickness(3.f);
-	
-
-}
-
-void Game::BarraVidaAux(float xPlayer, float yPlayer) {
-
-	this->vidaaux.setPosition(xPlayer - 2.f, yPlayer - 20.f);
-	this->vidaaux.setSize(sf::Vector2f(CantVida, 10.f));
-	this->vidaaux.setFillColor(sf::Color::Red);
-	this->vidaaux.setOutlineColor(sf::Color::Black);
-	this->vidaaux.setOutlineThickness(3.f);
-}
 
 

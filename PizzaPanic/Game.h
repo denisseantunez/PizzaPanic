@@ -11,6 +11,7 @@
 #include "Collidable.h"
 #include "MainMenu.h"
 #include "Pets.h"
+#include "Player.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -33,11 +34,6 @@ class Game
 {
 public:
 	Game();
-	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-	bool mIsMovingUp = false;
-	bool mIsMovingDown = false;
-	bool mIsMovingLeft = false;
-	bool mIsMovingRight = false;
 	void showMainMenu();
 	void run();
 	void MakeArray();
@@ -61,15 +57,15 @@ private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
-
 	void checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime);
+	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
+	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
-	void HitBoxPlayer();
-
-    sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
-
+	sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 	sf::Vector2f movement;
 
+	//Creating pets and Player
+	Player Player;
 	Pet chiwis;
 	Pet sheguis;
 	Pet soruya;
@@ -78,14 +74,6 @@ private:
 	Pet manteca;
 	Pet pushi;
 	Pet muneca;
-
-
-	void BarraVida(float QuitarVida, float xPlayer, float yPlayer);
-	void BarraVidaAux(float xPlayer, float yPlayer);
-	
-	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
-
-	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
 	// texto
 	sf::Text texto;
@@ -98,14 +86,8 @@ private:
 	// Textures
 	sf::Texture mTexture;
 
-	// Texture Rects
-	sf::IntRect m_playerRect;
-
 	// Time
 	sf::Clock clock;
-
-	// Sprites
-	sf::Sprite mPlayer;
 
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;
@@ -162,12 +144,7 @@ private:
 	sf::Vector2f previousMindyPos;
 
 	// Game objects
-	sf::RectangleShape hitboxplayer;
-	sf::RectangleShape vida;
-	sf::RectangleShape vidaaux;
 	sf::ConvexShape arrow;
 
 	void Initialize();
-
-	
 };
