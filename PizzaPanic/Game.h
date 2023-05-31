@@ -83,9 +83,6 @@ private:
 	// Variables
 	sf::RenderWindow mWindow;
 
-	// Textures
-	sf::Texture mTexture;
-
 	// Time
 	sf::Clock clock;
 

@@ -6,7 +6,6 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
-	, mTexture()
 	, Player()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
@@ -356,6 +355,7 @@ void Game::Initialize()
 	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
+	mItemArrow.setPosition(-1000, -1000);
 	mItemArrow.setScale(0.3f, 0.3f);
 
 	// Game Over
