@@ -293,25 +293,6 @@ void Game::update(sf::Time deltaTime)
 	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
 	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
 
-	//*************CHIWIS******************************************************************************
-
-	//float dxchiwis = mPlayer.getPosition().x - chiwis.hitbox.getPosition().x;
-	//float dychiwis = mPlayer.getPosition().y - chiwis.hitbox.getPosition().y;
-	//float distancechiwis = sqrt(pow(dxchiwis, 2.f) + pow(dychiwis, 2.f));
-
-	//sf::Vector2f unitVectorchiwis(dxchiwis / distancechiwis, dychiwis / distancechiwis);
-	//if (distancechiwis <= chiwisRadio) {
-	//	ChiwisSpeed = 250.f;
-	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	//}
-	//else {
-	//	ChiwisSpeed = 400.f;
-	//	sf::Vector2f velocitychiwis = unitVectorchiwis * (ChiwisSpeed);
-	//	chiwis.hitbox.move(velocitychiwis * deltaTime.asSeconds());
-	//}
-	//*************************************************************************************************
-
 	// Move player 
 	mPlayer.move(movement * deltaTime.asSeconds());
 	hitboxplayer.move(movement * deltaTime.asSeconds());
