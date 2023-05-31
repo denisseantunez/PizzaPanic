@@ -25,6 +25,8 @@ void Player::move(sf::Time deltaTime)
 		movement.x -= speed;
 	if (mIsMovingRight)
 		movement.x += speed;
+	if (movement.x != 0.f && movement.y != 0.f)
+		movement = movement / std::sqrt(2.f);
 
 	previousPos = sprite.getPosition();
 

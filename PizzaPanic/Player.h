@@ -41,7 +41,7 @@ public:
 
 
 	const float speed = 350.f;
-	const float playerFullLife = 100.f;
+	const float playerFullLife = 60.f;
 	
 };
 

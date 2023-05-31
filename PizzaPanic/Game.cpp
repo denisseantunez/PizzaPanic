@@ -6,8 +6,7 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
-	, mTexture()
-	//, Player()
+	, Player()
 	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
@@ -134,7 +133,6 @@ void Game::processEvents()
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
-	Player.move(deltaTime);
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
@@ -170,8 +168,9 @@ void Game::update(sf::Time deltaTime)
 	manteca.sprite.setPosition(manteca.hitbox.getPosition().x, manteca.hitbox.getPosition().y);
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
-	Player.sprite.setPosition(Player.sprite.getPosition().x, Player.sprite.getPosition().y);
 
+	cout << Player.sprite.getPosition().x << std::endl; 
+	cout << Player.sprite.getPosition().y << std::endl;
 	// Check item collision 
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
@@ -255,6 +254,9 @@ void Game::update(sf::Time deltaTime)
 	pushi.checkCollisions(objects, deltaTime, 250.f);
 	muneca.checkCollisions(objects, deltaTime, 250.f);
 
+	//Move Player
+	Player.move(deltaTime);
+
 	// Vida Player
 	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
 	this->Player.PlayerLifeAux(xPlayer, yPlayer);
@@ -319,6 +321,7 @@ void Game::Initialize()
 	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
+	mItemArrow.setPosition(-1000, -1000);
 	mItemArrow.setScale(0.3f, 0.3f);
 
 	// Game Over
@@ -351,6 +354,7 @@ void Game::Initialize()
 		cout << ("Error al cargar el archivo de la pizza");
 
 	// Player 
+
 	if (!Player.texture.loadFromFile("Images\\Robot.png"))
 		cout << ("Error al cargar el archivo.");
 	Player.texRect.left = 0;
@@ -359,7 +363,7 @@ void Game::Initialize()
 	Player.texRect.height = 320;
 	Player.sprite.setTexture(Player.texture);
 	Player.sprite.setTextureRect(Player.texRect);
-	Player.sprite.setPosition(Player.initialX, Player.initialY);
+	Player.sprite.setPosition(2500.f, 2500.f);
 	Player.sprite.setScale(Player.escaleX, Player.escaleY);
 
 
