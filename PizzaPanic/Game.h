@@ -43,7 +43,7 @@ public:
     int NuevaPosicion;
     int AlturaInicial = 2645;
     int PizzasEntregadas = 0;
-	float quitarVida = .0f;
+	float quitarVida = 0.0f;
 	float mordidas = 0.f;
 	float xPlayer;
     float yPlayer;
@@ -96,6 +96,12 @@ private:
 
 	// Camera
 	sf::View pView;
+
+	// Camera boundaries
+	float camLeftBound = 510.f;
+	float camRightBound = 2850.f;
+	float camUpperBound = 510.f;
+	float camLowerBound = 2850.f;
 
 	// Audio
 	sf::Music music;

@@ -155,9 +155,34 @@ void Game::update(sf::Time deltaTime)
 		clock.restart();
 	}
 
-	// Camera follows player 
-	pView.setCenter(Player.sprite.getPosition());
+	// Camera size
 	pView.setSize(1000.f, 1000.f);
+
+	// Camera follows player, if player is in the limits of the map, the camera locks 
+	// in place to the corresponding boundary (camera boundaires)
+
+	// check corners only
+	if (xPlayer < camLeftBound && yPlayer < camUpperBound)
+		pView.setCenter(camLeftBound, camUpperBound);
+	else if (xPlayer > camRightBound && yPlayer < camUpperBound)
+		pView.setCenter(camRightBound, camUpperBound);
+	else if (xPlayer < camLeftBound && yPlayer > camLowerBound)
+		pView.setCenter(camLeftBound, camLowerBound);
+	else if (xPlayer > camRightBound && yPlayer > camLowerBound)
+		pView.setCenter(camRightBound, camLowerBound);
+
+	// Check sides only
+	else if (xPlayer < camLeftBound)
+		pView.setCenter(camLeftBound, yPlayer);
+	else if (xPlayer > camRightBound)
+		pView.setCenter(camRightBound, yPlayer);
+	else if (yPlayer > camLowerBound)
+		pView.setCenter(xPlayer, camLowerBound);
+	else if (yPlayer < camUpperBound)
+		pView.setCenter(xPlayer, camUpperBound);
+	else
+		pView.setCenter(xPlayer, yPlayer);
+
 	mWindow.setView(pView);
 
 	// Update item and player collision boundaries 
@@ -165,7 +190,7 @@ void Game::update(sf::Time deltaTime)
 	mItemArrowCollider = mItemArrow.getGlobalBounds();
 	mPlayerCollider = Player.sprite.getGlobalBounds();
 
-	//Sprites wuth hitboxes.
+	// Sprites with hitboxes.
 	chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
 	sheguis.sprite.setPosition(sheguis.hitbox.getPosition().x, sheguis.hitbox.getPosition().y);
 	soruya.sprite.setPosition(soruya.hitbox.getPosition().x, soruya.hitbox.getPosition().y);
@@ -175,8 +200,7 @@ void Game::update(sf::Time deltaTime)
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
 
-	cout << Player.sprite.getPosition().x << std::endl; 
-	cout << Player.sprite.getPosition().y << std::endl;
+	cout << "x: " << Player.sprite.getPosition().x << " , y: " << Player.sprite.getPosition().y << std::endl;
 	// Check item collision 
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
@@ -592,14 +616,14 @@ void Game::checkCollision(const SurfaceObjects& objects, const Collidable& petCo
 
 void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
-	this->fondotexto.setPosition(xPlayer - 450.f, yPlayer - 450.f);
+	this->fondotexto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
 	this->fondotexto.setSize(sf::Vector2f(260.f, 30.f));
 	this->fondotexto.setFillColor(sf::Color::Blue);
 	this->fondotexto.setOutlineColor(sf::Color::Black);
 	this->fondotexto.setOutlineThickness(4.f);
 	this->texto.setFont(fuente); // "fuente" es el objeto de la fuente que quieres utilizar
 	this->texto.setCharacterSize(20); // ajusta el tamaño del texto según tus necesidades
-	this->texto.setPosition(xPlayer - 450.f, yPlayer - 450.f);
+	this->texto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
 	this->texto.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
 
