@@ -42,9 +42,9 @@ public:
     int PosicionesItem[Filas][Columnas];
     int NuevaPosicion;
     int AlturaInicial = 2645;
-    int PizzasEntregadas = 0;
+    int deliveredPizzas = 0;
 	float quitarVida = 0.0f;
-	float mordidas = 0.f;
+	float bites = 0.f;
 	float xPlayer;
     float yPlayer;
 	sf::Vector2f EntregarPizza;
@@ -57,7 +57,7 @@ private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
-	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
+	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
 	sf::Keyboard::Key teclaItem = sf::Keyboard::Space;

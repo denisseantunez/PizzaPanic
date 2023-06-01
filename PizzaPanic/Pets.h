@@ -21,7 +21,7 @@ public:
 	void followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime);
 	void followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime);
 
-	void checkMordidas(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider);
+	void checkBites(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider);
 
 	void checkCollisions(const TileMap& objects, sf::Time deltaTime, const float petSpeed);
 

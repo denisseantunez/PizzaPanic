@@ -1,4 +1,4 @@
-// basado en el libro SFML Game Development :)
+// based on SFML Game Development book :)
 
 #include "Game.h"
 
@@ -41,20 +41,14 @@ void Game::run()
 		// Initialize variables
 		mainMenu.resetSelectedOption();
 		processEvents();
-		mordidas = 0.f;
+		bites = 0.f;
 		quitarVida = 0.f;
 		mItem.setTexture(mItemTexture);
 		mItem.setPosition(3070.f, 2760.f);
 		Player.sprite.setPosition(Player.initialX, Player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
-		sheguis.hitbox.setPosition(2000.f, 2100.f);
-		soruya.hitbox.setPosition(3000.f, 700.f);
-		mindy.hitbox.setPosition(1816.f, 1466.f);
-		bella.hitbox.setPosition(85.f, 790.f);
 		manteca.hitbox.setPosition(2366.f, 2800.f);
-		pushi.hitbox.setPosition(85.f, 1950.f);
-		muneca.hitbox.setPosition(1500.f, 2415.f);
 
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);	
@@ -87,8 +81,8 @@ void Game::run()
 				}
 				render();
 				// If player dies
-				if (mordidas >= 60) {
-					PizzasEntregadas = 0;
+				if (bites >= 60) {
+					deliveredPizzas = 0;
 					mItem.setPosition(3070.f, 2760.f);
 					cargandoItem = false;
 					music.stop();
@@ -141,7 +135,7 @@ void Game::processEvents()
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
-	// Guardar Coordenadas del jugador en variables
+	// Saving player's coordinates on variables
 	xPlayer = Player.sprite.getPosition().x;
 	yPlayer = Player.sprite.getPosition().y;
 
@@ -226,12 +220,12 @@ void Game::update(sf::Time deltaTime)
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if(cargandoItem){
 				quitarVida = 0.f;
-				mordidas = 0.f;
+				bites = 0.f;
 				mItemArrow.setPosition(-1000, -1000);
                 mItem.setPosition(3070.f, 2760.f);
 				mItem.setScale(1.7f, 1.7f);
                 cargandoItem = false;
-                PizzasEntregadas++;
+                deliveredPizzas++;
             } else {
                 cargandoItem = true;
                 NuevaPosicion = rand() % 35;
@@ -242,26 +236,26 @@ void Game::update(sf::Time deltaTime)
 		}
 	}
 
-	//Flecha
+	//Arrow
 	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
-		Flecha(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
+		Arrow(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 	}
 	else {
-		Flecha(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
+		Arrow(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
 	}
 
-	//Imprimir texto
-	this->ContadorPizzas(Player.sprite.getPosition().x, Player.sprite.getPosition().y, PizzasEntregadas, texto, m_font2);
+	//Print text of pizzas
+	this->ContadorPizzas(Player.sprite.getPosition().x, Player.sprite.getPosition().y, deliveredPizzas, texto, m_font2);
 
 	// Check if pet attacks player
-	chiwis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	sheguis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	soruya.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	bella.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	pushi.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	muneca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	mindy.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
-	manteca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	chiwis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	sheguis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	soruya.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	bella.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	pushi.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	muneca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	mindy.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
+	manteca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
 
 	// Pets follow player
 	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
@@ -286,9 +280,6 @@ void Game::update(sf::Time deltaTime)
 
 	//Move Player
 	Player.move(deltaTime);
-
-	cout << manteca.hitbox.getPosition().x << std::endl;
-	cout << manteca.hitbox.getPosition().y << std::endl;
 
 	//Player's life
 	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
@@ -350,7 +341,7 @@ void Game::Initialize()
 	mItem.setPosition(3070.f, 2760.f);
 	mItem.setScale(1.7f, 1.7f);
 
-	// Flecha del Item 
+	// Arrow's item
 	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
@@ -400,7 +391,7 @@ void Game::Initialize()
 	Player.sprite.setScale(Player.escaleX, Player.escaleY);
 
 
-	// Textura del Item 
+	// Item's texture
 	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
@@ -413,7 +404,7 @@ void Game::Initialize()
 	mItem.setPosition(-1000, -1000);
 
 
-	// Textura Chiwis
+	// Chiwis' texture
 	if (!chiwis.texture.loadFromFile("Images\\Mascotas.png")) 
 		cout << ("Error al cargar la textura de chiwis.");
 	chiwis.texRect.left = 0;
@@ -428,7 +419,7 @@ void Game::Initialize()
 	float chiwisWidth = chiwisRect.width;
 	float chiwisHeight = chiwisRect.height;
 
-	// Textura Sheguis 
+	// Sheguis'texture 
 	if (!sheguis.texture.loadFromFile("Images\\Mascotas.png")) 
 		cout << ("Error al cargar la textura de sheguis.");
 	sheguis.texRect.left = 0;
@@ -443,7 +434,7 @@ void Game::Initialize()
 	float sheguisWidth = sheguisRect.width;
 	float sheguisHeight = sheguisRect.height;
 
-	// Textura Soruya 
+	// Soruya's texture
 	if (!soruya.texture.loadFromFile("Images\\Mascotas.png")) 
 		cout << ("Error al cargar la textura de soruya.");
 	soruya.texRect.left = 156;
@@ -458,7 +449,7 @@ void Game::Initialize()
 	float soruyaWidth = soruyaRect.width;
 	float soruyaHeight = soruyaRect.height;
 
-	// Textura Mindy
+	// Mindy's texture
 	if (!mindy.texture.loadFromFile("Images\\Mascotas.png"))
 		cout << ("Error al cargar la textura de mindy.");
 	mindy.texRect.left = 156;
@@ -473,7 +464,7 @@ void Game::Initialize()
 	float mindyWidth = mindyRect.width;
 	float mindyHeight = mindyRect.height;
 
-	// Textura Bella
+	// Bella's texture
 	if (!bella.texture.loadFromFile("Images\\Mascotas.png"))
 		cout << ("Error al cargar la textura de bella.");
 	bella.texRect.left = 468;
@@ -488,7 +479,7 @@ void Game::Initialize()
 	float bellaWidth = bellaRect.width;
 	float bellaHeight = bellaRect.height;
 
-	// Textura Manteca 
+	// Manteca's texture 
 	if (!manteca.texture.loadFromFile("Images\\Mascotas.png"))
 		cout << ("Error al cargar la textura de manteca.");
 	manteca.texRect.left = 312;
@@ -503,7 +494,7 @@ void Game::Initialize()
 	float mantecaWidth = mantecaRect.width;
 	float mantecaHeight = mantecaRect.height;
 
-	// Textura Pushi 
+	// Pushi's texture 
 	if (!pushi.texture.loadFromFile("Images\\Mascotas.png")) 
 		cout << ("Error al cargar la textura de pushi.");
 	pushi.texRect.left = 312;
@@ -518,7 +509,7 @@ void Game::Initialize()
 	float pushiWidth = pushiRect.width;
 	float pushiHeight = pushiRect.height;
 
-	// Textura Muneca 
+	// Muneca's texture
 	if (!muneca.texture.loadFromFile("Images\\Mascotas.png"))
 		cout << ("Error al cargar la textura de muneca.");
 	muneca.texRect.left = 468;
@@ -533,11 +524,10 @@ void Game::Initialize()
 	float munecaWidth = munecaRect.width;
 	float munecaHeight = munecaRect.height;
 
-	// Texto del item 
+	// Item's texture 
 	prompt.setFont(m_font2);
 
 	// Hitboxes 
-	//Player.setHitbox();
 	chiwis.setHitbox(3000.f, 700.f, chiwisWidth, chiwisHeight);
 	sheguis.setHitbox(2000.f, 2100.f, sheguisWidth, sheguisHeight);
 	soruya.setHitbox(3000.f, 700.f, soruyaWidth, soruyaHeight);
@@ -547,7 +537,7 @@ void Game::Initialize()
 	pushi.setHitbox(85.f, 1950.f, pushiWidth, pushiHeight);
 	muneca.setHitbox(1500.f, 2415.f, munecaWidth, munecaHeight);
 
-	// Crear arreglo y empezar semilla 
+	// Creating array and seed
 	MakeArray();
 	srand(time(NULL));
 }
@@ -561,49 +551,38 @@ void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf:
 	this->fondotexto.setFillColor(sf::Color::Blue);
 	this->fondotexto.setOutlineColor(sf::Color::Black);
 	this->fondotexto.setOutlineThickness(4.f);
-	this->texto.setFont(fuente); // "fuente" es el objeto de la fuente que quieres utilizar
-	this->texto.setCharacterSize(20); // ajusta el tamaño del texto según tus necesidades
+	this->texto.setFont(fuente); // "fuente" is the object of the font you want to use.
+	this->texto.setCharacterSize(20); // adjust the size of the text for our neccesities.
 	this->texto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
 	this->texto.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
 
-void Game::Flecha(float xPlayer, float yPlayer, float xItem, float yItem) {
+void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 
 	float dx = xItem - xPlayer;
 	float dy = yItem - yPlayer;
-	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; // calcular el �ngulo en grados
-	this->arrow.setRotation(angle); // rotar la flecha
-	float arrowOffset = -50.f; // ajusta esto para que la flecha est� en la posici�n correcta
+	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; 
+	this->arrow.setRotation(angle); 
+	float arrowOffset = -50.f; 
 
-	// establecer los puntos de la flecha en relaci�n con la posici�n del jugador
 	this->arrow.setPointCount(3);
 	this->arrow.setPoint(0, sf::Vector2f(xPlayer, yPlayer));
 	this->arrow.setPoint(1, sf::Vector2f(xPlayer - 10.f, yPlayer - 10.f));
 	this->arrow.setPoint(2, sf::Vector2f(xPlayer + 10.f, yPlayer - 10.f));
 	this->arrow.setFillColor(sf::Color::Yellow);
-
-	// ajustar el origen de la flecha para que est� en la punta superior
 	this->arrow.setOrigin(xPlayer, yPlayer - 20.f);
-
-	// ajustar la escala de la flecha
-	this->arrow.setScale(1.f,1.f); // ajusta la escala seg�n lo necesites
-
-	// enmarcar el contorno de la flecha de negro
+	this->arrow.setScale(1.f,1.f); 
 	this->arrow.setOutlineThickness(2.f);
 	this->arrow.setOutlineColor(sf::Color::Black);
 
-	// calcular la posici�n del centro del c�rculo
-	float circleRadius = 80.f; // ajusta el radio del c�rculo seg�n lo necesites
+	float circleRadius = 80.f; 
 	sf::Vector2f circleCenter(xPlayer + 15.f, yPlayer + 20.f);
 
-	// calcular la posici�n de la flecha en el borde del c�rculo
-	float angleRadians = (angle + 90) * 3.141592 / 180; // convertir el �ngulo a radianes y ajustar para la orientaci�n de la flecha
+	float angleRadians = (angle + 90) * 3.141592 / 180; 
 	sf::Vector2f arrowPosition(cos(angleRadians) * circleRadius, sin(angleRadians) * circleRadius);
 
-	// ajustar la posici�n de la flecha en funci�n del centro del c�rculo
 	arrowPosition += circleCenter;
 
-	// establecer la posici�n de la flecha
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
