@@ -35,7 +35,7 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	const float speed = 500.f;
+	const float speed = 450.f;
 	const float playerFullLife = 60.f;
 };
 

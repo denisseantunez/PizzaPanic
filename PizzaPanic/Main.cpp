@@ -19,9 +19,11 @@ int main()
 		game.chiwis.hitbox.setPosition(3000.f, 700.f);
 		game.manteca.hitbox.setPosition(2366.f, 2800.f);
 
+		//Open the window
 		game.mView.reset(sf::FloatRect(0, 0, game.mWindow.getSize().x, game.mWindow.getSize().y));
 		game.mWindow.setView(game.mView);
 
+		//Playing music
 		game.menuMusic.play();
 		game.menuMusic.setLoop(true);
 		game.showMainMenu();
@@ -37,6 +39,7 @@ int main()
 			// Keep track of the player's initial position
 			sf::Vector2f previousPlayerPos = game.player.sprite.getPosition();
 
+			//Initializing time
 			sf::Clock clock;
 
 			sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -45,11 +48,16 @@ int main()
 				timeSinceLastUpdate += clock.restart();
 				while (timeSinceLastUpdate > TimePerFrame) {
 					timeSinceLastUpdate -= TimePerFrame;
+
+					//Updates everything that happens in the game.
 					game.processEvents();
 					game.update(TimePerFrame);
 				}
+
+				//Drawing sprites.
 				game.render();
-				// If player dies
+
+				// If player dies, reseting everything.
 				if (game.bites >= 60) {
 					game.deliveredPizzas = 0;
 					game.mItem.setPosition(3070.f, 2760.f);
@@ -57,7 +65,6 @@ int main()
 					game.music.stop();
 					game.deathSound.play();
 					game.deathSound.setLoop(true);
-
 					game.gameOver.setPosition(game.mView.getCenter().x - 460.f, game.mView.getCenter().y - 500.f);
 					game.mWindow.clear();
 					game.mWindow.draw(game.gameOver);
