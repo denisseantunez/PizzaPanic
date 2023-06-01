@@ -2,13 +2,15 @@
 #include "MainMenu.h"
 
 
+/*******************************************************************************************************************************************************************/
+
 MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	: m_font(font)
 	, m_menuBackground(backgroundTexture)
 {
-	// Items del menu
+	// Menu Items
 
-	// Titulo
+	// Title
 	sf::Text TitleShadow("PIZZA PANIC", m_font);
 	TitleShadow.setCharacterSize(55);
 	TitleShadow.setPosition(170, 30);
@@ -23,7 +25,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	Title.setFillColor(sf::Color::Red);
 	m_menuItems.emplace_back(std::move(Title));
 ;
-	// Boton de jugar
+	// Play Button
 	sf::RectangleShape playButton;
 	playButton.setSize(sf::Vector2f(328, 40));
 	playButton.setOutlineColor(sf::Color::Red);
@@ -38,7 +40,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	m_menuItems.emplace_back(std::move(playText));
 
 
-	// Boton de instrucciones
+	// Instructions Button
 	sf::RectangleShape instructionsButton;
 	instructionsButton.setSize(sf::Vector2f(328, 40));
 	instructionsButton.setOutlineColor(sf::Color::Red);
@@ -52,7 +54,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	instructionsText.setPosition(250, 350);
 	m_menuItems.emplace_back(std::move(instructionsText));
 
-	// Boton de creditos
+	// Credits Button
 	sf::RectangleShape creditsButton;
 	creditsButton.setSize(sf::Vector2f(328, 40));
 	creditsButton.setOutlineColor(sf::Color::Red);
@@ -66,7 +68,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	creditsText.setPosition(310, 400);
 	m_menuItems.emplace_back(std::move(creditsText));
 
-	// Boton de Salir
+	// Quit Button
 	sf::RectangleShape quitButton;
 	quitButton.setSize(sf::Vector2f(328, 40));
 	quitButton.setOutlineColor(sf::Color::Red);
@@ -81,7 +83,7 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	m_menuItems.emplace_back(std::move(quitText));
 
 	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
-		// Boton de Regresar
+		// Go Back Button
 		sf::RectangleShape backButton;
 		backButton.setSize(sf::Vector2f(230, 40));
 		backButton.setOutlineColor(sf::Color::Red);
@@ -96,8 +98,9 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 		m_menuItems.emplace_back(std::move(backText));
 	}
 
-
 }
+
+/*******************************************************************************************************************************************************************/
 
 void MainMenu::handleEvent(sf::Event event)
 {
@@ -124,7 +127,7 @@ void MainMenu::handleEvent(sf::Event event)
 					}
 					else if (menuItem.getString() == "Regresar") {
 						m_selectedOption = Option::Regresar;
-						// Borrar boton de regresar de los vectores
+						// Erase Go Back Button from vector
 						m_menuItems.pop_back();
 						m_menuButtons.pop_back();
 					}
@@ -134,6 +137,8 @@ void MainMenu::handleEvent(sf::Event event)
 		}
 	}
 }
+
+/*******************************************************************************************************************************************************************/
 
 void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -170,7 +175,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(menuItem);
 	}
 
-	// Instrucciones
+	// Instructions
 	if (m_selectedOption == Option::Instrucciones) {
 		sf::Texture instructionsTexture;
 		instructionsTexture.loadFromFile("Images\\Instrucciones.png");
@@ -182,7 +187,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	}
 
-	// Creditos
+	// Credits
 	if (m_selectedOption == Option::Creditos) {
 		sf::Texture creditsTexture;
 		creditsTexture.loadFromFile("Images\\Creditos.png");
@@ -196,14 +201,20 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 }
 
+/*******************************************************************************************************************************************************************/
+
 MainMenu::Option MainMenu::getSelectedOption() const
 {
 	return m_selectedOption;
 }
 
+/*******************************************************************************************************************************************************************/
+
 void MainMenu::resetSelectedOption()
 {
 	m_selectedOption = Option::Default;
 }
+
+/*******************************************************************************************************************************************************************/
 
 

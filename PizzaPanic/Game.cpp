@@ -6,8 +6,6 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Pizza Panic")
-	, Player()
-	, pView(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mainMenu(m_font, m_menuBackground)
 {
 	Initialize();
@@ -45,13 +43,13 @@ void Game::run()
 		quitarVida = 0.f;
 		mItem.setTexture(mItemTexture);
 		mItem.setPosition(3070.f, 2760.f);
-		Player.sprite.setPosition(Player.initialX, Player.initialY);
+		player.sprite.setPosition(player.initialX, player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
 		manteca.hitbox.setPosition(2366.f, 2800.f);
 
-		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
-		mWindow.setView(pView);	
+		mView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
+		mWindow.setView(mView);	
 
 		menuMusic.play();
 		menuMusic.setLoop(true);
@@ -66,7 +64,7 @@ void Game::run()
 			music.setLoop(true);
 
 			// Keep track of the player's initial position
-			sf::Vector2f previousPlayerPos = Player.sprite.getPosition();
+			sf::Vector2f previousPlayerPos = player.sprite.getPosition();
 
 			sf::Clock clock;
 
@@ -89,9 +87,9 @@ void Game::run()
 					deathSound.play();
 					deathSound.setLoop(true);
 			
-					GameOver.setPosition(pView.getCenter().x - 460.f, pView.getCenter().y - 500.f);
+					gameOver.setPosition(mView.getCenter().x - 460.f, mView.getCenter().y - 500.f);
 					mWindow.clear();
-					mWindow.draw(GameOver);
+					mWindow.draw(gameOver);
 					mWindow.display();
                     std::this_thread::sleep_for(std::chrono::seconds(2));
 					deathSound.stop();
@@ -115,10 +113,10 @@ void Game::processEvents()
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
-			Player.handlePlayerInput(event.key.code, true);
+			player.handlePlayerInput(event.key.code, true);
 			break;
 		case sf::Event::KeyReleased:
-			Player.handlePlayerInput(event.key.code, false);
+			player.handlePlayerInput(event.key.code, false);
 			break;
 		case sf::Event::Closed:
 			mWindow.close();
@@ -136,12 +134,12 @@ void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
 	// Saving player's coordinates on variables
-	xPlayer = Player.sprite.getPosition().x;
-	yPlayer = Player.sprite.getPosition().y;
+	xPlayer = player.sprite.getPosition().x;
+	yPlayer = player.sprite.getPosition().y;
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
-		Player.animate();
+		player.animate();
 		chiwis.animate(xPlayer, yPlayer, chiwisSpeed);
 		sheguis.animate(xPlayer, yPlayer, 2000.f, 2100.f);
 		soruya.animate(xPlayer, yPlayer, 3000.f, 700.f);
@@ -155,18 +153,18 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	// Camera size
-	pView.setSize(1000.f, 1000.f);
+	mView.setSize(1000.f, 1000.f);
 
 	// Camera follows player, if player is in the limits of the map, the camera locks 
 	// in place to the corresponding boundary (camera boundaires)
 	SetCameraView();
 
-	mWindow.setView(pView);
+	mWindow.setView(mView);
 
 	// Update item and player collision boundaries 
 	mItemCollider = mItem.getGlobalBounds();
 	mItemArrowCollider = mItemArrow.getGlobalBounds();
-	mPlayerCollider = Player.sprite.getGlobalBounds();
+	mPlayerCollider = player.sprite.getGlobalBounds();
 
 	// Sprites with hitboxes.
 	chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
@@ -202,7 +200,7 @@ void Game::update(sf::Time deltaTime)
 	manteca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
 
 	// Pets follow player
-	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
+	chiwis.followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
 	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
 	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
 	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
@@ -212,7 +210,7 @@ void Game::update(sf::Time deltaTime)
 	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
 
 	// Check for collisions
-	Player.checkCollisions(objects);
+	player.checkCollisions(objects);
 	chiwis.checkCollisions(objects, deltaTime, chiwisSpeed);
 	sheguis.checkCollisions(objects, deltaTime, 250.f);
 	soruya.checkCollisions(objects, deltaTime, 250.f);
@@ -223,11 +221,11 @@ void Game::update(sf::Time deltaTime)
 	muneca.checkCollisions(objects, deltaTime, 250.f);
 
 	//Move Player
-	Player.move(deltaTime);
+	player.move(deltaTime);
 
 	//Player's life
-	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
-	this->Player.PlayerLifeAux(xPlayer, yPlayer);
+	this->player.PlayerLife(quitarVida, xPlayer, yPlayer);
+	this->player.PlayerLifeAux(xPlayer, yPlayer);
 }
 
 /*******************************************************************************************************************************************************************/
@@ -239,15 +237,15 @@ void Game::render()
 	mWindow.draw(objects);
 	mWindow.draw(pizzaLogo);
     mWindow.draw(mItem);
-	mWindow.draw(Player.sprite);
+	mWindow.draw(player.sprite);
 	mWindow.draw(mItemArrow);
 
 	if (displayItemPrompt) {
 		mWindow.draw(prompt);
 	}
 
-	mWindow.draw(Player.playerLifeAux);
-	mWindow.draw(Player.playerLife);
+	mWindow.draw(player.playerLifeAux);
+	mWindow.draw(player.playerLife);
 	mWindow.draw(chiwis.sprite);
 	mWindow.draw(sheguis.sprite);
 	mWindow.draw(soruya.sprite);
@@ -278,6 +276,9 @@ void Game::Initialize()
 		cout << ("Error al cargar el fondo del menu.");
 	MainMenu mainMenu(m_font, m_menuBackground);
 
+	// View
+	mView = sf::View(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y));
+
 	// Item
 	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
@@ -295,8 +296,8 @@ void Game::Initialize()
 	// Game Over
 	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
 		cout << ("Error al cargar el archivo de game over.");
-	GameOver.setTexture(GameOverTex);
-	GameOver.setScale(1.5f, 1.5f);
+	gameOver.setTexture(GameOverTex);
+	gameOver.setScale(1.5f, 1.5f);
 
 	// Music 
 	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
@@ -322,16 +323,16 @@ void Game::Initialize()
 		cout << ("Error al cargar el archivo de la pizza");
 
 	// Player 
-	if (!Player.texture.loadFromFile("Images\\Robot.png"))
+	if (!player.texture.loadFromFile("Images\\Robot.png"))
 		cout << ("Error al cargar el archivo.");
-	Player.texRect.left = 0;
-	Player.texRect.top = 0;
-	Player.texRect.width = 320;
-	Player.texRect.height = 320;
-	Player.sprite.setTexture(Player.texture);
-	Player.sprite.setTextureRect(Player.texRect);
-	Player.sprite.setPosition(2500.f, 2500.f);
-	Player.sprite.setScale(Player.escaleX, Player.escaleY);
+	player.texRect.left = 0;
+	player.texRect.top = 0;
+	player.texRect.width = 320;
+	player.texRect.height = 320;
+	player.sprite.setTexture(player.texture);
+	player.sprite.setTextureRect(player.texRect);
+	player.sprite.setPosition(2500.f, 2500.f);
+	player.sprite.setScale(player.escaleX, player.escaleY);
 
 	// Item's texture
 	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
@@ -487,14 +488,14 @@ void Game::Initialize()
 
 void Game::ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
-	this->textBackground.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
+	this->textBackground.setPosition(mView.getCenter().x - 450.f, mView.getCenter().y - 450.f);
 	this->textBackground.setSize(sf::Vector2f(260.f, 30.f));
 	this->textBackground.setFillColor(sf::Color::Blue);
 	this->textBackground.setOutlineColor(sf::Color::Black);
 	this->textBackground.setOutlineThickness(4.f);
 	this->text.setFont(fuente); // "fuente" is the object of the font you want to use.
 	this->text.setCharacterSize(20); // adjust the size of the text for our neccesities.
-	this->text.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
+	this->text.setPosition(mView.getCenter().x - 450.f, mView.getCenter().y - 450.f);
 	this->text.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
 
@@ -569,25 +570,25 @@ void Game::CheckItemCollision() {
 void Game::SetCameraView() {
 	// Check corners only
 	if (xPlayer < camLeftBound && yPlayer < camUpperBound)
-		pView.setCenter(camLeftBound, camUpperBound);
+		mView.setCenter(camLeftBound, camUpperBound);
 	else if (xPlayer > camRightBound && yPlayer < camUpperBound)
-		pView.setCenter(camRightBound, camUpperBound);
+		mView.setCenter(camRightBound, camUpperBound);
 	else if (xPlayer < camLeftBound && yPlayer > camLowerBound)
-		pView.setCenter(camLeftBound, camLowerBound);
+		mView.setCenter(camLeftBound, camLowerBound);
 	else if (xPlayer > camRightBound && yPlayer > camLowerBound)
-		pView.setCenter(camRightBound, camLowerBound);
+		mView.setCenter(camRightBound, camLowerBound);
 
 	// Check sides only
 	else if (xPlayer < camLeftBound)
-		pView.setCenter(camLeftBound, yPlayer);
+		mView.setCenter(camLeftBound, yPlayer);
 	else if (xPlayer > camRightBound)
-		pView.setCenter(camRightBound, yPlayer);
+		mView.setCenter(camRightBound, yPlayer);
 	else if (yPlayer > camLowerBound)
-		pView.setCenter(xPlayer, camLowerBound);
+		mView.setCenter(xPlayer, camLowerBound);
 	else if (yPlayer < camUpperBound)
-		pView.setCenter(xPlayer, camUpperBound);
+		mView.setCenter(xPlayer, camUpperBound);
 	else
-		pView.setCenter(xPlayer, yPlayer);
+		mView.setCenter(xPlayer, yPlayer);
 }
 
 

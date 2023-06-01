@@ -2,6 +2,7 @@
 
 #include "Player.h"
 
+/*******************************************************************************************************************************************************************/
 
 void Player::move(sf::Time deltaTime)
 {
@@ -23,6 +24,8 @@ void Player::move(sf::Time deltaTime)
 	sprite.move(movement * deltaTime.asSeconds());
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Player::animate()
 {
 	if (texRect.left == 1920)
@@ -33,6 +36,8 @@ void Player::animate()
 	sprite.setTextureRect(texRect);
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Player::checkCollisions(const TileMap& objects)
 {
 	for (const sf::FloatRect& collidable : objects.collidables) {
@@ -40,6 +45,8 @@ void Player::checkCollisions(const TileMap& objects)
 			sprite.setPosition(previousPos);
 	}
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
@@ -57,6 +64,8 @@ void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 	}
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Player::PlayerLife(float QuitarVida, float xPlayer, float yPlayer) {
 
 	this->playerLife.setPosition(xPlayer - 2.f, yPlayer - 20.f);
@@ -69,9 +78,9 @@ void Player::PlayerLife(float QuitarVida, float xPlayer, float yPlayer) {
 	
 	this->playerLife.setOutlineColor(sf::Color::Transparent);
 	this->playerLife.setOutlineThickness(3.f);
-
-
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Player::PlayerLifeAux(float xPlayer, float yPlayer) {
 
@@ -81,3 +90,5 @@ void Player::PlayerLifeAux(float xPlayer, float yPlayer) {
 	this->playerLifeAux.setOutlineColor(sf::Color::Black);
 	this->playerLifeAux.setOutlineThickness(3.f);
 }
+
+/*******************************************************************************************************************************************************************/

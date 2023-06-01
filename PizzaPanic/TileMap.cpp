@@ -3,6 +3,8 @@
 #include "TileMap.h"
 
 
+/*******************************************************************************************************************************************************************/
+
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool collisions)
 {
 	// Load the tileset texture
@@ -75,6 +77,8 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool colli
 	return true;
 }
 
+/*******************************************************************************************************************************************************************/
+
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	// Apply the transform
@@ -86,4 +90,6 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// Draw the vertex array
 	target.draw(m_vertices, states);
 }
+
+/*******************************************************************************************************************************************************************/
 

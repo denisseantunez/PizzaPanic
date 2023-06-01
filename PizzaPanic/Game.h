@@ -30,9 +30,38 @@ class Game
 {
 public:
 	Game();
+	void processEvents();
+	void update(sf::Time deltaTime);
+	void render();
+
 	void showMainMenu();
 	void run();
 	void MakeArray();
+
+	//Creating pets and Player
+	Player player;
+	Pet chiwis;
+	Pet sheguis;
+	Pet soruya;
+	Pet mindy;
+	Pet bella;
+	Pet manteca;
+	Pet pushi;
+	Pet muneca;
+
+	// Public game objects
+	MainMenu mainMenu;
+	sf::Sprite mItem;
+	sf::Texture mItemTexture;
+	sf::View mView;
+	sf::RenderWindow mWindow;
+	sf::Sprite gameOver;
+
+	// Audio
+	sf::Music music;
+	sf::Music menuMusic;
+	sf::Music deathSound;
+
 
     bool displayItemPrompt;
 	bool cargandoItem;
@@ -49,10 +78,6 @@ public:
 	
 
 private:
-	void processEvents();
-	void update(sf::Time deltaTime);
-	void render();
-
 	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 	void CheckItemCollision();
@@ -61,25 +86,11 @@ private:
 	sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 	sf::Vector2f movement;
 
-	//Creating pets and Player
-	Player Player;
-	Pet chiwis;
-	Pet sheguis;
-	Pet soruya;
-	Pet mindy;
-	Pet bella;
-	Pet manteca;
-	Pet pushi;
-	Pet muneca;
-
 	// Text
 	sf::Text text;
 	sf::Font textFont;
 	sf::RectangleShape textBackground;
-
-	// Window
-	sf::RenderWindow mWindow;
-
+	
 	// Time
 	sf::Clock clock;
 
@@ -89,10 +100,7 @@ private:
 
 	// Game Over
 	sf::Texture GameOverTex;
-	sf::Sprite GameOver;
-
-	// Camera
-	sf::View pView;
+	
 
 	// Camera boundaries
 	float camLeftBound = 510.f;
@@ -100,23 +108,15 @@ private:
 	float camUpperBound = 510.f;
 	float camLowerBound = 2850.f;
 
-	// Audio
-	sf::Music music;
-	sf::Music menuMusic;
-	sf::Music deathSound;
-
     // Item
-    sf::Texture mItemTexture;
 	sf::Texture mItemArrowTexture;
 	sf::Sprite mItemArrow;
-    sf::Sprite mItem;
     sf::FloatRect mPlayerCollider;
     sf::FloatRect mItemCollider;
     sf::FloatRect mItemArrowCollider;
     sf::Text prompt;
 
     // Main menu
-	MainMenu mainMenu;
 	sf::Font m_font;
     sf::Font m_font2;
 	sf::Texture m_menuBackground;

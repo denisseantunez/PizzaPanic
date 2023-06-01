@@ -2,6 +2,8 @@
 #include "Pets.h"
 
 
+/*******************************************************************************************************************************************************************/
+
 void Pet::setHitbox(const float x, const float y, const float width, const float height)
 {
 	hitbox.setPosition(x, y);
@@ -10,6 +12,8 @@ void Pet::setHitbox(const float x, const float y, const float width, const float
 	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(6.f);
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Pet::animate(float xPlayer, float yPlayer, float initialX, float initialY)
 {
@@ -55,6 +59,8 @@ void Pet::animate(float xPlayer, float yPlayer, float initialX, float initialY)
 	sprite.setTextureRect(texRect);
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Pet::animate(float xPlayer, float yPlayer, float chiwisSpeed) 
 {
 	float chiwisAngle = this->chiwisAngle(xPlayer, yPlayer, hitbox.getPosition().x, hitbox.getPosition().y, chiwisSpeed);
@@ -99,6 +105,8 @@ void Pet::animate(float xPlayer, float yPlayer, float chiwisSpeed)
 	sprite.setTextureRect(texRect);
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime)
 {
 	float xPet = hitbox.getPosition().x;
@@ -122,8 +130,9 @@ void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initi
 		hitbox.move(velocity * deltaTime.asSeconds());
 	else 
 		hitbox.move(velocityaux * deltaTime.asSeconds());
-	
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime)
 {
@@ -144,6 +153,8 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 	}
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Pet::checkBites(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider)
 {
 	sf::FloatRect petCollider = hitbox.getGlobalBounds();
@@ -154,6 +165,8 @@ void Pet::checkBites(float& mordidas, float& quitarVida, int PizzasEntregadas, s
 			quitarVida += 0.5f + (PizzasEntregadas / 10.f);
 	}
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Pet::checkCollisions(const TileMap& objects, sf::Time deltaTime, const float petSpeed)
 {
@@ -186,6 +199,8 @@ void Pet::checkCollisions(const TileMap& objects, sf::Time deltaTime, const floa
 		}
 }
 
+/*******************************************************************************************************************************************************************/
+
 float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY) {
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
@@ -211,6 +226,8 @@ float Pet::petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float 
 	}
 }
 
+/*******************************************************************************************************************************************************************/
+
 float Pet::chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, const float chiwisSpeed) {
 	float dx = xPlayer - xPet;
 	float dy = yPlayer - yPet;
@@ -221,3 +238,5 @@ float Pet::chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, con
 	return angle;
 
 }
+
+/*******************************************************************************************************************************************************************/
