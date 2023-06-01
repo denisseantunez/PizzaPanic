@@ -95,7 +95,7 @@ void Game::run()
 					deathSound.play();
 					deathSound.setLoop(true);
 			
-					GameOver.setPosition(Player.sprite.getPosition().x - 460.f, Player.sprite.getPosition().y - 500.f);
+					GameOver.setPosition(pView.getCenter().x - 460.f, pView.getCenter().y - 500.f);
 					mWindow.clear();
 					mWindow.draw(GameOver);
 					mWindow.display();
