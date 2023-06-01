@@ -18,7 +18,7 @@ public:
 	void animate(float xPlayer, float yPlayer, float initialX, float initialY);
 	void animate(float xPlayer, float yPlayer, float chiwisSpeed);
 
-	void followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime);
+	void followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime, int Pizzas);
 	void followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwisSpeed, sf::Time deltaTime);
 
 	void checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerBounds);
@@ -26,7 +26,7 @@ public:
 	void checkCollisions(const TileMap& objects, sf::Time deltaTime, const float petSpeed);
 
 private:
-	const float RadioDetected = 300.f;
+	float RadioDetected;
 
 	float petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY);
 	float chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, const float chiwisSpeed);
