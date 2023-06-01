@@ -146,14 +146,14 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 	}
 }
 
-void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
+void Pet::checkMordidas(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider)
 {
 	sf::FloatRect petCollider = hitbox.getGlobalBounds();
 
-	if (petCollider.intersects(playerCollider)){
-		mordidas++;
+	if (petCollider.intersects(playerCollider)) {
+		mordidas += 0.5f + (PizzasEntregadas / 10.f);
 		if (mordidas > 0 && mordidas < 120)
-			quitarVida += 0.5f;
+			quitarVida += 0.5f + (PizzasEntregadas / 10.f);
 	}
 }
 

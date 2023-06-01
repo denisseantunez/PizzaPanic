@@ -79,7 +79,7 @@ void Game::run()
 				}
 				render();
 				// If player dies
-				if (mordidas == 120) {
+				if (mordidas >= 60) {
 					PizzasEntregadas = 0;
 					mItem.setPosition(3070.f, 2760.f);
 					cargandoItem = false;
@@ -244,14 +244,14 @@ void Game::update(sf::Time deltaTime)
 	this->ContadorPizzas(Player.sprite.getPosition().x, Player.sprite.getPosition().y, PizzasEntregadas, texto, m_font2);
 
 	// Check if pet attacks player
-	chiwis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	sheguis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	soruya.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	bella.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	pushi.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	muneca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	mindy.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	manteca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
+	chiwis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	sheguis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	soruya.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	bella.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	pushi.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	muneca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	mindy.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	manteca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
 
 	// Guardar Coordenadas del jugador en variables
 	xPlayer = Player.sprite.getPosition().x;
