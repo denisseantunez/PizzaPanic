@@ -19,11 +19,11 @@ int main()
 		game.chiwis.hitbox.setPosition(3000.f, 700.f);
 		game.manteca.hitbox.setPosition(2366.f, 2800.f);
 
-		//Open the window
+		// Open the window
 		game.mView.reset(sf::FloatRect(0, 0, game.mWindow.getSize().x, game.mWindow.getSize().y));
 		game.mWindow.setView(game.mView);
 
-		//Playing music
+		// Playing music and showing Main Menu
 		game.menuMusic.play();
 		game.menuMusic.setLoop(true);
 		game.showMainMenu();
@@ -36,19 +36,17 @@ int main()
 			game.music.play();
 			game.music.setLoop(true);
 
-			// Keep track of the player's initial position
-			sf::Vector2f previousPlayerPos = game.player.sprite.getPosition();
-
 			//Initializing time
 			sf::Clock clock;
 
 			sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
 			while (game.mWindow.isOpen()) {
 				game.processEvents();
 				timeSinceLastUpdate += clock.restart();
+
 				while (timeSinceLastUpdate > TimePerFrame) {
 					timeSinceLastUpdate -= TimePerFrame;
-
 					//Updates everything that happens in the game.
 					game.processEvents();
 					game.update(TimePerFrame);
@@ -75,6 +73,6 @@ int main()
 				}
 			}
 		}
-	} while (game.mainMenu.getSelectedOption() == MainMenu::Option::Jugar);
+	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir);
 	
 }
