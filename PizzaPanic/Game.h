@@ -24,9 +24,7 @@ const float PlayerSpeed = 450.f;
 const int Filas = 2;
 const int Columnas = 35;
 
-
 using std::cout;
-
 
 class Game
 {
@@ -35,6 +33,7 @@ public:
 	void showMainMenu();
 	void run();
 	void MakeArray();
+
     bool displayItemPrompt;
 	bool cargandoItem;
     int PosicionesItem[Filas][Columnas];
@@ -46,15 +45,14 @@ public:
 	float xPlayer;
     float yPlayer;
 	sf::Vector2f EntregarPizza;
-
 	float chiwisSpeed = 250.f;
 	
 
 private:
-	// Funciones
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
+
 	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 	void CheckItemCollision();
@@ -74,12 +72,12 @@ private:
 	Pet pushi;
 	Pet muneca;
 
-	// texto
-	sf::Text texto;
-	sf::Font fuente;
-	sf::RectangleShape fondotexto;
+	// Text
+	sf::Text text;
+	sf::Font textFont;
+	sf::RectangleShape textBackground;
 
-	// Variables
+	// Window
 	sf::RenderWindow mWindow;
 
 	// Time
@@ -87,7 +85,7 @@ private:
 
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;
-	sf::Sprite PizzaLogo;
+	sf::Sprite pizzaLogo;
 
 	// Game Over
 	sf::Texture GameOverTex;
@@ -123,7 +121,7 @@ private:
     sf::Font m_font2;
 	sf::Texture m_menuBackground;
 
-	// Tilemaps
+	// Tilemap
 	TileMap background;
 	TileMap objects;
 

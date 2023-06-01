@@ -172,7 +172,6 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	// Instrucciones
 	if (m_selectedOption == Option::Instrucciones) {
-		// 
 		sf::Texture instructionsTexture;
 		instructionsTexture.loadFromFile("Images\\Instrucciones.png");
 		sf::Sprite Instructions(instructionsTexture);
@@ -185,7 +184,6 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	// Creditos
 	if (m_selectedOption == Option::Creditos) {
-		// 
 		sf::Texture creditsTexture;
 		creditsTexture.loadFromFile("Images\\Creditos.png");
 		sf::Sprite Credits(creditsTexture);

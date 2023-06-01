@@ -181,16 +181,15 @@ void Game::update(sf::Time deltaTime)
 	// Check item collision
 	CheckItemCollision();
 
-	//Arrow
-	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
+	// Arrow
+	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) 
 		Arrow(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
-	}
-	else {
+	else 
 		Arrow(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
-	}
+	
 
-	//Print text of pizzas
-	this->ContadorPizzas(deliveredPizzas, texto, m_font2);
+	// Print text of pizzas
+	this->ContadorPizzas(deliveredPizzas, text, m_font2);
 
 	// Check if pet attacks player
 	chiwis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
@@ -238,7 +237,7 @@ void Game::render()
 	mWindow.clear();;
 	mWindow.draw(background);
 	mWindow.draw(objects);
-	mWindow.draw(PizzaLogo);
+	mWindow.draw(pizzaLogo);
     mWindow.draw(mItem);
 	mWindow.draw(Player.sprite);
 	mWindow.draw(mItemArrow);
@@ -258,8 +257,8 @@ void Game::render()
 	mWindow.draw(pushi.sprite);
 	mWindow.draw(muneca.sprite);
 	mWindow.draw(arrow);
-	mWindow.draw(fondotexto);
-	mWindow.draw(texto);
+	mWindow.draw(textBackground);
+	mWindow.draw(text);
 
 	mWindow.display();
 
@@ -323,7 +322,6 @@ void Game::Initialize()
 		cout << ("Error al cargar el archivo de la pizza");
 
 	// Player 
-
 	if (!Player.texture.loadFromFile("Images\\Robot.png"))
 		cout << ("Error al cargar el archivo.");
 	Player.texRect.left = 0;
@@ -334,7 +332,6 @@ void Game::Initialize()
 	Player.sprite.setTextureRect(Player.texRect);
 	Player.sprite.setPosition(2500.f, 2500.f);
 	Player.sprite.setScale(Player.escaleX, Player.escaleY);
-
 
 	// Item's texture
 	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
@@ -347,7 +344,6 @@ void Game::Initialize()
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	mItem.setPosition(-1000, -1000);
-
 
 	// Chiwis' texture
 	if (!chiwis.texture.loadFromFile("Images\\Mascotas.png")) 
@@ -491,15 +487,15 @@ void Game::Initialize()
 
 void Game::ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
-	this->fondotexto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
-	this->fondotexto.setSize(sf::Vector2f(260.f, 30.f));
-	this->fondotexto.setFillColor(sf::Color::Blue);
-	this->fondotexto.setOutlineColor(sf::Color::Black);
-	this->fondotexto.setOutlineThickness(4.f);
-	this->texto.setFont(fuente); // "fuente" is the object of the font you want to use.
-	this->texto.setCharacterSize(20); // adjust the size of the text for our neccesities.
-	this->texto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
-	this->texto.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
+	this->textBackground.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
+	this->textBackground.setSize(sf::Vector2f(260.f, 30.f));
+	this->textBackground.setFillColor(sf::Color::Blue);
+	this->textBackground.setOutlineColor(sf::Color::Black);
+	this->textBackground.setOutlineThickness(4.f);
+	this->text.setFont(fuente); // "fuente" is the object of the font you want to use.
+	this->text.setCharacterSize(20); // adjust the size of the text for our neccesities.
+	this->text.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
+	this->text.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
 
 void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
