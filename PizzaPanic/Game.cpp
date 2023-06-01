@@ -1,6 +1,6 @@
-// based on SFML Game Development book :)
 
 #include "Game.h"
+
 
 /*******************************************************************************************************************************************************************/
 
@@ -33,77 +33,6 @@ void Game::showMainMenu()
 
 /*******************************************************************************************************************************************************************/
 
-void Game::run()
-{
-	do {
-		// Initialize variables
-		mainMenu.resetSelectedOption();
-		processEvents();
-		bites = 0.f;
-		quitarVida = 0.f;
-		mItem.setTexture(mItemTexture);
-		mItem.setPosition(3070.f, 2760.f);
-		player.sprite.setPosition(player.initialX, player.initialY);
-		mItem.setScale(1.7f, 1.7f);
-		chiwis.hitbox.setPosition(3000.f, 700.f);
-		manteca.hitbox.setPosition(2366.f, 2800.f);
-
-		mView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
-		mWindow.setView(mView);	
-
-		menuMusic.play();
-		menuMusic.setLoop(true);
-		showMainMenu();
-		
-		// If Play button is clicked, start the game
-		if (mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
-
-			// Play game music
-			menuMusic.stop();
-			music.play();
-			music.setLoop(true);
-
-			// Keep track of the player's initial position
-			sf::Vector2f previousPlayerPos = player.sprite.getPosition();
-
-			sf::Clock clock;
-
-			sf::Time timeSinceLastUpdate = sf::Time::Zero;
-			while (mWindow.isOpen()){
-				processEvents();
-				timeSinceLastUpdate += clock.restart();
-				while (timeSinceLastUpdate > TimePerFrame){
-					timeSinceLastUpdate -= TimePerFrame;
-					processEvents();
-					update(TimePerFrame);
-				}
-				render();
-				// If player dies
-				if (bites >= 60) {
-					deliveredPizzas = 0;
-					mItem.setPosition(3070.f, 2760.f);
-					cargandoItem = false;
-					music.stop();
-					deathSound.play();
-					deathSound.setLoop(true);
-			
-					gameOver.setPosition(mView.getCenter().x - 460.f, mView.getCenter().y - 500.f);
-					mWindow.clear();
-					mWindow.draw(gameOver);
-					mWindow.display();
-                    std::this_thread::sleep_for(std::chrono::seconds(2));
-					deathSound.stop();
-					break;
-				}
-			}
-		}
-	} while (mainMenu.getSelectedOption() == MainMenu::Option::Jugar);
-}
-
-/*******************************************************************************************************************************************************************/
-
-
-
 void Game::processEvents()
 // User input
 {
@@ -125,8 +54,6 @@ void Game::processEvents()
 
 	}
 }
-
-
 
 /*******************************************************************************************************************************************************************/
 
@@ -166,7 +93,7 @@ void Game::update(sf::Time deltaTime)
 	mItemArrowCollider = mItemArrow.getGlobalBounds();
 	mPlayerCollider = player.sprite.getGlobalBounds();
 
-	// Sprites with hitboxes.
+	// Sprites with hitboxes
 	chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
 	sheguis.sprite.setPosition(sheguis.hitbox.getPosition().x, sheguis.hitbox.getPosition().y);
 	soruya.sprite.setPosition(soruya.hitbox.getPosition().x, soruya.hitbox.getPosition().y);
@@ -185,7 +112,6 @@ void Game::update(sf::Time deltaTime)
 	else 
 		Arrow(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
 	
-
 	// Print text of pizzas
 	this->ContadorPizzas(deliveredPizzas, text, m_font2);
 
@@ -240,10 +166,9 @@ void Game::render()
 	mWindow.draw(player.sprite);
 	mWindow.draw(mItemArrow);
 
-	if (displayItemPrompt) {
+	if (displayItemPrompt)
 		mWindow.draw(prompt);
-	}
-
+	
 	mWindow.draw(player.playerLifeAux);
 	mWindow.draw(player.playerLife);
 	mWindow.draw(chiwis.sprite);
@@ -261,6 +186,7 @@ void Game::render()
 	mWindow.display();
 
 }
+
 /*******************************************************************************************************************************************************************/
 
 void Game::Initialize()
@@ -316,7 +242,6 @@ void Game::Initialize()
 		cout << ("Error al cargar el mapa.");
 	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48), true))
 		cout << ("Error al cargar los objetos del mapa.");
-
 
 	// Pizza logo in restaurant
 	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
@@ -484,7 +409,7 @@ void Game::Initialize()
 	srand(time(NULL));
 }
 
-//*******************************************************************************************************************************************************************
+/*******************************************************************************************************************************************************************/
 
 void Game::ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
@@ -498,6 +423,8 @@ void Game::ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente
 	this->text.setPosition(mView.getCenter().x - 450.f, mView.getCenter().y - 450.f);
 	this->text.setString("Pizzas entregadas: " + std::to_string(cantidad_pizzas));
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 
@@ -527,6 +454,8 @@ void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
+
+/*******************************************************************************************************************************************************************/
 
 void Game::CheckItemCollision() {
 	displayItemPrompt = false;
@@ -567,6 +496,8 @@ void Game::CheckItemCollision() {
 	}
 }
 
+/*******************************************************************************************************************************************************************/
+
 void Game::SetCameraView() {
 	// Check corners only
 	if (xPlayer < camLeftBound && yPlayer < camUpperBound)
@@ -590,6 +521,8 @@ void Game::SetCameraView() {
 	else
 		mView.setCenter(xPlayer, yPlayer);
 }
+
+/*******************************************************************************************************************************************************************/
 
 
 

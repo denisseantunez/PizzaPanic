@@ -35,7 +35,6 @@ public:
 	void render();
 
 	void showMainMenu();
-	void run();
 	void MakeArray();
 
 	//Creating pets and Player
@@ -76,7 +75,6 @@ public:
 	sf::Vector2f EntregarPizza;
 	float chiwisSpeed = 250.f;
 	
-
 private:
 	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
@@ -100,7 +98,6 @@ private:
 
 	// Game Over
 	sf::Texture GameOverTex;
-	
 
 	// Camera boundaries
 	float camLeftBound = 510.f;
