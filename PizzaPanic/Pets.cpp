@@ -167,7 +167,7 @@ void Pet::checkCollisions(const TileMap& objects, sf::Time deltaTime, const floa
 				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
 				direction /= distance;
 				sf::Vector2f size = hitbox.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
+				float radius = sqrt(size.x * size.x + size.y * size.y) / 2.f;
 		
 				// Calculate distance to move enemy away from intersection point
 				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;

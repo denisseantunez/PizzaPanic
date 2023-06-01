@@ -3,7 +3,6 @@
 #include "TileMap.h"
 
 
-
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool collisions)
 {
 	// Load the tileset texture

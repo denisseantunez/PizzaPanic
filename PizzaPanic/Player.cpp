@@ -1,17 +1,7 @@
+
+
 #include "Player.h"
 
-//void Player::setHitbox()
-//{
-//
-//	float hitboxWidth = texRect.width * 0.5;  // 80% of the texRect's width
-//	float hitboxHeight = texRect.height * 0.5; // 80% of the texRect's height
-//
-//	// Center hitbox with sprite
-//	float hitboxX = sprite.getPosition().x - (hitboxWidth / 2);
-//	float hitboxY = sprite.getPosition().y - (hitboxHeight / 2);
-//
-//	hitbox = sf::FloatRect(hitboxX, hitboxY, hitboxWidth, hitboxHeight);
-//}
 
 void Player::move(sf::Time deltaTime)
 {
@@ -37,19 +27,17 @@ void Player::animate()
 {
 	if (texRect.left == 1920)
 		texRect.left = 0;
-	else { texRect.left += 320; }
+	else 
+		texRect.left += 320; 
 
 	sprite.setTextureRect(texRect);
 }
 
 void Player::checkCollisions(const TileMap& objects)
 {
-	
 	for (const sf::FloatRect& collidable : objects.collidables) {
-		if (collidable.intersects(sprite.getGlobalBounds())) {
+		if (collidable.intersects(sprite.getGlobalBounds())) 
 			sprite.setPosition(previousPos);
-
-		}
 	}
 }
 
@@ -74,12 +62,11 @@ void Player::PlayerLife(float QuitarVida, float xPlayer, float yPlayer) {
 	this->playerLife.setPosition(xPlayer - 2.f, yPlayer - 20.f);
 	this->playerLife.setSize(sf::Vector2f(playerFullLife - QuitarVida, 10.f));
 
-	if (QuitarVida >= playerFullLife - 1.f) {
+	if (QuitarVida >= playerFullLife - 1.f) 
 		this->playerLife.setFillColor(sf::Color::Red);
-	}
-	else {
+	else 
 		this->playerLife.setFillColor(sf::Color::Green);
-	}
+	
 	this->playerLife.setOutlineColor(sf::Color::Transparent);
 	this->playerLife.setOutlineThickness(3.f);
 

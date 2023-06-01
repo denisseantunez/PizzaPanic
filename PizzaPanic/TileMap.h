@@ -1,4 +1,3 @@
-// tutorial sobre esto en https://www.sfml-dev.org/tutorials/2.4/graphics-vertex-array.php#example-tile-map :)
 
 #pragma once
 

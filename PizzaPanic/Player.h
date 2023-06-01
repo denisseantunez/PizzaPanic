@@ -7,7 +7,6 @@ class Player
 {
 
 public:
-	
 	//Player's Movement
 	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 	bool mIsMovingUp = false;
@@ -15,7 +14,6 @@ public:
 	bool mIsMovingLeft = false;
 	bool mIsMovingRight = false;
 
-	//void setHitbox();
 	void move(sf::Time deltaTime);
 	void animate();
 	void checkCollisions(const TileMap& objects);
@@ -30,18 +28,14 @@ public:
 	const float escaleY = 0.18;
 
 	sf::Vector2f previousPos;
-
-
 	sf::RectangleShape playerLife;
 	sf::RectangleShape playerLifeAux;
+
 	sf::IntRect texRect;
 	sf::Sprite sprite;
 	sf::Texture texture;
-	//sf::FloatRect hitbox;
-
 
 	const float speed = 500.f;
 	const float playerFullLife = 60.f;
-	
 };
 
