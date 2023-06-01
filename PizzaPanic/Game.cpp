@@ -48,6 +48,14 @@ void Game::run()
 		Player.sprite.setPosition(Player.initialX, Player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
+		sheguis.hitbox.setPosition(2000.f, 2100.f);
+		soruya.hitbox.setPosition(3000.f, 700.f);
+		mindy.hitbox.setPosition(1816.f, 1466.f);
+		bella.hitbox.setPosition(85.f, 790.f);
+		manteca.hitbox.setPosition(2366.f, 2800.f);
+		pushi.hitbox.setPosition(85.f, 1950.f);
+		muneca.hitbox.setPosition(1500.f, 2415.f);
+
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);	
 
@@ -79,7 +87,7 @@ void Game::run()
 				}
 				render();
 				// If player dies
-				if (mordidas == 120) {
+				if (mordidas >= 60) {
 					PizzasEntregadas = 0;
 					mItem.setPosition(3070.f, 2760.f);
 					cargandoItem = false;
@@ -197,7 +205,6 @@ void Game::update(sf::Time deltaTime)
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
 
-	cout << "x: " << Player.sprite.getPosition().x << " , y: " << Player.sprite.getPosition().y << std::endl;
 	// Check item collision 
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
@@ -247,24 +254,24 @@ void Game::update(sf::Time deltaTime)
 	this->ContadorPizzas(Player.sprite.getPosition().x, Player.sprite.getPosition().y, PizzasEntregadas, texto, m_font2);
 
 	// Check if pet attacks player
-	chiwis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	sheguis.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	soruya.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	bella.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	pushi.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	muneca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	mindy.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-	manteca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
+	chiwis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	sheguis.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	soruya.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	bella.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	pushi.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	muneca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	mindy.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
+	manteca.checkMordidas(mordidas, quitarVida, PizzasEntregadas, mPlayerCollider);
 
 	// Pets follow player
 	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
-	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime, PizzasEntregadas);
-	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime, PizzasEntregadas);
-	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime, PizzasEntregadas);
-	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime, PizzasEntregadas);
-	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime, PizzasEntregadas);
-	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime, PizzasEntregadas);
-	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime, PizzasEntregadas);
+	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
+	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
+	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
+	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime);
+	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime);
+	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
+	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
 
 	// Check for collisions
 	Player.checkCollisions(objects);
@@ -279,6 +286,9 @@ void Game::update(sf::Time deltaTime)
 
 	//Move Player
 	Player.move(deltaTime);
+
+	cout << manteca.hitbox.getPosition().x << std::endl;
+	cout << manteca.hitbox.getPosition().y << std::endl;
 
 	//Player's life
 	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);

@@ -99,7 +99,7 @@ void Pet::animate(float xPlayer, float yPlayer, float chiwisSpeed)
 	sprite.setTextureRect(texRect);
 }
 
-void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime, int Pizzas)
+void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime)
 {
 	float xPet = hitbox.getPosition().x;
 	float yPet = hitbox.getPosition().y;
@@ -117,8 +117,6 @@ void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initi
 	
 	sf::Vector2f velocity = unitVector * (speed);
 	sf::Vector2f velocityaux = unitVectoraux * (speed);
-
-	RadioDetected = 300.f * (Pizzas / 5 + 1);
 
 	if (distance <= RadioDetected && distanceaux <= RadioDetected)
 		hitbox.move(velocity * deltaTime.asSeconds());
@@ -146,14 +144,14 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 	}
 }
 
-void Pet::checkMordidas(float& mordidas, float& quitarVida, sf::FloatRect playerCollider)
+void Pet::checkMordidas(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider)
 {
 	sf::FloatRect petCollider = hitbox.getGlobalBounds();
 
-	if (petCollider.intersects(playerCollider)){
-		mordidas++;
+	if (petCollider.intersects(playerCollider)) {
+		mordidas += 0.5f + (PizzasEntregadas / 10.f);
 		if (mordidas > 0 && mordidas < 120)
-			quitarVida += 0.5f;
+			quitarVida += 0.5f + (PizzasEntregadas / 10.f);
 	}
 }
 
