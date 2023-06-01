@@ -48,6 +48,14 @@ void Game::run()
 		Player.sprite.setPosition(Player.initialX, Player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
+		sheguis.hitbox.setPosition(2000.f, 2100.f);
+		soruya.hitbox.setPosition(3000.f, 700.f);
+		mindy.hitbox.setPosition(1816.f, 1466.f);
+		bella.hitbox.setPosition(85.f, 790.f);
+		manteca.hitbox.setPosition(2366.f, 2800.f);
+		pushi.hitbox.setPosition(85.f, 1950.f);
+		muneca.hitbox.setPosition(1500.f, 2415.f);
+
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
 		mWindow.setView(pView);	
 
@@ -93,7 +101,6 @@ void Game::run()
 					mWindow.display();
                     std::this_thread::sleep_for(std::chrono::seconds(2));
 					deathSound.stop();
-					Initialize();
 					break;
 				}
 			}
@@ -195,7 +202,6 @@ void Game::update(sf::Time deltaTime)
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
 
-	cout << "x: " << Player.sprite.getPosition().x << " , y: " << Player.sprite.getPosition().y << std::endl;
 	// Check item collision 
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
@@ -281,6 +287,9 @@ void Game::update(sf::Time deltaTime)
 
 	//Move Player
 	Player.move(deltaTime);
+
+	cout << manteca.hitbox.getPosition().x << std::endl;
+	cout << manteca.hitbox.getPosition().y << std::endl;
 
 	//Player's life
 	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
