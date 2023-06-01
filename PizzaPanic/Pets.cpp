@@ -99,7 +99,7 @@ void Pet::animate(float xPlayer, float yPlayer, float chiwisSpeed)
 	sprite.setTextureRect(texRect);
 }
 
-void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime, int Pizzas)
+void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initialY, sf::Time deltaTime)
 {
 	float xPet = hitbox.getPosition().x;
 	float yPet = hitbox.getPosition().y;
@@ -117,8 +117,6 @@ void Pet::followPlayer(float xPlayer, float yPlayer, float initialX, float initi
 	
 	sf::Vector2f velocity = unitVector * (speed);
 	sf::Vector2f velocityaux = unitVectoraux * (speed);
-
-	RadioDetected = 300.f * (Pizzas / 5 + 1);
 
 	if (distance <= RadioDetected && distanceaux <= RadioDetected)
 		hitbox.move(velocity * deltaTime.asSeconds());

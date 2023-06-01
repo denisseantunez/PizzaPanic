@@ -40,7 +40,7 @@ public:
 	//sf::FloatRect hitbox;
 
 
-	const float speed = 350.f;
+	const float speed = 500.f;
 	const float playerFullLife = 60.f;
 	
 };

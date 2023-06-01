@@ -93,6 +93,7 @@ void Game::run()
 					mWindow.display();
                     std::this_thread::sleep_for(std::chrono::seconds(2));
 					deathSound.stop();
+					Initialize();
 					break;
 				}
 			}
@@ -259,13 +260,13 @@ void Game::update(sf::Time deltaTime)
 
 	// Pets follow player
 	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
-	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime, PizzasEntregadas);
-	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime, PizzasEntregadas);
-	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime, PizzasEntregadas);
-	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime, PizzasEntregadas);
-	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime, PizzasEntregadas);
-	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime, PizzasEntregadas);
-	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime, PizzasEntregadas);
+	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
+	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
+	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
+	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime);
+	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime);
+	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
+	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
 
 	// Check for collisions
 	Player.checkCollisions(objects);
