@@ -133,6 +133,9 @@ void Game::processEvents()
 void Game::update(sf::Time deltaTime)
 // Update what happens in game
 {
+	// Guardar Coordenadas del jugador en variables
+	xPlayer = Player.sprite.getPosition().x;
+	yPlayer = Player.sprite.getPosition().y;
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
@@ -252,10 +255,6 @@ void Game::update(sf::Time deltaTime)
 	muneca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 	mindy.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 	manteca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
-
-	// Guardar Coordenadas del jugador en variables
-	xPlayer = Player.sprite.getPosition().x;
-	yPlayer = Player.sprite.getPosition().y;
 
 	// Pets follow player
 	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
