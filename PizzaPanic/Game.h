@@ -56,7 +56,9 @@ private:
 	void update(sf::Time deltaTime);
 	void render();
 	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
-	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
+	void ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
+	void CheckItemCollision();
+	void SetCameraView();
 
 	sf::Keyboard::Key teclaItem = sf::Keyboard::Space;
 	sf::Vector2f movement;

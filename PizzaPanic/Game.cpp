@@ -159,28 +159,7 @@ void Game::update(sf::Time deltaTime)
 
 	// Camera follows player, if player is in the limits of the map, the camera locks 
 	// in place to the corresponding boundary (camera boundaires)
-
-	// check corners only
-	if (xPlayer < camLeftBound && yPlayer < camUpperBound)
-		pView.setCenter(camLeftBound, camUpperBound);
-	else if (xPlayer > camRightBound && yPlayer < camUpperBound)
-		pView.setCenter(camRightBound, camUpperBound);
-	else if (xPlayer < camLeftBound && yPlayer > camLowerBound)
-		pView.setCenter(camLeftBound, camLowerBound);
-	else if (xPlayer > camRightBound && yPlayer > camLowerBound)
-		pView.setCenter(camRightBound, camLowerBound);
-
-	// Check sides only
-	else if (xPlayer < camLeftBound)
-		pView.setCenter(camLeftBound, yPlayer);
-	else if (xPlayer > camRightBound)
-		pView.setCenter(camRightBound, yPlayer);
-	else if (yPlayer > camLowerBound)
-		pView.setCenter(xPlayer, camLowerBound);
-	else if (yPlayer < camUpperBound)
-		pView.setCenter(xPlayer, camUpperBound);
-	else
-		pView.setCenter(xPlayer, yPlayer);
+	SetCameraView();
 
 	mWindow.setView(pView);
 
@@ -199,42 +178,8 @@ void Game::update(sf::Time deltaTime)
 	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
 	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);
 
-	// Check item collision 
-	displayItemPrompt = false;
-	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
-
-		if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
-			prompt.setString("Presiona espacio para recoger la pizza!");
-		}
-		else {
-			prompt.setString("Presiona espacio para dejar la pizza!");
-		}
-		displayItemPrompt = true;
-		if (cargandoItem) {
-			prompt.setPosition(mItemArrow.getPosition().x - 300, mItemArrow.getPosition().y + 100);
-		}
-		else {
-			prompt.setPosition(mItem.getPosition().x - 300, mItem.getPosition().y + 100);
-		}
-
-		if (sf::Keyboard::isKeyPressed(teclaItem)) {
-			if(cargandoItem){
-				quitarVida = 0.f;
-				bites = 0.f;
-				mItemArrow.setPosition(-1000, -1000);
-                mItem.setPosition(3070.f, 2760.f);
-				mItem.setScale(1.7f, 1.7f);
-                cargandoItem = false;
-                deliveredPizzas++;
-            } else {
-                cargandoItem = true;
-                NuevaPosicion = rand() % 35;
-				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
-				mItemArrow.setScale(0.3f, 0.3f);
-				mItem.setPosition(-1000, -1000);
-            }
-		}
-	}
+	// Check item collision
+	CheckItemCollision();
 
 	//Arrow
 	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
@@ -245,7 +190,7 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	//Print text of pizzas
-	this->ContadorPizzas(Player.sprite.getPosition().x, Player.sprite.getPosition().y, deliveredPizzas, texto, m_font2);
+	this->ContadorPizzas(deliveredPizzas, texto, m_font2);
 
 	// Check if pet attacks player
 	chiwis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
@@ -544,7 +489,7 @@ void Game::Initialize()
 
 //*******************************************************************************************************************************************************************
 
-void Game::ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
+void Game::ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente) {
 
 	this->fondotexto.setPosition(pView.getCenter().x - 450.f, pView.getCenter().y - 450.f);
 	this->fondotexto.setSize(sf::Vector2f(260.f, 30.f));
@@ -586,7 +531,68 @@ void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setPosition(arrowPosition.x, arrowPosition.y);
 }
 
+void Game::CheckItemCollision() {
+	displayItemPrompt = false;
+	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
 
+		if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
+			prompt.setString("Presiona espacio para recoger la pizza!");
+		}
+		else {
+			prompt.setString("Presiona espacio para dejar la pizza!");
+		}
+		displayItemPrompt = true;
+		if (cargandoItem) {
+			prompt.setPosition(mItemArrow.getPosition().x - 300, mItemArrow.getPosition().y + 100);
+		}
+		else {
+			prompt.setPosition(mItem.getPosition().x - 300, mItem.getPosition().y + 100);
+		}
+
+		if (sf::Keyboard::isKeyPressed(teclaItem)) {
+			if (cargandoItem) {
+				quitarVida = 0.f;
+				bites = 0.f;
+				mItemArrow.setPosition(-1000, -1000);
+				mItem.setPosition(3070.f, 2760.f);
+				mItem.setScale(1.7f, 1.7f);
+				cargandoItem = false;
+				deliveredPizzas++;
+			}
+			else {
+				cargandoItem = true;
+				NuevaPosicion = rand() % 35;
+				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+				mItemArrow.setScale(0.3f, 0.3f);
+				mItem.setPosition(-1000, -1000);
+			}
+		}
+	}
+}
+
+void Game::SetCameraView() {
+	// Check corners only
+	if (xPlayer < camLeftBound && yPlayer < camUpperBound)
+		pView.setCenter(camLeftBound, camUpperBound);
+	else if (xPlayer > camRightBound && yPlayer < camUpperBound)
+		pView.setCenter(camRightBound, camUpperBound);
+	else if (xPlayer < camLeftBound && yPlayer > camLowerBound)
+		pView.setCenter(camLeftBound, camLowerBound);
+	else if (xPlayer > camRightBound && yPlayer > camLowerBound)
+		pView.setCenter(camRightBound, camLowerBound);
+
+	// Check sides only
+	else if (xPlayer < camLeftBound)
+		pView.setCenter(camLeftBound, yPlayer);
+	else if (xPlayer > camRightBound)
+		pView.setCenter(camRightBound, yPlayer);
+	else if (yPlayer > camLowerBound)
+		pView.setCenter(xPlayer, camLowerBound);
+	else if (yPlayer < camUpperBound)
+		pView.setCenter(xPlayer, camUpperBound);
+	else
+		pView.setCenter(xPlayer, yPlayer);
+}
 
 
 
