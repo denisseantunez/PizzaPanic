@@ -7,8 +7,8 @@
 #include <SFML/Audio.hpp>
 
 #include "TileMap.h"
-#include "SurfaceObjects.h"
-#include "Collidable.h"
+#//include "SurfaceObjects.h"
+//#include "Collidable.h"
 #include "MainMenu.h"
 #include "Pets.h"
 #include "Player.h"
@@ -57,7 +57,6 @@ private:
 	void processEvents();
 	void update(sf::Time deltaTime);
 	void render();
-	void checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime);
 	void Flecha(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(float xPlayer, float yPlayer, int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
 
@@ -126,21 +125,9 @@ private:
 
 	// Tilemaps
 	TileMap background;
-	SurfaceObjects objects;
-
-	// Collision
-	Collidable playerCollidable;
-	Collidable chiwisCollidable;
-	Collidable sheguisCollidable;
-	Collidable soruyaCollidable;
-	Collidable mindyCollidable;
-	Collidable bellaCollidable;
-	Collidable mantecaCollidable;
-	Collidable pushiCollidable;
-	Collidable munecaCollidable;
+	TileMap objects;
 
 	// Previous Positions
-	sf::Vector2f previousPlayerPos;
 	sf::Vector2f previousChiwisPos;
 	sf::Vector2f previousSheguisPos;
 	sf::Vector2f previousSoruyaPos;

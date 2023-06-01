@@ -45,7 +45,7 @@ void Game::run()
 		quitarVida = 0.f;
 		mItem.setTexture(mItemTexture);
 		mItem.setPosition(3070.f, 2760.f);
-		Player.sprite.setPosition(2500.f, 2500.f);
+		Player.sprite.setPosition(Player.initialX, Player.initialY);
 		mItem.setScale(1.7f, 1.7f);
 		chiwis.hitbox.setPosition(3000.f, 700.f);
 		pView.reset(sf::FloatRect(0, 0, mWindow.getSize().x, mWindow.getSize().y));
@@ -136,10 +136,6 @@ void Game::update(sf::Time deltaTime)
 
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
-		// Player Animations
-		/*if (Player.texRect.left == 1920)
-			Player.texRect.left = 0;
-		else { Player.texRect.left += 320; }*/
 		Player.animate();
 		chiwis.animate(xPlayer, yPlayer, chiwisSpeed);
 		sheguis.animate(xPlayer, yPlayer, 2000.f, 2100.f);
@@ -150,8 +146,6 @@ void Game::update(sf::Time deltaTime)
 		pushi.animate(yPlayer, yPlayer, 85.f, 1950.f);
 		muneca.animate(xPlayer, yPlayer, 1500.f, 2415.f);
 
-		// Set Sprite Textures Rectangles
-		Player.sprite.setTextureRect(Player.texRect);
 		clock.restart();
 	}
 
@@ -259,63 +253,35 @@ void Game::update(sf::Time deltaTime)
 	mindy.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 	manteca.checkMordidas(mordidas, quitarVida, mPlayerCollider);
 
-
-	// Keep track of previous positions
-	sf::Vector2f previousPlayerPos = Player.sprite.getPosition();
-	sf::Vector2f previousChiwisPos = chiwis.hitbox.getPosition();
-	sf::Vector2f previousSheguisPos = sheguis.hitbox.getPosition();
-	sf::Vector2f previousSoruyaPos = soruya.hitbox.getPosition();
-	sf::Vector2f previousMindyPos = mindy.hitbox.getPosition();
-	sf::Vector2f previousBellaPos = bella.hitbox.getPosition();
-	sf::Vector2f previousMantecaPos = manteca.hitbox.getPosition();
-	sf::Vector2f previousPushiPos = pushi.hitbox.getPosition();
-	sf::Vector2f previousMunecaPos = muneca.hitbox.getPosition();
-
 	// Guardar Coordenadas del jugador en variables
 	xPlayer = Player.sprite.getPosition().x;
 	yPlayer = Player.sprite.getPosition().y;
 
 	// Pets follow player
 	chiwis.followPlayer(Player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
-	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
-	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
-	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
-	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime);
-	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime);
-	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
-	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
-
-	// Create Collidable object for the player and enemies
-	Collidable playerCollidable(0, Player.sprite.getGlobalBounds(), true);
-	Collidable chiwisCollidable(1, chiwis.hitbox.getGlobalBounds(), true);
-	Collidable sheguisCollidable(1, sheguis.hitbox.getGlobalBounds(), true);
-	Collidable soruyaCollidable(1, soruya.hitbox.getGlobalBounds(), true);
-	Collidable mindyCollidable(1, mindy.hitbox.getGlobalBounds(), true);
-	Collidable bellaCollidable(1, bella.hitbox.getGlobalBounds(), true);
-	Collidable mantecaCollidable(1, manteca.hitbox.getGlobalBounds(), true);
-	Collidable pushiCollidable(1, pushi.hitbox.getGlobalBounds(), true);
-	Collidable munecaCollidable(1, muneca.hitbox.getGlobalBounds(), true);
+	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime, PizzasEntregadas);
+	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime, PizzasEntregadas);
+	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime, PizzasEntregadas);
+	bella.followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime, PizzasEntregadas);
+	manteca.followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime, PizzasEntregadas);
+	pushi.followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime, PizzasEntregadas);
+	muneca.followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime, PizzasEntregadas);
 
 	// Check for collisions
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(playerCollidable.m_bounds)) {
-			Player.sprite.setPosition(previousPlayerPos);
-
-		}
-	}
-	checkCollision(objects, chiwisCollidable, chiwis.hitbox , 250.f, deltaTime);
-	checkCollision(objects, sheguisCollidable, sheguis.hitbox, 250.f, deltaTime);
-	checkCollision(objects, soruyaCollidable, soruya.hitbox, 250.f, deltaTime);
-	checkCollision(objects, mindyCollidable, mindy.hitbox, 250.f, deltaTime);
-	checkCollision(objects, bellaCollidable, bella.hitbox, 250.f, deltaTime);
-	checkCollision(objects, mantecaCollidable, manteca.hitbox, 250.f, deltaTime);
-	checkCollision(objects, pushiCollidable, pushi.hitbox, 250.f, deltaTime);
-	checkCollision(objects, munecaCollidable, muneca.hitbox, 250.f, deltaTime);
+	Player.checkCollisions(objects);
+	chiwis.checkCollisions(objects, deltaTime, chiwisSpeed);
+	sheguis.checkCollisions(objects, deltaTime, 250.f);
+	soruya.checkCollisions(objects, deltaTime, 250.f);
+	mindy.checkCollisions(objects, deltaTime, 250.f);
+	bella.checkCollisions(objects, deltaTime, 250.f);
+	manteca.checkCollisions(objects, deltaTime, 250.f);
+	pushi.checkCollisions(objects, deltaTime, 250.f);
+	muneca.checkCollisions(objects, deltaTime, 250.f);
 
 	//Move Player
 	Player.move(deltaTime);
 
-	// Vida Player
+	//Player's life
 	this->Player.PlayerLife(quitarVida, xPlayer, yPlayer);
 	this->Player.PlayerLifeAux(xPlayer, yPlayer);
 }
@@ -401,11 +367,9 @@ void Game::Initialize()
 		cout << ("Error al cargar el audio de game over.");
 
 	// Tilemap 
-	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48), false))
 		cout << ("Error al cargar el mapa.");
-
-	// Collision objects
-	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48)))
+	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48), true))
 		cout << ("Error al cargar los objetos del mapa.");
 
 
@@ -564,6 +528,7 @@ void Game::Initialize()
 	prompt.setFont(m_font2);
 
 	// Hitboxes 
+	//Player.setHitbox();
 	chiwis.setHitbox(3000.f, 700.f, chiwisWidth, chiwisHeight);
 	sheguis.setHitbox(2000.f, 2100.f, sheguisWidth, sheguisHeight);
 	soruya.setHitbox(3000.f, 700.f, soruyaWidth, soruyaHeight);
@@ -576,40 +541,6 @@ void Game::Initialize()
 	// Crear arreglo y empezar semilla 
 	MakeArray();
 	srand(time(NULL));
-}
-
-//*******************************************************************************************************************************************************************
-
-void Game::checkCollision(const SurfaceObjects& objects, const Collidable& petCollidable, sf::RectangleShape& petHitbox, const float petSpeed, sf::Time deltaTime)
-{
-	for (auto& collidable : objects.collidables) {
-		if (collidable.m_bounds.intersects(petCollidable.m_bounds)) {
-			// Handle collision
-			sf::FloatRect intersection;
-			if (petHitbox.getGlobalBounds().intersects(collidable.getBounds(), intersection)) {
-				// Calculate shortest distance to move hitbox away from intersection
-				sf::Vector2f direction = petHitbox.getPosition() - sf::Vector2f(intersection.left + intersection.width / 2, intersection.top + intersection.height / 2);
-				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction /= distance;
-				sf::Vector2f size = petHitbox.getSize();
-				float radius = std::sqrt(size.x * size.x + size.y * size.y) / 2.f;
-
-				// Calculate distance to move enemy away from intersection point
-				float overlapX = (radius - (intersection.width / 2.f)) * direction.x;
-				float overlapY = (radius - (intersection.height / 2.f)) * direction.y;
-
-				// Add randomness to new position calculation
-				sf::Vector2f randOffset = sf::Vector2f(((rand() % 51) - 25) * 0.2f, ((rand() % 51) - 25) * 0.2f);
-				sf::Vector2f newPosition = petHitbox.getPosition() + sf::Vector2f(overlapX, overlapY) + randOffset;
-
-				// Adjust speed based on distance to collision point
-				float speed = petSpeed * (distance / radius);
-				sf::Vector2f velocity = direction * speed;
-				petHitbox.move(velocity * deltaTime.asSeconds());
-				break;
-			}
-		}
-	}
 }
 
 //*******************************************************************************************************************************************************************

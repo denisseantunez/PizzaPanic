@@ -4,15 +4,20 @@
 
 
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool collisions)
 {
 	// Load the tileset texture
 	if (!m_tileset.loadFromFile("Images\\Tileset.png"))
 		return false;
 
 	// .txt tilemap
+	std::ifstream map_stream;
 	std::vector<std::vector<int> > tiles;
-	std::ifstream map_stream("Tilemaps\\background.txt");
+	if(collisions == false)
+		map_stream.open("Tilemaps\\background.txt");
+	else
+		map_stream.open("Tilemaps\\surfaceobjects.txt");
+
 	for (std::string line; std::getline(map_stream, line);){
 		tiles.push_back(std::vector<int>());
 		std::stringstream line_stream(line);
@@ -33,6 +38,15 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
 		for (unsigned int i = 0; i < width; ++i){
 			// Get the current tile number 
 			int tileNumber = tiles[j][i];
+
+			// COLISIONS
+			if (collisions == true && (tileNumber != -1 && tileNumber != 96 && tileNumber != 0 && tileNumber != 249)) { // tiles in .txt that are different from -1, 0 and 58 are not passable
+				// Calculate the bounds of the title
+				sf::FloatRect tileBounds(i * 48.f, j * 48.f, 48.f, 48.f);
+
+				// Add it to a vector 
+				collidables.push_back(tileBounds);
+			}
 
 			// Find its position in the tileset texture
 			int tileCol = tileNumber % (m_tileset.getSize().x / tileSize.x);

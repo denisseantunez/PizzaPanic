@@ -1,5 +1,17 @@
 #include "Player.h"
 
+//void Player::setHitbox()
+//{
+//
+//	float hitboxWidth = texRect.width * 0.5;  // 80% of the texRect's width
+//	float hitboxHeight = texRect.height * 0.5; // 80% of the texRect's height
+//
+//	// Center hitbox with sprite
+//	float hitboxX = sprite.getPosition().x - (hitboxWidth / 2);
+//	float hitboxY = sprite.getPosition().y - (hitboxHeight / 2);
+//
+//	hitbox = sf::FloatRect(hitboxX, hitboxY, hitboxWidth, hitboxHeight);
+//}
 
 void Player::move(sf::Time deltaTime)
 {
@@ -16,6 +28,8 @@ void Player::move(sf::Time deltaTime)
 	if (movement.x != 0.f && movement.y != 0.f)
 		movement = movement / std::sqrt(2.f);
 
+	previousPos = sprite.getPosition();
+
 	sprite.move(movement * deltaTime.asSeconds());
 }
 
@@ -26,6 +40,17 @@ void Player::animate()
 	else { texRect.left += 320; }
 
 	sprite.setTextureRect(texRect);
+}
+
+void Player::checkCollisions(const TileMap& objects)
+{
+	
+	for (const sf::FloatRect& collidable : objects.collidables) {
+		if (collidable.intersects(sprite.getGlobalBounds())) {
+			sprite.setPosition(previousPos);
+
+		}
+	}
 }
 
 void Player::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
