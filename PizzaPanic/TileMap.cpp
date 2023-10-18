@@ -8,16 +8,16 @@
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool collisions)
 {
 	// Load the tileset texture
-	if (!m_tileset.loadFromFile("Images\\Tileset.png"))
+	if (!m_tileset.loadFromFile("../Images/Tileset.png"))
 		return false;
 
 	// .txt tilemap
 	std::ifstream map_stream;
 	std::vector<std::vector<int> > tiles;
 	if(collisions == false)
-		map_stream.open("Tilemaps\\background.txt");
+		map_stream.open("../Tilemaps/background.txt");
 	else
-		map_stream.open("Tilemaps\\surfaceobjects.txt");
+		map_stream.open("../Tilemaps/surfaceobjects.txt");
 
 	for (std::string line; std::getline(map_stream, line);){
 		tiles.push_back(std::vector<int>());
@@ -29,6 +29,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool colli
 	unsigned int height = tiles.size();
 
 	m_vertices.setPrimitiveType(sf::Quads);
+  f_vertices.setPrimitiveType(sf::Quads);
 
 
 	// Populate the vertex array, with one quad per tile
@@ -55,21 +56,32 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, bool colli
 
 			// Get a pointer to the current tile's quad
 			sf::Vertex quad[4];
+      sf::Vertex fquad[4];
 
 			// Define its 4 corners
 			quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 			quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 			quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 			quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+      fquad[0].position = quad[0].position;
+      fquad[1].position = quad[1].position;
+      fquad[2].position = quad[2].position;
+      fquad[3].position = quad[3].position;
 
 			// Define its 4 texture coordinates
 			quad[0].texCoords = sf::Vector2f(tileCol * tileSize.x, tileRow * tileSize.y);
 			quad[1].texCoords = sf::Vector2f((tileCol + 1) * tileSize.x, tileRow * tileSize.y);
 			quad[2].texCoords = sf::Vector2f((tileCol + 1) * tileSize.x, (tileRow + 1) * tileSize.y);
 			quad[3].texCoords = sf::Vector2f(tileCol * tileSize.x, (tileRow + 1) * tileSize.y);
+      fquad[0].texCoords = sf::Vector2f(0 * tileSize.x, 0 * tileSize.y);
+      fquad[1].texCoords = sf::Vector2f((0 + 1) * tileSize.x, 0 * tileSize.y);
+      fquad[2].texCoords = sf::Vector2f((0 + 1) * tileSize.x, (0 + 1) * tileSize.y);
+      fquad[3].texCoords = sf::Vector2f(0 * tileSize.x, (0 + 1) * tileSize.y);
 
 			for (int k = 0; k < 4; ++k)
 				m_vertices.append(quad[k]);
+      for (int k = 0; k < 4; ++k)
+        f_vertices.append(quad[k]);
 		}
 		
 	}
@@ -89,6 +101,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	// Draw the vertex array
 	target.draw(m_vertices, states);
+  target.draw(f_vertices, states);
 }
 
 /*******************************************************************************************************************************************************************/

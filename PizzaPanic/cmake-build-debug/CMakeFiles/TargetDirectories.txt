@@ -1,0 +1,3 @@
+/Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic/cmake-build-debug/CMakeFiles/PizzaPanic.dir
+/Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic/cmake-build-debug/CMakeFiles/rebuild_cache.dir

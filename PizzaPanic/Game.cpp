@@ -50,8 +50,9 @@ void Game::processEvents()
 		case sf::Event::Closed:
 			mWindow.close();
 			break;
+    default:
+      break;
 		}
-
 	}
 }
 
@@ -192,13 +193,13 @@ void Game::render()
 void Game::Initialize()
 {
 	// Initialize MainMenu 
-	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
+	if (!m_font.loadFromFile("../Fonts/ka1.ttf"))
 		cout << ("Error al cargar el font.");
 	
-	if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
+	if (!m_font2.loadFromFile("../Fonts/font2.ttf"))
 		cout << ("Error al cargar el font del item.");
 	
-	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
+	if (!m_menuBackground.loadFromFile("../Images/FondoMainMenu.png"))
 		cout << ("Error al cargar el fondo del menu.");
 	MainMenu mainMenu(m_font, m_menuBackground);
 
@@ -206,49 +207,49 @@ void Game::Initialize()
 	mView = sf::View(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y));
 
 	// Item
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+	if (!mItemTexture.loadFromFile("../Images/PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
 	mItem.setPosition(3070.f, 2760.f);
 	mItem.setScale(1.7f, 1.7f);
 
 	// Arrow's item
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	if (!mItemArrowTexture.loadFromFile("../Images/PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	mItemArrow.setPosition(-1000, -1000);
 	mItemArrow.setScale(0.3f, 0.3f);
 
 	// Game Over
-	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
+	if (!GameOverTex.loadFromFile("../Images/GameOver_.png"))
 		cout << ("Error al cargar el archivo de game over.");
 	gameOver.setTexture(GameOverTex);
 	gameOver.setScale(1.5f, 1.5f);
 
 	// Music 
-	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
+	if (!music.openFromFile("../Audios/GORILLAvsHUMAN.wav"))
 		cout << ("Error al cargar el audio.");
 	music.setVolume(10.f);
 
-	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
+	if (!menuMusic.openFromFile("../Audios/omairi.wav"))
 		cout << ("Error al cargar el audio del menu.");
 	menuMusic.setVolume(20.f);
 
-	if (!deathSound.openFromFile("Audios\\death.wav"))
+	if (!deathSound.openFromFile("../Audios/death.wav"))
 		cout << ("Error al cargar el audio de game over.");
 
 	// Tilemap 
-	if (!background.load("Images\\Tileset.png", sf::Vector2u(48, 48), false))
+	if (!background.load("Images/Tileset.png", sf::Vector2u(48, 48), false))
 		cout << ("Error al cargar el mapa.");
-	if (!objects.load("Images\\Tileset.png", sf::Vector2u(48, 48), true))
+	if (!objects.load("Images/Tileset.png", sf::Vector2u(48, 48), true))
 		cout << ("Error al cargar los objetos del mapa.");
 
 	// Pizza logo in restaurant
-	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
+	if (!PizzaLogoTex.loadFromFile("../Images/Pizza.png"))
 		cout << ("Error al cargar el archivo de la pizza");
 
 	// Player 
-	if (!player.texture.loadFromFile("Images\\Robot.png"))
+	if (!player.texture.loadFromFile("../Images/Robot.png"))
 		cout << ("Error al cargar el archivo.");
 	player.texRect.left = 0;
 	player.texRect.top = 0;
@@ -260,19 +261,19 @@ void Game::Initialize()
 	player.sprite.setScale(player.escaleX, player.escaleY);
 
 	// Item's texture
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+	if (!mItemTexture.loadFromFile("../Images/PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
 	mItem.setPosition(3070.f, 2760.f);
 	mItem.setScale(1.7f, 1.7f);
 
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	if (!mItemArrowTexture.loadFromFile("../Images/PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	mItem.setPosition(-1000, -1000);
 
 	// Chiwis' texture
-	if (!chiwis.texture.loadFromFile("Images\\Mascotas.png")) 
+	if (!chiwis.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de chiwis.");
 	chiwis.texRect.left = 0;
 	chiwis.texRect.width = 36;
@@ -287,7 +288,7 @@ void Game::Initialize()
 	float chiwisHeight = chiwisRect.height;
 
 	// Sheguis'texture 
-	if (!sheguis.texture.loadFromFile("Images\\Mascotas.png")) 
+	if (!sheguis.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de sheguis.");
 	sheguis.texRect.left = 0;
 	sheguis.texRect.width = 36;
@@ -302,7 +303,7 @@ void Game::Initialize()
 	float sheguisHeight = sheguisRect.height;
 
 	// Soruya's texture
-	if (!soruya.texture.loadFromFile("Images\\Mascotas.png")) 
+	if (!soruya.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de soruya.");
 	soruya.texRect.left = 156;
 	soruya.texRect.width = 36;
@@ -317,7 +318,7 @@ void Game::Initialize()
 	float soruyaHeight = soruyaRect.height;
 
 	// Mindy's texture
-	if (!mindy.texture.loadFromFile("Images\\Mascotas.png"))
+	if (!mindy.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de mindy.");
 	mindy.texRect.left = 156;
 	mindy.texRect.width = 36;
@@ -332,7 +333,7 @@ void Game::Initialize()
 	float mindyHeight = mindyRect.height;
 
 	// Bella's texture
-	if (!bella.texture.loadFromFile("Images\\Mascotas.png"))
+	if (!bella.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de bella.");
 	bella.texRect.left = 468;
 	bella.texRect.width = 36;
@@ -347,7 +348,7 @@ void Game::Initialize()
 	float bellaHeight = bellaRect.height;
 
 	// Manteca's texture 
-	if (!manteca.texture.loadFromFile("Images\\Mascotas.png"))
+	if (!manteca.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de manteca.");
 	manteca.texRect.left = 312;
 	manteca.texRect.width = 36;
@@ -362,7 +363,7 @@ void Game::Initialize()
 	float mantecaHeight = mantecaRect.height;
 
 	// Pushi's texture 
-	if (!pushi.texture.loadFromFile("Images\\Mascotas.png")) 
+	if (!pushi.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de pushi.");
 	pushi.texRect.left = 312;
 	pushi.texRect.width = 36;
@@ -377,7 +378,7 @@ void Game::Initialize()
 	float pushiHeight = pushiRect.height;
 
 	// Muneca's texture
-	if (!muneca.texture.loadFromFile("Images\\Mascotas.png"))
+	if (!muneca.texture.loadFromFile("../Images/Mascotas.png"))
 		cout << ("Error al cargar la textura de muneca.");
 	muneca.texRect.left = 468;
 	muneca.texRect.width = 36;

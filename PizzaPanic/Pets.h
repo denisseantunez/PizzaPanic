@@ -11,7 +11,7 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::IntRect texRect;
-	float speed = 250.f;
+	float speed = 100.f;
 
 	void setHitbox(const float x, const float y, const float width, const float height);
 
@@ -27,7 +27,7 @@ public:
 
 private:
 
-	const float RadioDetected = 300.f;
+	const float RadioDetected = 200.f;
 
 	float petAngle(float xPlayer, float yPlayer, float xPet, float yPet, float initialX, float initialY);
 	float chiwisAngle(float xPlayer, float yPlayer, float xPet, float yPet, const float chiwisSpeed);

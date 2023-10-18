@@ -1,5 +1,8 @@
 
 #include "Pets.h"
+#include <cmath>
+
+using std::pow;
 
 
 /*******************************************************************************************************************************************************************/
@@ -147,7 +150,7 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 		hitbox.move(velocitychiwis * deltaTime.asSeconds());
 	}
 	else {
-		chiwisSpeed = 400.f;
+		chiwisSpeed = 250.f;
 		sf::Vector2f velocitychiwis = unitVectorchiwis * (chiwisSpeed);
 		hitbox.move(velocitychiwis * deltaTime.asSeconds());
 	}
