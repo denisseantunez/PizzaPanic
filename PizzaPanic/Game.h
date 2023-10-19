@@ -39,14 +39,18 @@ public:
 
 	//Creating pets and Player
 	Player player;
-	Pet chiwis;
+
+	Pet pets[8];
+
+
+	/*Pet chiwis;
 	Pet sheguis;
 	Pet soruya;
 	Pet mindy;
 	Pet bella;
 	Pet manteca;
 	Pet pushi;
-	Pet muneca;
+	Pet muneca;*/
 
 	// Public game objects
 	MainMenu mainMenu;

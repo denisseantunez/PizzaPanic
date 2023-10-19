@@ -7,7 +7,7 @@ using std::pow;
 
 /*******************************************************************************************************************************************************************/
 
-void Pet::setHitbox(const float x, const float y, const float width, const float height)
+void Pet::setHitbox(const float x, const float y)
 {
 	hitbox.setPosition(x, y);
 	hitbox.setSize(sf::Vector2f(width, height));

@@ -113,11 +113,11 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 		clock.restart();
 		alpha = 0.0f;
 	}
-	if (alpha < 1) { // Day to night color transition
+	if (alpha < 1)  // Day to night color transition
 		currentColor = colorInterpolation(alpha);
-	}else{ // Night to day color transition
+	else // Night to day color transition
 		currentColor = colorInterpolation(2-alpha);
-	}
+	
 
 	// Apply current color to tile
 	for (size_t i = 0; i < m_vertices.getVertexCount(); i += 4) {
