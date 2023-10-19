@@ -91,6 +91,7 @@ private:
 	
 	// Time
 	sf::Clock clock;
+	sf::Clock clock2;
 
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;

@@ -81,6 +81,11 @@ void Game::update(sf::Time deltaTime)
 
 		clock.restart();
 	}
+	
+	// Update day and night colors
+	layer0.updateDayNightCycle(clock2);
+	layer1.updateDayNightCycle(clock2);
+	layer2.updateDayNightCycle(clock2);
 
 	// Camera size
 	mView.setSize(1000.f, 1000.f);
