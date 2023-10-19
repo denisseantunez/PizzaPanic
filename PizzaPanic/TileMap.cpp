@@ -101,42 +101,43 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void TileMap::updateDayNightCycle(sf::Clock& clock) 
 {
-
 	// Get the time since the clock started
 	sf::Time elapsedTime = clock.getElapsedTime();
 
-	
-
 	// Calculate alpha (opacity component) based on time which is in between 0 and 1 (will gradually change from day color to night color)
-	float alpha = elapsedTime.asSeconds() / 20;
+	float alpha = elapsedTime.asSeconds() / 10;
+
 
 	// If alpha exceeds 1 (night time) reset it to 0 (day time)
-	if (alpha >= 1.0f) {
+	if (alpha > 2.0f) {
 		clock.restart();
 		alpha = 0.0f;
 	}
-
-	//std::cout << alpha << std::endl;
-
-	// Day and night colors
-	sf::Color dayColor(255, 254, 232);
-	sf::Color nightColor(44, 0, 95);
-
-
-	sf::Uint8 r = static_cast<sf::Uint8>(dayColor.r + alpha * (nightColor.r - dayColor.r));
-	sf::Uint8 g = static_cast<sf::Uint8>(dayColor.g + alpha * (nightColor.g - dayColor.g));
-	sf::Uint8 b = static_cast<sf::Uint8>(dayColor.b + alpha * (nightColor.b - dayColor.b));
-	sf::Uint8 a = static_cast<sf::Uint8>(dayColor.a + alpha * (nightColor.a - dayColor.a));
-
-	currentColor = sf::Color(r, g, b, a);
+	if (alpha < 1) { // Day to night color transition
+		currentColor = colorInterpolation(alpha);
+	}else{ // Night to day color transition
+		currentColor = colorInterpolation(2-alpha);
+	}
 
 	// Apply current color to tile
-
 	for (size_t i = 0; i < m_vertices.getVertexCount(); i += 4) {
 		for (int j = 0; j < 4; ++j)
 			m_vertices[i + j].color = currentColor;
 	}
 
+}
 
+sf::Color TileMap::colorInterpolation(float alpha) {
+	// Day and night colors
+	sf::Color dayColor(255, 254, 232);
+	sf::Color nightColor(44, 0, 95);
+
+	// Color 1 to color 2 transition
+	sf::Uint8 r = static_cast<sf::Uint8>(dayColor.r + alpha * (nightColor.r - dayColor.r));
+	sf::Uint8 g = static_cast<sf::Uint8>(dayColor.g + alpha * (nightColor.g - dayColor.g));
+	sf::Uint8 b = static_cast<sf::Uint8>(dayColor.b + alpha * (nightColor.b - dayColor.b));
+	sf::Uint8 a = static_cast<sf::Uint8>(dayColor.a + alpha * (nightColor.a - dayColor.a));
+
+	return sf::Color(r, g, b, a);
 
 }

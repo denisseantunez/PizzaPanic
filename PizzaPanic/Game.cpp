@@ -134,7 +134,7 @@ void Game::update(sf::Time deltaTime)
 	manteca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
 
 	// Pets follow player
-	chiwis.followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
+	//chiwis.followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
 	sheguis.followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
 	soruya.followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
 	mindy.followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);

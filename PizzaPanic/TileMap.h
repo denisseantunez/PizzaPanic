@@ -19,7 +19,7 @@ public:
 	std::vector<sf::FloatRect> collidables;
 	
 private:
-
+	virtual sf::Color colorInterpolation(float alpha);
 	
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::VertexArray m_vertices;
