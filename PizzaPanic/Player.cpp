@@ -51,9 +51,9 @@ void Player::checkCollisions(const TileMap& objects)
   
 	for (const sf::FloatRect& collidable : objects.collidables) {
 		if (collidable.intersects(new_bounds)) {
-      sprite.setPosition(previousPos);
-      break;
-    }
+			sprite.setPosition(previousPos);
+			break;
+		  }
 	}
 }
 

@@ -7,6 +7,7 @@ int main()
 	Game game;
 	
 	do {
+
 		// Initialize variables
 		game.mainMenu.resetSelectedOption();
 		game.processEvents();
@@ -15,6 +16,8 @@ int main()
 		game.mItem.setTexture(game.mItemTexture);
 		game.mItem.setPosition(3070.f, 2760.f);
 		game.player.sprite.setPosition(game.player.initialX, game.player.initialY);
+		//game.player.previousPos = sf::Vector2f(game.player.initialX, game.player.initialY);
+		//std::cout << game.xPlayer << "..." << game.yPlayer << std::endl;
 		game.mItem.setScale(1.7f, 1.7f);
 		game.chiwis.hitbox.setPosition(3000.f, 700.f);
 		game.manteca.hitbox.setPosition(2366.f, 2800.f);
@@ -24,17 +27,17 @@ int main()
 		game.mWindow.setView(game.mView);
 
 		// Playing music and showing Main Menu
-		game.menuMusic.play();
-		game.menuMusic.setLoop(true);
+		//game.menuMusic.play();
+		//game.menuMusic.setLoop(true);
 		game.showMainMenu();
 
 		// If Play button is clicked, start the game
 		if (game.mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
 
 			// Play game music
-			game.menuMusic.stop();
-			game.music.play();
-			game.music.setLoop(true);
+			//game.menuMusic.stop();
+			//game.music.play();
+			//game.music.setLoop(true);
 
 			//Initializing time
 			sf::Clock clock;

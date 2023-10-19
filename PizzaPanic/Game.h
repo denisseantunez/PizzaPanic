@@ -119,8 +119,9 @@ private:
 	sf::Texture m_menuBackground;
 
 	// Tilemap
-	TileMap background;
-	TileMap objects;
+	TileMap layer0;
+	TileMap layer1;
+	TileMap layer2;
 
 	// Previous Positions
 	sf::Vector2f previousChiwisPos;

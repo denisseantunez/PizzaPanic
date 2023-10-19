@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
 #include "TileMap.h"
 
 class Player
@@ -22,12 +23,14 @@ public:
 
 	const float playerWidht = 320.f;
 	const float playerHeight = 320.f;
-	const float initialX = 2500.f;
-	const float initialY = 2500.f;
+	 float initialX = 1345.f;
+	 float initialY = 1390.f;
 	const float escaleX = 0.18;
 	const float escaleY = 0.18;
 
 	sf::Vector2f previousPos;
+	
+
 	sf::RectangleShape playerLife;
 	sf::RectangleShape playerLifeAux;
 
