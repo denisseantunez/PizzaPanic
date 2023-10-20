@@ -91,7 +91,6 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// Apply the tileset texture
 	states.texture = &m_tileset;
 
-	// Apply current color to tile
 
 	// Draw the vertex array
 	target.draw(m_vertices, states);
@@ -105,7 +104,7 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 	sf::Time elapsedTime = clock.getElapsedTime();
 
 	// Calculate alpha (opacity component) based on time which is in between 0 and 1 (will gradually change from day color to night color)
-	float alpha = elapsedTime.asSeconds() / 10;
+	float alpha = elapsedTime.asSeconds() / 30;
 
 
 	// If alpha exceeds 1 (night time) reset it to 0 (day time)

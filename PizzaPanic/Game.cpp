@@ -106,15 +106,6 @@ void Game::update(sf::Time deltaTime)
 	for (int i = 0; i < 8; ++i)
 		pets[i].sprite.setPosition(pets[i].hitbox.getPosition().x, pets[i].hitbox.getPosition().y);
 
-	/*chiwis.sprite.setPosition(chiwis.hitbox.getPosition().x, chiwis.hitbox.getPosition().y);
-	sheguis.sprite.setPosition(sheguis.hitbox.getPosition().x, sheguis.hitbox.getPosition().y);
-	soruya.sprite.setPosition(soruya.hitbox.getPosition().x, soruya.hitbox.getPosition().y);
-	mindy.sprite.setPosition(mindy.hitbox.getPosition().x, mindy.hitbox.getPosition().y);
-	bella.sprite.setPosition(bella.hitbox.getPosition().x, bella.hitbox.getPosition().y);
-	manteca.sprite.setPosition(manteca.hitbox.getPosition().x, manteca.hitbox.getPosition().y);
-	pushi.sprite.setPosition(pushi.hitbox.getPosition().x, pushi.hitbox.getPosition().y);
-	muneca.sprite.setPosition(muneca.hitbox.getPosition().x, muneca.hitbox.getPosition().y);*/
-
 	// Check item collision
 	CheckItemCollision();
 
@@ -131,14 +122,6 @@ void Game::update(sf::Time deltaTime)
 	for (int i = 0; i < 8; ++i)
 		pets[i].checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
 
-	/*chiwis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	sheguis.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	soruya.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	bella.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	pushi.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	muneca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	mindy.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);
-	manteca.checkBites(bites, quitarVida, deliveredPizzas, mPlayerCollider);*/
 
 	// Pets follow player
 	//pets[0].followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
@@ -156,15 +139,6 @@ void Game::update(sf::Time deltaTime)
 
 	for (int i = 1; i < 8; ++i)
 		pets[i].checkCollisions(layer1, deltaTime, 250.f);
-
-
-	/*sheguis.checkCollisions(layer1, deltaTime, 250.f);
-	soruya.checkCollisions(layer1, deltaTime, 250.f);
-	mindy.checkCollisions(layer1, deltaTime, 250.f);
-	bella.checkCollisions(layer1, deltaTime, 250.f);
-	manteca.checkCollisions(layer1, deltaTime, 250.f);
-	pushi.checkCollisions(layer1, deltaTime, 250.f);
-	muneca.checkCollisions(layer1, deltaTime, 250.f);*/
 
 	//Move Player
 	player.move(deltaTime);
@@ -334,128 +308,6 @@ void Game::Initialize()
 	pets[7].texRect.left = 468;
 	pets[7].sprite.setPosition(1500.f, 2415.f);
 	
-
-
-
-	// Chiwis' texture
-	//if (!chiwis.texture.loadFromFile("Images\\Mascotas.png"))
-	//	cout << ("Error al cargar la textura de chiwis.");
-	//chiwis.texRect.left = 0;
-	//chiwis.texRect.width = 36;
-	//chiwis.texRect.height = 47;
-	//chiwis.sprite.setTexture(chiwis.texture);
-	//chiwis.sprite.setTextureRect(chiwis.texRect);
-	//chiwis.sprite.setPosition(3000.f, 700.f);
-	//chiwis.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect chiwisRect = chiwis.sprite.getGlobalBounds();
-	//float chiwisWidth = chiwisRect.width;
-	//float chiwisHeight = chiwisRect.height;
-
-	// Sheguis'texture 
-	//if (!sheguis.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de sheguis.");
-	//sheguis.texRect.left = 0;
-	//sheguis.texRect.width = 36;
-	//sheguis.texRect.height = 47;
-	//sheguis.sprite.setTexture(sheguis.texture);
-	//sheguis.sprite.setTextureRect(sheguis.texRect);
-	//sheguis.sprite.setPosition(2000.f, 2100.f);
-	//sheguis.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect sheguisRect = sheguis.sprite.getGlobalBounds();
-	//float sheguisWidth = sheguisRect.width;
-	//float sheguisHeight = sheguisRect.height;
-
-	// Soruya's texture
-	//if (!soruya.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de soruya.");
-	//soruya.texRect.left = 156;
-	//soruya.texRect.width = 36;
-	//soruya.texRect.height = 47;
-	//soruya.sprite.setTexture(soruya.texture);
-	//soruya.sprite.setTextureRect(soruya.texRect);
-	//soruya.sprite.setPosition(3000.f, 700.f);
-	//soruya.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect soruyaRect = soruya.sprite.getGlobalBounds();
-	//float soruyaWidth = soruyaRect.width;
-	//float soruyaHeight = soruyaRect.height;
-
-	// Mindy's texture
-	//if (!mindy.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de mindy.");
-	//mindy.texRect.left = 156;
-	//mindy.texRect.width = 36;
-	//mindy.texRect.height = 47;
-	//mindy.sprite.setTexture(mindy.texture);
-	//mindy.sprite.setTextureRect(mindy.texRect);
-	//mindy.sprite.setPosition(1816.f, 1466.f);
-	//mindy.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect mindyRect = mindy.sprite.getGlobalBounds();
-	//float mindyWidth = mindyRect.width;
-	//float mindyHeight = mindyRect.height;
-
-	// Bella's texture
-	//if (!bella.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de bella.");
-	//bella.texRect.left = 468;
-	//bella.texRect.width = 36;
-	//bella.texRect.height = 47;
-	//bella.sprite.setTexture(bella.texture);
-	//bella.sprite.setTextureRect(bella.texRect);
-	//bella.sprite.setPosition(85.f, 790.f);
-	//bella.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect bellaRect = bella.sprite.getGlobalBounds();
-	//float bellaWidth = bellaRect.width;
-	//float bellaHeight = bellaRect.height;
-
-	// Manteca's texture 
-	//if (!manteca.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de manteca.");
-	//manteca.texRect.left = 312;
-	//manteca.texRect.width = 36;
-	//manteca.texRect.height = 47;
-	//manteca.sprite.setTexture(manteca.texture);
-	//manteca.sprite.setTextureRect(manteca.texRect);
-	//manteca.sprite.setPosition(2366.f, 2800.f);
-	//manteca.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect mantecaRect = manteca.sprite.getGlobalBounds();
-	//float mantecaWidth = mantecaRect.width;
-	//float mantecaHeight = mantecaRect.height;
-
-	// Pushi's texture 
-	//if (!pushi.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de pushi.");
-	//pushi.texRect.left = 312;
-	//pushi.texRect.width = 36;
-	//pushi.texRect.height = 47;
-	//pushi.sprite.setTexture(pushi.texture);
-	//pushi.sprite.setTextureRect(pushi.texRect);
-	//pushi.sprite.setPosition(85.f, 1950.f);
-	//pushi.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect pushiRect = pushi.sprite.getGlobalBounds();
-	//float pushiWidth = pushiRect.width;
-	//float pushiHeight = pushiRect.height;
-
-	// Muneca's texture
-	//if (!muneca.texture.loadFromFile("Images\\Mascotas.png"))
-		//cout << ("Error al cargar la textura de muneca.");
-	//muneca.texRect.left = 468;
-	//muneca.texRect.width = 36;
-	//muneca.texRect.height = 47;
-	//muneca.sprite.setTexture(muneca.texture);
-	//muneca.sprite.setTextureRect(muneca.texRect);
-	//muneca.sprite.setPosition(1500.f, 2415.f);
-	//muneca.sprite.setScale(1.5f, 1.5f);
-
-	//sf::FloatRect munecaRect = muneca.sprite.getGlobalBounds();
-	//float munecaWidth = munecaRect.width;
-	//float munecaHeight = munecaRect.height;
 
 	// Item's texture 
 	prompt.setFont(m_font2);

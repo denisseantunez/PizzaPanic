@@ -42,16 +42,6 @@ public:
 
 	Pet pets[8];
 
-
-	/*Pet chiwis;
-	Pet sheguis;
-	Pet soruya;
-	Pet mindy;
-	Pet bella;
-	Pet manteca;
-	Pet pushi;
-	Pet muneca;*/
-
 	// Public game objects
 	MainMenu mainMenu;
 	sf::Sprite mItem;
@@ -127,12 +117,6 @@ private:
 	TileMap layer0;
 	TileMap layer1;
 	TileMap layer2;
-
-	// Previous Positions
-	sf::Vector2f previousChiwisPos;
-	sf::Vector2f previousSheguisPos;
-	sf::Vector2f previousSoruyaPos;
-	sf::Vector2f previousMindyPos;
 
 	// Game objects
 	sf::ConvexShape arrow;
