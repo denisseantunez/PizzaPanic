@@ -104,7 +104,7 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 	sf::Time elapsedTime = clock.getElapsedTime();
 
 	// Calculate alpha (opacity component) based on time which is in between 0 and 1 (will gradually change from day color to night color)
-	float alpha = elapsedTime.asSeconds() / 30;
+	float alpha = elapsedTime.asSeconds() / 60;
 
 
 	// If alpha exceeds 1 (night time) reset it to 0 (day time)
@@ -112,6 +112,7 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 		clock.restart();
 		alpha = 0.0f;
 	}
+
 	if (alpha < 1)  // Day to night color transition
 		currentColor = colorInterpolation(alpha);
 	else // Night to day color transition
@@ -119,9 +120,8 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 	
 
 	// Apply current color to tile
-	for (size_t i = 0; i < m_vertices.getVertexCount(); i += 4) {
-		for (int j = 0; j < 4; ++j)
-			m_vertices[i + j].color = currentColor;
+	for (size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
+		m_vertices[i].color = currentColor;
 	}
 
 }

@@ -67,26 +67,33 @@ void Game::update(sf::Time deltaTime)
 	xPlayer = player.sprite.getPosition().x;
 	yPlayer = player.sprite.getPosition().y;
 
+	//cout << "x: " << xPlayer << std::endl;
+	//cout << "y: " << yPlayer << std::endl;
+
 	// Sprite Animations 
 	if (clock.getElapsedTime().asSeconds() > 0.1f) {
 		player.animate();
 
 		pets[0].animate(xPlayer, yPlayer, chiwisSpeed);
-		pets[1].animate(xPlayer, yPlayer, 2000.f, 2100.f);
-		pets[2].animate(xPlayer, yPlayer, 3000.f, 700.f);
-		pets[3].animate(xPlayer, yPlayer, 1816.f, 1466.f);
-		pets[4].animate(xPlayer, yPlayer, 85.f, 790.f);
-		pets[5].animate(xPlayer, yPlayer, 2366, 2800);
-		pets[6].animate(yPlayer, yPlayer, 85.f, 1950.f);
-		pets[7].animate(xPlayer, yPlayer, 1500.f, 2415.f);
+		pets[1].animate(xPlayer, yPlayer, 407.536f, 2372.47f);
+		pets[2].animate(xPlayer, yPlayer, 407.536f, 1240.f);
+		pets[3].animate(xPlayer, yPlayer, 407.536f, 317.541f);
+		pets[4].animate(xPlayer, yPlayer, 2264.14f, 1248.04f);
+		pets[5].animate(xPlayer, yPlayer, 2264.14f, 2335.5f);
+		pets[6].animate(yPlayer, yPlayer, 2378.68f, 228.298f);
+		pets[7].animate(xPlayer, yPlayer, 1338.86f, 618.972f);
 
 		clock.restart();
 	}
 	
-	// Update day and night colors
-	layer0.updateDayNightCycle(clock2);
-	layer1.updateDayNightCycle(clock2);
-	layer2.updateDayNightCycle(clock2);
+	if (clock3.getElapsedTime().asSeconds() > 0.4f) {
+		// Update day and night colors
+		layer0.updateDayNightCycle(clock2);
+		layer1.updateDayNightCycle(clock2);
+		layer2.updateDayNightCycle(clock2);
+
+		clock3.restart();
+	}
 
 	// Camera size
 	mView.setSize(1000.f, 1000.f);
@@ -125,13 +132,13 @@ void Game::update(sf::Time deltaTime)
 
 	// Pets follow player
 	//pets[0].followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
-	pets[1].followPlayer(xPlayer, yPlayer, 2000.f, 2100.f, deltaTime);
-	pets[2].followPlayer(xPlayer, yPlayer, 3000.f, 700.f, deltaTime);
-	pets[3].followPlayer(xPlayer, yPlayer, 1816.f, 1466.f, deltaTime);
-	pets[4].followPlayer(xPlayer, yPlayer, 85.f, 790.f, deltaTime);
-	pets[5].followPlayer(xPlayer, yPlayer, 2366.f, 2800.f, deltaTime);
-	pets[6].followPlayer(xPlayer, yPlayer, 85.f, 1950.f, deltaTime);
-	pets[7].followPlayer(xPlayer, yPlayer, 1500.f, 2415.f, deltaTime);
+	pets[1].followPlayer(xPlayer, yPlayer, 407.536f, 2372.47f, deltaTime);
+	pets[2].followPlayer(xPlayer, yPlayer, 407.536f, 1240.f, deltaTime);
+	pets[3].followPlayer(xPlayer, yPlayer, 407.536f, 317.541f, deltaTime);
+	pets[4].followPlayer(xPlayer, yPlayer, 2264.14f, 1248.04f, deltaTime);
+	pets[5].followPlayer(xPlayer, yPlayer, 2264.14f, 2335.5f, deltaTime);
+	pets[6].followPlayer(xPlayer, yPlayer, 2378.68f, 228.298f, deltaTime);
+	pets[7].followPlayer(xPlayer, yPlayer, 1338.86f, 618.972f, deltaTime);
 
 	// Check for collisions
 	player.checkCollisions(layer1);
@@ -238,8 +245,10 @@ void Game::Initialize()
 		cout << ("Error al cargar los detalles del mapa.");
 
 	// Pizza logo in restaurant
-	if (!PizzaLogoTex.loadFromFile("Images\'Pizza.png"))
+	if (!PizzaLogoTex.loadFromFile("Images\Pizza.png"))
 		cout << ("Error al cargar el archivo de la pizza");
+	pizzaLogo.setTexture(PizzaLogoTex);
+	pizzaLogo.setPosition(1345.f, 1167.58f);
 
 	// Player 
 	if (!player.texture.loadFromFile("Images\\Robot.png"))
@@ -285,42 +294,42 @@ void Game::Initialize()
 	// [7] --> muñeca
 
 	pets[0].texRect.left = 0;
-	pets[0].sprite.setPosition(3000.f, 700.f);
+	pets[0].sprite.setPosition(1361.51f, 2678.98f);
 
 	pets[1].texRect.left = 0;
-	pets[1].sprite.setPosition(2000.f, 2100.f);
+	pets[1].sprite.setPosition(407.536f, 2372.47f);
 
 	pets[2].texRect.left = 156;
-	pets[2].sprite.setPosition(3000.f, 700.f);
+	pets[2].sprite.setPosition(407.536f, 1240.f);
 
 	pets[3].texRect.left = 156;
-	pets[3].sprite.setPosition(1816.f, 1466.f);
+	pets[3].sprite.setPosition(407.536f, 317.541f);
 
 	pets[4].texRect.left = 468;
-	pets[4].sprite.setPosition(85.f, 790.f);
+	pets[4].sprite.setPosition(2264.14f, 1248.04f);
 
 	pets[5].texRect.left = 312;
-	pets[5].sprite.setPosition(2366.f, 2800.f);
+	pets[5].sprite.setPosition(2264.14f, 2335.5f);
 
 	pets[6].texRect.left = 312;
-	pets[6].sprite.setPosition(85.f, 1950.f);
+	pets[6].sprite.setPosition(2378.68f, 228.298f);
 
 	pets[7].texRect.left = 468;
-	pets[7].sprite.setPosition(1500.f, 2415.f);
+	pets[7].sprite.setPosition(1338.86f, 618.972f);
 	
 
 	// Item's texture 
 	prompt.setFont(m_font2);
 
 	// Hitboxes 
-	pets[0].setHitbox(3000.f, 700.f);
-	pets[1].setHitbox(2000.f, 2100.f);
-	pets[2].setHitbox(3000.f, 700.f);
-	pets[3].setHitbox(1816.f, 1466.f);
-	pets[4].setHitbox(85.f, 790.f);
-	pets[5].setHitbox(2366.f, 2800.f);
-	pets[6].setHitbox(85.f, 1950.f);
-	pets[7].setHitbox(1500.f, 2415.f);
+	pets[0].setHitbox(1361.51f, 2678.98f);
+	pets[1].setHitbox(407.536f, 2372.47f);
+	pets[2].setHitbox(407.536f, 1240.f);
+	pets[3].setHitbox(407.536f, 317.541f);
+	pets[4].setHitbox(2264.14f, 1248.04f);
+	pets[5].setHitbox(2264.14f, 2335.5f);
+	pets[6].setHitbox(2378.68f, 228.298f);
+	pets[7].setHitbox(1338.86f, 618.972f);
 
 	// Creating array and seed
 	MakeArray();
