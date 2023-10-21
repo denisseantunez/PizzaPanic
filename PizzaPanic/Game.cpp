@@ -245,7 +245,7 @@ void Game::Initialize()
 		cout << ("Error al cargar los detalles del mapa.");
 
 	// Pizza logo in restaurant
-	if (!PizzaLogoTex.loadFromFile("Images\Pizza.png"))
+	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
 		cout << ("Error al cargar el archivo de la pizza");
 	pizzaLogo.setTexture(PizzaLogoTex);
 	pizzaLogo.setPosition(1345.f, 1167.58f);
@@ -414,8 +414,8 @@ void Game::CheckItemCollision() {
 			}
 			else {
 				cargandoItem = true;
-				NuevaPosicion = rand() % 35;
-				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+				NuevaPosicion = rand() % 22;
+				//mItemArrow.setPosition([NuevaPosicion]PosicionesItem[0], [NuevaPosicion]PosicionesItem[1]);
 				mItemArrow.setScale(0.3f, 0.3f);
 				mItem.setPosition(-1000, -1000);
 			}

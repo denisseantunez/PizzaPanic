@@ -39,7 +39,6 @@ public:
 
 	//Creating pets and Player
 	Player player;
-
 	Pet pets[8];
 
 	// Public game objects
