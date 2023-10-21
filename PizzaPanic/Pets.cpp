@@ -1,10 +1,13 @@
 
 #include "Pets.h"
+#include <cmath>
+
+using std::pow;
 
 
 /*******************************************************************************************************************************************************************/
 
-void Pet::setHitbox(const float x, const float y, const float width, const float height)
+void Pet::setHitbox(const float x, const float y)
 {
 	hitbox.setPosition(x, y);
 	hitbox.setSize(sf::Vector2f(width, height));
@@ -147,7 +150,7 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 		hitbox.move(velocitychiwis * deltaTime.asSeconds());
 	}
 	else {
-		chiwisSpeed = 400.f;
+		chiwisSpeed = 250.f;
 		sf::Vector2f velocitychiwis = unitVectorchiwis * (chiwisSpeed);
 		hitbox.move(velocitychiwis * deltaTime.asSeconds());
 	}
@@ -157,7 +160,7 @@ void Pet::followPlayer(sf::Sprite mPlayer, const float chiwisRadio, float chiwis
 
 void Pet::checkBites(float& mordidas, float& quitarVida, int PizzasEntregadas, sf::FloatRect playerCollider)
 {
-	sf::FloatRect petCollider = hitbox.getGlobalBounds();
+	sf::FloatRect petCollider = sprite.getGlobalBounds();
 
 	if (petCollider.intersects(playerCollider)) {
 		mordidas += 0.5f + (PizzasEntregadas / 10.f);

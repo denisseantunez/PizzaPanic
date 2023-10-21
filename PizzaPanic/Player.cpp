@@ -1,6 +1,7 @@
 
 
 #include "Player.h"
+#include <cmath>
 
 /*******************************************************************************************************************************************************************/
 
@@ -40,9 +41,19 @@ void Player::animate()
 
 void Player::checkCollisions(const TileMap& objects)
 {
+  double scale = 0.1;
+  sf::FloatRect bounds = sprite.getGlobalBounds();
+  double new_width = bounds.width * scale;
+  double new_height = bounds.height * scale;
+  double new_left = bounds.left + (bounds.width - new_width) / 2.0;
+  double new_top = bounds.top + (bounds.height - new_height) / 2.0;
+  sf::FloatRect new_bounds = sf::FloatRect(new_left, new_top, new_width, new_height);
+  
 	for (const sf::FloatRect& collidable : objects.collidables) {
-		if (collidable.intersects(sprite.getGlobalBounds())) 
+		if (collidable.intersects(new_bounds)) {
 			sprite.setPosition(previousPos);
+			break;
+		  }
 	}
 }
 

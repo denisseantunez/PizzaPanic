@@ -39,14 +39,7 @@ public:
 
 	//Creating pets and Player
 	Player player;
-	Pet chiwis;
-	Pet sheguis;
-	Pet soruya;
-	Pet mindy;
-	Pet bella;
-	Pet manteca;
-	Pet pushi;
-	Pet muneca;
+	Pet pets[8];
 
 	// Public game objects
 	MainMenu mainMenu;
@@ -60,6 +53,8 @@ public:
 	sf::Music music;
 	sf::Music menuMusic;
 	sf::Music deathSound;
+
+	sf::Clock clock2;
 
 
     bool displayItemPrompt;
@@ -91,6 +86,7 @@ private:
 	
 	// Time
 	sf::Clock clock;
+	sf::Clock clock3;
 
 	// Pizza logo in restaurant
 	sf::Texture PizzaLogoTex;
@@ -119,14 +115,9 @@ private:
 	sf::Texture m_menuBackground;
 
 	// Tilemap
-	TileMap background;
-	TileMap objects;
-
-	// Previous Positions
-	sf::Vector2f previousChiwisPos;
-	sf::Vector2f previousSheguisPos;
-	sf::Vector2f previousSoruyaPos;
-	sf::Vector2f previousMindyPos;
+	TileMap layer0;
+	TileMap layer1;
+	TileMap layer2;
 
 	// Game objects
 	sf::ConvexShape arrow;

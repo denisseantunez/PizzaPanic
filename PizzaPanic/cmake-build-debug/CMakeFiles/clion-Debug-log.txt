@@ -1,0 +1,5 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic -B /Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic/cmake-build-debug
+-- Found SFML 2.5.1 in /Library/Frameworks/SFML.framework/Resources/CMake
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/omarpacheco/Documents/Proyectos/Juego/JuegoDenisse1/PizzaPanic/PizzaPanic/cmake-build-debug
