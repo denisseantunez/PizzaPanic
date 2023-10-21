@@ -73,8 +73,4 @@ int main()
 			}
 		}
 	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir && game.mWindow.isOpen());
-<<<<<<< HEAD
-=======
-	
->>>>>>> f64cd4e60f18bd765ffb823f75569ddaccfdc993
 }
