@@ -217,7 +217,7 @@ void Game::Initialize()
 	mItem.setScale(1.7f, 1.7f);
 
 	// Arrow's item
-	if (!mItemArrowTexture.loadFromFile("Images\PixelArrowRotated.png"))
+	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	mItemArrow.setPosition(-1000, -1000);
