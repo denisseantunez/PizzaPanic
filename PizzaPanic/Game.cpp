@@ -116,8 +116,8 @@ void Game::update(sf::Time deltaTime)
 	// Check item collision
 	CheckItemCollision();
 
-	// Arrow
-	if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) 
+	// Arrow 
+	if (mItem.getPosition().x == 1436.f && mItem.getPosition().y == 1388.f)
 		Arrow(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
 	else 
 		Arrow(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
@@ -161,13 +161,16 @@ void Game::render()
 {
 	mWindow.clear();;
 	mWindow.draw(layer0);
-	mWindow.draw(layer1);
+	//mWindow.draw(layer1);
 	mWindow.draw(layer2);
     mWindow.draw(mItem);
 	
 	mWindow.draw(player.sprite);
 	mWindow.draw(layer1);
 	mWindow.draw(pizzaLogo);
+	//mWindow.draw(layer2);
+
+	//mWindow.draw(player.sprite);
 	
 	mWindow.draw(mItemArrow);
 
@@ -269,13 +272,13 @@ void Game::Initialize()
 	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
-	mItem.setPosition(3070.f, 2760.f);
+	mItem.setPosition(1436.f, 1388.f);
 	mItem.setScale(1.7f, 1.7f);
 
 	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
-	mItem.setPosition(-1000, -1000);
+	//mItem.setPosition(-1000, -1000);
 
 	// Create pets
 	for (int i = 0; i < 8; ++i) {
@@ -391,11 +394,11 @@ void Game::CheckItemCollision() {
 	displayItemPrompt = false;
 	if (mPlayerCollider.intersects(mItemCollider) || mPlayerCollider.intersects(mItemArrowCollider)) {
 
-		if (mItem.getPosition().x == 3070.f && mItem.getPosition().y == 2760.f) {
+		if (mItem.getPosition().x == 1436.f && mItem.getPosition().y == 1388.f) {
 			prompt.setString("Presiona espacio para recoger la pizza!");
 		}
 		else {
-			prompt.setString("Presiona espacio para recoger la pizza!");
+			prompt.setString("Presiona espacio para dejar la pizza!");
 		}
 		displayItemPrompt = true;
 		if (cargandoItem) {
@@ -410,16 +413,16 @@ void Game::CheckItemCollision() {
 				quitarVida = 0.f;
 				bites = 0.f;
 				mItemArrow.setPosition(-1000, -1000);
-				mItem.setPosition(3070.f, 2760.f);
+				mItem.setPosition(1436.f,1388.f); 
 				mItem.setScale(1.7f, 1.7f);
 				cargandoItem = false;
 				deliveredPizzas++;
 			}
 			else {
 				cargandoItem = true;
-				NuevaPosicion = rand() % 22;
-				//mItemArrow.setPosition([NuevaPosicion]PosicionesItem[0], [NuevaPosicion]PosicionesItem[1]);
-				mItemArrow.setScale(0.3f, 0.3f);
+				NuevaPosicion = rand() % 23;
+				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
+				mItemArrow.setScale(0.4f, 0.4f);
 				mItem.setPosition(-1000, -1000);
 			}
 		}

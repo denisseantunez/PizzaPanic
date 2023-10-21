@@ -14,7 +14,7 @@ int main()
 		game.bites = 0.f;
 		game.quitarVida = 0.f;
 		game.mItem.setTexture(game.mItemTexture);
-		game.mItem.setPosition(1400.f, 1360.f);
+		game.mItem.setPosition(1436.f, 1388.f);
 		game.player.sprite.setPosition(game.player.initialX, game.player.initialY);
 		//game.player.previousPos = sf::Vector2f(game.player.initialX, game.player.initialY);
 		//std::cout << game.xPlayer << "..." << game.yPlayer << std::endl;
@@ -62,7 +62,7 @@ int main()
 				if (game.bites >= 60) {
 					game.clock2.restart();
 					game.deliveredPizzas = 0;
-					game.mItem.setPosition(3070.f, 2760.f);
+					game.mItem.setPosition(1436.f, 1388.f);
 					game.cargandoItem = false;
 					game.music.stop();
 					game.deathSound.play();
