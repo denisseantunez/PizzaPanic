@@ -18,7 +18,7 @@ float weight(graph* g, int u, int v);
 bool adjacent(graph* g, int u, int v);
 int nearest_vertex(int n, bool* frontier, float* distances);
 int* find_path(graph* g, int beg, int end);
-void initialize_graph(graph* g, int**matriz, int**adyacencia);
+void initialize_graph(graph* g, int**matriz, int**adyacencia, int tamMatriz);
 
 
 #endif 
