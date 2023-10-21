@@ -73,6 +73,6 @@ int main()
 				}
 			}
 		}
-	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir);
+	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir && game.mWindow.isOpen());
 	
 }

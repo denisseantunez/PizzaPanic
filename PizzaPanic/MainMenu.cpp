@@ -1,6 +1,5 @@
-
 #include "MainMenu.h"
-
+#include <vector>
 
 /*******************************************************************************************************************************************************************/
 
@@ -16,14 +15,14 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	TitleShadow.setPosition(170, 30);
 	TitleShadow.setStyle(sf::Text::Bold);
 	TitleShadow.setFillColor(sf::Color::Black);
-	m_menuItems.emplace_back(std::move(TitleShadow));
+	m_menuItems.__emplace_back(std::move(TitleShadow));
 
 	sf::Text Title("PIZZA PANIC", m_font);
 	Title.setCharacterSize(55);
 	Title.setPosition(173, 33);
 	Title.setStyle(sf::Text::Bold);
 	Title.setFillColor(sf::Color::Red);
-	m_menuItems.emplace_back(std::move(Title));
+	m_menuItems.__emplace_back(std::move(Title));
 ;
 	// Play Button
 	sf::RectangleShape playButton;
@@ -32,12 +31,12 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	playButton.setOutlineThickness(2);
 	playButton.setPosition(240, 300);
 	playButton.setFillColor(sf::Color::White);
-	m_menuButtons.emplace_back(std::move(playButton));
+	m_menuButtons.__emplace_back(std::move(playButton));
 
 	sf::Text playText("Jugar", m_font);
 	playText.setFillColor(sf::Color::Black);
 	playText.setPosition(335, 300);
-	m_menuItems.emplace_back(std::move(playText));
+	m_menuItems.__emplace_back(std::move(playText));
 
 
 	// Instructions Button
@@ -47,12 +46,12 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	instructionsButton.setOutlineThickness(2);
 	instructionsButton.setPosition(240, 350);
 	instructionsButton.setFillColor(sf::Color::White);
-	m_menuButtons.emplace_back(std::move(instructionsButton));
+	m_menuButtons.__emplace_back(std::move(instructionsButton));
 
 	sf::Text instructionsText("Instrucciones", m_font);
 	instructionsText.setFillColor(sf::Color::Black);
 	instructionsText.setPosition(250, 350);
-	m_menuItems.emplace_back(std::move(instructionsText));
+	m_menuItems.__emplace_back(std::move(instructionsText));
 
 	// Credits Button
 	sf::RectangleShape creditsButton;
@@ -61,12 +60,12 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	creditsButton.setOutlineThickness(2);
 	creditsButton.setPosition(240, 400);
 	creditsButton.setFillColor(sf::Color::White);
-	m_menuButtons.emplace_back(std::move(creditsButton));
+	m_menuButtons.__emplace_back(std::move(creditsButton));
 
 	sf::Text creditsText("Creditos", m_font);
 	creditsText.setFillColor(sf::Color::Black);
 	creditsText.setPosition(310, 400);
-	m_menuItems.emplace_back(std::move(creditsText));
+	m_menuItems.__emplace_back(std::move(creditsText));
 
 	// Quit Button
 	sf::RectangleShape quitButton;
@@ -75,12 +74,12 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 	quitButton.setOutlineThickness(2);
 	quitButton.setPosition(240, 450);
 	quitButton.setFillColor(sf::Color::White);
-	m_menuButtons.emplace_back(std::move(quitButton));
+	m_menuButtons.__emplace_back(std::move(quitButton));
 
 	sf::Text quitText("Salir", m_font);
 	quitText.setFillColor(sf::Color::Black);
 	quitText.setPosition(345, 450);
-	m_menuItems.emplace_back(std::move(quitText));
+	m_menuItems.__emplace_back(std::move(quitText));
 
 	if (m_selectedOption == Option::Instrucciones || m_selectedOption == Option::Creditos) {
 		// Go Back Button
@@ -90,12 +89,12 @@ MainMenu::MainMenu(sf::Font& font, sf::Texture& backgroundTexture)
 		backButton.setOutlineThickness(2);
 		backButton.setPosition(500, 520);
 		backButton.setFillColor(sf::Color::White);
-		m_menuButtons.emplace_back(std::move(backButton));
+		m_menuButtons.__emplace_back(std::move(backButton));
 
 		sf::Text backText("Regresar", m_font);
 		backText.setFillColor(sf::Color::Black);
 		backText.setPosition(500, 520);
-		m_menuItems.emplace_back(std::move(backText));
+		m_menuItems.__emplace_back(std::move(backText));
 	}
 
 }
