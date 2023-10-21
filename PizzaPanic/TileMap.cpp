@@ -8,7 +8,7 @@
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, int layer)
 {
 	// Load the tileset texture
-	if (!m_tileset.loadFromFile("Images\\Tileset.png"))
+	if (!m_tileset.loadFromFile("Images/Tileset.png"))
 		return false;
 
 	// .txt tilemap
@@ -16,11 +16,11 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, int layer)
 	std::vector<std::vector<int> > tiles;
 
 	if (layer == 0)
-		map_stream.open("Tilemaps\\layer0.txt");
+		map_stream.open("Tilemaps/layer0.txt");
 	else if (layer == 1)
-		map_stream.open("Tilemaps\\layer1.txt");
+		map_stream.open("Tilemaps/layer1.txt");
 	else
-		map_stream.open("Tilemaps\\layer2.txt");
+		map_stream.open("Tilemaps/layer2.txt");
 
 	for (std::string line; std::getline(map_stream, line);) {
 		tiles.push_back(std::vector<int>());
@@ -44,7 +44,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, int layer)
 			int tileNumber = tiles[j][i];
 
 			// COLISIONS
-			if (layer == 1 && tileNumber!= -1 && tileNumber != 0) {
+			if (layer == 1 && tileNumber != -1 && tileNumber != 0) {
 				// Calculate the bounds of the title
 				sf::FloatRect tileBounds(i * 48.f, j * 48.f, 48.f, 48.f);
 
@@ -98,7 +98,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 /*******************************************************************************************************************************************************************/
 
-void TileMap::updateDayNightCycle(sf::Clock& clock) 
+void TileMap::updateDayNightCycle(sf::Clock& clock)
 {
 	// Get the time since the clock started
 	sf::Time elapsedTime = clock.getElapsedTime();
@@ -116,8 +116,25 @@ void TileMap::updateDayNightCycle(sf::Clock& clock)
 	if (alpha < 1)  // Day to night color transition
 		currentColor = colorInterpolation(alpha);
 	else // Night to day color transition
-		currentColor = colorInterpolation(2-alpha);
-	
+		currentColor = colorInterpolation(2 - alpha);
+
+
+	// Apply current color to tile
+	for (size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
+		m_vertices[i].color = currentColor;
+	}
+
+}
+
+void TileMap::colors(sf::Clock& clock)
+{
+	// Get the time since the clock started
+	sf::Time elapsedTime = clock.getElapsedTime();
+
+	// Calculate alpha (opacity component) based on time which is in between 0 and 1 (will gradually change from day color to night color)
+	float alpha = elapsedTime.asSeconds();
+
+	currentColor = colorInterpolation(alpha);
 
 	// Apply current color to tile
 	for (size_t i = 0; i < m_vertices.getVertexCount(); ++i) {

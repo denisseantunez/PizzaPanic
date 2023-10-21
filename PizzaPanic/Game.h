@@ -53,23 +53,26 @@ public:
 	sf::Music music;
 	sf::Music menuMusic;
 	sf::Music deathSound;
+	sf::Music itemRemix;
 
 	sf::Clock clock2;
 
+	bool itemColores;
 
-    bool displayItemPrompt;
+
+	bool displayItemPrompt;
 	bool cargandoItem;
-    int PosicionesItem[Filas][Columnas];
-    int NuevaPosicion;
-    int AlturaInicial = 2645;
-    int deliveredPizzas = 0;
+	int PosicionesItem[Filas][Columnas];
+	int NuevaPosicion;
+	int AlturaInicial = 2645;
+	int deliveredPizzas = 0;
 	float quitarVida = 0.0f;
 	float bites = 0.f;
 	float xPlayer;
-    float yPlayer;
+	float yPlayer;
 	sf::Vector2f EntregarPizza;
 	float chiwisSpeed = 250.f;
-	
+
 private:
 	void Arrow(float xPlayer, float yPlayer, float xItem, float yItem);
 	void ContadorPizzas(int cantidad_pizzas, sf::Text& texto, sf::Font& fuente);
@@ -83,7 +86,7 @@ private:
 	sf::Text text;
 	sf::Font textFont;
 	sf::RectangleShape textBackground;
-	
+
 	// Time
 	sf::Clock clock;
 	sf::Clock clock3;
@@ -101,17 +104,17 @@ private:
 	float camUpperBound = 510.f;
 	float camLowerBound = 2850.f;
 
-    // Item
+	// Item
 	sf::Texture mItemArrowTexture;
 	sf::Sprite mItemArrow;
-    sf::FloatRect mPlayerCollider;
-    sf::FloatRect mItemCollider;
-    sf::FloatRect mItemArrowCollider;
-    sf::Text prompt;
+	sf::FloatRect mPlayerCollider;
+	sf::FloatRect mItemCollider;
+	sf::FloatRect mItemArrowCollider;
+	sf::Text prompt;
 
-    // Main menu
+	// Main menu
 	sf::Font m_font;
-    sf::Font m_font2;
+	sf::Font m_font2;
 	sf::Texture m_menuBackground;
 
 	// Tilemap

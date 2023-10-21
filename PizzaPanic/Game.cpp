@@ -1,4 +1,3 @@
-
 #include "Game.h"
 
 #include <SFML/Graphics.hpp>
@@ -17,9 +16,9 @@ Game::Game()
 
 void Game::showMainMenu()
 {
-	while (mWindow.isOpen()){
+	while (mWindow.isOpen()) {
 		sf::Event event;
-		while (mWindow.pollEvent(event)){
+		while (mWindow.pollEvent(event)) {
 			mainMenu.handleEvent(event);
 			if (event.type == sf::Event::Closed)
 				mWindow.close();
@@ -52,8 +51,8 @@ void Game::processEvents()
 		case sf::Event::Closed:
 			mWindow.close();
 			break;
-    default:
-      break;
+		default:
+			break;
 		}
 	}
 }
@@ -85,12 +84,23 @@ void Game::update(sf::Time deltaTime)
 
 		clock.restart();
 	}
-	
-	if (clock3.getElapsedTime().asSeconds() > 0.4f) {
-		// Update day and night colors
-		layer0.updateDayNightCycle(clock2);
-		layer1.updateDayNightCycle(clock2);
-		layer2.updateDayNightCycle(clock2);
+
+	if (clock3.getElapsedTime().asSeconds() > 0.3f) {
+
+
+		// Activate colors when item is picked up
+		if (itemColores) {
+			layer0.colors(clock2);
+			layer1.colors(clock2);
+			layer2.colors(clock2);
+		}
+		else {
+			// Update day and night colors
+			layer0.updateDayNightCycle(clock2);
+			layer1.updateDayNightCycle(clock2);
+			layer2.updateDayNightCycle(clock2);
+		}
+
 
 		clock3.restart();
 	}
@@ -119,9 +129,9 @@ void Game::update(sf::Time deltaTime)
 	// Arrow 
 	if (mItem.getPosition().x == 1436.f && mItem.getPosition().y == 1388.f)
 		Arrow(xPlayer, yPlayer, mItem.getPosition().x, mItem.getPosition().y);
-	else 
+	else
 		Arrow(xPlayer, yPlayer, mItemArrow.getPosition().x, mItemArrow.getPosition().y);
-	
+
 	// Print text of pizzas
 	this->ContadorPizzas(deliveredPizzas, text, m_font2);
 
@@ -131,7 +141,7 @@ void Game::update(sf::Time deltaTime)
 
 
 	// Pets follow player
-	//pets[0].followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
+	pets[0].followPlayer(player.sprite, chiwisRadio, chiwisSpeed, deltaTime);
 	pets[1].followPlayer(xPlayer, yPlayer, 407.536f, 2372.47f, deltaTime);
 	pets[2].followPlayer(xPlayer, yPlayer, 407.536f, 1240.f, deltaTime);
 	pets[3].followPlayer(xPlayer, yPlayer, 407.536f, 317.541f, deltaTime);
@@ -163,23 +173,23 @@ void Game::render()
 	mWindow.draw(layer0);
 	//mWindow.draw(layer1);
 	mWindow.draw(layer2);
-    mWindow.draw(mItem);
-	
+	mWindow.draw(mItem);
+
 	mWindow.draw(player.sprite);
 	mWindow.draw(layer1);
 	mWindow.draw(pizzaLogo);
 	//mWindow.draw(layer2);
 
 	//mWindow.draw(player.sprite);
-	
+
 	mWindow.draw(mItemArrow);
 
 	if (displayItemPrompt)
 		mWindow.draw(prompt);
-	
+
 	mWindow.draw(player.playerLifeAux);
 	mWindow.draw(player.playerLife);
-	
+
 	for (int i = 0; i < 8; ++i)
 		mWindow.draw(pets[i].sprite);
 
@@ -198,10 +208,10 @@ void Game::Initialize()
 	// Initialize MainMenu 
 	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
 		cout << ("Error al cargar el font.");
-	
+
 	if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
 		cout << ("Error al cargar el font del item.");
-	
+
 	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
 		cout << ("Error al cargar el fondo del menu.");
 	MainMenu mainMenu(m_font, m_menuBackground);
@@ -240,6 +250,10 @@ void Game::Initialize()
 
 	if (!deathSound.openFromFile("Audios\\death.wav"))
 		cout << ("Error al cargar el audio de game over.");
+
+	if (!itemRemix.openFromFile("Audios\\ItemRemix.wav"))
+		cout << ("Error al cargar el remix.");
+	music.setVolume(10.f);
 
 	// Tilemap 
 	if (!layer0.load("Images\\Tileset.png", sf::Vector2u(48, 48), 0))
@@ -297,7 +311,7 @@ void Game::Initialize()
 	// [4] --> bella
 	// [5] --> manteca
 	// [6] --> pushi
-	// [7] --> muñeca
+	// [7] --> mu?eca
 
 	pets[0].texRect.left = 0;
 	pets[0].sprite.setPosition(1361.51f, 2678.98f);
@@ -322,7 +336,7 @@ void Game::Initialize()
 
 	pets[7].texRect.left = 468;
 	pets[7].sprite.setPosition(1338.86f, 618.972f);
-	
+
 
 	// Item's texture 
 	prompt.setFont(m_font2);
@@ -363,9 +377,9 @@ void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 
 	float dx = xItem - xPlayer;
 	float dy = yItem - yPlayer;
-	float angle = atan2(dy, dx) * 180 / 3.141592 - 90; 
-	this->arrow.setRotation(angle); 
-	float arrowOffset = -50.f; 
+	float angle = atan2(dy, dx) * 180 / 3.141592 - 90;
+	this->arrow.setRotation(angle);
+	float arrowOffset = -50.f;
 
 	this->arrow.setPointCount(3);
 	this->arrow.setPoint(0, sf::Vector2f(xPlayer, yPlayer));
@@ -373,14 +387,14 @@ void Game::Arrow(float xPlayer, float yPlayer, float xItem, float yItem) {
 	this->arrow.setPoint(2, sf::Vector2f(xPlayer + 10.f, yPlayer - 10.f));
 	this->arrow.setFillColor(sf::Color::Yellow);
 	this->arrow.setOrigin(xPlayer, yPlayer - 20.f);
-	this->arrow.setScale(1.f,1.f); 
+	this->arrow.setScale(1.f, 1.f);
 	this->arrow.setOutlineThickness(2.f);
 	this->arrow.setOutlineColor(sf::Color::Black);
 
-	float circleRadius = 80.f; 
+	float circleRadius = 80.f;
 	sf::Vector2f circleCenter(xPlayer + 15.f, yPlayer + 20.f);
 
-	float angleRadians = (angle + 90) * 3.141592 / 180; 
+	float angleRadians = (angle + 90) * 3.141592 / 180;
 	sf::Vector2f arrowPosition(cos(angleRadians) * circleRadius, sin(angleRadians) * circleRadius);
 
 	arrowPosition += circleCenter;
@@ -410,19 +424,22 @@ void Game::CheckItemCollision() {
 
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if (cargandoItem) {
+
 				quitarVida = 0.f;
 				bites = 0.f;
 				mItemArrow.setPosition(-1000, -1000);
-				mItem.setPosition(1436.f,1388.f); 
-				mItem.setScale(1.7f, 1.7f);
+				mItem.setPosition(1436.f, 1388.f);
+				mItem.setScale(2.0f, 2.0f);
 				cargandoItem = false;
 				deliveredPizzas++;
+				if (deliveredPizzas % 10 == 0) itemColores = true;
 			}
 			else {
+				itemColores = false;
 				cargandoItem = true;
-				NuevaPosicion = rand() % 23;
+				NuevaPosicion = rand() % 22;
 				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
-				mItemArrow.setScale(0.4f, 0.4f);
+				mItemArrow.setScale(0.5f, 0.5f);
 				mItem.setPosition(-1000, -1000);
 			}
 		}
@@ -455,8 +472,4 @@ void Game::SetCameraView() {
 		mView.setCenter(xPlayer, yPlayer);
 }
 
-/*******************************************************************************************************************************************************************/
-
-
-
-
+/*************************************/
