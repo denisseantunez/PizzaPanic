@@ -22,16 +22,16 @@ int main()
 		game.mWindow.setView(game.mView);
 
 		// Playing music and showing Main Menu
-		game.menuMusic.play();
-		game.menuMusic.setLoop(true);
+		//game.menuMusic.play();
+		//game.menuMusic.setLoop(true);
 		game.showMainMenu();
 
 		// If Play button is clicked, start the game
 		if (game.mainMenu.getSelectedOption() == MainMenu::Option::Jugar) {
 
 			// Play game music
-			game.menuMusic.stop();
-			game.music.play();
+			//game.menuMusic.stop();
+			//game.music.play();
 			game.music.setLoop(true);
 
 			//Initializing time
@@ -73,4 +73,8 @@ int main()
 			}
 		}
 	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir && game.mWindow.isOpen());
+<<<<<<< HEAD
+=======
+	
+>>>>>>> f64cd4e60f18bd765ffb823f75569ddaccfdc993
 }
