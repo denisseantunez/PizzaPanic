@@ -4,49 +4,56 @@
 /*******************************************************************************************************************************************************************/
 
 void Game::MakeArray() {
-    for (int i = 0; i <= 34; ++i){
-        if (i/3 == 0) PosicionesItem[1][i] = AlturaInicial;
-        else if (i/3 == 1) PosicionesItem[1][i] = AlturaInicial - 385;
-        else if (i/3 == 2) PosicionesItem[1][i] = AlturaInicial - (385*2);
-        else if (i/3 == 3) PosicionesItem[1][i] = AlturaInicial - (385*3);
-        else if (i/13 < 1) PosicionesItem[1][i] = AlturaInicial - (385*3);
-        else if (i/18 < 1) PosicionesItem[1][i] = AlturaInicial - (385*4);
-        else if (i/25 < 1) PosicionesItem[1][i] = AlturaInicial - (385*5);
-        else if (i/35 < 1) PosicionesItem[1][i] = AlturaInicial - (385*6);
-    }
 
-    for(int i = 0; i <= 6; i+=3){
-        PosicionesItem[0][i] = 1045;
-        PosicionesItem[0][i+1] = 660;
-        PosicionesItem[0][i+2] = 325;
-    }
+    // x
+    PosicionesItem[0][0] = 92;
+    PosicionesItem[0][1] = 123;
+    PosicionesItem[0][2] = 132;
+    PosicionesItem[0][3] = 708;
+    PosicionesItem[0][4] = 664;
+    PosicionesItem[0][5] = 904;
+    PosicionesItem[0][6] = 716;
+    PosicionesItem[0][7] = 712;
+    PosicionesItem[0][8] = 1060;
+    PosicionesItem[0][9] = 1340;
+    PosicionesItem[0][10] = 1484;
+    PosicionesItem[0][11] = 1824;
+    PosicionesItem[0][12] = 1676;
+    PosicionesItem[0][13] = 2112;
+    PosicionesItem[0][14] = 2252;
+    PosicionesItem[0][15] = 2016;
+    PosicionesItem[0][16] = 1968;
+    PosicionesItem[0][17] = 1872;
+    PosicionesItem[0][18] = 2240;
+    PosicionesItem[0][19] = 2828;
+    PosicionesItem[0][20] = 3168;
+    PosicionesItem[0][21] = 2976;
+    PosicionesItem[0][22] = 3164;
 
-    PosicionesItem[0][9] = 1380;
-    PosicionesItem[0][10] = 1045;
-    PosicionesItem[0][11] = 660;
-    PosicionesItem[0][12] = 325;
-    PosicionesItem[0][13] = 1770;
-    PosicionesItem[0][14] = 1380;
-    PosicionesItem[0][15] = 1045;
-    PosicionesItem[0][16] = 660;
-    PosicionesItem[0][17] = 325;
-    PosicionesItem[0][18] = 2480;
-    PosicionesItem[0][19] = 2150;
-    PosicionesItem[0][20] = 1770;
-    PosicionesItem[0][21] = 1380;
-    PosicionesItem[0][22] = 1045;
-    PosicionesItem[0][23] = 660;
-    PosicionesItem[0][24] = 325;
-    PosicionesItem[0][25] = 3160;
-    PosicionesItem[0][26] = 2870;
-    PosicionesItem[0][27] = 2480;
-    PosicionesItem[0][28] = 2150;
-    PosicionesItem[0][29] = 1770;
-    PosicionesItem[0][30] = 1380;
-    PosicionesItem[0][31] = 1045;
-    PosicionesItem[0][32] = 660;
-    PosicionesItem[0][33] = 325;
-    PosicionesItem[0][34] = 80;
+    // y
+    PosicionesItem[1][0] = 2028;
+    PosicionesItem[1][1] = 1212;
+    PosicionesItem[1][2] = 532;
+    PosicionesItem[1][3] = 144;
+    PosicionesItem[1][4] = 580;
+    PosicionesItem[1][5] = 1072;
+    PosicionesItem[1][6] = 1556;
+    PosicionesItem[1][7] = 2276;
+    PosicionesItem[1][8] = 688;
+    PosicionesItem[1][9] = 2284;
+    PosicionesItem[1][10] = 508;
+    PosicionesItem[1][11] = 848;
+    PosicionesItem[1][12] = 1856;
+    PosicionesItem[1][13] = 132;
+    PosicionesItem[1][14] = 1088;
+    PosicionesItem[1][15] = 1856;
+    PosicionesItem[1][16] = 2288;
+    PosicionesItem[1][17] = 2636;
+    PosicionesItem[1][18] = 2632;
+    PosicionesItem[1][19] = 128;
+    PosicionesItem[1][20] = 956;
+    PosicionesItem[1][21] = 1820;
+    PosicionesItem[1][22] = 2296;
 }
 
 /*******************************************************************************************************************************************************************/

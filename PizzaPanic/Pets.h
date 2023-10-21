@@ -11,9 +11,15 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::IntRect texRect;
+
+	sf::FloatRect rect = sprite.getGlobalBounds();
+
+	float width = rect.width;
+	float height = rect.height;
+
 	float speed = 100.f;
 
-	void setHitbox(const float x, const float y, const float width, const float height);
+	void setHitbox(const float x, const float y);
 
 	void animate(float xPlayer, float yPlayer, float initialX, float initialY);
 	void animate(float xPlayer, float yPlayer, float chiwisSpeed);

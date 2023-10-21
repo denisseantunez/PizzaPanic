@@ -177,7 +177,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// Instructions
 	if (m_selectedOption == Option::Instrucciones) {
 		sf::Texture instructionsTexture;
-		instructionsTexture.loadFromFile("../Images/Instrucciones.png");
+		instructionsTexture.loadFromFile("Images\\Instrucciones.png");
 		sf::Sprite Instructions(instructionsTexture);
 		Instructions.setPosition(30, 8);
 		Instructions.setScale(0.85f, 0.85f);
@@ -189,7 +189,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// Credits
 	if (m_selectedOption == Option::Creditos) {
 		sf::Texture creditsTexture;
-		creditsTexture.loadFromFile("../Images/Creditos.png");
+		creditsTexture.loadFromFile("Images\\Creditos.png");
 		sf::Sprite Credits(creditsTexture);
 		Credits.setPosition(30, 8);
 		Credits.setScale(0.85f, 0.85f);
