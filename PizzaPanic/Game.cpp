@@ -163,9 +163,11 @@ void Game::render()
 	mWindow.draw(layer0);
 	mWindow.draw(layer1);
 	mWindow.draw(layer2);
-	mWindow.draw(pizzaLogo);
     mWindow.draw(mItem);
+	
 	mWindow.draw(player.sprite);
+	mWindow.draw(layer1);
+	mWindow.draw(pizzaLogo);
 	
 	mWindow.draw(mItemArrow);
 
@@ -248,7 +250,8 @@ void Game::Initialize()
 	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
 		cout << ("Error al cargar el archivo de la pizza");
 	pizzaLogo.setTexture(PizzaLogoTex);
-	pizzaLogo.setPosition(1345.f, 1167.58f);
+	pizzaLogo.setScale(0.1, 0.1);
+	pizzaLogo.setPosition(1315.f, 1167.f);
 
 	// Player 
 	if (!player.texture.loadFromFile("Images\\Robot.png"))
@@ -392,7 +395,7 @@ void Game::CheckItemCollision() {
 			prompt.setString("Presiona espacio para recoger la pizza!");
 		}
 		else {
-			prompt.setString("Presiona espacio para dejar la pizza!");
+			prompt.setString("Presiona espacio para recoger la pizza!");
 		}
 		displayItemPrompt = true;
 		if (cargandoItem) {

@@ -60,6 +60,7 @@ int main()
 
 				// If player dies, reseting everything.
 				if (game.bites >= 60) {
+					game.clock2.restart();
 					game.deliveredPizzas = 0;
 					game.mItem.setPosition(3070.f, 2760.f);
 					game.cargandoItem = false;

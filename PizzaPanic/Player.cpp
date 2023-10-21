@@ -41,7 +41,7 @@ void Player::animate()
 
 void Player::checkCollisions(const TileMap& objects)
 {
-  double scale = 0.1;
+  double scale = 0.25;
   sf::FloatRect bounds = sprite.getGlobalBounds();
   double new_width = bounds.width * scale;
   double new_height = bounds.height * scale;

@@ -54,6 +54,8 @@ public:
 	sf::Music menuMusic;
 	sf::Music deathSound;
 
+	sf::Clock clock2;
+
 
     bool displayItemPrompt;
 	bool cargandoItem;
@@ -84,7 +86,6 @@ private:
 	
 	// Time
 	sf::Clock clock;
-	sf::Clock clock2;
 	sf::Clock clock3;
 
 	// Pizza logo in restaurant
