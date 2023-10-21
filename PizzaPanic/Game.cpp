@@ -86,11 +86,22 @@ void Game::update(sf::Time deltaTime)
 		clock.restart();
 	}
 	
-	if (clock3.getElapsedTime().asSeconds() > 0.4f) {
-		// Update day and night colors
-		layer0.updateDayNightCycle(clock2);
-		layer1.updateDayNightCycle(clock2);
-		layer2.updateDayNightCycle(clock2);
+	if (clock3.getElapsedTime().asSeconds() > 0.3f) {
+		
+
+		// Activate colors when item is picked up
+		if (itemColores) {
+			layer0.colors(clock2);
+			layer1.colors(clock2);
+			layer2.colors(clock2);
+		}
+		else {
+			// Update day and night colors
+			layer0.updateDayNightCycle(clock2);
+			layer1.updateDayNightCycle(clock2);
+			layer2.updateDayNightCycle(clock2);
+		}
+		
 
 		clock3.restart();
 	}
@@ -240,6 +251,10 @@ void Game::Initialize()
 
 	if (!deathSound.openFromFile("Audios\\death.wav"))
 		cout << ("Error al cargar el audio de game over.");
+
+	if (!itemRemix.openFromFile("Audios\\ItemRemix.wav"))
+		cout << ("Error al cargar el remix.");
+	music.setVolume(10.f);
 
 	// Tilemap 
 	if (!layer0.load("Images\\Tileset.png", sf::Vector2u(48, 48), 0))
@@ -410,6 +425,7 @@ void Game::CheckItemCollision() {
 
 		if (sf::Keyboard::isKeyPressed(teclaItem)) {
 			if (cargandoItem) {
+				
 				quitarVida = 0.f;
 				bites = 0.f;
 				mItemArrow.setPosition(-1000, -1000);
@@ -417,8 +433,10 @@ void Game::CheckItemCollision() {
 				mItem.setScale(1.7f, 1.7f);
 				cargandoItem = false;
 				deliveredPizzas++;
+				if (deliveredPizzas % 2 == 0) itemColores = true;
 			}
 			else {
+				itemColores = false;
 				cargandoItem = true;
 				NuevaPosicion = rand() % 23;
 				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);

@@ -53,8 +53,11 @@ public:
 	sf::Music music;
 	sf::Music menuMusic;
 	sf::Music deathSound;
+	sf::Music itemRemix;
 
 	sf::Clock clock2;
+
+	bool itemColores;
 
 
     bool displayItemPrompt;

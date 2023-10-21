@@ -16,6 +16,8 @@ public:
 	bool load(const std::string& tileset, sf::Vector2u tileSize, int layer);
 
 	void updateDayNightCycle(sf::Clock& clock);
+	void colors(sf::Clock& clock);
+
 	std::vector<sf::FloatRect> collidables;
 	
 private:
