@@ -433,7 +433,7 @@ void Game::CheckItemCollision() {
 				mItem.setScale(1.7f, 1.7f);
 				cargandoItem = false;
 				deliveredPizzas++;
-				if (deliveredPizzas % 2 == 0) itemColores = true;
+				if (deliveredPizzas % 10 == 0) itemColores = true;
 			}
 			else {
 				itemColores = false;
