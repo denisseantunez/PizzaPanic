@@ -8,7 +8,7 @@
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, int layer)
 {
 	// Load the tileset texture
-	if (!m_tileset.loadFromFile("Images\\Tileset.png"))
+	if (!m_tileset.loadFromFile("Images/Tileset.png"))
 		return false;
 
 	// .txt tilemap
@@ -16,11 +16,11 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, int layer)
 	std::vector<std::vector<int> > tiles;
 
 	if (layer == 0)
-		map_stream.open("Tilemaps\\layer0.txt");
+		map_stream.open("Tilemaps/layer0.txt");
 	else if (layer == 1)
-		map_stream.open("Tilemaps\\layer1.txt");
+		map_stream.open("Tilemaps/layer1.txt");
 	else
-		map_stream.open("Tilemaps\\layer2.txt");
+		map_stream.open("Tilemaps/layer2.txt");
 
 	for (std::string line; std::getline(map_stream, line);) {
 		tiles.push_back(std::vector<int>());
