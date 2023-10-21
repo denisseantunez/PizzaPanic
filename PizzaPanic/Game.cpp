@@ -420,9 +420,9 @@ void Game::CheckItemCollision() {
 			}
 			else {
 				cargandoItem = true;
-				NuevaPosicion = rand() % 23;
+				NuevaPosicion = rand() % 22;
 				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
-				mItemArrow.setScale(0.4f, 0.4f);
+				mItemArrow.setScale(0.3f, 0.3f);
 				mItem.setPosition(-1000, -1000);
 			}
 		}
