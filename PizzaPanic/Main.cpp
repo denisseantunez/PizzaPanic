@@ -7,7 +7,6 @@ int main()
 	Game game;
 	
 	do {
-
 		// Initialize variables
 		game.mainMenu.resetSelectedOption();
 		game.processEvents();
@@ -16,11 +15,7 @@ int main()
 		game.mItem.setTexture(game.mItemTexture);
 		game.mItem.setPosition(1436.f, 1388.f);
 		game.player.sprite.setPosition(game.player.initialX, game.player.initialY);
-		//game.player.previousPos = sf::Vector2f(game.player.initialX, game.player.initialY);
-		//std::cout << game.xPlayer << "..." << game.yPlayer << std::endl;
 		game.mItem.setScale(1.7f, 1.7f);
-		//game.chiwis.hitbox.setPosition(3000.f, 700.f);
-		//game.manteca.hitbox.setPosition(2366.f, 2800.f);
 
 		// Open the window
 		game.mView.reset(sf::FloatRect(0, 0, game.mWindow.getSize().x, game.mWindow.getSize().y));
@@ -79,5 +74,4 @@ int main()
 			}
 		}
 	} while (game.mainMenu.getSelectedOption() != MainMenu::Option::Salir && game.mWindow.isOpen());
-	
 }

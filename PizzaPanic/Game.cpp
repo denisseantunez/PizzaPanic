@@ -207,13 +207,13 @@ void Game::render()
 void Game::Initialize()
 {
 	// Initialize MainMenu 
-	if (!m_font.loadFromFile("Fonts\\ka1.ttf"))
+	if (!m_font.loadFromFile("Fonts/ka1.ttf"))
 		cout << ("Error al cargar el font.");
 	
-	if (!m_font2.loadFromFile("Fonts\\font2.ttf"))
+	if (!m_font2.loadFromFile("Fonts/font2.ttf"))
 		cout << ("Error al cargar el font del item.");
 	
-	if (!m_menuBackground.loadFromFile("Images\\FondoMainMenu.png"))
+	if (!m_menuBackground.loadFromFile("Images/FondoMainMenu.png"))
 		cout << ("Error al cargar el fondo del menu.");
 	MainMenu mainMenu(m_font, m_menuBackground);
 
@@ -221,35 +221,35 @@ void Game::Initialize()
 	mView = sf::View(sf::FloatRect(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y));
 
 	// Item
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+	if (!mItemTexture.loadFromFile("Images/PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
 	mItem.setPosition(3070.f, 2760.f);
 	mItem.setScale(1.7f, 1.7f);
 
 	// Arrow's item
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	if (!mItemArrowTexture.loadFromFile("Images/PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	mItemArrow.setPosition(-1000, -1000);
 	mItemArrow.setScale(0.3f, 0.3f);
 
 	// Game Over
-	if (!GameOverTex.loadFromFile("Images\\GameOver_.png"))
+	if (!GameOverTex.loadFromFile("Images/GameOver_.png"))
 		cout << ("Error al cargar el archivo de game over.");
 	gameOver.setTexture(GameOverTex);
 	gameOver.setScale(1.5f, 1.5f);
 
 	// Music 
-	if (!music.openFromFile("Audios\\GORILLAvsHUMAN.wav"))
+	if (!music.openFromFile("Audios/GORILLAvsHUMAN.wav"))
 		cout << ("Error al cargar el audio.");
 	music.setVolume(10.f);
 
-	if (!menuMusic.openFromFile("Audios\\omairi.wav"))
+	if (!menuMusic.openFromFile("Audios/omairi.wav"))
 		cout << ("Error al cargar el audio del menu.");
 	menuMusic.setVolume(20.f);
 
-	if (!deathSound.openFromFile("Audios\\death.wav"))
+	if (!deathSound.openFromFile("Audios/death.wav"))
 		cout << ("Error al cargar el audio de game over.");
 
 	if (!itemRemix.openFromFile("Audios\\ItemRemix.wav"))
@@ -257,22 +257,22 @@ void Game::Initialize()
 	music.setVolume(10.f);
 
 	// Tilemap 
-	if (!layer0.load("Images\\Tileset.png", sf::Vector2u(48, 48), 0))
+	if (!layer0.load("Images/Tileset.png", sf::Vector2u(48, 48), 0))
 		cout << ("Error al cargar el mapa.");
-	if (!layer1.load("Images\\Tileset.png", sf::Vector2u(48, 48), 1))
+	if (!layer1.load("Images/Tileset.png", sf::Vector2u(48, 48), 1))
 		cout << ("Error al cargar los objetos del mapa.");
-	if (!layer2.load("Images\\Tileset.png", sf::Vector2u(48, 48), 2))
+	if (!layer2.load("Images/Tileset.png", sf::Vector2u(48, 48), 2))
 		cout << ("Error al cargar los detalles del mapa.");
 
 	// Pizza logo in restaurant
-	if (!PizzaLogoTex.loadFromFile("Images\\Pizza.png"))
+	if (!PizzaLogoTex.loadFromFile("Images/Pizza.png"))
 		cout << ("Error al cargar el archivo de la pizza");
 	pizzaLogo.setTexture(PizzaLogoTex);
 	pizzaLogo.setScale(0.1, 0.1);
 	pizzaLogo.setPosition(1315.f, 1167.f);
 
 	// Player 
-	if (!player.texture.loadFromFile("Images\\Robot.png"))
+	if (!player.texture.loadFromFile("Images/Robot.png"))
 		cout << ("Error al cargar el archivo.");
 	player.texRect.left = 0;
 	player.texRect.top = 0;
@@ -284,20 +284,20 @@ void Game::Initialize()
 	player.sprite.setScale(player.escaleX, player.escaleY);
 
 	// Item's texture
-	if (!mItemTexture.loadFromFile("Images\\PizzaBox.png"))
+	if (!mItemTexture.loadFromFile("Images/PizzaBox.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItem.setTexture(mItemTexture);
 	mItem.setPosition(1436.f, 1388.f);
 	mItem.setScale(1.7f, 1.7f);
 
-	if (!mItemArrowTexture.loadFromFile("Images\\PixelArrowRotated.png"))
+	if (!mItemArrowTexture.loadFromFile("Images/PixelArrowRotated.png"))
 		cout << ("Error al cargar el archivo del Item.");
 	mItemArrow.setTexture(mItemArrowTexture);
 	//mItem.setPosition(-1000, -1000);
 
 	// Create pets
 	for (int i = 0; i < 8; ++i) {
-		pets[i].texture.loadFromFile("Images\\Mascotas.png");
+		pets[i].texture.loadFromFile("Images/Mascotas.png");
 		pets[i].texRect.width = 36;
 		pets[i].texRect.height = 47;
 		pets[i].sprite.setTexture(pets[i].texture);
@@ -312,7 +312,7 @@ void Game::Initialize()
 	// [4] --> bella
 	// [5] --> manteca
 	// [6] --> pushi
-	// [7] --> muñeca
+	// [7] --> muï¿½eca
 
 	pets[0].texRect.left = 0;
 	pets[0].sprite.setPosition(1361.51f, 2678.98f);
@@ -438,9 +438,9 @@ void Game::CheckItemCollision() {
 			else {
 				itemColores = false;
 				cargandoItem = true;
-				NuevaPosicion = rand() % 23;
+				NuevaPosicion = rand() % 22;
 				mItemArrow.setPosition(PosicionesItem[0][NuevaPosicion], PosicionesItem[1][NuevaPosicion]);
-				mItemArrow.setScale(0.4f, 0.4f);
+				mItemArrow.setScale(0.3f, 0.3f);
 				mItem.setPosition(-1000, -1000);
 			}
 		}
